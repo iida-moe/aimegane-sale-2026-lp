@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIMEGANE THE SALE — FV 案B</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f0eeeb;
+      font-family: 'Noto Serif JP', serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    /* 全体コンテナ */
+    .fv-wrap {
+      width: 100%;
+      max-width: 900px;
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+    }
+
+    /* ナビゲーション */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 28px;
+      background: #f8f8f8;
+      border-bottom: 1px solid #eee;
+    }
+    .nav-logo {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #333;
+      letter-spacing: 0.05em;
+    }
+    .nav-reserve {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #444;
+      border: 1px solid #bbb;
+      padding: 7px 18px;
+      letter-spacing: 0.05em;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    /* FV本体 */
+    .fv-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 480px;
+    }
+
+    /* 左：テキストエリア */
+    .fv-left {
+      padding: 52px 48px 48px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .the {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 52px;
+      color: #1a1a1a;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      margin-bottom: -4px;
+    }
+
+    .sale {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 110px;
+      color: #1a1a1a;
+      line-height: 0.88;
+      letter-spacing: 0.01em;
+      margin-bottom: 20px;
+    }
+
+    /* 30%OFF行 */
+    .discount-row {
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+      margin-bottom: 20px;
+    }
+    .saidai {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: #444;
+      letter-spacing: 0.05em;
+      line-height: 1;
+      margin-right: 4px;
+      /* 縦に2行に分けて「最大」を上下に */
+      writing-mode: vertical-rl;
+      height: 2em;
+    }
+    .num {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 80px;
+      color: #1a1a1a;
+      line-height: 1;
+      letter-spacing: 0.01em;
+    }
+    .pct-off {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 28px;
+      color: #1a1a1a;
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+    .off {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 28px;
+      color: #1a1a1a;
+      letter-spacing: 0.05em;
+    }
+
+    /* 区切り線 */
+    .rule {
+      width: 100%;
+      height: 1px;
+      background: #ccc;
+      margin-bottom: 16px;
+    }
+
+    /* 期間 */
+    .period {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: #555;
+      letter-spacing: 0.08em;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .period .date-en {
+      font-size: 10px;
+      color: #999;
+      letter-spacing: 0.15em;
+    }
+    .period .dash {
+      font-size: 14px;
+      color: #999;
+    }
+
+    /* CTAボタン */
+    .btn-reserve {
+      display: inline-block;
+      width: fit-content;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: #333;
+      border: 1px solid #bbb;
+      padding: 13px 32px;
+      letter-spacing: 0.08em;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-reserve:hover {
+      background: #1a1a1a;
+      color: #fff;
+      border-color: #1a1a1a;
+    }
+
+    /* 右：写真エリア */
+    .fv-right {
+      background: #e8e4de;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .photo-placeholder {
+      text-align: center;
+    }
+    .photo-placeholder .ph-icon {
+      font-size: 48px;
+      opacity: 0.3;
+      margin-bottom: 12px;
+    }
+    .photo-placeholder .ph-text {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14px;
+      color: #aaa;
+      letter-spacing: 0.15em;
+      font-weight: 500;
+    }
+    .photo-placeholder .ph-note {
+      font-size: 10px;
+      color: #c0c0c0;
+      margin-top: 6px;
+      letter-spacing: 0.08em;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="fv-wrap">
+
+    <!-- ナビ -->
+    <nav>
+      <span class="nav-logo">ロゴ</span>
+      <button class="nav-reserve">来店予約</button>
+    </nav>
+
+    <!-- FV本体 -->
+    <div class="fv-body">
+
+      <!-- 左：テキスト -->
+      <div class="fv-left">
+        <p class="the">THE</p>
+        <p class="sale">SALE</p>
+
+        <div class="discount-row">
+          <span class="saidai">最大</span>
+          <span class="num">30</span>
+          <span style="display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:8px;">
+            <span class="pct-off">%</span>
+            <span class="off">OFF</span>
+          </span>
+        </div>
+
+        <div class="rule"></div>
+
+        <p class="period">
+          2026. 8.8 <span class="date-en">SAT</span>
+          <span class="dash">—</span>
+          10.12 <span class="date-en">MON</span>
+        </p>
+
+        <button class="btn-reserve">来店予約はこちら</button>
+      </div>
+
+      <!-- 右：写真 -->
+      <div class="fv-right">
+        <div class="photo-placeholder">
+          <div class="ph-icon">🧑‍🦱</div>
+          <p class="ph-text">写真</p>
+          <p class="ph-note">メガネをかけた人物 or メガネ単体</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

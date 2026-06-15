@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIMEGANE THE SALE 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Cormorant+Garamond:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans JP', serif;
+      background: #F4E9D6;
+      padding-top: 68px;
+    }
+
+    /* ════════════════════
+       NAV
+    ════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 68px; padding: 0 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: #fff;
+      border-bottom: 1px solid #e8e8e8;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    }
+    .nav-logo img { height: 40px; width: auto; display: block; }
+    .nav-btn {
+      font-family: 'Noto Sans JP', serif;
+      font-size: 11px; font-weight: 400; letter-spacing: 0.2em;
+      padding: 9px 26px;
+      color: #B03228; border: 1px solid #B03228;
+      background: transparent; cursor: pointer;
+      text-decoration: none; display: inline-block;
+      transition: background 0.3s, color 0.3s;
+      white-space: nowrap;
+    }
+    .nav-btn:hover { background: #B03228; color: #fff; }
+
+    /* PC では非表示 */
+    .side-cta   { display: none; }
+    .mobile-below { display: none; }
+
+    /* ════════════════════
+       FV（PC：フルブリード写真＋テキストオーバーレイ）
+    ════════════════════ */
+    .fv {
+      display: block;
+      position: relative;
+      height: calc(100vh - 68px);
+      height: calc(100dvh - 68px);
+      overflow: hidden;
+    }
+    .fv-left {
+      position: absolute; top: 0; bottom: 0; left: 0;
+      width: 50%;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 48px 40px 48px 72px;
+      background: transparent;
+      z-index: 5;
+    }
+    .catch { font-size: 12px; font-weight: 300; letter-spacing: 0.22em; color: #7a6040; margin-bottom: 10px; }
+    .t-the  {
+      display: block; font-family: 'Playfair Display', serif; font-weight: 700;
+      font-size: clamp(54px, 6.8vw, 96px); letter-spacing: 0.10em; line-height: 1;
+      background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      filter: drop-shadow(0 1px 2px rgba(120,20,20,0.18));
+    }
+    .t-sale {
+      display: block; font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: clamp(100px, 14vw, 200px); letter-spacing: 0.04em; line-height: 0.86; margin-bottom: 10px;
+      background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      filter: drop-shadow(0 2px 4px rgba(120,20,20,0.20));
+    }
+    .tagline {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px; font-weight: 400; letter-spacing: 0.28em;
+      color: #7a4030; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .tagline::before, .tagline::after {
+      content: ''; display: block; height: 1px; width: 28px; background: #B03228; opacity: 0.5;
+    }
+    .rule   { display: none; } /* PC：非表示 */
+    .disc   { display: flex; align-items: baseline; margin-bottom: 12px; }
+    .d-pre  { font-family: 'Noto Sans JP', sans-serif; font-size: 16px; font-weight: 500; color: #C02828; letter-spacing: 0.1em; margin-right: 6px; align-self: flex-end; padding-bottom: 10px; }
+    .d-num  {
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: clamp(72px, 9.2vw, 130px); letter-spacing: -0.02em; line-height: 1;
+      background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      filter: drop-shadow(0 2px 4px rgba(120,20,20,0.20));
+    }
+    .d-suf  { display: flex; flex-direction: column; align-self: flex-end; padding-bottom: 8px; margin-left: 4px; }
+    .d-pct, .d-off {
+      font-family: 'Playfair Display', serif; font-weight: 700;
+      font-size: clamp(24px, 3vw, 42px); line-height: 1; letter-spacing: 0.04em;
+      background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      filter: drop-shadow(0 1px 2px rgba(120,20,20,0.18));
+    }
+    .period { margin-bottom: 20px; }
+    .p-date { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.14em; color: #3a2c18; margin-bottom: 4px; }
+    .p-note { font-size: 11px; font-weight: 300; letter-spacing: 0.2em; color: #9a806a; }
+    .fv-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+      font-family: 'Noto Sans JP', serif; font-size: 14px; font-weight: 500; letter-spacing: 0.22em;
+      padding: 18px 48px; background: #B03228; color: #F7EEDC;
+      text-decoration: none; transition: background 0.3s, box-shadow 0.3s;
+      width: fit-content; min-width: 240px;
+      box-shadow: 0 6px 24px rgba(176,50,40,0.35);
+    }
+    .fv-btn:hover { background: #8a2420; box-shadow: 0 8px 30px rgba(176,50,40,0.45); }
+    .fv-btn::after { content: ''; display: block; width: 6px; height: 6px; flex-shrink: 0; border-right: 2px solid #F7EEDC; border-top: 2px solid #F7EEDC; transform: rotate(45deg); }
+
+    /* 右：写真（PC：フルブリード） */
+    .fv-right { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .fv-right picture { display: block; width: 100%; height: 100%; }
+    .fv-right img { width: 100%; height: 100%; object-fit: cover; object-position: 68% center; display: block; }
+    .fv-right::before {
+      content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background: linear-gradient(to right,
+        rgba(248, 240, 225, 0.97) 0%,
+        rgba(248, 240, 225, 0.90) 35%,
+        rgba(248, 240, 225, 0.35) 58%,
+        transparent 74%
+      );
+    }
+    .photo-ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+    .ph-line { width: 32px; height: 1px; background: rgba(160,130,90,0.3); margin-bottom: 4px; }
+    .ph-txt  { font-family: 'Cormorant Garamond', serif; font-size: 12px; font-weight: 300; letter-spacing: 0.3em; color: rgba(120,95,60,0.5); }
+    .ph-sub  { font-size: 9px; font-weight: 300; letter-spacing: 0.2em; color: rgba(140,110,75,0.4); }
+
+
+    /* ════════════════════════════════════════════
+       MOBILE (〜899px)
+       ワイヤー：帝京平成大学LP方式
+       写真フルブリード ＋ テキストオーバーレイ
+       ＋ 右端フロートCTA ＋ 写真下エリア
+    ════════════════════════════════════════════ */
+    @media (max-width: 899px) {
+      body { padding-top: 54px; background: #F0E2CC; }
+
+      nav { height: 54px; padding: 0 16px; }
+      .nav-logo img { height: 32px; }
+      .nav-btn { display: none; }
+
+      /* ── 右端フロートCTAタブ ── */
+      .side-cta {
+        display: block;
+        position: fixed;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 90;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        background: #B03228;
+        color: #F7EEDC;
+        padding: 26px 13px;
+        font-family: 'Noto Sans JP', serif;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.30em;
+        text-decoration: none;
+        border-radius: 4px 0 0 4px;
+        box-shadow: -3px 0 14px rgba(0,0,0,0.28);
+      }
+
+      /* ── FV：写真フルブリード ── */
+      .fv {
+        display: block;
+        position: relative;
+        height: 68vh;
+        height: 68dvh;
+        overflow: hidden;
+      }
+
+      /* ── テキスト：左55%に限定（人物に被らないよう） ── */
+      .fv-left {
+        position: absolute;
+        top: 0; bottom: 0; left: 0;
+        width: 55%;
+        background: transparent;
+        padding: 6% 0 2% 22px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        z-index: 5;
+      }
+
+      /* 写真：コンテナ全面 */
+      .fv-right {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+      /* 左側クリームグラデーション */
+      .fv-right::before {
+        background: linear-gradient(to right,
+          rgba(248, 240, 225, 0.88) 0%,
+          rgba(248, 240, 225, 0.78) 38%,
+          rgba(248, 240, 225, 0.22) 58%,
+          transparent               72%
+        );
+      }
+      .fv-right img { object-position: 30% top; }
+
+      /* キャッチコピー */
+      .catch  { display: none; }
+
+      /* THE SALE：赤色グラデーション */
+      .t-the  {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: #C02828;
+        font-size: clamp(52px, 13vw, 76px);
+      }
+      .t-sale {
+        font-family: 'Playfair Display', serif;
+        font-weight: 900;
+        background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: #C02828;
+        font-size: clamp(80px, 20.5vw, 118px);
+        margin-bottom: 12px;
+      }
+      .rule   { display: block; width: 38px; height: 1px; background: #B03228; margin-bottom: 10px; }
+
+      /* 割引：30もグラデーション */
+      .d-pre  {
+        font-family: 'Noto Sans JP', sans-serif;
+        color: #C02828; padding-bottom: 7px; font-size: 13px; font-weight: 400;
+        letter-spacing: 0.1em;
+      }
+      .d-num  {
+        font-family: 'Playfair Display', serif;
+        font-weight: 900;
+        background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: #C02828;
+        font-size: clamp(90px, 23vw, 128px);
+        line-height: 1;
+      }
+      .d-pct, .d-off {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: #C02828;
+        font-size: clamp(32px, 8.5vw, 48px);
+        line-height: 1;
+      }
+      .disc   { margin-bottom: 10px; }
+
+      /* 期間：表示 */
+      .fv-left .period  { margin-bottom: 0; }
+      .fv-left .p-date  {
+        display: inline-block;
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        color: #2a1a0e;
+        font-size: 15px;
+        letter-spacing: 0.06em;
+        white-space: nowrap;
+        background: rgba(255, 252, 245, 0.90);
+        padding: 7px 16px;
+        border-radius: 999px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      }
+      .fv-left .p-note  { display: none; }
+      /* ボタンはmobile-belowに */
+      .fv-left .fv-btn  { display: none; }
+
+      /* ── 写真下エリア：日程 ＋ CTA ── */
+      .mobile-below {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 22px 24px 40px;
+        background: linear-gradient(175deg, #F7EFE0 0%, #EDD8B8 100%);
+        gap: 16px;
+      }
+      .mb-period { text-align: center; }
+      .mb-date {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 17px; font-weight: 400; letter-spacing: 0.22em; color: #3a2c18;
+      }
+      .mb-btn {
+        display: flex; align-items: center; justify-content: center; gap: 10px;
+        font-family: 'Noto Sans JP', serif;
+        font-size: 13px; font-weight: 400; letter-spacing: 0.22em;
+        padding: 18px 16px;
+        background: #B03228; color: #F7EEDC;
+        text-decoration: none; transition: background 0.3s;
+      }
+      .mb-btn:hover { background: #8a2420; }
+      .mb-btn::after {
+        content: ''; display: block; width: 5px; height: 5px; flex-shrink: 0;
+        border-right: 1px solid #F7EEDC; border-top: 1px solid #F7EEDC;
+        transform: rotate(45deg);
+      }
+
+      /* ── クーポン：セクションごとFVに食い込む ── */
+      .cp-section {
+        margin-top: -80px;
+        padding-top: 28px;
+        padding-bottom: 52px;
+        position: relative;
+        z-index: 10;
+        background: linear-gradient(to bottom,
+          rgba(232,212,168,0.50)  0px,
+          rgba(232,212,168,0.95) 44px,
+          #E8D4A8                72px,
+          #D9BE8A               100%
+        );
+      }
+      .cp-badges {
+        position: static;
+        top: auto; left: auto; right: auto; z-index: auto;
+        margin-top: 24px;
+      }
+      .cp-head { display: block; padding: 0 16px; margin-bottom: 0; }
+      .cp-title { font-size: 17px; letter-spacing: 0.12em; }
+    }
+    /* ════════════════════
+       COUPON SECTION
+    ════════════════════ */
+    .cp-section {
+      background: linear-gradient(180deg, #E8D4A8 0%, #D0B880 100%);
+      padding: 52px 24px 60px;
+      text-align: center;
+    }
+    .cp-en {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.35em;
+      color: #B03228; margin-bottom: 2px;
+    }
+    .cp-title {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 22px; font-weight: 500; letter-spacing: 0.18em;
+      color: #3a2c18; margin-bottom: 8px;
+    }
+    .cp-sub {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px; font-weight: 300; letter-spacing: 0.1em;
+      color: #7a6040; margin-bottom: 40px;
+    }
+    .cp-badges {
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
+    }
+    .cp-row2 { display: flex; gap: 14px; justify-content: center; }
+    .cp-badge {
+      width: 152px; height: 152px; border-radius: 50%;
+      background: #FFF8EE;
+      border: 2px solid #B03228;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 14px; position: relative;
+      color: #B03228; text-align: center;
+      box-shadow: 0 4px 16px rgba(176,50,40,0.15);
+      overflow: hidden;
+    }
+    .cp-badge::before {
+      content: ''; position: absolute; inset: 7px;
+      border-radius: 50%; border: 1px dashed rgba(176,50,40,0.35);
+    }
+    .cb-type {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px; font-weight: 700; line-height: 1; margin-bottom: 3px;
+      color: #B03228;
+    }
+    .cb-desc {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10.5px; font-weight: 400; letter-spacing: 0em;
+      line-height: 1.5; color: #6a3030;
+      white-space: nowrap;
+    }
+    .cb-val {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px; font-weight: 500; margin-top: 5px; line-height: 1;
+      color: #B03228;
+    }
+    .cb-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px; font-weight: 900; line-height: 1;
+      background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: #C02828;
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">
+      <img src="images/aimegane_yoko_3.jpg" alt="アイメガネ">
+    </div>
+    <a href="https://www.aimegane.com/booking-search/" class="nav-btn">ご来店予約</a>
+  </nav>
+
+  <!-- フロートCTAタブ（スマホのみ） -->
+  <a href="https://www.aimegane.com/booking-search/" class="side-cta">ご来店予約</a>
+
+  <section class="fv">
+
+    <!-- テキスト（PC:左カラム／スマホ:写真オーバーレイ） -->
+    <div class="fv-left">
+      <div>
+        <p class="catch">見える毎日を、もっと心地よく。</p>
+        <span class="t-the">THE</span>
+        <span class="t-sale">SALE</span>
+      </div>
+      <p class="tagline">年に一度の特別価格</p>
+      <div class="rule"></div>
+      <div class="disc">
+        <span class="d-pre">最大</span>
+        <span class="d-num">30</span>
+        <div class="d-suf">
+          <span class="d-pct">%</span>
+          <span class="d-off">OFF</span>
+        </div>
+      </div>
+      <div class="period">
+        <p class="p-date">2026.8.8 <small>SAT</small> &mdash; 10.12 <small>MON</small></p>
+      </div>
+      <a href="https://www.aimegane.com/booking-search/" class="fv-btn">ご来店予約はこちら</a>
+    </div>
+
+    <!-- 写真（PC:右カラム／スマホ:フルブリード背景） -->
+    <div class="fv-right">
+      <picture>
+        <source media="(min-width: 900px)" srcset="images/hero_pc.png">
+        <img src="images/hero_photo.png" alt="アイメガネ">
+      </picture>
+    </div>
+
+  </section>
+
+
+
+  <!-- ▼ クーポン特典セクション -->
+  <section class="cp-section">
+
+    <!-- タイトル -->
+    <div class="cp-head">
+      <h2 class="cp-title">さらに3つのお得な特典</h2>
+    </div>
+
+    <!-- バッジ群 -->
+    <div class="cp-badges">
+
+      <!-- バッジ① LINE -->
+      <div class="cp-badge">
+        <p class="cb-type">LINE</p>
+        <p class="cb-desc">お友達登録（新規）で</p>
+        <p class="cb-val"><span class="cb-num">1,100</span>円引き</p>
+      </div>
+
+      <div class="cp-row2">
+        <!-- バッジ② 処方箋 -->
+        <div class="cp-badge">
+          <p class="cb-desc">処方箋持参で</p>
+          <p class="cb-val"><span class="cb-num">1,100</span>円引き</p>
+        </div>
+
+        <!-- バッジ③ 2本目 -->
+        <div class="cp-badge">
+          <p class="cb-desc">2本目同時購入</p>
+          <p class="cb-desc">お安い方をさらに</p>
+          <p class="cb-val"><span class="cb-num">10</span>%引き</p>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+</body>
+</html>

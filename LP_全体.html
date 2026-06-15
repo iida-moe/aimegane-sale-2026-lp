@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIMEGANE THE SALE 2026 | アイメガネ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans JP', sans-serif; color: #1e0e04; overflow-x: hidden; padding-top: 44px; }
+
+    /* ─────────────────────────────
+       確認用バー（チーム共有時のFV切替）
+    ───────────────────────────── */
+    .compare-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+      background: #F5C842; border-bottom: 2px solid #d4940a;
+      height: 44px; padding: 0 20px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .compare-bar .bar-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: #5a3a00; white-space: nowrap;
+    }
+    .compare-btn {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+      padding: 5px 16px; border-radius: 20px;
+      border: 2px solid #b08000; background: transparent; color: #5a3a00;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .compare-btn.active { background: #1e0e04; color: #F5C842; border-color: #1e0e04; }
+    .bar-note { font-size: 9px; color: #7a5a00; margin-left: auto; white-space: nowrap; }
+
+    /* ─────────────────────────────
+       ナビ
+    ───────────────────────────── */
+    .nav {
+      position: sticky; top: 44px; z-index: 100;
+      background: #fff; border-bottom: 1px solid #f0e8d8;
+      height: 64px; padding: 0 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .nav-logo {
+      font-size: 15px; font-weight: 900; letter-spacing: 0.14em; color: #1e0e04;
+    }
+    .nav-logo span { color: #C83530; }
+    .nav-cta {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
+      padding: 10px 26px; background: #C83530; color: #fff;
+      border: none; border-radius: 2px; cursor: pointer;
+      text-decoration: none; transition: background 0.2s;
+      display: inline-block;
+    }
+    .nav-cta:hover { background: #d94040; }
+
+    /* ─────────────────────────────
+       FV 共通スイッチ
+    ───────────────────────────── */
+    .fv-section { display: none; }
+    .fv-section.active { display: block; }
+
+    /* ─────────────────────────────
+       FV1：テキスト左揃え・右に写真
+    ───────────────────────────── */
+    .fv1 {
+      min-height: calc(100vh - 108px);
+      background: radial-gradient(ellipse 100% 90% at 30% 50%, #FEF8F0 0%, #F0E0C4 100%);
+      display: grid; grid-template-columns: 55% 45%;
+    }
+    .fv1-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 56px 80px 80px;
+    }
+    .fv1-eyebrow {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.8em;
+      color: #8a4820; opacity: 0.6; margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .fv1-mc {
+      font-size: clamp(20px, 2.2vw, 30px); font-weight: 900;
+      line-height: 1.8; letter-spacing: 0.06em; color: #1e0e04;
+      margin-bottom: 44px;
+    }
+    .fv1-mc .kari { font-size: 10px; font-weight: 300; vertical-align: super; margin-left: 6px; opacity: 0.4; }
+    .fv1-brand-sub {
+      display: block; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.8em; color: #8a4820; opacity: 0.5;
+      margin-bottom: 6px; text-transform: uppercase;
+    }
+    .fv1-brand-main {
+      display: block; font-size: clamp(36px, 5vw, 70px);
+      font-weight: 900; letter-spacing: 0.04em; color: #C83530;
+      line-height: 1; margin-bottom: 40px;
+    }
+    .fv1-sep { width: 48px; height: 2px; background: #C83530; margin-bottom: 32px; }
+    .fv1-disc-label { font-size: 12px; font-weight: 500; letter-spacing: 0.3em; color: #5a2e14; margin-bottom: 8px; }
+    .fv1-disc-row { display: flex; align-items: baseline; gap: 2px; line-height: 1; margin-bottom: 28px; }
+    .fv1-disc-pre { font-size: clamp(14px, 1.6vw, 20px); font-weight: 700; color: #1e0e04; margin-right: 4px; }
+    .fv1-disc-num { font-size: clamp(60px, 8vw, 100px); font-weight: 900; color: #C83530; letter-spacing: -0.04em; line-height: 0.9; }
+    .fv1-disc-suf { font-size: clamp(20px, 2.6vw, 34px); font-weight: 900; color: #1e0e04; align-self: flex-end; padding-bottom: 6px; }
+    .fv1-date { font-size: 13px; letter-spacing: 0.4em; color: #6a4020; margin-bottom: 8px; }
+    .fv1-coupon { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; color: #6a4020; opacity: 0.75; margin-bottom: 40px; }
+    .fv1-btn {
+      display: inline-flex; align-items: center; gap: 12px; width: fit-content;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 14px; font-weight: 700; letter-spacing: 0.16em;
+      padding: 18px 44px; background: #C83530; color: #fff;
+      border: none; border-radius: 2px; cursor: pointer;
+      box-shadow: 0 10px 32px rgba(200,53,48,.3);
+      transition: all 0.2s; text-decoration: none;
+    }
+    .fv1-btn:hover { background: #d94040; transform: translateY(-2px); }
+    .fv1-right {
+      background: #e4d4b8; position: relative;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .fv1-right img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+
+    /* ─────────────────────────────
+       FV2：テキスト中央・メガネ4つ
+    ───────────────────────────── */
+    .fv2 {
+      min-height: calc(100vh - 108px);
+      background: radial-gradient(ellipse 70% 65% at 50% 48%, #FEF8F0 0%, #F5E5CE 100%);
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .gc { position: absolute; pointer-events: none; }
+    .gc-tl { top: -30px; left: -30px; transform: rotate(-18deg); }
+    .gc-tr { top: -30px; right: -30px; transform: rotate(22deg); }
+    .gc-bl { bottom: -30px; left: -30px; transform: rotate(14deg); }
+    .gc-br { bottom: -30px; right: -30px; transform: rotate(-16deg); }
+    .fv2-inner {
+      position: relative; z-index: 10;
+      text-align: center; padding: 80px 64px;
+      max-width: 720px; width: 100%;
+    }
+    .fv2-mc { font-size: clamp(22px, 2.6vw, 36px); font-weight: 900; line-height: 1.75; letter-spacing: 0.08em; color: #1e0e04; margin-bottom: 48px; }
+    .fv2-mc .kari { font-size: 10px; font-weight: 300; vertical-align: super; margin-left: 6px; opacity: 0.4; }
+    .fv2-eyebrow { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.9em; color: #8a4820; opacity: 0.55; margin-bottom: 8px; text-transform: uppercase; }
+    .fv2-brand-main { display: block; font-size: clamp(44px, 7vw, 88px); font-weight: 900; letter-spacing: 0.05em; color: #C83530; line-height: 1; margin-bottom: 40px; }
+    .fv2-sep { width: 44px; height: 2px; background: #C83530; margin: 0 auto 36px; }
+    .fv2-disc-label { display: block; font-size: 12px; font-weight: 500; letter-spacing: 0.35em; color: #5a2e14; margin-bottom: 8px; }
+    .fv2-disc-row { display: inline-flex; align-items: baseline; gap: 2px; line-height: 1; margin-bottom: 4px; }
+    .fv2-disc-pre { font-size: clamp(16px, 2vw, 22px); font-weight: 700; color: #1e0e04; margin-right: 4px; }
+    .fv2-disc-num { font-size: clamp(72px, 10vw, 120px); font-weight: 900; color: #C83530; letter-spacing: -0.04em; line-height: 0.9; }
+    .fv2-disc-suf { font-size: clamp(22px, 3vw, 36px); font-weight: 900; color: #1e0e04; align-self: flex-end; padding-bottom: 6px; }
+    .fv2-date { font-size: 13px; letter-spacing: 0.5em; color: #6a4020; margin: 24px 0 10px; display: flex; align-items: center; justify-content: center; gap: 14px; }
+    .fv2-date::before, .fv2-date::after { content: ''; display: block; width: 32px; height: 1px; background: #6a4020; opacity: 0.35; }
+    .fv2-coupon { font-size: 11px; font-weight: 500; letter-spacing: 0.22em; color: #6a4020; opacity: 0.7; margin-bottom: 48px; }
+    .fv2-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 14px; font-weight: 700; letter-spacing: 0.16em;
+      padding: 20px 56px; background: #C83530; color: #fff;
+      border: none; border-radius: 2px; cursor: pointer;
+      box-shadow: 0 10px 32px rgba(200,53,48,.3);
+      transition: all 0.2s; text-decoration: none;
+    }
+    .fv2-btn:hover { background: #d94040; transform: translateY(-2px); }
+
+    /* ─── 矢印 ─── */
+    .arr { width: 8px; height: 8px; border-right: 2px solid currentColor; border-top: 2px solid currentColor; transform: rotate(45deg); flex-shrink: 0; }
+
+    /* ─── 写真プレースホルダー共通 ─── */
+    .photo-ph { text-align: center; }
+    .photo-ph-icon { font-size: 48px; opacity: 0.22; margin-bottom: 12px; }
+    .photo-ph-text { font-size: 12px; color: #aaa; letter-spacing: 0.12em; font-weight: 700; margin-bottom: 4px; }
+    .photo-ph-note { font-size: 10px; color: #bbb; letter-spacing: 0.08em; line-height: 1.7; }
+
+    /* ─────────────────────────────
+       セクション 共通
+    ───────────────────────────── */
+    .sec { padding: 96px 48px; }
+    .sec-inner { max-width: 1080px; margin: 0 auto; }
+    .sec-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.8em; opacity: 0.55; text-transform: uppercase; display: block; margin-bottom: 12px; }
+    .sec-title { font-size: clamp(24px, 2.8vw, 36px); font-weight: 900; letter-spacing: 0.05em; line-height: 1.4; margin-bottom: 12px; }
+    .sec-sub { font-size: 14px; letter-spacing: 0.08em; opacity: 0.6; line-height: 1.8; margin-bottom: 56px; }
+
+    /* ─────────────────────────────
+       セール概要
+    ───────────────────────────── */
+    .sale-sec { background: #FDF5E6; }
+    .sale-sec .sec-eyebrow { color: #8a4820; }
+    .sale-sec .sec-title { color: #1e0e04; }
+    .sale-sec .sec-sub { color: #6a4020; }
+
+    .sale-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .sale-card {
+      background: #fff; border-radius: 4px; padding: 44px 32px;
+      text-align: center; border-top: 5px solid #ddd;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .sale-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(0,0,0,0.10); }
+    .sale-card.t1 { border-top-color: #d4a040; }
+    .sale-card.t2 { border-top-color: #C83530; }
+    .sale-card.t3 { border-top-color: #1e0e04; }
+
+    .sale-badge { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.4em; padding: 4px 12px; border-radius: 20px; margin-bottom: 24px; }
+    .t1 .sale-badge { background: #fef3dc; color: #8a5a10; }
+    .t2 .sale-badge { background: #fde8e8; color: #8a2020; }
+    .t3 .sale-badge { background: #1e0e04; color: #F5C842; }
+
+    .sale-illust { display: flex; justify-content: center; margin-bottom: 28px; }
+    .sale-illust svg { opacity: 0.55; }
+
+    .sale-num {
+      font-size: clamp(52px, 6vw, 76px); font-weight: 900;
+      letter-spacing: -0.03em; line-height: 1; margin-bottom: 4px;
+    }
+    .t1 .sale-num { color: #d4a040; }
+    .t2 .sale-num { color: #C83530; }
+    .t3 .sale-num { color: #1e0e04; }
+    .sale-unit { font-size: 14px; font-weight: 700; }
+    .t1 .sale-unit { color: #d4a040; }
+    .t2 .sale-unit { color: #C83530; }
+    .t3 .sale-unit { color: #1e0e04; }
+
+    .sale-img-ph {
+      margin-top: 20px; background: #f5f0e8; border-radius: 4px;
+      height: 120px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 6px;
+    }
+    .sale-img-ph .pi { font-size: 28px; opacity: 0.25; }
+    .sale-img-ph .pt { font-size: 9px; color: #bbb; letter-spacing: 0.1em; font-weight: 700; }
+
+    .sale-note { margin-top: 36px; text-align: center; font-size: 11px; color: #a08060; letter-spacing: 0.08em; line-height: 1.9; }
+
+    /* ─────────────────────────────
+       クーポン特典
+    ───────────────────────────── */
+    .coupon-sec { background: #fff; }
+    .coupon-sec .sec-eyebrow { color: #C83530; }
+    .coupon-sec .sec-title { color: #1e0e04; }
+    .coupon-sec .sec-sub { color: #6a4020; }
+
+    .coupon-banner {
+      text-align: center; margin-bottom: 44px;
+      font-size: 13px; font-weight: 700; color: #C83530;
+      letter-spacing: 0.25em; display: flex; align-items: center; justify-content: center; gap: 16px;
+    }
+    .coupon-banner::before, .coupon-banner::after { content: ''; display: block; flex: 1; max-width: 80px; height: 1px; background: #C83530; opacity: 0.35; }
+
+    .coupon-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .coupon-card {
+      border: 2px dashed #e0c8a8; border-radius: 4px;
+      padding: 40px 28px; text-align: center; background: #fffdf8;
+      position: relative;
+    }
+    .coupon-card::before {
+      content: '';
+      position: absolute; top: -2px; left: 50%; transform: translateX(-50%);
+      width: 48px; height: 3px; background: #C83530;
+    }
+    .coupon-icon { font-size: 34px; margin-bottom: 16px; display: block; }
+    .coupon-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.4em; color: #C83530; background: #fde8e8; padding: 3px 10px; border-radius: 20px; display: inline-block; margin-bottom: 14px; }
+    .coupon-title { font-size: 14px; font-weight: 700; color: #1e0e04; letter-spacing: 0.05em; line-height: 1.6; margin-bottom: 16px; }
+    .coupon-amount { font-size: clamp(30px, 3.5vw, 42px); font-weight: 900; color: #C83530; letter-spacing: -0.02em; line-height: 1; }
+    .coupon-amount-unit { font-size: 14px; font-weight: 700; color: #C83530; }
+    .coupon-desc { font-size: 11px; color: #999; letter-spacing: 0.06em; margin-top: 10px; line-height: 1.8; }
+
+    .coupon-note { margin-top: 36px; text-align: center; font-size: 11px; color: #aaa; letter-spacing: 0.08em; line-height: 1.9; }
+
+    /* ─────────────────────────────
+       補聴器
+    ───────────────────────────── */
+    .hearing-sec { background: #f7f4f0; }
+    .hearing-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .hearing-badge {
+      display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.5em;
+      padding: 4px 14px; border: 1px solid #bbb; border-radius: 20px; color: #888; margin-bottom: 16px;
+    }
+    .hearing-title { font-size: clamp(22px, 2.4vw, 32px); font-weight: 900; color: #1e0e04; letter-spacing: 0.05em; margin-bottom: 10px; }
+    .hearing-tagline { font-size: 14px; font-weight: 700; color: #C83530; letter-spacing: 0.1em; margin-bottom: 20px; }
+    .hearing-desc { font-size: 13px; color: #5a4030; letter-spacing: 0.06em; line-height: 2.0; }
+    .hearing-visual {
+      background: #e8e0d0; border-radius: 4px;
+      height: 280px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px;
+    }
+    .hearing-visual .ph-icon2 { font-size: 44px; opacity: 0.25; }
+    .hearing-visual .ph-text2 { font-size: 11px; color: #bbb; letter-spacing: 0.1em; font-weight: 700; }
+
+    /* ─────────────────────────────
+       締めCTA
+    ───────────────────────────── */
+    .end-sec { background: #C83530; text-align: center; padding: 96px 48px; }
+    .end-copy { font-size: clamp(22px, 2.8vw, 36px); font-weight: 900; color: #fff; letter-spacing: 0.08em; line-height: 1.7; margin-bottom: 28px; }
+    .end-period {
+      font-size: 14px; letter-spacing: 0.5em; color: rgba(255,255,255,0.75); margin-bottom: 48px;
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+    }
+    .end-period::before, .end-period::after { content: ''; display: block; width: 32px; height: 1px; background: rgba(255,255,255,0.35); }
+    .end-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 14px; font-weight: 700; letter-spacing: 0.16em;
+      padding: 20px 56px; background: #fff; color: #C83530;
+      border: none; border-radius: 2px; cursor: pointer;
+      box-shadow: 0 10px 32px rgba(0,0,0,0.18);
+      transition: all 0.2s; text-decoration: none;
+    }
+    .end-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,0,0,0.25); }
+
+    /* ─────────────────────────────
+       店舗情報
+    ───────────────────────────── */
+    .store-sec { background: #fff; }
+    .store-sec .sec-eyebrow { color: #8a4820; }
+    .store-sec .sec-title { color: #1e0e04; }
+    .store-caution { font-size: 11px; color: #b08060; letter-spacing: 0.08em; margin-bottom: 40px; line-height: 1.9; }
+    .store-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid #f0e8d8; border-left: 1px solid #f0e8d8; }
+    .store-item { font-size: 12px; color: #5a4030; letter-spacing: 0.04em; padding: 12px 14px; border-right: 1px solid #f0e8d8; border-bottom: 1px solid #f0e8d8; line-height: 1.5; }
+
+    /* ─────────────────────────────
+       Footer
+    ───────────────────────────── */
+    footer { background: #1e0e04; color: rgba(255,255,255,0.45); padding: 40px 48px; text-align: center; }
+    .footer-logo { color: #fff; font-weight: 900; font-size: 14px; letter-spacing: 0.14em; margin-bottom: 14px; display: block; }
+    .footer-logo span { color: #C83530; }
+    .footer-copy { font-size: 10px; letter-spacing: 0.12em; }
+
+    /* ─────────────────────────────
+       フローティングCTA
+    ───────────────────────────── */
+    .float-cta {
+      position: fixed; bottom: 28px; right: 28px; z-index: 500;
+    }
+    .float-cta a {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.12em;
+      padding: 14px 24px; background: #C83530; color: #fff;
+      border-radius: 40px;
+      box-shadow: 0 8px 28px rgba(200,53,48,.5);
+      text-decoration: none; transition: all 0.2s;
+    }
+    .float-cta a:hover { background: #d94040; transform: translateY(-2px); }
+
+    /* ─────────────────────────────
+       レスポンシブ
+    ───────────────────────────── */
+    @media (max-width: 860px) {
+      .nav { padding: 0 24px; }
+      .fv1 { grid-template-columns: 1fr; }
+      .fv1-left { padding: 56px 28px; }
+      .fv1-right { min-height: 260px; order: -1; }
+      .fv2-inner { padding: 60px 28px; }
+      .sale-cards { grid-template-columns: 1fr; gap: 16px; }
+      .coupon-cards { grid-template-columns: 1fr; gap: 16px; }
+      .hearing-inner { grid-template-columns: 1fr; gap: 32px; }
+      .store-grid { grid-template-columns: repeat(2, 1fr); }
+      .sec { padding: 64px 24px; }
+      .end-sec { padding: 64px 24px; }
+      .float-cta { bottom: 16px; right: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ 確認用バー ══ -->
+  <div class="compare-bar">
+    <span class="bar-label">FV確認</span>
+    <button class="compare-btn active" onclick="switchFV(1,this)">パターン1：テキスト左・写真右</button>
+    <button class="compare-btn"        onclick="switchFV(2,this)">パターン2：テキスト中央・メガネ4つ</button>
+    <span class="bar-note">※このバーはチーム確認用。本番LPには出しません</span>
+  </div>
+
+  <!-- ══ ナビ ══ -->
+  <nav class="nav">
+    <span class="nav-logo"><span>AI</span>MEGANE</span>
+    <a href="https://www.aimegane.com/booking-search/" class="nav-cta">ご来店予約</a>
+  </nav>
+
+  <!-- ══ FV1：テキスト左揃え・右に写真 ══ -->
+  <div id="fv1" class="fv-section active">
+    <div class="fv1">
+      <div class="fv1-left">
+        <p class="fv1-eyebrow">AIMEGANEI</p>
+        <p class="fv1-mc">年に一度だから、思いきって。<span class="kari">（仮）</span></p>
+        <span class="fv1-brand-sub">AIMEGANEI</span>
+        <span class="fv1-brand-main">THE SALE</span>
+        <div class="fv1-sep"></div>
+        <p class="fv1-disc-label">メガネ・サングラス</p>
+        <div class="fv1-disc-row">
+          <span class="fv1-disc-pre">最大</span>
+          <span class="fv1-disc-num">30</span>
+          <span class="fv1-disc-suf">%OFF</span>
+        </div>
+        <p class="fv1-date">8.8 SAT &nbsp;→&nbsp; 10.12 MON</p>
+        <p class="fv1-coupon">＋ クーポンでさらにお得！</p>
+        <a href="https://www.aimegane.com/booking-search/" class="fv1-btn">
+          ご来店予約はこちら <span class="arr"></span>
+        </a>
+      </div>
+      <div class="fv1-right" id="fv1-right">
+        <div class="photo-ph" style="position:relative;z-index:2;">
+          <div class="photo-ph-icon">🧑‍🦱</div>
+          <p class="photo-ph-text">写真エリア</p>
+          <p class="photo-ph-note">メガネをかけた人物<br>or メガネ単体</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ FV2：テキスト中央・メガネ4つ ══ -->
+  <div id="fv2" class="fv-section">
+    <div class="fv2">
+      <div class="gc gc-tl" id="gc-tl"></div>
+      <div class="gc gc-tr" id="gc-tr"></div>
+      <div class="gc gc-bl" id="gc-bl"></div>
+      <div class="gc gc-br" id="gc-br"></div>
+      <div class="fv2-inner">
+        <p class="fv2-mc">年に一度だから、思いきって。<span class="kari">（仮）</span></p>
+        <span class="fv2-eyebrow">AIMEGANEI</span>
+        <span class="fv2-brand-main">THE SALE</span>
+        <div class="fv2-sep"></div>
+        <span class="fv2-disc-label">メガネ・サングラス</span>
+        <div>
+          <div class="fv2-disc-row">
+            <span class="fv2-disc-pre">最大</span>
+            <span class="fv2-disc-num">30</span>
+            <span class="fv2-disc-suf">%OFF</span>
+          </div>
+        </div>
+        <p class="fv2-date">8.8 SAT &nbsp;→&nbsp; 10.12 MON</p>
+        <p class="fv2-coupon">＋ クーポンでさらにお得！</p>
+        <a href="https://www.aimegane.com/booking-search/" class="fv2-btn">
+          ご来店予約はこちら <span class="arr"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ セール概要 ══ -->
+  <section class="sec sale-sec">
+    <div class="sec-inner">
+      <span class="sec-eyebrow" style="color:#8a4820;">SALE CONTENTS</span>
+      <h2 class="sec-title">フレーム・サングラス<br>最大30%OFF</h2>
+      <p class="sec-sub">今年のザ・セールは3段階の割引をご用意。<br>対象商品・割引率は店舗スタッフまでお気軽にお尋ねください。</p>
+      <div class="sale-cards">
+
+        <!-- 10%OFF -->
+        <div class="sale-card t1">
+          <span class="sale-badge">ENTRY</span>
+          <div class="sale-illust" id="si1"></div>
+          <div class="sale-num">10</div>
+          <div class="sale-unit">%OFF</div>
+          <div class="sale-img-ph">
+            <span class="pi">👓</span>
+            <span class="pt">商品画像が入ります</span>
+          </div>
+        </div>
+
+        <!-- 20%OFF -->
+        <div class="sale-card t2">
+          <span class="sale-badge">STANDARD</span>
+          <div class="sale-illust" id="si2"></div>
+          <div class="sale-num">20</div>
+          <div class="sale-unit">%OFF</div>
+          <div class="sale-img-ph">
+            <span class="pi">👓</span>
+            <span class="pt">商品画像が入ります</span>
+          </div>
+        </div>
+
+        <!-- 30%OFF -->
+        <div class="sale-card t3">
+          <span class="sale-badge">PREMIUM</span>
+          <div class="sale-illust" id="si3"></div>
+          <div class="sale-num">30</div>
+          <div class="sale-unit">%OFF</div>
+          <div class="sale-img-ph">
+            <span class="pi">👓</span>
+            <span class="pt">商品画像が入ります</span>
+          </div>
+        </div>
+
+      </div>
+      <p class="sale-note">
+        ※店頭価格（税込）より割引。<br>
+        対象商品の詳細は各店舗スタッフまでお尋ねください。
+      </p>
+    </div>
+  </section>
+
+  <!-- ══ クーポン特典 ══ -->
+  <section class="sec coupon-sec">
+    <div class="sec-inner">
+      <span class="sec-eyebrow" style="color:#C83530;">COUPON</span>
+      <h2 class="sec-title">さらにお得な<br>クーポン特典</h2>
+      <p class="sec-sub">セール割引にプラスして使えるクーポンをご用意しています。</p>
+      <div class="coupon-banner">セール割引にさらにプラス！</div>
+      <div class="coupon-cards">
+
+        <!-- LINE -->
+        <div class="coupon-card">
+          <span class="coupon-icon">📱</span>
+          <span class="coupon-tag">LINE 新規登録</span>
+          <p class="coupon-title">LINEお友だち登録<br>（新規・その場で）</p>
+          <p class="coupon-amount">1,100<span class="coupon-amount-unit">円引き</span></p>
+          <p class="coupon-desc">ご来店当日に新規でLINEお友だち登録をされた方に適用</p>
+        </div>
+
+        <!-- 処方箋 -->
+        <div class="coupon-card">
+          <span class="coupon-icon">📄</span>
+          <span class="coupon-tag">処方箋持参</span>
+          <p class="coupon-title">眼科の処方箋を<br>お持ちの方</p>
+          <p class="coupon-amount">1,100<span class="coupon-amount-unit">円引き</span></p>
+          <p class="coupon-desc">眼科で発行された処方箋をご持参ください</p>
+        </div>
+
+        <!-- 2本目 -->
+        <div class="coupon-card">
+          <span class="coupon-icon">🕶</span>
+          <span class="coupon-tag">2本目同時購入</span>
+          <p class="coupon-title">2本同時に<br>ご購入の方</p>
+          <p class="coupon-amount" style="font-size:clamp(24px,2.8vw,36px);">お安い方が<br>さらに10%<span class="coupon-amount-unit">引き</span></p>
+          <p class="coupon-desc">2本同時ご購入時、お安い商品をさらに10%引き</p>
+        </div>
+
+      </div>
+      <p class="coupon-note">
+        ※クーポンの重複適用については各店舗スタッフまでお気軽にご相談ください。<br>
+        ※一部対象外の商品がございます。
+      </p>
+    </div>
+  </section>
+
+  <!-- ══ 補聴器 ══ -->
+  <section class="sec hearing-sec">
+    <div class="sec-inner hearing-inner">
+      <div>
+        <span class="hearing-badge">こんな商品も</span>
+        <h2 class="hearing-title">補聴器<br>Gシリーズ</h2>
+        <p class="hearing-tagline">この機会にお買い得に！</p>
+        <p class="hearing-desc">
+          アイメガネで取り扱う補聴器Gシリーズも、<br>
+          THE SALEの期間中はお求めやすい価格でご提供します。<br>
+          補聴器のご相談はスタッフまでお気軽にどうぞ。
+        </p>
+      </div>
+      <div class="hearing-visual">
+        <span class="ph-icon2">🦻</span>
+        <span class="ph-text2">補聴器 Gシリーズ 画像</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 締めCTA ══ -->
+  <section class="end-sec">
+    <p class="end-copy">お得な機会に、新しい一本を。</p>
+    <p class="end-period">8.8 SAT &nbsp;→&nbsp; 10.12 MON</p>
+    <a href="https://www.aimegane.com/booking-search/" class="end-btn">
+      ご来店予約はこちら <span class="arr" style="border-color:#C83530;"></span>
+    </a>
+  </section>
+
+  <!-- ══ 店舗情報 ══ -->
+  <section class="sec store-sec">
+    <div class="sec-inner">
+      <span class="sec-eyebrow" style="color:#8a4820;">STORES</span>
+      <h2 class="sec-title">対象店舗</h2>
+      <p class="store-caution">
+        ※本庄南大通り店は対象外です。その他の除外店舗は要確認。<br>
+        ※下記店舗一覧は暫定です。確定次第更新します。
+      </p>
+      <div class="store-grid">
+        <div class="store-item">アイメガネ本店</div>
+        <div class="store-item">おもちゃのまち西口店</div>
+        <div class="store-item">イオンタウン毛呂山店</div>
+        <div class="store-item">三郷南口駅前通り店</div>
+        <div class="store-item">上尾東口駅前店</div>
+        <div class="store-item">与野イオン店</div>
+        <div class="store-item">与野本町店</div>
+        <div class="store-item">今市センショープラザ店</div>
+        <div class="store-item">八千代台ユアエルム店</div>
+        <div class="store-item">古河イオン店</div>
+        <div class="store-item">坂戸にっさい店</div>
+        <div class="store-item">宇都宮錦店</div>
+        <div class="store-item">寄居店</div>
+        <div class="store-item">富士見鶴馬店</div>
+        <div class="store-item">小川大塚店</div>
+        <div class="store-item">小平小川町店</div>
+        <div class="store-item">岩槻駅前通り店</div>
+        <div class="store-item">嵐山バイパス店</div>
+        <div class="store-item">川口赤井店</div>
+        <div class="store-item">川越的場店</div>
+        <div class="store-item">幸手エムズタウン店</div>
+        <div class="store-item">日高店</div>
+        <div class="store-item">東松山松本町店</div>
+        <div class="store-item">毛呂山店</div>
+        <div class="store-item">深谷上柴西店</div>
+        <div class="store-item">焼津石津店</div>
+        <div class="store-item">町田木曽店</div>
+        <div class="store-item">秩父中宮地店</div>
+        <div class="store-item">羽生店</div>
+        <div class="store-item">蓮田関山店</div>
+        <div class="store-item">藤岡店</div>
+        <div class="store-item">鴻巣ウニクス店</div>
+        <div class="store-item">鴻巣東駅通り店</div>
+        <div class="store-item">熊谷ティアラ店</div>
+        <div class="store-item">南浦和店</div>
+        <div class="store-item">新越谷店</div>
+        <div class="store-item">エキア店</div>
+        <div class="store-item">東大和店</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Footer ══ -->
+  <footer>
+    <span class="footer-logo"><span>AI</span>MEGANE THE SALE 2026</span>
+    <p class="footer-copy">© AIMEGANE. All rights reserved.</p>
+  </footer>
+
+  <!-- ══ フローティングCTA ══ -->
+  <div class="float-cta">
+    <a href="https://www.aimegane.com/booking-search/">
+      ご来店予約 <span class="arr"></span>
+    </a>
+  </div>
+
+  <script>
+    /* ─── FV切替 ─── */
+    function switchFV(n, btn) {
+      document.getElementById('fv1').classList.toggle('active', n === 1);
+      document.getElementById('fv2').classList.toggle('active', n === 2);
+      document.querySelectorAll('.compare-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    /* ─── メガネSVG生成 ─── */
+    function glasses(type, w, color, sw) {
+      sw = sw || 2.5;
+      const t = type % 4;
+      if (t === 0) {
+        const h = Math.round(w * 0.38);
+        return `<svg viewBox="-14 -2 160 56" width="${w}" height="${h}"><ellipse cx="35" cy="26" rx="28" ry="19.5" fill="none" stroke="${color}" stroke-width="${sw}"/><ellipse cx="103" cy="26" rx="28" ry="19.5" fill="none" stroke="${color}" stroke-width="${sw}"/><path d="M63 26 Q69 20 77 26" fill="none" stroke="${color}" stroke-width="${sw*0.7}"/><line x1="7" y1="17" x2="-14" y2="14" stroke="${color}" stroke-width="${sw*0.7}"/><line x1="131" y1="17" x2="146" y2="14" stroke="${color}" stroke-width="${sw*0.7}"/></svg>`;
+      }
+      if (t === 1) {
+        const h = Math.round(w * 0.33);
+        return `<svg viewBox="-14 4 176 46" width="${w}" height="${h}"><rect x="4" y="8" width="62" height="30" rx="5" fill="none" stroke="${color}" stroke-width="${sw}"/><rect x="84" y="8" width="62" height="30" rx="5" fill="none" stroke="${color}" stroke-width="${sw}"/><line x1="66" y1="23" x2="84" y2="23" stroke="${color}" stroke-width="${sw*0.7}"/><line x1="4" y1="18" x2="-14" y2="15" stroke="${color}" stroke-width="${sw*0.7}"/><line x1="146" y1="18" x2="162" y2="15" stroke="${color}" stroke-width="${sw*0.7}"/></svg>`;
+      }
+      if (t === 2) {
+        const h = Math.round(w * 0.38);
+        return `<svg viewBox="-14 0 176 62" width="${w}" height="${h}"><circle cx="38" cy="31" r="27" fill="none" stroke="${color}" stroke-width="${sw}"/><circle cx="112" cy="31" r="27" fill="none" stroke="${color}" stroke-width="${sw}"/><line x1="65" y1="31" x2="85" y2="31" stroke="${color}" stroke-width="${sw*0.7}"/><line x1="11" y1="20" x2="-14" y2="17" stroke="${color}" stroke-width="${sw*0.7}"/><line x1="139" y1="20" x2="162" y2="17" stroke="${color}" stroke-width="${sw*0.7}"/></svg>`;
+      }
+      const h = Math.round(w * 0.40);
+      return `<svg viewBox="-14 -2 176 64" width="${w}" height="${h}"><path d="M8 22Q8 2 38 2Q66 2 66 24Q66 52 38 52Q8 52 8 22Z" fill="none" stroke="${color}" stroke-width="${sw}"/><path d="M84 22Q84 2 112 2Q140 2 140 24Q140 52 112 52Q84 52 84 22Z" fill="none" stroke="${color}" stroke-width="${sw}"/><path d="M66 21Q75 14 84 21" fill="none" stroke="${color}" stroke-width="${sw*0.7}"/><line x1="8" y1="21" x2="-14" y2="18" stroke="${color}" stroke-width="${sw*0.7}"/><line x1="140" y1="21" x2="162" y2="18" stroke="${color}" stroke-width="${sw*0.7}"/></svg>`;
+    }
+
+    /* ─── FV2：4隅のメガネ ─── */
+    const corners = [
+      { id: 'gc-tl', type: 0, size: 360, color: '#C83530', opacity: 0.20 },
+      { id: 'gc-tr', type: 2, size: 340, color: '#d4940a', opacity: 0.18 },
+      { id: 'gc-bl', type: 3, size: 320, color: '#d4940a', opacity: 0.18 },
+      { id: 'gc-br', type: 1, size: 380, color: '#C83530', opacity: 0.22 },
+    ];
+    corners.forEach(c => {
+      const el = document.getElementById(c.id);
+      if (el) { el.style.opacity = c.opacity; el.innerHTML = glasses(c.type, c.size, c.color, 3); }
+    });
+
+    /* ─── セール概要：メガネイラスト ─── */
+    document.getElementById('si1').innerHTML = glasses(0, 120, '#d4a040', 2);
+    document.getElementById('si2').innerHTML = glasses(2, 120, '#C83530', 2);
+    document.getElementById('si3').innerHTML = glasses(1, 120, '#1e0e04', 2);
+  </script>
+</body>
+</html>

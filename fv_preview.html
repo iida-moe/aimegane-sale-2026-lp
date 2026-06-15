@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FV パターン比較 全6案 | アイメガネ ザ セール</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans JP',sans-serif;}
+
+/* ─── 比較ラベル ─── */
+.pat-label{
+  background:#111;color:#fff;
+  padding:24px;text-align:center;
+  font-size:10px;font-weight:700;letter-spacing:0.45em;
+}
+
+/* ─── FV 共通 ─── */
+.fv{
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.gb{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;}
+.fv::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;}
+.fv-inner{
+  position:relative;z-index:10;
+  text-align:center;padding:80px 48px;
+  max-width:740px;width:100%;
+}
+
+/* ─── 共通タイポグラフィ ─── */
+.mc{font-size:clamp(22px,2.6vw,36px);font-weight:900;line-height:1.7;letter-spacing:.08em;margin-bottom:52px;}
+.mc .k{font-size:11px;font-weight:300;vertical-align:super;margin-left:8px;letter-spacing:.06em;opacity:.5;}
+.ev-sub{display:block;font-size:10px;font-weight:700;letter-spacing:.9em;text-transform:uppercase;margin-bottom:8px;}
+.ev-main{display:block;font-size:clamp(44px,6.5vw,88px);font-weight:900;letter-spacing:.06em;text-transform:uppercase;line-height:1;margin-bottom:44px;}
+.sep{width:44px;height:1.5px;margin:0 auto 44px;}
+.disc-label{display:block;font-size:12px;font-weight:500;letter-spacing:.35em;margin-bottom:10px;}
+.disc-num{display:inline-flex;align-items:baseline;gap:2px;line-height:1;margin-bottom:4px;}
+.disc-pre{font-size:clamp(16px,2vw,22px);font-weight:700;letter-spacing:.05em;margin-right:4px;}
+.disc-pct{font-size:clamp(72px,10vw,128px);font-weight:900;letter-spacing:-.04em;line-height:.9;}
+.disc-suf{font-size:clamp(22px,3vw,38px);font-weight:900;letter-spacing:.02em;align-self:flex-end;padding-bottom:8px;}
+.date{font-size:clamp(11px,1.1vw,13px);letter-spacing:.55em;font-weight:400;margin:24px 0 16px;display:flex;align-items:center;justify-content:center;gap:12px;}
+.date::before,.date::after{content:'';display:block;width:36px;height:1px;background:currentColor;opacity:.35;}
+.cp{font-size:11px;font-weight:500;letter-spacing:.25em;margin-bottom:56px;opacity:.65;}
+.btn{
+  display:inline-flex;align-items:center;gap:14px;
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:14px;font-weight:700;letter-spacing:.2em;
+  padding:20px 56px;border-radius:2px;border:none;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;
+}
+.btn .arr{width:8px;height:8px;flex-shrink:0;border-right:2px solid currentColor;border-top:2px solid currentColor;transform:rotate(45deg);}
+.btn:hover{transform:translateY(-3px);}
+
+
+/* ══════════════════════════════
+   B: Red × Cream
+   温かみ・高揚感
+══════════════════════════════ */
+.fv-b{background:radial-gradient(ellipse 70% 65% at 50% 48%,#FEF8F0 0%,#F5E5CE 100%);}
+.fv-b::before{background:radial-gradient(ellipse 55% 55% at 50% 48%,rgba(254,248,240,.72) 0%,transparent 100%);}
+.fv-b .mc{color:#1e0e04;}
+.fv-b .ev-sub{color:#8a4820;opacity:.6;}
+.fv-b .ev-main{color:#C83530;}
+.fv-b .sep{background:#C83530;}
+.fv-b .disc-label{color:#5a2e14;}
+.fv-b .disc-pre,.fv-b .disc-suf{color:#1e0e04;}
+.fv-b .disc-pct{color:#C83530;}
+.fv-b .date,.fv-b .cp{color:#6a4020;}
+.fv-b .btn{background:#C83530;color:#fff;box-shadow:0 10px 32px rgba(200,53,48,.3);}
+.fv-b .btn:hover{background:#d94040;box-shadow:0 16px 40px rgba(200,53,48,.4);}
+
+
+/* ══════════════════════════════
+   C: ユニクロ風 × 眼鏡イラスト
+   白・帯・強気
+══════════════════════════════ */
+.fv-c{background:#fff;border-top:5px solid #D93530;flex-direction:column;justify-content:center;}
+.fv-c::before{
+  background:
+    radial-gradient(ellipse 80% 45% at 50% 28%,rgba(255,255,255,.90) 0%,rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 80% 30% at 50% 82%,rgba(255,255,255,.90) 0%,rgba(255,255,255,0) 100%);
+}
+.uni-top{position:relative;z-index:10;text-align:center;padding:56px 48px 44px;max-width:860px;width:100%;}
+.uni-ev-sub{display:block;font-size:10px;font-weight:700;letter-spacing:1em;text-transform:uppercase;color:#bbb;margin-bottom:10px;}
+.uni-ev-main{display:block;font-size:clamp(56px,9vw,120px);font-weight:900;letter-spacing:.04em;text-transform:uppercase;line-height:1;margin-bottom:36px;}
+.uni-rule{border:none;border-top:1px solid #e0e0e0;margin:0 auto 36px;width:100%;max-width:600px;}
+.uni-mc{font-size:clamp(20px,2.4vw,32px);font-weight:900;line-height:1.7;letter-spacing:.08em;}
+.uni-mc .k{font-size:11px;font-weight:300;vertical-align:super;margin-left:8px;opacity:.35;}
+.uni-band{position:relative;z-index:10;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 48px;gap:2px;}
+.uni-band-label{font-size:12px;font-weight:500;letter-spacing:.45em;opacity:.8;}
+.uni-band-num{display:inline-flex;align-items:baseline;gap:0;line-height:1;}
+.uni-band-pre{font-size:clamp(18px,2.2vw,26px);font-weight:700;letter-spacing:.05em;margin-right:6px;}
+.uni-band-pct{font-size:clamp(80px,12vw,152px);font-weight:900;letter-spacing:-.04em;line-height:.88;}
+.uni-band-suf{font-size:clamp(28px,3.8vw,50px);font-weight:900;align-self:flex-end;padding-bottom:12px;}
+.uni-bot{position:relative;z-index:10;text-align:center;padding:40px 48px 56px;max-width:860px;width:100%;}
+.uni-date{font-size:clamp(12px,1.2vw,15px);letter-spacing:.55em;font-weight:400;margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:14px;}
+.uni-date::before,.uni-date::after{content:'';display:block;width:36px;height:1px;}
+.uni-cp{font-size:11px;font-weight:500;letter-spacing:.3em;margin-bottom:44px;}
+.uni-btn{
+  display:inline-flex;align-items:center;gap:14px;
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:14px;font-weight:700;letter-spacing:.2em;
+  padding:18px 52px;border-radius:2px;cursor:pointer;
+  background:transparent;border:2px solid;transition:all .2s;
+}
+.uni-btn .arr{width:8px;height:8px;flex-shrink:0;border-right:2px solid currentColor;border-top:2px solid currentColor;transform:rotate(45deg);}
+.uni-btn:hover{transform:translateY(-2px);}
+.fv-c .uni-ev-main{color:#D93530;}
+.fv-c .uni-mc{color:#111;}
+.fv-c .uni-band{background:#D93530;color:#fff;}
+.fv-c .uni-date{color:#555;}
+.fv-c .uni-date::before,.fv-c .uni-date::after{background:#bbb;}
+.fv-c .uni-cp{color:#999;}
+.fv-c .uni-btn{color:#D93530;border-color:#D93530;}
+.fv-c .uni-btn:hover{background:#D93530;color:#fff;}
+
+
+/* ══════════════════════════════
+   E: JINS風
+   白・ティール・アウトラインボックス
+══════════════════════════════ */
+.fv-e{background:#fff;border-top:6px solid #009FCE;flex-direction:column;justify-content:center;}
+.fv-e::before{display:none;}
+.jins-top{position:relative;z-index:10;text-align:center;padding:52px 48px 36px;max-width:860px;width:100%;}
+.jins-sub{display:block;font-size:10px;font-weight:700;letter-spacing:1em;text-transform:uppercase;color:#aaa;margin-bottom:10px;}
+.jins-title{display:block;font-size:clamp(52px,8.5vw,112px);font-weight:900;letter-spacing:.05em;text-transform:uppercase;line-height:1;color:#009FCE;margin-bottom:32px;}
+.jins-rule{border:none;border-top:1px solid #e5e5e5;margin:0 auto 32px;width:100%;max-width:560px;}
+.jins-mc{font-size:clamp(20px,2.4vw,32px);font-weight:900;line-height:1.7;letter-spacing:.08em;color:#111;}
+.jins-mc .k{font-size:11px;font-weight:300;vertical-align:super;margin-left:8px;opacity:.35;}
+.jins-box-wrap{position:relative;z-index:10;text-align:center;padding:8px 48px;}
+.jins-box{display:inline-flex;flex-direction:column;align-items:center;border:3px solid #009FCE;padding:24px 64px 20px;gap:4px;}
+.jins-box-label{font-size:12px;font-weight:500;letter-spacing:.4em;color:#009FCE;opacity:.8;}
+.jins-disc-num{display:inline-flex;align-items:baseline;gap:2px;line-height:1;}
+.jins-pre{font-size:clamp(16px,2vw,22px);font-weight:700;color:#111;margin-right:4px;}
+.jins-pct{font-size:clamp(72px,10vw,128px);font-weight:900;letter-spacing:-.04em;line-height:.9;color:#009FCE;}
+.jins-suf{font-size:clamp(22px,3vw,38px);font-weight:900;color:#111;align-self:flex-end;padding-bottom:8px;}
+.jins-bot{position:relative;z-index:10;text-align:center;padding:32px 48px 52px;max-width:860px;width:100%;}
+.jins-date{font-size:clamp(12px,1.2vw,15px);letter-spacing:.55em;font-weight:400;color:#666;margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:14px;}
+.jins-date::before,.jins-date::after{content:'';display:block;width:36px;height:1px;background:#ccc;}
+.jins-cp{font-size:11px;font-weight:500;letter-spacing:.3em;color:#aaa;margin-bottom:44px;}
+.jins-btn{
+  display:inline-flex;align-items:center;gap:14px;
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:14px;font-weight:700;letter-spacing:.2em;
+  padding:18px 52px;border-radius:0;cursor:pointer;
+  background:#009FCE;color:#fff;border:none;transition:all .2s;
+}
+.jins-btn .arr{width:8px;height:8px;flex-shrink:0;border-right:2px solid #fff;border-top:2px solid #fff;transform:rotate(45deg);}
+.jins-btn:hover{background:#0080AA;transform:translateY(-2px);}
+
+
+/* ══════════════════════════════
+   H: 明治・クラシカル洋風
+   古紙クリーム × 墨 × 金
+══════════════════════════════ */
+.fv-h{
+  background:radial-gradient(ellipse 80% 70% at 50% 50%,#FAF4E0 0%,#E4D8B8 100%);
+}
+.fv-h::before{
+  background:radial-gradient(ellipse 60% 60% at 50% 48%,rgba(250,244,224,.6) 0%,transparent 100%);
+}
+.fv-h .fv-inner{
+  border-top:1px solid #B8943E;
+  border-bottom:1px solid #B8943E;
+  outline:3px solid transparent;
+  box-shadow:inset 0 4px 0 #B8943E, inset 0 -4px 0 #B8943E, inset 0 8px 0 #FAF4E0, inset 0 -8px 0 #FAF4E0;
+  padding:72px 64px;
+}
+.fv-h .mc{color:#1A0C00;}
+.fv-h .ev-sub{color:#B8943E;font-size:9px;letter-spacing:1.4em;}
+.fv-h .ev-main{color:#1A0C00;}
+.fv-h .sep{background:#B8943E;width:60px;height:1px;}
+.fv-h .disc-label{color:#5a3a10;}
+.fv-h .disc-pre,.fv-h .disc-suf{color:#1A0C00;}
+.fv-h .disc-pct{color:#8B1A00;}
+.fv-h .date,.fv-h .cp{color:#6a4820;}
+.fv-h .btn{
+  background:#1A0C00;color:#E8D090;
+  border:1px solid #B8943E;
+  box-shadow:0 8px 28px rgba(26,12,0,.3),inset 0 1px 0 rgba(200,160,60,.3);
+}
+.fv-h .btn:hover{background:#2a1c08;box-shadow:0 14px 36px rgba(26,12,0,.45);}
+
+
+/* ══════════════════════════════
+   I: 医療・光学風
+   白 × コバルトブルー × 精密
+══════════════════════════════ */
+.fv-i{
+  background:#F2F7FC;
+  border-top:5px solid #003E8F;
+}
+.fv-i::before{display:none;}
+.fv-i .fv-inner{position:relative;}
+.fv-i .mc{color:#001D48;font-weight:700;}
+.fv-i .ev-sub{color:#003E8F;opacity:.5;font-size:9px;letter-spacing:1.2em;}
+.fv-i .ev-main{color:#003E8F;}
+.fv-i .sep{background:#003E8F;width:32px;}
+.fv-i .disc-label{color:#2a4a7a;}
+.fv-i .disc-pre,.fv-i .disc-suf{color:#001D48;}
+.fv-i .disc-pct{color:#003E8F;}
+.fv-i .date,.fv-i .cp{color:#4a6a9a;}
+.fv-i .btn{
+  background:#003E8F;color:#fff;border-radius:0;
+  box-shadow:0 8px 24px rgba(0,62,143,.28);
+}
+.fv-i .btn:hover{background:#004EB8;box-shadow:0 14px 32px rgba(0,62,143,.4);}
+/* 視力検査表風の装飾文字 */
+.eye-chart{
+  position:absolute;right:-20px;top:0;
+  font-size:clamp(9px,0.9vw,12px);
+  font-weight:700;letter-spacing:.15em;
+  color:#003E8F;opacity:.07;
+  line-height:2;text-align:right;
+  pointer-events:none;user-select:none;
+}
+/* 十字マーク */
+.fv-i .fv-inner::after{
+  content:'+';
+  position:absolute;top:-36px;right:20px;
+  font-size:20px;font-weight:300;
+  color:#003E8F;opacity:.18;
+  pointer-events:none;
+}
+
+
+/* ══════════════════════════════
+   J: 左揃えレイアウト
+   Red × Cream / テキスト左・ビジュアル右
+══════════════════════════════ */
+.fv-j{
+  background:radial-gradient(ellipse 90% 80% at 20% 50%,#FEF8F0 0%,#F0E0C4 100%);
+  justify-content:center;
+}
+.fv-j::before{display:none;}
+.fv-j-inner{
+  position:relative;z-index:10;
+  display:flex;align-items:center;
+  width:100%;max-width:1200px;
+  padding:80px 96px;
+  gap:80px;
+}
+.fv-j-text{flex:0 0 auto;width:460px;text-align:left;}
+.fv-j-text .mc{color:#1e0e04;margin-bottom:40px;}
+.fv-j-text .ev-sub{color:#8a4820;opacity:.6;}
+.fv-j-text .ev-main{color:#C83530;font-size:clamp(40px,5.5vw,76px);}
+.fv-j-text .sep{background:#C83530;margin:0 0 44px 0;}
+.fv-j-text .disc-label{color:#5a2e14;}
+.fv-j-text .disc-pre,.fv-j-text .disc-suf{color:#1e0e04;}
+.fv-j-text .disc-pct{color:#C83530;}
+.fv-j-text .date{color:#6a4020;justify-content:flex-start;}
+.fv-j-text .date::before{display:none;}
+.fv-j-text .cp{color:#6a4020;opacity:.65;}
+.fv-j-text .btn{background:#C83530;color:#fff;box-shadow:0 10px 32px rgba(200,53,48,.3);}
+.fv-j-text .btn:hover{background:#d94040;box-shadow:0 16px 40px rgba(200,53,48,.4);}
+.fv-j-visual{
+  flex:1;
+  position:relative;
+  height:520px;
+  min-width:320px;
+}
+
+@media(max-width:900px){
+  .fv-j-inner{flex-direction:column;padding:60px 40px;gap:40px;}
+  .fv-j-text{width:100%;text-align:center;}
+  .fv-j-text .sep{margin:0 auto 44px;}
+  .fv-j-text .date{justify-content:center;}
+  .fv-j-text .date::before{display:block;}
+  .fv-j-visual{width:100%;height:280px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ B: Red × Cream ══ -->
+<div class="pat-label">PATTERN B ─── RED × CREAM ─── 温かみ・高揚感 / 中央揃え</div>
+<section class="fv fv-b">
+  <div class="gb" id="gb-b"></div>
+  <div class="fv-inner">
+    <p class="mc">今年の自分に、いい一本を。<span class="k">（仮）</span></p>
+    <span class="ev-sub">AIMEGANEI</span>
+    <span class="ev-main">THE SALE</span>
+    <div class="sep"></div>
+    <span class="disc-label">メガネ・サングラス</span>
+    <div class="disc-num"><span class="disc-pre">最大</span><span class="disc-pct">30</span><span class="disc-suf">%OFF</span></div>
+    <p class="date">8.8 SAT&nbsp;→&nbsp;10.12 MON</p>
+    <p class="cp">＋ クーポンでさらにお得！</p>
+    <button class="btn">ご来店予約はこちら <span class="arr"></span></button>
+  </div>
+</section>
+
+<!-- ══ C: ユニクロ風 ══ -->
+<div class="pat-label">PATTERN C ─── ユニクロ風 × 眼鏡イラスト ─── 白・帯・強気 / 中央揃え</div>
+<section class="fv fv-c">
+  <div class="gb" id="gb-c"></div>
+  <div class="uni-top">
+    <span class="uni-ev-sub">AIMEGANEI</span>
+    <span class="uni-ev-main">THE SALE</span>
+    <hr class="uni-rule">
+    <p class="uni-mc">今年の自分に、いい一本を。<span class="k">（仮）</span></p>
+  </div>
+  <div class="uni-band">
+    <span class="uni-band-label">メガネ・サングラス</span>
+    <div class="uni-band-num">
+      <span class="uni-band-pre">最大</span><span class="uni-band-pct">30</span><span class="uni-band-suf">%OFF</span>
+    </div>
+  </div>
+  <div class="uni-bot">
+    <p class="uni-date">8.8 SAT&nbsp;→&nbsp;10.12 MON</p>
+    <p class="uni-cp">＋ クーポンでさらにお得！</p>
+    <button class="uni-btn">ご来店予約はこちら <span class="arr"></span></button>
+  </div>
+</section>
+
+<!-- ══ E: JINS風 ══ -->
+<div class="pat-label">PATTERN E ─── JINS風 ─── ティール・アウトライン・クリーンモダン / 中央揃え</div>
+<section class="fv fv-e">
+  <div class="jins-top">
+    <span class="jins-sub">AIMEGANEI</span>
+    <span class="jins-title">THE SALE</span>
+    <hr class="jins-rule">
+    <p class="jins-mc">今年の自分に、いい一本を。<span class="k">（仮）</span></p>
+  </div>
+  <div class="jins-box-wrap">
+    <div class="jins-box">
+      <span class="jins-box-label">メガネ・サングラス</span>
+      <div class="jins-disc-num">
+        <span class="jins-pre">最大</span><span class="jins-pct">30</span><span class="jins-suf">%OFF</span>
+      </div>
+    </div>
+  </div>
+  <div class="jins-bot">
+    <p class="jins-date">8.8 SAT&nbsp;→&nbsp;10.12 MON</p>
+    <p class="jins-cp">＋ クーポンでさらにお得！</p>
+    <button class="jins-btn">ご来店予約はこちら <span class="arr"></span></button>
+  </div>
+</section>
+
+<!-- ══ H: 明治・クラシカル洋風 ══ -->
+<div class="pat-label">PATTERN H ─── 明治・クラシカル洋風 ─── 古紙クリーム × 墨 × 金 / 中央揃え</div>
+<section class="fv fv-h">
+  <div class="gb" id="gb-h"></div>
+  <div class="fv-inner">
+    <p class="mc">年に一度だから、思いきって。<span class="k">（仮）</span></p>
+    <span class="ev-sub">AIMEGANEI</span>
+    <span class="ev-main">THE SALE</span>
+    <div class="sep"></div>
+    <span class="disc-label">メガネ・サングラス</span>
+    <div class="disc-num"><span class="disc-pre">最大</span><span class="disc-pct">30</span><span class="disc-suf">%OFF</span></div>
+    <p class="date">8.8 SAT&nbsp;→&nbsp;10.12 MON</p>
+    <p class="cp">＋ クーポンでさらにお得！</p>
+    <button class="btn">ご来店予約はこちら <span class="arr"></span></button>
+  </div>
+</section>
+
+<!-- ══ I: 医療・光学風 ══ -->
+<div class="pat-label">PATTERN I ─── 医療・光学風 ─── コバルトブルー × 白 × 精密 / 中央揃え</div>
+<section class="fv fv-i">
+  <div class="gb" id="gb-i"></div>
+  <div class="fv-inner">
+    <div class="eye-chart">E<br>FP<br>TOZ<br>LPED<br>PECFD<br>EDFCZP<br>FELOPZD<br>DEFPOTEC</div>
+    <p class="mc">そろそろ、替えどきかも。<span class="k">（仮）</span></p>
+    <span class="ev-sub">AIMEGANEI</span>
+    <span class="ev-main">THE SALE</span>
+    <div class="sep"></div>
+    <span class="disc-label">メガネ・サングラス</span>
+    <div class="disc-num"><span class="disc-pre">最大</span><span class="disc-pct">30</span><span class="disc-suf">%OFF</span></div>
+    <p class="date">8.8 SAT&nbsp;→&nbsp;10.12 MON</p>
+    <p class="cp">＋ クーポンでさらにお得！</p>
+    <button class="btn">ご来店予約はこちら <span class="arr"></span></button>
+  </div>
+</section>
+
+<!-- ══ J: 左揃えレイアウト ══ -->
+<div class="pat-label">PATTERN J ─── 左揃えレイアウト ─── Red × Cream / テキスト左・ビジュアル右</div>
+<section class="fv fv-j">
+  <div class="fv-j-inner">
+    <div class="fv-j-text">
+      <p class="mc">今年の自分に、いい一本を。<span class="k">（仮）</span></p>
+      <span class="ev-sub">AIMEGANEI</span>
+      <span class="ev-main">THE SALE</span>
+      <div class="sep"></div>
+      <span class="disc-label">メガネ・サングラス</span>
+      <div class="disc-num"><span class="disc-pre">最大</span><span class="disc-pct">30</span><span class="disc-suf">%OFF</span></div>
+      <p class="date">8.8 SAT&nbsp;→&nbsp;10.12 MON</p>
+      <p class="cp">＋ クーポンでさらにお得！</p>
+      <button class="btn">ご来店予約はこちら <span class="arr"></span></button>
+    </div>
+    <div class="fv-j-visual" id="vis-j"></div>
+  </div>
+</section>
+
+
+<script>
+const ITEMS = [
+  {t:2,x:'-10%',y:'-5%', w:280,r:-14,o:.06},
+  {t:0,x:'60%', y:'-7%', w:260,r:20, o:.06},
+  {t:1,x:'-6%', y:'12%', w:190,r:-22,o:.11},
+  {t:3,x:'72%', y:'3%',  w:172,r:17, o:.10},
+  {t:0,x:'13%', y:'1%',  w:152,r:-7, o:.12},
+  {t:2,x:'42%', y:'8%',  w:128,r:13, o:.09},
+  {t:1,x:'82%', y:'27%', w:162,r:-25,o:.11},
+  {t:3,x:'-8%', y:'46%', w:178,r:9,  o:.11},
+  {t:0,x:'65%', y:'53%', w:138,r:-18,o:.10},
+  {t:2,x:'4%',  y:'63%', w:155,r:22, o:.12},
+  {t:1,x:'33%', y:'78%', w:116,r:-11,o:.10},
+  {t:0,x:'75%', y:'74%', w:132,r:25, o:.11},
+  {t:3,x:'18%', y:'86%', w:120,r:-16,o:.10},
+  {t:2,x:'55%', y:'88%', w:110,r:7,  o:.11},
+  {t:1,x:'86%', y:'60%', w:145,r:-13,o:.09},
+];
+
+function glasses(type,w,color){
+  const t=type%4;
+  if(t===0){const h=Math.round(w*.375);return `<svg viewBox="-14 -2 160 56" width="${w}" height="${h}"><ellipse cx="35" cy="26" rx="28" ry="19.5" fill="none" stroke="${color}" stroke-width="2"/><ellipse cx="103" cy="26" rx="28" ry="19.5" fill="none" stroke="${color}" stroke-width="2"/><path d="M63 26 Q69 20 77 26" fill="none" stroke="${color}" stroke-width="1.6"/><line x1="7" y1="17" x2="-14" y2="14" stroke="${color}" stroke-width="1.6"/><line x1="131" y1="17" x2="146" y2="14" stroke="${color}" stroke-width="1.6"/></svg>`;}
+  if(t===1){const h=Math.round(w*.32);return `<svg viewBox="-14 4 176 46" width="${w}" height="${h}"><rect x="4" y="8" width="62" height="30" rx="5" fill="none" stroke="${color}" stroke-width="2"/><rect x="84" y="8" width="62" height="30" rx="5" fill="none" stroke="${color}" stroke-width="2"/><line x1="66" y1="23" x2="84" y2="23" stroke="${color}" stroke-width="1.6"/><line x1="4" y1="18" x2="-14" y2="15" stroke="${color}" stroke-width="1.6"/><line x1="146" y1="18" x2="162" y2="15" stroke="${color}" stroke-width="1.6"/></svg>`;}
+  if(t===2){const h=Math.round(w*.375);return `<svg viewBox="-14 0 176 62" width="${w}" height="${h}"><circle cx="38" cy="31" r="27" fill="none" stroke="${color}" stroke-width="2"/><circle cx="112" cy="31" r="27" fill="none" stroke="${color}" stroke-width="2"/><line x1="65" y1="31" x2="85" y2="31" stroke="${color}" stroke-width="1.6"/><line x1="11" y1="20" x2="-14" y2="17" stroke="${color}" stroke-width="1.6"/><line x1="139" y1="20" x2="162" y2="17" stroke="${color}" stroke-width="1.6"/></svg>`;}
+  const h=Math.round(w*.40);return `<svg viewBox="-14 -2 176 64" width="${w}" height="${h}"><path d="M8 22Q8 2 38 2Q66 2 66 24Q66 52 38 52Q8 52 8 22Z" fill="none" stroke="${color}" stroke-width="2"/><path d="M84 22Q84 2 112 2Q140 2 140 24Q140 52 112 52Q84 52 84 22Z" fill="none" stroke="${color}" stroke-width="2"/><path d="M66 21Q75 14 84 21" fill="none" stroke="${color}" stroke-width="1.6"/><line x1="8" y1="21" x2="-14" y2="18" stroke="${color}" stroke-width="1.6"/><line x1="140" y1="21" x2="162" y2="18" stroke="${color}" stroke-width="1.6"/></svg>`;
+}
+
+function fill(id,colors){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.innerHTML=ITEMS.map((it,i)=>{
+    const c=colors[i%colors.length];
+    return `<div style="position:absolute;left:${it.x};top:${it.y};transform:rotate(${it.r}deg);opacity:${it.o};">${glasses(it.t,it.w,c)}</div>`;
+  }).join('');
+}
+
+// B: レッド・ウォーム
+fill('gb-b',['#C83530','#d4940a','#b02820','#e09028']);
+// C: 赤・黄 on 白
+fill('gb-c',['#D93530','#F5C842','#e84040','#e8a020','#c02020','#f0d040']);
+// H: 墨・金（明治）
+fill('gb-h',['#1A0C00','#B8943E','#3a2000','#C9A84C','#8a6020']);
+// I: コバルト（医療）
+fill('gb-i',['#003E8F','#5a8aCC','#002060','#4a7aBC','#1a5aA0']);
+
+// J: 右側に大きな眼鏡を配置（ビジュアルパネル）
+const visJ = document.getElementById('vis-j');
+if(visJ){
+  const jGlasses=[
+    {t:0,x:'0%',  y:'4%',  w:340,r:-6, o:.52,c:'#C83530'},
+    {t:2,x:'10%', y:'38%', w:280,r:14, o:.44,c:'#d4940a'},
+    {t:3,x:'28%', y:'10%', w:210,r:24, o:.32,c:'#b02820'},
+    {t:1,x:'22%', y:'65%', w:240,r:-8, o:.38,c:'#C83530'},
+    {t:0,x:'50%', y:'50%', w:170,r:-20,o:.26,c:'#e09028'},
+    {t:2,x:'55%', y:'8%',  w:150,r:10, o:.22,c:'#b02820'},
+  ];
+  visJ.innerHTML=jGlasses.map(it=>{
+    return `<div style="position:absolute;left:${it.x};top:${it.y};transform:rotate(${it.r}deg);opacity:${it.o};">${glasses(it.t,it.w,it.c)}</div>`;
+  }).join('');
+}
+</script>
+</body>
+</html>

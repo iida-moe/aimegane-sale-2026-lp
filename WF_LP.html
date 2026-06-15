@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIMEGANE THE SALE — ワイヤーフレーム</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #e8e8e8;
+      font-family: 'Noto Sans JP', sans-serif;
+      padding: 32px 16px 80px;
+      color: #333;
+    }
+
+    /* ページタイトル */
+    .page-title {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .page-title h1 {
+      font-size: 13px;
+      color: #666;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+    .page-title p {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* スマホ枠 */
+    .phone-wrap {
+      max-width: 390px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+    }
+
+    /* セクション共通 */
+    .section {
+      padding: 28px 20px;
+      border-bottom: 1px solid #e0e0e0;
+      position: relative;
+    }
+
+    /* セクションラベル */
+    .sec-label {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-size: 9px;
+      color: #bbb;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+
+    /* 画像プレースホルダー */
+    .img-box {
+      background: #e0e0e0;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      position: relative;
+    }
+    .img-box::before {
+      content: '';
+      position: absolute;
+      top: 8px; left: 8px; right: 8px; bottom: 8px;
+      border: 1.5px dashed #ccc;
+      border-radius: 4px;
+    }
+
+    /* テキストプレースホルダー */
+    .text-line {
+      height: 12px;
+      background: #e8e8e8;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .text-line.short { width: 60%; }
+    .text-line.medium { width: 80%; }
+    .text-line.full { width: 100%; }
+
+    /* ボタン */
+    .wf-btn {
+      width: 100%;
+      padding: 14px;
+      background: #c8c8c8;
+      border-radius: 50px;
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-top: 16px;
+    }
+    .wf-btn.primary {
+      background: #aaa;
+      color: #fff;
+    }
+
+    /* タグ・バッジ */
+    .wf-badge {
+      display: inline-block;
+      background: #d0d0d0;
+      color: #888;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      padding: 3px 14px;
+      border-radius: 30px;
+      margin-bottom: 14px;
+    }
+
+    /* ラベルテキスト */
+    .label-text {
+      font-size: 11px;
+      color: #999;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    /* 大きい数字 */
+    .big-num {
+      font-size: 52px;
+      font-weight: 900;
+      color: #ccc;
+      line-height: 1;
+      margin: 4px 0;
+    }
+
+    /* 区切りバー */
+    .divider-bar {
+      background: #e8e8e8;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 11px;
+      color: #aaa;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    /* カード行 */
+    .card-row {
+      display: grid;
+      gap: 10px;
+    }
+    .card-row.col2 { grid-template-columns: 1fr 1fr; }
+    .card-row.col3 { grid-template-columns: 1fr 1fr 1fr; }
+
+    .wf-card {
+      background: #f2f2f2;
+      border-radius: 8px;
+      padding: 14px 12px;
+      text-align: center;
+    }
+    .wf-card .card-icon {
+      width: 40px;
+      height: 40px;
+      background: #ddd;
+      border-radius: 50%;
+      margin: 0 auto 10px;
+    }
+    .wf-card .card-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: #888;
+      margin-bottom: 6px;
+    }
+    .wf-card .card-body {
+      font-size: 10px;
+      color: #bbb;
+      line-height: 1.5;
+    }
+
+    /* セール商品行 */
+    .sale-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .sale-item:last-child { border-bottom: none; }
+    .sale-item .item-img {
+      width: 60px;
+      height: 60px;
+      flex-shrink: 0;
+    }
+    .sale-item .item-info { flex: 1; }
+
+    /* クーポンカード */
+    .coupon-card {
+      background: #f5f5f5;
+      border: 1.5px dashed #d8d8d8;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+    }
+    .coupon-card .coupon-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #888;
+      margin-bottom: 6px;
+    }
+    .coupon-card .coupon-discount {
+      font-size: 22px;
+      font-weight: 900;
+      color: #bbb;
+    }
+
+    /* 店舗リスト */
+    .store-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .store-item:last-child { border-bottom: none; }
+    .store-dot {
+      width: 8px; height: 8px;
+      background: #ccc;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ナビバー（ページ内） */
+    .nav-bar {
+      background: #f8f8f8;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .nav-logo {
+      width: 80px;
+      height: 16px;
+      background: #ddd;
+      border-radius: 3px;
+    }
+    .nav-btn {
+      width: 80px;
+      height: 28px;
+      background: #ccc;
+      border-radius: 4px;
+    }
+
+    /* フローティングCTA */
+    .floating-cta {
+      background: #ddd;
+      padding: 14px 20px;
+      text-align: center;
+      font-size: 11px;
+      color: #888;
+      font-weight: 700;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    /* セクション番号 */
+    .sec-num {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background: #ddd;
+      border-radius: 50%;
+      font-size: 10px;
+      font-weight: 700;
+      color: #888;
+      text-align: center;
+      line-height: 20px;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+    .sec-heading {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .sec-heading-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-title">
+    <h1>AIMEGANE THE SALE — LP ワイヤーフレーム</h1>
+    <p>スマホ表示 / コンセプト：年に一度の祭り感 / カラー：温かみ系（赤×イエロー）</p>
+  </div>
+
+  <div class="phone-wrap">
+
+    <!-- ナビゲーション -->
+    <div class="nav-bar">
+      <div class="nav-logo"></div>
+      <div class="nav-btn"></div>
+    </div>
+
+    <!-- ① ヒーロー（FV） -->
+    <div class="section" style="background:#fafafa; padding:36px 20px 28px; text-align:center;">
+      <span class="sec-label">① HERO</span>
+      <div class="wf-badge">2026 THE SALE</div>
+      <div class="label-text">メインコピー（1〜2行）</div>
+      <div class="text-line medium" style="margin:0 auto 6px;"></div>
+      <div class="text-line short" style="margin:0 auto 20px;"></div>
+      <div class="label-text">AIMEGANE THE SALE</div>
+      <div class="big-num">30<span style="font-size:22px;">%OFF</span></div>
+      <p style="font-size:10px;color:#bbb;margin:6px 0 20px;">メガネ・サングラス</p>
+      <div class="text-line short" style="margin:0 auto 24px;height:10px;"></div>
+      <div class="wf-btn primary">ご来店予約はこちら →</div>
+      <div class="divider-bar">＋クーポンでさらにお得！</div>
+    </div>
+
+    <!-- ② セール概要 -->
+    <div class="section">
+      <span class="sec-label">② SALE概要</span>
+      <div class="sec-heading">
+        <span class="sec-num">2</span>
+        <span class="sec-heading-text">セール内容</span>
+      </div>
+
+      <!-- フレーム・SG -->
+      <div class="sale-item">
+        <div class="img-box item-img">画像</div>
+        <div class="item-info">
+          <div class="label-text">フレーム・サングラス</div>
+          <div class="text-line medium"></div>
+          <div style="font-size:18px;font-weight:900;color:#ccc;">最大30%OFF</div>
+          <div style="font-size:9px;color:#bbb;margin-top:4px;">10 / 20 / 30%（商品による）</div>
+        </div>
+      </div>
+
+      <!-- 補聴器 -->
+      <div class="sale-item">
+        <div class="img-box item-img">画像</div>
+        <div class="item-info">
+          <div class="label-text">補聴器 Gシリーズ</div>
+          <div class="text-line medium"></div>
+          <div style="font-size:14px;font-weight:700;color:#ccc;">お買い得に！</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ③ クーポン特典 -->
+    <div class="section" style="background:#fafafa;">
+      <span class="sec-label">③ COUPON</span>
+      <div class="sec-heading">
+        <span class="sec-num">3</span>
+        <span class="sec-heading-text">クーポン特典</span>
+      </div>
+
+      <div class="coupon-card">
+        <div class="coupon-title">LINEお友だち登録（新規・その場で）</div>
+        <div class="coupon-discount">1,100円引き</div>
+        <div style="font-size:9px;color:#ccc;margin-top:4px;">QRコードイメージ</div>
+      </div>
+
+      <div class="coupon-card">
+        <div class="coupon-title">処方箋持参</div>
+        <div class="coupon-discount">1,100円引き</div>
+        <div style="font-size:9px;color:#ccc;margin-top:4px;">処方箋イラスト</div>
+      </div>
+
+      <div class="coupon-card">
+        <div class="coupon-title">2本目同時購入</div>
+        <div class="coupon-discount">お安いほうをさらに10%引き</div>
+      </div>
+
+      <p style="font-size:10px;color:#bbb;margin-top:12px;text-align:center;">※クーポン併用可否は【要確認】</p>
+    </div>
+
+    <!-- ④ 補聴器（サブ） -->
+    <div class="section">
+      <span class="sec-label">④ 補聴器サブ</span>
+      <div class="sec-heading">
+        <span class="sec-num">4</span>
+        <span class="sec-heading-text">こんな商品も</span>
+      </div>
+      <div class="img-box" style="height:120px; margin-bottom:12px;">補聴器 Gシリーズ 画像</div>
+      <div class="text-line medium"></div>
+      <div class="text-line short"></div>
+    </div>
+
+    <!-- ⑤ 締めCTA -->
+    <div class="section" style="background:#fafafa; text-align:center;">
+      <span class="sec-label">⑤ 締めCTA</span>
+      <div class="label-text">CTAコピー（1〜2行）</div>
+      <div class="text-line short" style="margin:0 auto 6px;"></div>
+      <div class="text-line medium" style="margin:0 auto 20px;"></div>
+      <div style="font-size:11px;color:#bbb;margin-bottom:16px;">8.8 sat → 10.12 mon</div>
+      <div class="wf-btn primary">ご来店予約はこちら →</div>
+      <p style="font-size:10px;color:#bbb;margin-top:10px;">予約URL：aimegane.com/booking-search/</p>
+    </div>
+
+    <!-- ⑥ 店舗情報 -->
+    <div class="section">
+      <span class="sec-label">⑥ 店舗情報</span>
+      <div class="sec-heading">
+        <span class="sec-num">6</span>
+        <span class="sec-heading-text">参加店舗</span>
+      </div>
+      <p style="font-size:10px;color:#bbb;margin-bottom:12px;">※本庄南大通り店を除く</p>
+
+      <!-- 店舗リスト（仮） -->
+      <div class="store-item"><div class="store-dot"></div><div class="text-line" style="width:60%;margin:0;height:10px;"></div></div>
+      <div class="store-item"><div class="store-dot"></div><div class="text-line" style="width:70%;margin:0;height:10px;"></div></div>
+      <div class="store-item"><div class="store-dot"></div><div class="text-line" style="width:55%;margin:0;height:10px;"></div></div>
+      <div class="store-item"><div class="store-dot"></div><div class="text-line" style="width:65%;margin:0;height:10px;"></div></div>
+      <div class="store-item"><div class="store-dot"></div><div class="text-line" style="width:50%;margin:0;height:10px;"></div></div>
+
+      <div class="img-box" style="height:160px; margin-top:16px;">地図 or 店舗一覧画像</div>
+    </div>
+
+    <!-- フローティングCTA（下部固定イメージ） -->
+    <div class="floating-cta">
+      【画面下部 固定表示】来店予約ボタン
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIMEGANE THE SALE — FV 新案2パターン</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans JP', sans-serif; background: #ddd; }
+
+    .pat-label {
+      background: #111; color: #fff;
+      padding: 20px 32px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.4em;
+    }
+
+    /* ══════════════════════════════
+       パターン1：テキスト左揃え・右に写真
+    ══════════════════════════════ */
+    .fv1 {
+      min-height: 100vh;
+      background: radial-gradient(ellipse 100% 90% at 30% 50%, #FEF8F0 0%, #F0E0C4 100%);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* 左：テキストエリア */
+    .fv1-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 64px 80px 96px;
+    }
+
+    .fv1-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.7em;
+      color: #8a4820;
+      opacity: 0.65;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .fv1-mc {
+      font-size: clamp(22px, 2.2vw, 32px);
+      font-weight: 900;
+      line-height: 1.75;
+      letter-spacing: 0.07em;
+      color: #1e0e04;
+      margin-bottom: 40px;
+    }
+    .fv1-mc .kari {
+      font-size: 10px;
+      font-weight: 300;
+      vertical-align: super;
+      margin-left: 6px;
+      opacity: 0.4;
+    }
+
+    .fv1-brand {
+      margin-bottom: 36px;
+    }
+    .fv1-brand-sub {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8em;
+      color: #8a4820;
+      opacity: 0.5;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+    .fv1-brand-main {
+      display: block;
+      font-size: clamp(40px, 5vw, 72px);
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      color: #C83530;
+      line-height: 1;
+    }
+
+    .fv1-sep {
+      width: 48px; height: 2px;
+      background: #C83530;
+      margin-bottom: 32px;
+    }
+
+    .fv1-disc-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      color: #5a2e14;
+      margin-bottom: 6px;
+    }
+    .fv1-disc-row {
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+    .fv1-disc-pre {
+      font-size: clamp(14px, 1.6vw, 20px);
+      font-weight: 700;
+      color: #1e0e04;
+      margin-right: 4px;
+    }
+    .fv1-disc-num {
+      font-size: clamp(64px, 8vw, 108px);
+      font-weight: 900;
+      color: #C83530;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+    }
+    .fv1-disc-suf {
+      font-size: clamp(20px, 2.6vw, 36px);
+      font-weight: 900;
+      color: #1e0e04;
+      align-self: flex-end;
+      padding-bottom: 6px;
+    }
+
+    .fv1-date {
+      font-size: 13px;
+      letter-spacing: 0.45em;
+      color: #6a4020;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+    .fv1-coupon {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: #6a4020;
+      opacity: 0.7;
+      margin-bottom: 40px;
+    }
+
+    .fv1-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      width: fit-content;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      padding: 18px 48px;
+      background: #C83530;
+      color: #fff;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      box-shadow: 0 10px 32px rgba(200, 53, 48, 0.3);
+      transition: all 0.2s;
+    }
+    .fv1-btn:hover {
+      background: #d94040;
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(200, 53, 48, 0.4);
+    }
+    .fv1-btn .arr {
+      width: 8px; height: 8px;
+      border-right: 2px solid #fff;
+      border-top: 2px solid #fff;
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    /* 右：写真エリア */
+    .fv1-right {
+      position: relative;
+      background: #e4d4b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .fv1-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .fv1-photo-placeholder {
+      text-align: center;
+    }
+    .fv1-photo-placeholder .ph-icon { font-size: 52px; opacity: 0.3; margin-bottom: 14px; }
+    .fv1-photo-placeholder .ph-text { font-size: 13px; color: #aaa; letter-spacing: 0.15em; font-weight: 700; margin-bottom: 6px; }
+    .fv1-photo-placeholder .ph-note { font-size: 10px; color: #bbb; letter-spacing: 0.08em; }
+
+    /* 右側の背景装飾（メガネシルエット薄く） */
+    .fv1-right-deco {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+
+    /* ══════════════════════════════
+       パターン2：テキスト中央・周りにメガネ4つ
+    ══════════════════════════════ */
+    .fv2 {
+      min-height: 100vh;
+      position: relative;
+      background: radial-gradient(ellipse 70% 65% at 50% 48%, #FEF8F0 0%, #F5E5CE 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* 4隅のメガネ */
+    .glasses-corner {
+      position: absolute;
+      pointer-events: none;
+    }
+    .gc-tl { top: -20px;  left: -20px;  transform: rotate(-18deg); }
+    .gc-tr { top: -20px;  right: -20px; transform: rotate(22deg); }
+    .gc-bl { bottom: -20px; left: -20px;  transform: rotate(12deg); }
+    .gc-br { bottom: -20px; right: -20px; transform: rotate(-14deg); }
+
+    /* 中央テキストブロック */
+    .fv2-inner {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 80px 64px;
+      max-width: 700px;
+      width: 100%;
+    }
+
+    .fv2-mc {
+      font-size: clamp(22px, 2.6vw, 36px);
+      font-weight: 900;
+      line-height: 1.75;
+      letter-spacing: 0.08em;
+      color: #1e0e04;
+      margin-bottom: 44px;
+    }
+    .fv2-mc .kari {
+      font-size: 10px;
+      font-weight: 300;
+      vertical-align: super;
+      margin-left: 6px;
+      opacity: 0.4;
+    }
+
+    .fv2-eyebrow {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.9em;
+      color: #8a4820;
+      opacity: 0.6;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .fv2-brand-main {
+      display: block;
+      font-size: clamp(44px, 6.5vw, 88px);
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      color: #C83530;
+      line-height: 1;
+      margin-bottom: 36px;
+    }
+
+    .fv2-sep {
+      width: 44px; height: 2px;
+      background: #C83530;
+      margin: 0 auto 36px;
+    }
+
+    .fv2-disc-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      color: #5a2e14;
+      margin-bottom: 8px;
+    }
+    .fv2-disc-row {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 2px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .fv2-disc-pre {
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 700;
+      color: #1e0e04;
+      margin-right: 4px;
+    }
+    .fv2-disc-num {
+      font-size: clamp(72px, 10vw, 120px);
+      font-weight: 900;
+      color: #C83530;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+    }
+    .fv2-disc-suf {
+      font-size: clamp(22px, 3vw, 38px);
+      font-weight: 900;
+      color: #1e0e04;
+      align-self: flex-end;
+      padding-bottom: 6px;
+    }
+
+    .fv2-date {
+      font-size: clamp(11px, 1.1vw, 13px);
+      letter-spacing: 0.55em;
+      color: #6a4020;
+      font-weight: 400;
+      margin: 24px 0 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .fv2-date::before, .fv2-date::after {
+      content: '';
+      display: block;
+      width: 32px; height: 1px;
+      background: #6a4020;
+      opacity: 0.35;
+    }
+    .fv2-coupon {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      color: #6a4020;
+      opacity: 0.65;
+      margin-bottom: 48px;
+    }
+
+    .fv2-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      padding: 20px 56px;
+      background: #C83530;
+      color: #fff;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      box-shadow: 0 10px 32px rgba(200, 53, 48, 0.3);
+      transition: all 0.2s;
+    }
+    .fv2-btn:hover {
+      background: #d94040;
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(200, 53, 48, 0.4);
+    }
+    .fv2-btn .arr {
+      width: 8px; height: 8px;
+      border-right: 2px solid #fff;
+      border-top: 2px solid #fff;
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ パターン1：テキスト左揃え・右に写真 ══ -->
+<div class="pat-label">パターン1 ─── テキスト左揃え・右に写真</div>
+<section class="fv1">
+  <div class="fv1-left">
+    <p class="fv1-eyebrow">AIMEGANEI</p>
+    <p class="fv1-mc">年に一度だから、思いきって。<span class="kari">（仮）</span></p>
+    <div class="fv1-brand">
+      <span class="fv1-brand-sub">AIMEGANEI</span>
+      <span class="fv1-brand-main">THE SALE</span>
+    </div>
+    <div class="fv1-sep"></div>
+    <p class="fv1-disc-label">メガネ・サングラス</p>
+    <div class="fv1-disc-row">
+      <span class="fv1-disc-pre">最大</span>
+      <span class="fv1-disc-num">30</span>
+      <span class="fv1-disc-suf">%OFF</span>
+    </div>
+    <p class="fv1-date">8.8 SAT &nbsp;→&nbsp; 10.12 MON</p>
+    <p class="fv1-coupon">＋ クーポンでさらにお得！</p>
+    <button class="fv1-btn">ご来店予約はこちら <span class="arr"></span></button>
+  </div>
+  <div class="fv1-right">
+    <svg class="fv1-right-deco" id="deco1"></svg>
+    <div class="fv1-photo-placeholder">
+      <div class="ph-icon">🧑‍🦱</div>
+      <p class="ph-text">写真エリア</p>
+      <p class="ph-note">メガネをかけた人物 or メガネ単体</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ パターン2：テキスト中央揃え・周りにメガネ4つ ══ -->
+<div class="pat-label">パターン2 ─── テキスト中央揃え・周りにメガネイラスト4つ</div>
+<section class="fv2">
+  <!-- 4隅のメガネ -->
+  <div class="glasses-corner gc-tl" id="gc-tl"></div>
+  <div class="glasses-corner gc-tr" id="gc-tr"></div>
+  <div class="glasses-corner gc-bl" id="gc-bl"></div>
+  <div class="glasses-corner gc-br" id="gc-br"></div>
+
+  <div class="fv2-inner">
+    <p class="fv2-mc">年に一度だから、思いきって。<span class="kari">（仮）</span></p>
+    <span class="fv2-eyebrow">AIMEGANEI</span>
+    <span class="fv2-brand-main">THE SALE</span>
+    <div class="fv2-sep"></div>
+    <span class="fv2-disc-label">メガネ・サングラス</span>
+    <div>
+      <div class="fv2-disc-row">
+        <span class="fv2-disc-pre">最大</span>
+        <span class="fv2-disc-num">30</span>
+        <span class="fv2-disc-suf">%OFF</span>
+      </div>
+    </div>
+    <p class="fv2-date">8.8 SAT &nbsp;→&nbsp; 10.12 MON</p>
+    <p class="fv2-coupon">＋ クーポンでさらにお得！</p>
+    <button class="fv2-btn">ご来店予約はこちら <span class="arr"></span></button>
+  </div>
+</section>
+
+<script>
+  /* ─── メガネSVG生成 ─── */
+  function glasses(type, w, color) {
+    const t = type % 4;
+    if (t === 0) {
+      const h = Math.round(w * 0.38);
+      return `<svg viewBox="-14 -2 160 56" width="${w}" height="${h}"><ellipse cx="35" cy="26" rx="28" ry="19.5" fill="none" stroke="${color}" stroke-width="3"/><ellipse cx="103" cy="26" rx="28" ry="19.5" fill="none" stroke="${color}" stroke-width="3"/><path d="M63 26 Q69 20 77 26" fill="none" stroke="${color}" stroke-width="2"/><line x1="7" y1="17" x2="-14" y2="14" stroke="${color}" stroke-width="2"/><line x1="131" y1="17" x2="146" y2="14" stroke="${color}" stroke-width="2"/></svg>`;
+    }
+    if (t === 1) {
+      const h = Math.round(w * 0.33);
+      return `<svg viewBox="-14 4 176 46" width="${w}" height="${h}"><rect x="4" y="8" width="62" height="30" rx="5" fill="none" stroke="${color}" stroke-width="3"/><rect x="84" y="8" width="62" height="30" rx="5" fill="none" stroke="${color}" stroke-width="3"/><line x1="66" y1="23" x2="84" y2="23" stroke="${color}" stroke-width="2"/><line x1="4" y1="18" x2="-14" y2="15" stroke="${color}" stroke-width="2"/><line x1="146" y1="18" x2="162" y2="15" stroke="${color}" stroke-width="2"/></svg>`;
+    }
+    if (t === 2) {
+      const h = Math.round(w * 0.38);
+      return `<svg viewBox="-14 0 176 62" width="${w}" height="${h}"><circle cx="38" cy="31" r="27" fill="none" stroke="${color}" stroke-width="3"/><circle cx="112" cy="31" r="27" fill="none" stroke="${color}" stroke-width="3"/><line x1="65" y1="31" x2="85" y2="31" stroke="${color}" stroke-width="2"/><line x1="11" y1="20" x2="-14" y2="17" stroke="${color}" stroke-width="2"/><line x1="139" y1="20" x2="162" y2="17" stroke="${color}" stroke-width="2"/></svg>`;
+    }
+    const h = Math.round(w * 0.40);
+    return `<svg viewBox="-14 -2 176 64" width="${w}" height="${h}"><path d="M8 22Q8 2 38 2Q66 2 66 24Q66 52 38 52Q8 52 8 22Z" fill="none" stroke="${color}" stroke-width="3"/><path d="M84 22Q84 2 112 2Q140 2 140 24Q140 52 112 52Q84 52 84 22Z" fill="none" stroke="${color}" stroke-width="3"/><path d="M66 21Q75 14 84 21" fill="none" stroke="${color}" stroke-width="2"/><line x1="8" y1="21" x2="-14" y2="18" stroke="${color}" stroke-width="2"/><line x1="140" y1="21" x2="162" y2="18" stroke="${color}" stroke-width="2"/></svg>`;
+  }
+
+  /* ─── パターン1右側：薄い装飾（背景） ─── */
+  const deco1 = document.getElementById('deco1');
+  deco1.setAttribute('width', '100%');
+  deco1.setAttribute('height', '100%');
+  deco1.innerHTML = `
+    <g opacity="0.08" transform="translate(60,120) rotate(-12)">
+      ${glasses(2, 380, '#C83530').replace(/<svg[^>]*>/, '').replace('</svg>', '')}
+    </g>
+    <g opacity="0.07" transform="translate(20,340) rotate(18)">
+      ${glasses(0, 300, '#d4940a').replace(/<svg[^>]*>/, '').replace('</svg>', '')}
+    </g>
+    <g opacity="0.07" transform="translate(120,500) rotate(-8)">
+      ${glasses(1, 250, '#C83530').replace(/<svg[^>]*>/, '').replace('</svg>', '')}
+    </g>
+  `;
+
+  /* ─── パターン2：4隅のメガネ ─── */
+  const corners = [
+    { id: 'gc-tl', type: 0, size: 340, color: '#C83530', opacity: 0.22 },
+    { id: 'gc-tr', type: 2, size: 320, color: '#d4940a', opacity: 0.20 },
+    { id: 'gc-bl', type: 3, size: 300, color: '#d4940a', opacity: 0.20 },
+    { id: 'gc-br', type: 1, size: 360, color: '#C83530', opacity: 0.22 },
+  ];
+
+  corners.forEach(c => {
+    const el = document.getElementById(c.id);
+    if (el) {
+      el.style.opacity = c.opacity;
+      el.innerHTML = glasses(c.type, c.size, c.color);
+    }
+  });
+</script>
+</body>
+</html>
