@@ -358,7 +358,7 @@
     .cp-num-hl { font-size: 19px; font-weight: 700; color: #B8942A; }
     /* カードリスト＋CTAの横並びコンテナ */
     .cp-row {
-      display: flex; gap: 12px; align-items: stretch;
+      display: flex; gap: 12px; align-items: flex-start;
       max-width: 1040px; margin: 0 auto;
     }
     .cp-list { display: flex; gap: 10px; flex: 1; }
@@ -398,6 +398,7 @@
       padding: 20px 14px;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
+      align-self: stretch;
       text-align: center; gap: 8px;
     }
     .cta-divider { width: 80%; height: 1px; background: rgba(197,162,74,0.5); }
