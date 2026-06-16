@@ -30,13 +30,13 @@
       font-family: 'Noto Sans JP', serif;
       font-size: 11px; font-weight: 400; letter-spacing: 0.2em;
       padding: 9px 26px;
-      color: #B03228; border: 1px solid #B03228;
+      color: #CC1530; border: 1px solid #CC1530;
       background: transparent; cursor: pointer;
       text-decoration: none; display: inline-block;
       transition: background 0.3s, color 0.3s;
       white-space: nowrap;
     }
-    .nav-btn:hover { background: #B03228; color: #fff; }
+    .nav-btn:hover { background: #CC1530; color: #fff; }
 
     /* PC では非表示 */
     .side-cta   { display: none; }
@@ -48,8 +48,8 @@
     .fv {
       display: block;
       position: relative;
-      height: calc(100vh - 68px);
-      height: calc(100dvh - 68px);
+      height: calc(88vh - 68px);
+      height: calc(88dvh - 68px);
       overflow: hidden;
     }
     .fv-left {
@@ -60,24 +60,31 @@
       background: transparent;
       z-index: 5;
     }
-    .catch { font-size: 12px; font-weight: 300; letter-spacing: 0.22em; color: #7a6040; margin-bottom: 10px; }
+    .catch { font-size: 15px; font-weight: 400; letter-spacing: 0.20em; color: #7a6040; margin-bottom: 8px; }
+    .sale-ribbon {
+      display: inline-block;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.22em;
+      background: #E82038; color: #fff;
+      padding: 5px 16px; margin-bottom: 10px;
+    }
     .t-the  {
       display: block; font-family: 'Playfair Display', serif; font-weight: 700;
       font-size: clamp(44px, 5.5vw, 78px); letter-spacing: 0.10em; line-height: 1;
-      background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
+      background: linear-gradient(to bottom, #E82038 0%, #CC1030 45%, #A80825 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       filter: drop-shadow(0 1px 2px rgba(120,20,20,0.18));
     }
     .t-sale {
       display: block; font-family: 'Playfair Display', serif; font-weight: 900;
       font-size: clamp(80px, 11vw, 156px); letter-spacing: 0.04em; line-height: 0.86; margin-bottom: 12px;
-      background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
+      background: linear-gradient(to bottom, #E82038 0%, #CC1030 45%, #A80825 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       filter: drop-shadow(0 2px 4px rgba(120,20,20,0.20));
     }
     .tagline {
       display: inline-flex; align-items: center; gap: 10px;
-      background: #B81818; color: #fff;
+      background: #CC1530; color: #fff;
       font-family: 'Noto Sans JP', sans-serif;
       font-size: 13px; font-weight: 500; letter-spacing: 0.25em;
       padding: 7px 18px; margin-bottom: 16px;
@@ -87,11 +94,11 @@
     .tagline::after  { content: '///'; font-size: 10px; opacity: 0.7; letter-spacing: 0; }
     .rule   { display: none; } /* PC：非表示 */
     .disc   { display: flex; align-items: baseline; margin-bottom: 12px; }
-    .d-pre  { font-family: 'Noto Sans JP', sans-serif; font-size: 16px; font-weight: 500; color: #C02828; letter-spacing: 0.1em; margin-right: 6px; align-self: flex-end; padding-bottom: 10px; }
+    .d-pre  { font-family: 'Noto Sans JP', sans-serif; font-size: 20px; font-weight: 700; color: #7a5535; letter-spacing: 0.1em; margin-right: 6px; align-self: flex-end; padding-bottom: 10px; }
     .d-num  {
       font-family: 'Noto Serif JP', serif; font-weight: 700;
       font-size: clamp(96px, 12vw, 160px); letter-spacing: -0.01em; line-height: 1;
-      background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
+      background: linear-gradient(to bottom, #E82038 0%, #CC1030 45%, #A80825 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       filter: drop-shadow(0 2px 4px rgba(120,20,20,0.20));
     }
@@ -99,7 +106,7 @@
     .d-pct, .d-off {
       font-family: 'Noto Serif JP', serif; font-weight: 700;
       font-size: clamp(30px, 3.8vw, 54px); line-height: 1; letter-spacing: 0.04em;
-      background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
+      background: linear-gradient(to bottom, #E82038 0%, #CC1030 45%, #A80825 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       filter: drop-shadow(0 1px 2px rgba(120,20,20,0.18));
     }
@@ -114,15 +121,18 @@
     .fv-btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 12px;
       font-family: 'Noto Sans JP', serif; font-size: 14px; font-weight: 500; letter-spacing: 0.22em;
-      padding: 18px 44px; background: #B03228; color: #F7EEDC;
+      padding: 18px 44px;
+      background: linear-gradient(to right, #AA1228 0%, #CC1530 50%, #AA1228 100%);
+      color: #F7EEDC;
       text-decoration: none; transition: background 0.3s, box-shadow 0.3s;
       width: fit-content;
-      outline: 1px solid rgba(247,238,220,0.30);
-      outline-offset: -4px;
-      box-shadow: 0 6px 24px rgba(176,50,40,0.35);
+      border: 1px solid rgba(212,175,48,0.65);
+      outline: 1px solid rgba(212,175,48,0.22);
+      outline-offset: -5px;
+      box-shadow: 0 6px 24px rgba(80,15,20,0.40);
     }
-    .fv-btn:hover { background: #8a2420; box-shadow: 0 8px 30px rgba(176,50,40,0.45); }
-    .fv-btn::after { content: ''; display: block; width: 6px; height: 6px; flex-shrink: 0; border-right: 2px solid #F7EEDC; border-top: 2px solid #F7EEDC; transform: rotate(45deg); }
+    .fv-btn:hover { background: linear-gradient(to right, #8A0E1E 0%, #AA1228 50%, #8A0E1E 100%); box-shadow: 0 8px 30px rgba(80,15,20,0.50); }
+    .fv-btn::after { content: ''; display: block; width: 6px; height: 6px; flex-shrink: 0; border-right: 2px solid #D4AF30; border-top: 2px solid #D4AF30; transform: rotate(45deg); }
 
     /* 右：写真（PC：フルブリード） */
     .fv-right { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -131,9 +141,9 @@
     .fv-right::before {
       content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
       background: linear-gradient(to right,
-        rgba(248, 240, 225, 0.97) 0%,
-        rgba(248, 240, 225, 0.90) 35%,
-        rgba(248, 240, 225, 0.35) 58%,
+        rgba(255, 255, 255, 0.97) 0%,
+        rgba(255, 255, 255, 0.92) 35%,
+        rgba(255, 255, 255, 0.30) 58%,
         transparent 74%
       );
     }
@@ -163,7 +173,7 @@
         position: fixed;
         bottom: 0; left: 0; right: 0;
         z-index: 90;
-        background: #B03228;
+        background: #CC1530;
         color: #F7EEDC;
         font-family: 'Noto Sans JP', sans-serif;
         font-size: 14px; font-weight: 500; letter-spacing: 0.22em;
@@ -207,59 +217,59 @@
         width: 100%;
         height: 100%;
       }
-      /* 左側クリームグラデーション */
+      /* 左側ホワイトグラデーション（クリームより鮮明） */
       .fv-right::before {
         background: linear-gradient(to right,
-          rgba(248, 240, 225, 0.95) 0%,
-          rgba(248, 240, 225, 0.80) 42%,
-          rgba(248, 240, 225, 0.38) 58%,
-          rgba(248, 240, 225, 0.08) 72%,
+          rgba(255, 255, 255, 0.97) 0%,
+          rgba(255, 255, 255, 0.88) 42%,
+          rgba(255, 255, 255, 0.35) 58%,
+          rgba(255, 255, 255, 0.06) 72%,
           transparent               82%
         );
       }
       .fv-right img { object-position: 0% top; }
 
       /* キャッチコピー */
-      .catch  { display: none; }
+      .catch  { display: block; font-size: 10px; letter-spacing: 0.12em; color: #5a3a20; margin-bottom: 4px; white-space: nowrap; }
 
       /* THE SALE */
       .t-the  {
         font-family: 'Playfair Display', serif;
         font-weight: 700;
-        background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
+        background: linear-gradient(to bottom, #E82038 0%, #CC1030 45%, #A80825 100%);
         -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         font-size: clamp(52px, 13vw, 76px);
       }
       .t-sale {
         font-family: 'Playfair Display', serif;
         font-weight: 900;
-        background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
+        background: linear-gradient(to bottom, #E82038 0%, #CC1030 45%, #A80825 100%);
         -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         font-size: clamp(80px, 20.5vw, 118px);
         margin-bottom: 12px;
       }
-      .rule   { display: block; width: 38px; height: 1px; background: #B03228; margin-bottom: 10px; }
+      .rule   { display: block; width: clamp(180px, 48vw, 280px); height: 2px; background: linear-gradient(to right, transparent, #D4AF30 25%, #F0CC50 50%, #D4AF30 75%, transparent); margin-bottom: 10px; }
 
       /* 割引 */
       .d-pre  {
         font-family: 'Noto Sans JP', sans-serif;
-        color: #C02828; padding-bottom: 10px; font-size: 16px; font-weight: 500;
+        color: #7a5535; padding-bottom: 10px; font-size: 18px; font-weight: 700;
         letter-spacing: 0.1em;
       }
       .d-num  {
         font-family: 'Noto Serif JP', serif;
         font-weight: 700;
-        background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
+        background: linear-gradient(to bottom, #E82038 0%, #CC1030 45%, #A80825 100%);
         -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        font-size: clamp(80px, 21vw, 115px);
+        font-size: clamp(92px, 24vw, 130px);
         line-height: 1;
       }
       .d-pct, .d-off {
         font-family: 'Noto Serif JP', serif;
         font-weight: 700;
-        background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
+        background: linear-gradient(to bottom, #E82038 0%, #CC1030 45%, #A80825 100%);
         -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        font-size: clamp(32px, 8.5vw, 46px);
+        font-size: clamp(36px, 9.5vw, 52px);
         line-height: 1;
       }
       .disc   { margin-bottom: 10px; }
@@ -302,7 +312,7 @@
         font-family: 'Noto Sans JP', serif;
         font-size: 13px; font-weight: 400; letter-spacing: 0.22em;
         padding: 18px 16px;
-        background: #B03228; color: #F7EEDC;
+        background: #CC1530; color: #F7EEDC;
         text-decoration: none; transition: background 0.3s;
       }
       .mb-btn:hover { background: #8a2420; }
@@ -315,20 +325,62 @@
       /* ── クーポン：スマホ ── */
       .cp-section {
         margin-top: -80px;
-        padding: 96px 16px 48px;
+        padding: 96px 0 48px;
         position: relative; z-index: 10;
         background: #FBF5EE;
       }
-      .cp-row { flex-direction: column; gap: 12px; }
-      .cp-list { flex-direction: column; gap: 10px; }
-      .cp-item { padding: 14px 12px; }
-      .cp-cta { width: 100%; padding: 16px; flex-direction: row; flex-wrap: wrap; gap: 8px; justify-content: space-between; }
-      .cta-label { font-size: 13px; }
-      .cta-icon { display: none; }
-      .cta-sub { display: none; }
-      .cta-btn { width: auto; flex: 1; min-width: 140px; }
+      .cp-head { padding: 0 16px; }
+      .cp-row { flex-direction: column; gap: 0; }
+      .cp-list { flex-direction: column; gap: 0; width: 100%; }
+      .cp-item {
+        width: 100%; border-radius: 0; border-left: none; border-right: none;
+        border-bottom: none; border-top: 1px solid rgba(212,175,48,0.25);
+        padding: 24px 24px 24px 20px; gap: 20px; min-height: 120px;
+        flex-direction: row; align-items: center;
+      }
+      .cp-item:first-child { border-top: none; }
+      .cp-icon {
+        width: 64px; height: 64px; border-radius: 10px; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .cp-body {
+        flex: 1; display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        text-align: center;
+      }
+      .cb-desc { font-size: 17px; line-height: 1.7; color: #4a3828; }
+      .cb-num { font-size: 48px; }
+      .cb-val { font-size: 19px; justify-content: center; margin-top: 6px; }
+      .cp-body .cb-val { margin-top: 6px; }
+      .cp-cta { width: 100%; border-radius: 0; padding: 16px 24px; flex-direction: row; flex-wrap: wrap; gap: 8px; justify-content: space-between; }
+      .cp-cta {
+        width: 100%; border-radius: 0;
+        background: #1A2444;
+        padding: 32px 24px;
+        flex-direction: column; align-items: center;
+        gap: 10px; text-align: center;
+        min-height: 0;
+      }
+      .cta-icon {
+        display: flex;
+        width: 64px; height: 64px; flex-shrink: 0;
+        background: transparent; border-radius: 0;
+        align-items: center; justify-content: center;
+        margin-bottom: 4px;
+      }
+      .cta-divider { display: block; width: 60%; background: rgba(212,175,48,0.5); }
+      .cta-label { font-size: 18px; color: #fff; font-weight: 500; letter-spacing: 0.12em; }
+      .cta-sub { display: block; font-size: 14px; color: rgba(255,255,255,0.75); letter-spacing: 0.08em; }
+      .cta-btn {
+        display: block; width: 100%; margin-top: 8px;
+        background: rgba(255,255,255,0.12); color: #fff;
+        font-size: 17px; font-weight: 500; padding: 16px;
+        border: 1px solid rgba(255,255,255,0.30);
+        border-radius: 2px; letter-spacing: 0.10em;
+      }
       .cp-title-wrap::before, .cp-title-wrap::after { max-width: 40px; }
-      .cp-title { font-size: 14px; letter-spacing: 0.12em; }
+      .cp-title { font-size: 20px; letter-spacing: 0.08em; }
+      .cp-num-hl { font-size: 24px; }
     }
     /* ════════════════════
        COUPON SECTION
@@ -364,11 +416,11 @@
       display: flex; align-items: center; gap: 8px;
       flex: 1; text-align: left;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      border: 1px solid rgba(197,162,74,0.45);
+      border: 1px solid rgba(212,175,48,0.45);
     }
     .cp-icon {
       width: 38px; height: 38px; flex-shrink: 0;
-      background: #B03228; border-radius: 4px;
+      background: #CC1530; border-radius: 4px;
       display: flex; align-items: center; justify-content: center;
       font-size: 18px;
     }
@@ -380,12 +432,17 @@
     }
     .cb-val {
       font-family: 'Noto Sans JP', sans-serif;
-      font-size: 11px; font-weight: 500; color: #B03228;
+      font-size: 11px; font-weight: 500; color: #CC1530;
       display: flex; align-items: baseline; gap: 1px;
     }
     .cb-num {
       font-family: 'Noto Serif JP', serif;
-      font-size: 22px; font-weight: 700; color: #B03228; line-height: 1;
+      font-size: 22px; font-weight: 700; color: #CC1530; line-height: 1;
+    }
+    .cb-sarani {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 16px; font-weight: 500; color: #CC1530;
+      letter-spacing: 0.05em; margin-right: 4px; align-self: flex-end; padding-bottom: 4px;
     }
     /* 右：来店予約CTAボックス */
     .cp-cta {
@@ -397,11 +454,11 @@
       align-self: stretch;
       text-align: center; gap: 8px;
     }
-    .cta-divider { width: 80%; height: 1px; background: rgba(197,162,74,0.5); }
+    .cta-divider { width: 80%; height: 1px; background: rgba(212,175,48,0.5); }
     .cta-label {
       font-family: 'Noto Sans JP', sans-serif;
       font-size: 12px; font-weight: 500; letter-spacing: 0.15em;
-      color: #C5A24A;
+      color: #D4AF30;
     }
     .cta-icon { font-size: 30px; opacity: 0.85; }
     .cta-sub {
@@ -420,6 +477,11 @@
     }
     .cta-btn:hover { background: #F0E8D0; }
 
+    @media (max-width: 899px) {
+      .cp-icon { width: 64px; height: 64px; border-radius: 10px; }
+      .cp-cta { width: 100%; flex-shrink: 1; }
+    }
+
   </style>
 </head>
 <body>
@@ -432,14 +494,14 @@
   </nav>
 
   <!-- フロートCTAタブ（スマホのみ） -->
-  <a href="https://www.aimegane.com/booking-search/" class="side-cta">ご来店予約</a>
+  <a href="https://www.aimegane.com/booking-search/" class="side-cta">今すぐ無料で予約する</a>
 
   <section class="fv">
 
     <!-- テキスト（PC:左カラム／スマホ:写真オーバーレイ） -->
     <div class="fv-left">
       <div>
-        <p class="catch">見える毎日を、もっと心地よく。</p>
+        <span class="sale-ribbon">期間限定</span>
         <span class="t-the">THE</span>
         <span class="t-sale">SALE</span>
       </div>
@@ -475,7 +537,7 @@
 
     <div class="cp-head">
       <div class="cp-title-wrap">
-        <h2 class="cp-title">うれしい<span class="cp-num-hl">３</span>つのクーポン特典</h2>
+        <h2 class="cp-title">セール価格から、さらに<span class="cp-num-hl">３</span>つのお得✨</h2>
       </div>
     </div>
 
@@ -485,28 +547,28 @@
 
         <!-- ① LINE -->
         <div class="cp-item">
-          <div class="cp-icon"><img src="images/icon_line.png" alt="" style="width:22px;height:22px;object-fit:contain;filter:invert(1) brightness(2);"></div>
+          <div class="cp-icon"><img src="images/icon_line.png" alt="" style="width:40px;height:40px;object-fit:contain;filter:invert(1) brightness(2);"></div>
           <div class="cp-body">
-            <p class="cb-desc">LINEお友だち登録<br>（新規・その場で）</p>
-            <p class="cb-val"><span class="cb-num">1,100</span>円引き</p>
+            <p class="cb-desc">LINEお友だち登録（新規・その場で）で</p>
+            <p class="cb-val"><span class="cb-sarani">さらに</span><span class="cb-num">1,100</span>円引き</p>
           </div>
         </div>
 
         <!-- ② 処方箋 -->
         <div class="cp-item">
-          <div class="cp-icon"><img src="images/icon_shohousen.png" alt="" style="width:22px;height:22px;object-fit:contain;filter:invert(1) brightness(2);"></div>
+          <div class="cp-icon"><img src="images/icon_shohousen.png" alt="" style="width:40px;height:40px;object-fit:contain;filter:invert(1) brightness(2);"></div>
           <div class="cp-body">
             <p class="cb-desc">処方箋持参で</p>
-            <p class="cb-val"><span class="cb-num">1,100</span>円引き</p>
+            <p class="cb-val"><span class="cb-sarani">さらに</span><span class="cb-num">1,100</span>円引き</p>
           </div>
         </div>
 
         <!-- ③ 2本目 -->
         <div class="cp-item">
-          <div class="cp-icon"><img src="images/icon_glasses.png" alt="" style="width:24px;height:24px;object-fit:contain;filter:invert(1) brightness(2);"></div>
+          <div class="cp-icon"><img src="images/icon_glasses.png" alt="" style="width:40px;height:40px;object-fit:contain;filter:invert(1) brightness(2);"></div>
           <div class="cp-body">
-            <p class="cb-desc">2本目同時購入で<br>お安いほうをさらに</p>
-            <p class="cb-val"><span class="cb-num">10</span>%引き</p>
+            <p class="cb-desc">2本目を同時購入でお安いほうが</p>
+            <p class="cb-val"><span class="cb-sarani">さらに</span><span class="cb-num">10</span>%引き</p>
           </div>
         </div>
 
@@ -516,7 +578,7 @@
       <div class="cp-cta">
         <div class="cta-divider"></div>
         <p class="cta-label">来店予約はこちら</p>
-        <div class="cta-icon"><img src="images/icon_calendar.png" alt="" style="width:36px;height:36px;object-fit:contain;filter:invert(1) brightness(2);"></div>
+        <div class="cta-icon"><img src="images/icon_calendar.png" alt="" style="width:52px;height:52px;object-fit:contain;filter:invert(76%) sepia(40%) saturate(800%) hue-rotate(5deg) brightness(95%);"></div>
         <p class="cta-sub">スムーズにご案内いたします。</p>
         <a href="https://www.aimegane.com/booking-search/" class="cta-btn">来店予約ページへ ›</a>
       </div>
