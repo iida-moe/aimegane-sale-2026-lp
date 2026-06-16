@@ -214,13 +214,13 @@
       /* 左側クリームグラデーション */
       .fv-right::before {
         background: linear-gradient(to right,
-          rgba(248, 240, 225, 0.88) 0%,
-          rgba(248, 240, 225, 0.78) 38%,
-          rgba(248, 240, 225, 0.22) 58%,
-          transparent               72%
+          rgba(248, 240, 225, 0.95) 0%,
+          rgba(248, 240, 225, 0.88) 44%,
+          rgba(248, 240, 225, 0.35) 60%,
+          transparent               74%
         );
       }
-      .fv-right img { object-position: 30% top; }
+      .fv-right img { object-position: 15% top; }
 
       /* キャッチコピー */
       .catch  { display: none; }
@@ -246,7 +246,7 @@
       /* 割引 */
       .d-pre  {
         font-family: 'Noto Sans JP', sans-serif;
-        color: #C02828; padding-bottom: 7px; font-size: 13px; font-weight: 400;
+        color: #C02828; padding-bottom: 10px; font-size: 16px; font-weight: 500;
         letter-spacing: 0.1em;
       }
       .d-num  {
@@ -254,7 +254,7 @@
         font-weight: 700;
         background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
         -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        font-size: clamp(108px, 28vw, 152px);
+        font-size: clamp(80px, 21vw, 115px);
         line-height: 1;
       }
       .d-pct, .d-off {
@@ -262,7 +262,7 @@
         font-weight: 700;
         background: linear-gradient(to bottom, #E8352A 0%, #C42020 45%, #831212 100%);
         -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        font-size: clamp(38px, 10vw, 56px);
+        font-size: clamp(32px, 8.5vw, 46px);
         line-height: 1;
       }
       .disc   { margin-bottom: 10px; }
@@ -283,8 +283,14 @@
         box-shadow: 0 2px 10px rgba(0,0,0,0.08);
       }
       .fv-left .p-note  { display: none; }
-      /* ボタンはmobile-belowに */
-      .fv-left .fv-btn  { display: none; }
+      /* FV内CTAボタン（モバイル） */
+      .fv-left .fv-btn  {
+        display: inline-flex;
+        font-size: 11px; letter-spacing: 0.16em;
+        padding: 11px 20px; margin-top: 10px;
+        min-width: 0; width: auto;
+        box-shadow: 0 4px 14px rgba(176,50,40,0.35);
+      }
 
       /* ── 写真下エリア：日程 ＋ CTA ── */
       .mobile-below {
