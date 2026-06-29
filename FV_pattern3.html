@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIMEGANE THE SALE 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans JP', sans-serif; overflow-x: hidden; }
+
+    /* ── Nav ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      height: 56px; padding: 0 clamp(24px, 4vw, 64px);
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .nav-logo-img { height: 30px; width: auto; }
+    .nav-reserve {
+      display: inline-flex; align-items: center; padding: 9px 24px;
+      font-size: clamp(10px, 0.88vw, 12px); font-weight: 700; letter-spacing: 0.18em;
+      border: 1.5px solid #B80020; color: #B80020;
+      background: transparent; text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-reserve:hover { background: #B80020; color: #fff; }
+
+    /* ── FV ── */
+    .fv {
+      position: relative; width: 100%;
+      height: calc(100dvh - 56px); min-height: 480px;
+      overflow: hidden; background: #EEEAE2;
+    }
+    .fv-bg {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center center;
+    }
+    .fv-veil {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(to right, rgba(238,234,226,0.25) 0%, transparent 52%);
+    }
+
+    /* ── インナー（左半分） ── */
+    .fv-inner {
+      position: absolute;
+      top: 0; left: 0; bottom: 0; width: 62%;
+      z-index: 2;
+      display: flex; flex-direction: column;
+      justify-content: flex-start;
+      padding: clamp(36px, 10vh, 110px) 0 clamp(16px, 2.5vh, 36px) clamp(56px, 7.5vw, 100px);
+      overflow: visible;
+    }
+
+    /* ヘッドライン（アイメガネ＋THE ／ SALE） */
+    .fv-headline {
+      display: flex; flex-direction: row;
+      align-items: center;
+      gap: clamp(4px, 0.4vw, 8px);
+      margin-bottom: clamp(16px, 2.5vh, 36px);
+    }
+    .fv-item-label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(11px, 1vw, 15px); font-weight: 500;
+      color: #555; letter-spacing: 0.12em;
+      margin-bottom: clamp(4px, 0.5vh, 8px);
+    }
+    .fv-headline-left {
+      display: flex; flex-direction: column;
+      align-items: flex-start;
+      padding-bottom: clamp(4px, 0.5vh, 8px);
+    }
+    .fv-brand {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(22px, 2.6vw, 36px);
+      font-weight: 700; color: #B80020;
+      line-height: 1.1; letter-spacing: 0.04em;
+      margin-bottom: 0;
+    }
+    .fv-the {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(62px, 7.5vw, 108px);
+      letter-spacing: 0.08em; color: #B80020;
+      line-height: 1;
+    }
+    .fv-sale {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(103px, 16.5vw, 243px);
+      line-height: 0.85; color: #B80020;
+      letter-spacing: -0.02em;
+    }
+
+    /* MAX 30% OFF ＋ 吹き出し */
+    .fv-discount-row {
+      display: flex; align-items: flex-end;
+      gap: clamp(8px, 1vw, 16px);
+    }
+    .fv-num-block { display: flex; flex-direction: row; align-items: center; flex-shrink: 0; }
+    .fv-max {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(24px, 2.2vw, 32px); letter-spacing: 0.5em;
+      color: #B80020;
+      writing-mode: vertical-rl; text-orientation: upright;
+      align-self: center;
+    }
+    .fv-big-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(93px, 14vw, 207px);
+      line-height: 0.82; color: #1A1A1A;
+      letter-spacing: -0.04em; flex-shrink: 0;
+    }
+    .fv-suf {
+      display: flex; flex-direction: column; align-self: flex-end;
+      padding-bottom: clamp(5px, 1vw, 14px);
+      margin-left: clamp(1px, 0.2vw, 3px); flex-shrink: 0;
+    }
+    .fv-pct {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 5.4vw, 78px); line-height: 0.83; color: #1A1A1A;
+    }
+    .fv-off-txt {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(26px, 4vw, 58px); line-height: 0.88; color: #1A1A1A;
+    }
+
+    /* さらに！テキストエリア */
+    .fv-benefits {
+      margin-top: clamp(6px, 0.9vh, 12px);
+    }
+    .fv-benefits-heading {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(16px, 1.5vw, 20px); font-weight: 700;
+      color: #B80020; letter-spacing: 0.1em;
+      margin-bottom: clamp(4px, 0.5vh, 7px);
+    }
+    .fv-benefits-list {
+      display: flex; flex-direction: column;
+      gap: clamp(3px, 0.4vh, 6px);
+    }
+    .fv-benefits-item {
+      font-size: clamp(10px, 0.9vw, 13px); color: #333;
+      line-height: 1.4; white-space: nowrap;
+    }
+    .fv-benefits-item strong {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(16px, 1.5vw, 21px);
+      color: #B80020; letter-spacing: 0.02em;
+    }
+
+    /* 日付エリア */
+    .fv-date-wrap {
+      margin-top: clamp(10px, 1.4vh, 18px);
+      display: flex; flex-direction: column;
+      align-items: flex-start;
+      gap: clamp(10px, 1.2vh, 16px);
+    }
+    .fv-period-label {
+      font-size: clamp(11px, 0.95vw, 13px); font-weight: 700;
+      letter-spacing: 0.18em; color: #B80020;
+      margin-bottom: clamp(4px, 0.5vh, 7px);
+    }
+    .fv-date {
+      display: flex; align-items: center;
+      gap: clamp(4px, 0.6vw, 10px);
+      margin-bottom: 0;
+    }
+    .fv-date-year {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(11px, 1vw, 15px); color: #999; letter-spacing: 0.1em;
+      writing-mode: vertical-rl; text-orientation: mixed;
+      align-self: center;
+    }
+    .fv-date-md {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(38px, 4.5vw, 64px);
+      color: #1A1A1A; line-height: 1; letter-spacing: 0.03em;
+    }
+    .fv-day-badge {
+      font-size: clamp(10px, 0.9vw, 13px);
+      font-family: 'Noto Sans JP', sans-serif; font-weight: 700;
+      color: #1A1A1A; flex-shrink: 0;
+    }
+    .fv-date-arrow { font-size: clamp(11px, 1vw, 15px); color: #B80020; }
+
+    /* CTA */
+    .fv-cta {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: clamp(14px, 1.8vh, 22px) clamp(36px, 4vw, 56px);
+      background: #B80020; color: #fff; text-decoration: none;
+      font-family: 'Noto Sans JP', sans-serif; font-weight: 700;
+      font-size: clamp(14px, 1.3vw, 18px); letter-spacing: 0.14em;
+      transition: opacity 0.15s; white-space: nowrap; align-self: flex-start;
+      min-width: clamp(180px, 18vw, 260px);
+    }
+    .fv-cta:hover { opacity: 0.85; }
+    .fv-cta-arrow {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.3em; line-height: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <img class="nav-logo-img" src="aimegane_logo.jpg" alt="アイメガネ">
+    <a href="#" class="nav-reserve">ご来店予約 ›</a>
+  </nav>
+
+  <section class="fv">
+    <img class="fv-bg" src="FV_bg.png" alt="アイメガネ セール対象 メガネ・サングラス">
+    <div class="fv-veil"></div>
+
+    <div class="fv-inner">
+
+      <!-- ヘッドライン -->
+      <div class="fv-headline">
+        <div class="fv-headline-left">
+          <span class="fv-brand">アイメガネ</span>
+          <span class="fv-the">THE</span>
+        </div>
+        <span class="fv-sale">SALE</span>
+      </div>
+
+      <!-- 対象商品 -->
+      <p class="fv-item-label">メガネ一式 / サングラス</p>
+
+      <!-- MAX 30% OFF -->
+      <div class="fv-discount-row">
+        <div class="fv-num-block">
+          <div class="fv-max">MAX</div>
+          <span class="fv-big-num">30</span>
+        </div>
+        <div class="fv-suf">
+          <span class="fv-pct">%</span>
+          <span class="fv-off-txt">OFF</span>
+        </div>
+      </div>
+
+
+      <!-- 日付 -->
+      <div class="fv-date-wrap">
+        <div class="fv-date">
+          <span class="fv-date-year">2026</span>
+          <span class="fv-date-md">8.8</span>
+          <span class="fv-day-badge">(土)</span>
+          <span class="fv-date-arrow">▶</span>
+          <span class="fv-date-md">10.12</span>
+          <span class="fv-day-badge">(月)</span>
+        </div>
+
+        <!-- CTA -->
+        <a href="#" class="fv-cta">
+          今すぐ予約する
+          <span class="fv-cta-arrow">›</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</body>
+</html>
