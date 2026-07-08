@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FV カラー比較 A / B / C</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Noto+Serif+JP:wght@700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    /* ══════════════════════════════
+       PANEL 共通
+    ══════════════════════════════ */
+    .panel {
+      height: 100dvh;
+      min-height: 600px;
+      scroll-snap-align: start;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px 42dvh;
+    }
+
+    /* 背景画像 */
+    .panel-bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .panel-bg img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: bottom center; display: block;
+    }
+
+    /* カラーオーバーレイ */
+    .panel-ov {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    }
+
+    /* パターンラベル */
+    .p-label {
+      position: absolute; top: 14px; left: 14px; z-index: 10;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.22em;
+      padding: 5px 14px; border-radius: 2px;
+    }
+
+    /* スクロールヒント */
+    .s-hint {
+      position: absolute; bottom: 14px; left: 50%;
+      transform: translateX(-50%); z-index: 10;
+      font-size: 9px; letter-spacing: 0.25em;
+      animation: bob 1.6s ease-in-out infinite;
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(5px); }
+    }
+
+    /* テキストコンテンツ */
+    .panel-content {
+      position: relative; z-index: 2;
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center;
+    }
+
+    /* ══════════════════════════════
+       テキスト共通スタイル
+    ══════════════════════════════ */
+    .t-catch {
+      font-size: 11px; font-weight: 300; letter-spacing: 0.28em; margin-bottom: 8px;
+    }
+    .t-badge {
+      display: inline-block;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.30em;
+      padding: 5px 18px; margin-bottom: 10px;
+    }
+    .t-the {
+      display: block; font-family: 'Playfair Display', serif; font-weight: 700;
+      font-size: clamp(52px, 15vw, 80px); letter-spacing: 0.16em; line-height: 1;
+    }
+    .t-sale {
+      display: block; font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: clamp(92px, 28vw, 148px); letter-spacing: 0.04em; line-height: 0.86;
+      margin-bottom: 10px;
+    }
+    .t-dv {
+      display: flex; align-items: center; gap: 8px;
+      width: min(240px, 70vw); margin-bottom: 10px;
+    }
+    .t-dv .ln { flex: 1; height: 1px; }
+    .t-dv .st { font-size: 9px; flex-shrink: 0; }
+    .t-disc {
+      display: flex; align-items: baseline; justify-content: center; margin-bottom: 12px;
+    }
+    .t-saidai {
+      font-size: 14px; font-weight: 700; letter-spacing: 0.06em;
+      align-self: flex-end; padding-bottom: 13px; margin-right: 3px;
+    }
+    .t-30 {
+      font-family: 'Noto Serif JP', serif; font-weight: 700;
+      font-size: clamp(100px, 30vw, 144px); line-height: 1;
+    }
+    .t-suf {
+      display: flex; flex-direction: column;
+      align-self: flex-end; padding-bottom: 12px; margin-left: 2px;
+    }
+    .t-suf span {
+      font-family: 'Noto Serif JP', serif; font-weight: 700;
+      font-size: clamp(36px, 10.5vw, 54px); line-height: 1; display: block;
+    }
+    .t-date {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.09em;
+      padding: 6px 18px; border-radius: 999px; border: 1px solid transparent;
+      display: inline-block; margin-bottom: 18px;
+    }
+    .t-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.22em;
+      padding: 15px 36px; text-decoration: none; border: 1px solid transparent;
+    }
+    .t-btn::after {
+      content: ''; display: block; width: 6px; height: 6px;
+      border-right: 2px solid currentColor; border-top: 2px solid currentColor;
+      transform: rotate(45deg); flex-shrink: 0; opacity: 0.7;
+    }
+
+    /* ══════════════════════════════
+       A: ダークネイビー
+    ══════════════════════════════ */
+    .pa { background: #0D1B2E; }
+    .pa .panel-ov {
+      background: linear-gradient(to bottom,
+        #0D1B2E 0%, #0D1B2E 50%,
+        rgba(13,27,46,0.88) 70%,
+        rgba(13,27,46,0.38) 85%,
+        transparent 100%);
+    }
+    .pa .p-label { background: rgba(255,255,255,0.10); color: rgba(255,255,255,0.55); }
+    .pa .s-hint  { color: rgba(255,255,255,0.30); }
+    .pa .t-catch { color: rgba(255,255,255,0.50); }
+    .pa .t-badge { background: #CC1530; color: #fff; }
+    .pa .t-the   { color: #D4AF30; }
+    .pa .t-sale  { color: #ffffff; }
+    .pa .t-30    { color: #D4AF30; }
+    .pa .t-suf span { color: #D4AF30; }
+    .pa .t-saidai   { color: rgba(255,255,255,0.50); }
+    .pa .t-dv .ln   { background: linear-gradient(to right, transparent, rgba(212,175,48,0.60), transparent); }
+    .pa .t-dv .st   { color: rgba(212,175,48,0.75); }
+    .pa .t-date { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.16); }
+    .pa .t-btn  { background: #CC1530; color: #F7EEDC; border-color: rgba(212,175,48,0.40); }
+
+    /* ══════════════════════════════
+       B: ボールドレッド
+    ══════════════════════════════ */
+    .pb { background: #B80020; }
+    .pb .panel-ov {
+      background: linear-gradient(to bottom,
+        #B80020 0%, #B80020 50%,
+        rgba(184,0,32,0.88) 70%,
+        rgba(184,0,32,0.38) 85%,
+        transparent 100%);
+    }
+    .pb .p-label { background: rgba(255,255,255,0.14); color: rgba(255,255,255,0.70); }
+    .pb .s-hint  { color: rgba(255,255,255,0.35); }
+    .pb .t-catch { color: rgba(255,255,255,0.60); }
+    .pb .t-badge { background: #fff; color: #B80020; }
+    .pb .t-the   { color: #ffffff; }
+    .pb .t-sale  { color: #ffffff; }
+    .pb .t-30    { color: #ffffff; }
+    .pb .t-suf span { color: #ffffff; }
+    .pb .t-saidai   { color: rgba(255,255,255,0.65); }
+    .pb .t-dv .ln   { background: linear-gradient(to right, transparent, rgba(255,255,255,0.40), transparent); }
+    .pb .t-dv .st   { color: rgba(255,255,255,0.55); }
+    .pb .t-date { background: rgba(255,255,255,0.14); color: #fff; border-color: rgba(255,255,255,0.28); }
+    .pb .t-btn  { background: #fff; color: #B80020; font-weight: 700; }
+
+    /* ══════════════════════════════
+       C: クリーム（現行）
+    ══════════════════════════════ */
+    .pc .panel-ov { display: none; }
+    .pc .p-label  { background: rgba(0,0,0,0.06); color: #5a3a20; }
+    .pc .t-catch  { color: #5a3a20; }
+    .pc .t-badge  { background: #CC1530; color: #fff; }
+    .pc .t-the {
+      background: linear-gradient(160deg, #E82038 0%, #CC1030 55%, #A80825 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .pc .t-sale {
+      background: linear-gradient(160deg, #E82038 0%, #CC1030 55%, #A80825 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .pc .t-30 {
+      background: linear-gradient(160deg, #E82038 0%, #CC1030 55%, #A80825 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .pc .t-suf span {
+      background: linear-gradient(160deg, #E82038 0%, #CC1030 55%, #A80825 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .pc .t-saidai   { color: #5a3010; }
+    .pc .t-dv .ln   { background: linear-gradient(to right, transparent, #C8981A, transparent); }
+    .pc .t-dv .st   { color: #C8981A; }
+    .pc .t-date { background: rgba(255,252,245,0.92); color: #2a1a0a; border-color: rgba(200,152,26,0.35); }
+    .pc .t-btn  { background: linear-gradient(to right, #AA1228, #CC1530, #AA1228); color: #F7EEDC; border-color: rgba(212,175,48,0.50); }
+  </style>
+</head>
+<body>
+
+  <!-- ══ A: ダークネイビー ══ -->
+  <section class="panel pa">
+    <div class="panel-bg">
+      <picture>
+        <source media="(min-width:900px)" srcset="images/bg_glasses2.png">
+        <img src="images/bg_glasses_sp.png" alt="">
+      </picture>
+    </div>
+    <div class="panel-ov"></div>
+    <div class="p-label">A ─ ダークネイビー</div>
+    <div class="panel-content">
+      <p class="t-catch">どうせ買うならお得な日に。</p>
+      <span class="t-badge">期間限定</span>
+      <div>
+        <span class="t-the">THE</span>
+        <span class="t-sale">SALE</span>
+      </div>
+      <div class="t-dv"><div class="ln"></div><div class="st">✦</div><div class="ln"></div></div>
+      <div class="t-disc">
+        <span class="t-saidai">最大</span>
+        <span class="t-30">30</span>
+        <div class="t-suf"><span>%</span><span>OFF</span></div>
+      </div>
+      <p class="t-date">2026.8.8（土）&mdash; 10.12（月）</p>
+      <a href="https://www.aimegane.com/booking-search/" class="t-btn">ご来店予約はこちら</a>
+    </div>
+    <div class="s-hint">↓ スクロール</div>
+  </section>
+
+  <!-- ══ B: ボールドレッド ══ -->
+  <section class="panel pb">
+    <div class="panel-bg">
+      <picture>
+        <source media="(min-width:900px)" srcset="images/bg_glasses2.png">
+        <img src="images/bg_glasses_sp.png" alt="">
+      </picture>
+    </div>
+    <div class="panel-ov"></div>
+    <div class="p-label">B ─ ボールドレッド</div>
+    <div class="panel-content">
+      <p class="t-catch">どうせ買うならお得な日に。</p>
+      <span class="t-badge">期間限定</span>
+      <div>
+        <span class="t-the">THE</span>
+        <span class="t-sale">SALE</span>
+      </div>
+      <div class="t-dv"><div class="ln"></div><div class="st">✦</div><div class="ln"></div></div>
+      <div class="t-disc">
+        <span class="t-saidai">最大</span>
+        <span class="t-30">30</span>
+        <div class="t-suf"><span>%</span><span>OFF</span></div>
+      </div>
+      <p class="t-date">2026.8.8（土）&mdash; 10.12（月）</p>
+      <a href="https://www.aimegane.com/booking-search/" class="t-btn">ご来店予約はこちら</a>
+    </div>
+    <div class="s-hint">↓ スクロール</div>
+  </section>
+
+  <!-- ══ C: クリーム（現行） ══ -->
+  <section class="panel pc">
+    <div class="panel-bg">
+      <picture>
+        <source media="(min-width:900px)" srcset="images/bg_glasses2.png">
+        <img src="images/bg_glasses_sp.png" alt="">
+      </picture>
+    </div>
+    <div class="panel-ov"></div>
+    <div class="p-label">C ─ クリーム（現行）</div>
+    <div class="panel-content">
+      <p class="t-catch">どうせ買うならお得な日に。</p>
+      <span class="t-badge">期間限定</span>
+      <div>
+        <span class="t-the">THE</span>
+        <span class="t-sale">SALE</span>
+      </div>
+      <div class="t-dv"><div class="ln"></div><div class="st">✦</div><div class="ln"></div></div>
+      <div class="t-disc">
+        <span class="t-saidai">最大</span>
+        <span class="t-30">30</span>
+        <div class="t-suf"><span>%</span><span>OFF</span></div>
+      </div>
+      <p class="t-date">2026.8.8（土）&mdash; 10.12（月）</p>
+      <a href="https://www.aimegane.com/booking-search/" class="t-btn">ご来店予約はこちら</a>
+    </div>
+  </section>
+
+</body>
+</html>

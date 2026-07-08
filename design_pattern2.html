@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FV パターン2比較 — AIMEGANE THE SALE 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans JP', sans-serif; background: #E8E2DC; }
+
+    .doc-header {
+      background: #1A2444; color: #fff;
+      padding: 28px 48px;
+      border-bottom: 2px solid rgba(212,175,48,0.35);
+    }
+    .doc-header h1 { font-size: 13px; font-weight: 500; letter-spacing: 0.28em; margin-bottom: 4px; }
+    .doc-header p  { font-size: 11px; color: rgba(255,255,255,0.48); letter-spacing: 0.10em; }
+
+    .compare-wrap { padding: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+    .col-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.45em; color: #B8942A;
+      text-transform: uppercase; display: block; margin-bottom: 10px;
+    }
+    .col-title {
+      font-size: 18px; font-weight: 700; color: #1A1A1A;
+      margin-bottom: 6px; letter-spacing: 0.03em;
+    }
+    .col-note {
+      font-size: 12px; color: #7a5a40; line-height: 1.85; margin-bottom: 20px;
+    }
+
+    .fv-frame {
+      border: 1px solid rgba(0,0,0,0.10);
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+      height: 480px;
+      background: #f5f0eb;
+    }
+
+    /* ── 共通：ナビ ── */
+    .p2-nav {
+      position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+      height: 58px; padding: 0 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .p2-logo { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; color: #1A1A1A; letter-spacing: 0.18em; }
+    .p2-navbtn { font-size: 10px; font-weight: 400; letter-spacing: 0.22em; padding: 7px 18px; color: #CC1530; border: 1px solid #CC1530; background: transparent; text-decoration: none; }
+
+    /* ── 共通：背景画像 ── */
+    .p2-bg {
+      position: absolute; inset: 0;
+      background: #f5f0eb;
+    }
+    .p2-bg img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      object-position: right bottom;
+      display: block;
+    }
+
+    /* ── オーバーレイなし ── */
+    .p2-overlay { display: none; }
+
+    /* ── テキストブロック 共通 ── */
+    .p2-text {
+      position: absolute; z-index: 5;
+      left: 0; width: 50%;
+      padding: 0 36px;
+      display: flex; flex-direction: column; align-items: flex-start;
+    }
+
+    /* ── Option A：上部配置 ── */
+    .p2-text.top {
+      top: 66px;
+    }
+
+    /* ── Option B：中央配置 ── */
+    .p2-text.center {
+      top: 50%; transform: translateY(-50%);
+    }
+
+    /* ── テキスト要素 ── */
+    .p2-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1px solid rgba(184,0,32,0.40);
+      background: transparent;
+      color: #B80020;
+      font-size: 9px; font-weight: 700; letter-spacing: 0.32em;
+      padding: 4px 14px; margin-bottom: 14px;
+    }
+    .p2-badge::before { content: '◆'; font-size: 5px; color: #A0A0A0; opacity: 0.90; }
+
+    .p2-the {
+      display: block;
+      font-family: 'Playfair Display', serif; font-weight: 700;
+      font-size: 46px; letter-spacing: 0.18em; line-height: 1;
+      color: #B80020; margin-bottom: -4px;
+    }
+    .p2-sale {
+      display: block;
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: 88px; letter-spacing: 0.04em; line-height: 0.88;
+      color: #B80020; margin-bottom: 14px;
+    }
+    .p2-divider {
+      display: flex; align-items: center; gap: 8px;
+      width: 160px; margin-bottom: 10px;
+    }
+    .p2-dv-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(192,192,192,0.55), transparent); }
+    .p2-dv-star { color: rgba(192,192,192,0.68); font-size: 8px; }
+
+    .p2-saidai {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.32em;
+      color: rgba(184,0,32,0.70); line-height: 1.4;
+    }
+    .p2-num-row { display: flex; align-items: baseline; }
+    .p2-num {
+      font-family: 'Noto Serif JP', serif; font-weight: 700;
+      font-size: 96px; line-height: 1; color: #B80020;
+      -webkit-text-stroke: 5px #E2E2E2;
+      paint-order: stroke fill;
+      text-shadow:
+        0 -2px 0 rgba(255,255,255,0.95),
+        0  2px 3px rgba(100,100,100,0.35);
+      filter: drop-shadow(0 0 8px rgba(220,220,220,0.65));
+    }
+    .p2-suf {
+      display: flex; flex-direction: column;
+      align-self: flex-end; padding-bottom: 8px; margin-left: 4px;
+    }
+    .p2-suf span {
+      font-family: 'Noto Serif JP', serif; font-weight: 700;
+      font-size: 32px; line-height: 1; color: #B80020;
+    }
+    .p2-coupon {
+      font-size: 10px; letter-spacing: 0.14em;
+      color: rgba(184,0,32,0.65); margin-top: 2px; margin-bottom: 4px;
+    }
+    .p2-date {
+      font-family: 'Playfair Display', serif;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+      color: #B80020; margin-bottom: 20px;
+    }
+    .p2-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+      padding: 13px 22px; background: #B80020; color: #fff;
+      text-decoration: none; white-space: nowrap;
+      box-shadow: 0 6px 24px rgba(184,0,32,0.30);
+    }
+    .p2-btn::after { content: '›'; font-size: 16px; font-weight: 300; }
+
+    /* ── 変更ポイント注記 ── */
+    .change-log { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; padding: 4px 12px; background: #fff; border: 1px solid rgba(184,0,32,0.28); color: #B80020; border-radius: 1px; }
+
+    /* ── パターン1との違い説明 ── */
+    .diff-note {
+      padding: 32px 48px 48px;
+      background: #fff;
+      border-top: 1px solid #e0d8d0;
+    }
+    .diff-note h2 { font-size: 13px; font-weight: 700; color: #B8942A; letter-spacing: 0.3em; margin-bottom: 16px; text-transform: uppercase; }
+    .diff-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .diff-table th { background: #1A2444; color: #fff; padding: 10px 16px; text-align: left; letter-spacing: 0.08em; font-weight: 500; }
+    .diff-table td { padding: 10px 16px; border-bottom: 1px solid #f0e8e0; color: #4a3828; line-height: 1.7; }
+    .diff-table tr:last-child td { border-bottom: none; }
+    .diff-table td:first-child { font-weight: 700; color: #1A1A1A; white-space: nowrap; width: 160px; }
+  </style>
+</head>
+<body>
+
+  <div class="doc-header">
+    <h1>FV パターン2 — テキスト位置比較</h1>
+    <p>パターン1（斜め赤パネル）との違いを確認してください。どちらのテキスト位置が好みか選んでください。</p>
+  </div>
+
+  <div class="compare-wrap">
+
+    <!-- ── Option A：テキスト上部 ── -->
+    <div>
+      <span class="col-label">Option A</span>
+      <h2 class="col-title">テキスト 上部配置</h2>
+      <p class="col-note">THE SALEの見出しをナビ直下から始める。スクロールを促す余白が下に生まれる。キャンペーン情報をすぐ視認できる。</p>
+      <div class="fv-frame">
+        <div class="p2-nav">
+          <span class="p2-logo">ai アイメガネ</span>
+          <a href="#" class="p2-navbtn">ご来店予約</a>
+        </div>
+        <div class="p2-bg">
+          <img src="FV_pattern2.png" alt="メガネ">
+        </div>
+        <div class="p2-overlay"></div>
+        <div class="p2-text top">
+          <span class="p2-badge">期 間 限 定</span>
+          <div>
+            <span class="p2-the">THE</span>
+            <span class="p2-sale">SALE</span>
+          </div>
+          <div class="p2-divider">
+            <div class="p2-dv-line"></div>
+            <div class="p2-dv-star">✦</div>
+            <div class="p2-dv-line"></div>
+          </div>
+          <span class="p2-saidai">最大</span>
+          <div class="p2-num-row">
+            <span class="p2-num">30</span>
+            <div class="p2-suf"><span>%</span><span>OFF</span></div>
+          </div>
+          <p class="p2-coupon">＋ 該当クーポン併用でさらにお得！</p>
+          <p class="p2-date">2026.8.8（土）— 10.12（月）</p>
+          <a href="#" class="p2-btn">ご来店予約はこちら</a>
+        </div>
+      </div>
+      <div class="change-log">
+        <span class="chip">グラデーション切り替え</span>
+        <span class="chip">テキスト上部スタート</span>
+        <span class="chip">画像が大きく見える</span>
+      </div>
+    </div>
+
+    <!-- ── Option B：テキスト中央 ── -->
+    <div>
+      <span class="col-label">Option B</span>
+      <h2 class="col-title">テキスト 中央配置</h2>
+      <p class="col-note">テキストが縦の真ん中に来る。視線が自然にFVの核心に向かう。メガネと文字のバランスが取りやすい。</p>
+      <div class="fv-frame">
+        <div class="p2-nav">
+          <span class="p2-logo">ai アイメガネ</span>
+          <a href="#" class="p2-navbtn">ご来店予約</a>
+        </div>
+        <div class="p2-bg">
+          <img src="FV_pattern2.png" alt="メガネ">
+        </div>
+        <div class="p2-overlay"></div>
+        <div class="p2-text center">
+          <span class="p2-badge">期 間 限 定</span>
+          <div>
+            <span class="p2-the">THE</span>
+            <span class="p2-sale">SALE</span>
+          </div>
+          <div class="p2-divider">
+            <div class="p2-dv-line"></div>
+            <div class="p2-dv-star">✦</div>
+            <div class="p2-dv-line"></div>
+          </div>
+          <span class="p2-saidai">最大</span>
+          <div class="p2-num-row">
+            <span class="p2-num">30</span>
+            <div class="p2-suf"><span>%</span><span>OFF</span></div>
+          </div>
+          <p class="p2-coupon">＋ 該当クーポン併用でさらにお得！</p>
+          <p class="p2-date">2026.8.8（土）— 10.12（月）</p>
+          <a href="#" class="p2-btn">ご来店予約はこちら</a>
+        </div>
+      </div>
+      <div class="change-log">
+        <span class="chip">グラデーション切り替え</span>
+        <span class="chip">テキスト垂直中央</span>
+        <span class="chip">落ち着いた重心</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── パターン1との違い ── -->
+  <div class="diff-note">
+    <h2>Pattern 1 との違い</h2>
+    <table class="diff-table">
+      <tr>
+        <th>項目</th>
+        <th>パターン1（現行）</th>
+        <th>パターン2（今回）</th>
+      </tr>
+      <tr>
+        <td>赤の見せ方</td>
+        <td>斜め切りの硬いパネル</td>
+        <td>グラデーションで画像に自然に溶け込む</td>
+      </tr>
+      <tr>
+        <td>メガネの見え方</td>
+        <td>右半分にはっきり分離</td>
+        <td>赤と混ざって幻想的・柔らかい</td>
+      </tr>
+      <tr>
+        <td>全体の印象</td>
+        <td>力強い・インパクト重視</td>
+        <td>上品・モダン・雑誌的</td>
+      </tr>
+      <tr>
+        <td>向いている写真</td>
+        <td>縦並び・右寄りの構図</td>
+        <td>横並び・中央構図でも対応しやすい</td>
+      </tr>
+    </table>
+  </div>
+
+</body>
+</html>

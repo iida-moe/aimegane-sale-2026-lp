@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>デザイン改善案 — AIMEGANE THE SALE 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans JP', sans-serif; background: #EDE8E2; color: #1A1A1A; }
+
+    /* ── ドキュメントUI ── */
+    .doc-header {
+      background: #1A2444;
+      color: #fff;
+      padding: 32px 48px;
+      border-bottom: 2px solid rgba(212,175,48,0.35);
+    }
+    .doc-header h1 { font-size: 13px; font-weight: 500; letter-spacing: 0.28em; margin-bottom: 6px; }
+    .doc-header p { font-size: 11px; color: rgba(255,255,255,0.48); letter-spacing: 0.10em; line-height: 1.7; }
+
+    .proposal-block { padding: 56px 48px; border-bottom: 1px solid #d8d0c8; }
+    .proposal-block:last-child { border-bottom: none; }
+
+    .proposal-eyebrow { font-size: 9px; font-weight: 700; letter-spacing: 0.65em; color: #B8942A; text-transform: uppercase; display: block; margin-bottom: 6px; }
+    .proposal-title { font-size: 20px; font-weight: 700; color: #1A1A1A; margin-bottom: 6px; letter-spacing: 0.03em; }
+    .proposal-note { font-size: 12px; color: #7a5a40; line-height: 1.85; margin-bottom: 32px; }
+    .proposal-note strong { color: #B80020; font-weight: 700; }
+
+    .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .ba-label {
+      display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.35em;
+      padding: 4px 12px; margin-bottom: 10px; border-radius: 1px;
+    }
+    .ba-label.before { background: #c8c0b8; color: #fff; }
+    .ba-label.after  { background: #B80020; color: #fff; }
+    .ba-frame { border: 1px solid rgba(0,0,0,0.10); border-radius: 2px; overflow: hidden; }
+
+    /* ==========================================================
+       提案A：FV ヘッドライン階層の改善
+    ========================================================== */
+
+    /* BEFORE A */
+    .fv-a { background: #B80020; padding: 44px 44px 52px; position: relative; overflow: hidden; }
+
+    .fv-a .catch { font-size: 11px; font-weight: 300; letter-spacing: 0.28em; color: rgba(255,255,255,0.60); margin-bottom: 8px; }
+    .fv-a .badge-b { display: inline-block; background: #fff; color: #B80020; font-size: 11px; font-weight: 700; letter-spacing: 0.28em; padding: 5px 18px; margin-bottom: 14px; }
+    .fv-a .the  { display: block; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 56px; letter-spacing: 0.18em; line-height: 1; color: #fff; margin-bottom: -6px; }
+    .fv-a .sale { display: block; font-family: 'Playfair Display', serif; font-weight: 900; font-size: 104px; letter-spacing: 0.04em; line-height: 0.88; color: #fff; margin-bottom: 16px; }
+    .fv-a .divider { display: flex; align-items: center; gap: 8px; width: 180px; margin-bottom: 10px; }
+    .fv-a .dv-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(255,255,255,0.35), transparent); }
+    .fv-a .dv-star { color: rgba(255,255,255,0.42); font-size: 9px; }
+    .fv-a .saidai { font-size: 15px; font-weight: 700; letter-spacing: 0.14em; color: rgba(255,255,255,0.88); line-height: 1.4; }
+    .fv-a .num-row { display: flex; align-items: baseline; }
+    .fv-a .num { font-family: 'Noto Serif JP', serif; font-weight: 700; font-size: 84px; line-height: 1; color: #fff; }
+    .fv-a .suf { display: flex; flex-direction: column; align-self: flex-end; padding-bottom: 8px; margin-left: 4px; }
+    .fv-a .suf span { font-family: 'Noto Serif JP', serif; font-weight: 700; font-size: 30px; line-height: 1; color: #fff; }
+    .fv-a .date { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; color: rgba(255,255,255,0.88); margin-top: 14px; margin-bottom: 4px; }
+    .fv-a .sub  { font-size: 11px; letter-spacing: 0.14em; color: rgba(255,255,255,0.58); margin-bottom: 28px; }
+    .fv-a .btn  { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.20em; padding: 17px 38px; background: #fff; color: #B80020; text-decoration: none; box-shadow: 0 6px 24px rgba(0,0,0,0.22); }
+    .fv-a .btn::after { content: ''; display: block; width: 5px; height: 5px; border-right: 2px solid #B80020; border-top: 2px solid #B80020; transform: rotate(45deg); }
+
+    /* AFTER A */
+    .fv-a-new { background: #B80020; padding: 44px 44px 52px; position: relative; overflow: hidden; }
+    .fv-a-new::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(255,255,255,0.022) 20px, rgba(255,255,255,0.022) 21px);
+      pointer-events: none;
+    }
+    .fv-a-new::after {
+      content: '';
+      position: absolute; top: 0; left: 44px; right: 44px; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(212,175,48,0.55) 25%, rgba(212,175,48,0.55) 75%, transparent);
+    }
+    .fv-a-new .brand-line { font-size: 8px; font-weight: 700; letter-spacing: 0.70em; color: rgba(212,175,48,0.65); text-transform: uppercase; margin-bottom: 16px; display: block; position: relative; }
+    .fv-a-new .badge-a {
+      display: inline-flex; align-items: center; gap: 7px;
+      border: 1px solid rgba(212,175,48,0.52);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.85);
+      font-size: 10px; font-weight: 700; letter-spacing: 0.30em;
+      padding: 5px 18px; margin-bottom: 20px; position: relative;
+    }
+    .fv-a-new .badge-a::before { content: '◆'; font-size: 6px; color: #D4AF30; opacity: 0.75; }
+    .fv-a-new .the  { display: block; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 52px; letter-spacing: 0.20em; line-height: 1; color: rgba(255,255,255,0.85); margin-bottom: -4px; position: relative; }
+    .fv-a-new .sale { display: block; font-family: 'Playfair Display', serif; font-weight: 900; font-size: 114px; letter-spacing: 0.04em; line-height: 0.88; color: #fff; margin-bottom: 20px; position: relative; }
+    .fv-a-new .divider { display: flex; align-items: center; gap: 10px; width: 200px; margin-bottom: 12px; position: relative; }
+    .fv-a-new .dv-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(212,175,48,0.52), transparent); }
+    .fv-a-new .dv-star { color: #D4AF30; font-size: 9px; opacity: 0.65; }
+    .fv-a-new .saidai { font-size: 13px; font-weight: 500; letter-spacing: 0.22em; color: rgba(255,255,255,0.72); line-height: 1.4; }
+    .fv-a-new .num-row { display: flex; align-items: baseline; }
+    .fv-a-new .num { font-family: 'Noto Serif JP', serif; font-weight: 700; font-size: 96px; line-height: 1; color: #fff; text-shadow: 0 2px 20px rgba(0,0,0,0.18); position: relative; }
+    .fv-a-new .suf { display: flex; flex-direction: column; align-self: flex-end; padding-bottom: 10px; margin-left: 4px; position: relative; }
+    .fv-a-new .suf span { font-family: 'Noto Serif JP', serif; font-weight: 700; font-size: 34px; line-height: 1; color: rgba(255,255,255,0.92); }
+    .fv-a-new .date { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; color: rgba(255,255,255,0.90); margin-top: 16px; margin-bottom: 3px; position: relative; }
+    .fv-a-new .catch { font-size: 11px; font-weight: 300; letter-spacing: 0.18em; color: rgba(255,255,255,0.52); margin-bottom: 32px; position: relative; }
+    .fv-a-new .btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.22em;
+      padding: 17px 42px; background: #fff; color: #B80020;
+      text-decoration: none;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+      position: relative;
+    }
+    .fv-a-new .btn::after { content: '›'; font-size: 18px; font-weight: 300; color: #B80020; }
+
+    /* ==========================================================
+       提案B：セール概要カードのプレミアム化
+    ========================================================== */
+
+    .sale-sec-wrap { background: #FFFBF5; padding: 48px 32px; }
+    .sale-sec-wrap .eyebrow { font-size: 9px; font-weight: 700; letter-spacing: 0.65em; color: #B8942A; display: block; margin-bottom: 8px; text-transform: uppercase; }
+    .sale-sec-wrap .title { font-size: 22px; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 8px; line-height: 1.5; }
+    .sale-sec-wrap .sub { font-size: 12px; color: #7a5a40; line-height: 1.85; margin-bottom: 28px; }
+    .sale-sec-wrap .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+
+    /* Before B cards */
+    .sc-b { background: #fff; border-radius: 4px; padding: 28px 18px 22px; box-shadow: 0 4px 18px rgba(0,0,0,0.05); text-align: center; }
+    .sc-b.c1 { border-top: 5px solid #B8942A; }
+    .sc-b.c2 { border-top: 5px solid #B80020; }
+    .sc-b.c3 { border-top: 5px solid #1A2444; }
+    .sc-b .bdg { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.42em; padding: 3px 10px; border-radius: 20px; margin-bottom: 14px; }
+    .sc-b.c1 .bdg { background: #FEF3DC; color: #8a5a10; }
+    .sc-b.c2 .bdg { background: #FDEAEA; color: #8a0020; }
+    .sc-b.c3 .bdg { background: #1A2444; color: #D4AF30; }
+    .sc-b .illust { height: 36px; display: flex; justify-content: center; align-items: center; margin-bottom: 14px; }
+    .sc-b .num { font-family: 'Noto Serif JP', serif; font-size: 62px; font-weight: 700; line-height: 1; }
+    .sc-b.c1 .num { color: #B8942A; }
+    .sc-b.c2 .num { color: #B80020; }
+    .sc-b.c3 .num { color: #1A2444; }
+    .sc-b .unit { font-size: 14px; font-weight: 700; margin-top: 2px; }
+    .sc-b.c1 .unit { color: #B8942A; }
+    .sc-b.c2 .unit { color: #B80020; }
+    .sc-b.c3 .unit { color: #1A2444; }
+    .sc-b .ph { margin-top: 14px; background: #F5F0E8; border-radius: 4px; height: 80px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 3px; }
+    .sc-b .ph span { font-size: 20px; opacity: 0.22; }
+    .sc-b .ph small { font-size: 8px; color: #bbb; font-weight: 700; letter-spacing: 0.08em; }
+
+    /* After B cards */
+    .sc-a { background: #fff; border-radius: 2px; overflow: hidden; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+    .sc-a .card-head { padding: 22px 22px 18px; position: relative; }
+    .sc-a.c1 .card-head { background: linear-gradient(140deg, #FEF9EC 0%, #F8EFD0 100%); }
+    .sc-a.c2 .card-head { background: linear-gradient(140deg, #FFF0EF 0%, #FAE0DC 100%); }
+    .sc-a.c3 .card-head { background: linear-gradient(140deg, #1A2444 0%, #24325a 100%); }
+    .sc-a .card-head::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
+    .sc-a.c1 .card-head::before { background: #B8942A; }
+    .sc-a.c2 .card-head::before { background: #B80020; }
+    .sc-a.c3 .card-head::before { background: #D4AF30; }
+    .sc-a .bdg { font-size: 8px; font-weight: 700; letter-spacing: 0.55em; display: block; margin-bottom: 10px; text-transform: uppercase; }
+    .sc-a.c1 .bdg { color: #8a5a10; }
+    .sc-a.c2 .bdg { color: #8a0020; }
+    .sc-a.c3 .bdg { color: rgba(212,175,48,0.85); }
+    .sc-a .num-wrap { display: flex; align-items: baseline; gap: 3px; }
+    .sc-a .num { font-family: 'Noto Serif JP', serif; font-size: 72px; font-weight: 700; line-height: 1; letter-spacing: -0.02em; }
+    .sc-a.c1 .num { color: #B8942A; }
+    .sc-a.c2 .num { color: #B80020; }
+    .sc-a.c3 .num { color: #fff; }
+    .sc-a .unit { font-size: 17px; font-weight: 700; align-self: flex-end; margin-bottom: 4px; }
+    .sc-a.c1 .unit { color: #B8942A; }
+    .sc-a.c2 .unit { color: #B80020; }
+    .sc-a.c3 .unit { color: #fff; }
+    .sc-a .card-body { padding: 16px 22px 20px; }
+    .sc-a .illust { height: 28px; display: flex; justify-content: flex-start; align-items: center; margin-bottom: 8px; }
+    .sc-a .ph { background: #F5F0E8; border-radius: 2px; height: 80px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 3px; }
+    .sc-a .ph span { font-size: 20px; opacity: 0.22; }
+    .sc-a .ph small { font-size: 8px; color: #bbb; font-weight: 700; letter-spacing: 0.08em; }
+
+    /* ==========================================================
+       提案C：クーポンセクションの呼吸感向上
+    ========================================================== */
+
+    /* Before C */
+    .cp-b { background: #FBF5EE; padding: 28px 32px 36px; }
+    .cp-b .head { margin-bottom: 16px; }
+    .cp-b .title-wrap { display: flex; align-items: center; justify-content: center; gap: 16px; }
+    .cp-b .title-wrap::before, .cp-b .title-wrap::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: #B8942A; opacity: 0.7; }
+    .cp-b .title { font-size: 14px; font-weight: 400; letter-spacing: 0.20em; color: #B8942A; white-space: nowrap; }
+    .cp-b .num-hl { font-size: 18px; font-weight: 700; }
+    .cp-b .row { display: flex; gap: 10px; }
+    .cp-b .list { display: flex; gap: 8px; flex: 1; }
+    .cp-b .item { background: #fff; border-radius: 4px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; flex: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid rgba(212,175,48,0.45); }
+    .cp-b .icon { width: 36px; height: 36px; flex-shrink: 0; background: #CC1530; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .cp-b .desc { font-size: 10px; font-weight: 300; color: #6a5040; line-height: 1.55; margin-bottom: 2px; }
+    .cp-b .val { font-size: 10px; font-weight: 500; color: #CC1530; display: flex; align-items: baseline; gap: 1px; }
+    .cp-b .sarani { font-size: 13px; font-weight: 500; color: #CC1530; letter-spacing: 0.05em; margin-right: 3px; align-self: flex-end; padding-bottom: 3px; }
+    .cp-b .cb-num { font-family: 'Noto Serif JP', serif; font-size: 20px; font-weight: 700; color: #CC1530; line-height: 1; }
+    .cp-b .cta { width: 148px; flex-shrink: 0; background: #1A2444; border-radius: 4px; padding: 16px 12px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+    .cp-b .cta-lbl { font-size: 11px; font-weight: 500; letter-spacing: 0.15em; color: #D4AF30; }
+    .cp-b .cta-icon { font-size: 26px; opacity: 0.8; }
+    .cp-b .cta-sub { font-size: 9px; color: rgba(255,255,255,0.7); letter-spacing: 0.04em; line-height: 1.8; }
+    .cp-b .cta-btn { display: block; width: 100%; background: rgba(255,255,255,0.10); color: #fff; font-size: 10px; font-weight: 500; padding: 8px 4px; text-decoration: none; text-align: center; border: 1px solid rgba(255,255,255,0.22); }
+
+    /* After C */
+    .cp-a { background: #FBF5EE; padding: 40px 32px 48px; }
+    .cp-a .head { margin-bottom: 28px; text-align: center; }
+    .cp-a .eyebrow { font-size: 8px; font-weight: 700; letter-spacing: 0.65em; color: #B8942A; display: block; margin-bottom: 10px; text-transform: uppercase; }
+    .cp-a .title { font-size: 17px; font-weight: 700; letter-spacing: 0.06em; color: #1A1A1A; }
+    .cp-a .num-hl { color: #B80020; }
+    .cp-a .grid { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px; align-items: stretch; }
+    .cp-a .item {
+      background: #fff; border-radius: 2px;
+      padding: 20px 18px 20px 22px;
+      display: flex; flex-direction: column; gap: 5px;
+      box-shadow: 0 3px 14px rgba(0,0,0,0.06);
+      border-left: 3px solid #B8942A;
+      min-height: 110px; justify-content: center;
+    }
+    .cp-a .item-lbl { font-size: 8px; font-weight: 700; letter-spacing: 0.45em; color: #B8942A; text-transform: uppercase; margin-bottom: 3px; }
+    .cp-a .desc { font-size: 11px; font-weight: 400; color: #5a4030; line-height: 1.75; }
+    .cp-a .val { display: flex; align-items: baseline; gap: 2px; margin-top: 4px; }
+    .cp-a .sarani { font-size: 10px; color: #B80020; font-weight: 500; letter-spacing: 0.05em; }
+    .cp-a .big { font-family: 'Noto Serif JP', serif; font-size: 30px; font-weight: 700; color: #B80020; line-height: 1; }
+    .cp-a .suf { font-size: 13px; font-weight: 700; color: #B80020; align-self: flex-end; padding-bottom: 3px; }
+    .cp-a .cta {
+      background: #1A2444; border-radius: 2px;
+      padding: 22px 16px;
+      display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center;
+      min-width: 140px;
+    }
+    .cp-a .gold-line { width: 28px; height: 1px; background: rgba(212,175,48,0.55); }
+    .cp-a .cta-lbl { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; color: #D4AF30; }
+    .cp-a .cta-icon { font-size: 28px; opacity: 0.72; }
+    .cp-a .cta-sub { font-size: 9px; color: rgba(255,255,255,0.62); letter-spacing: 0.06em; line-height: 1.85; }
+    .cp-a .cta-btn {
+      display: block; width: 100%;
+      border: 1px solid rgba(212,175,48,0.48);
+      color: #D4AF30; font-size: 10px; font-weight: 500;
+      padding: 10px 6px; text-decoration: none; text-align: center;
+      letter-spacing: 0.14em;
+    }
+
+    /* ==========================================================
+       提案D：締めCTA のビジュアル強化
+    ========================================================== */
+
+    /* Before D */
+    .end-b { background: #B80020; padding: 64px 40px; text-align: center; }
+    .end-b .copy { font-size: 22px; font-weight: 700; color: #fff; letter-spacing: 0.08em; line-height: 1.8; margin-bottom: 16px; }
+    .end-b .period { font-family: 'Playfair Display', serif; font-size: 12px; letter-spacing: 0.40em; color: rgba(255,255,255,0.70); margin-bottom: 36px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .end-b .period::before, .end-b .period::after { content: ''; display: block; width: 22px; height: 1px; background: rgba(255,255,255,0.28); }
+    .end-b .btn { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.22em; padding: 17px 48px; background: #fff; color: #B80020; text-decoration: none; box-shadow: 0 8px 28px rgba(0,0,0,0.20); }
+    .end-b .btn::after { content: ''; display: block; width: 5px; height: 5px; border-right: 2px solid #B80020; border-top: 2px solid #B80020; transform: rotate(45deg); }
+
+    /* After D */
+    .end-a { background: #B80020; padding: 64px 40px; text-align: center; position: relative; overflow: hidden; }
+    .end-a::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(-45deg, transparent, transparent 26px, rgba(255,255,255,0.028) 26px, rgba(255,255,255,0.028) 27px);
+      pointer-events: none;
+    }
+    .end-a .deco { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 24px; position: relative; }
+    .end-a .deco-line { flex: 0 0 52px; height: 1px; }
+    .end-a .deco-line.l { background: linear-gradient(to right, transparent, rgba(212,175,48,0.58)); }
+    .end-a .deco-line.r { background: linear-gradient(to left, transparent, rgba(212,175,48,0.58)); }
+    .end-a .deco-diamond { width: 7px; height: 7px; border: 1px solid rgba(212,175,48,0.62); transform: rotate(45deg); }
+    .end-a .copy { font-size: 22px; font-weight: 700; color: #fff; letter-spacing: 0.10em; line-height: 1.9; margin-bottom: 10px; position: relative; }
+    .end-a .period {
+      font-family: 'Playfair Display', serif; font-size: 13px; letter-spacing: 0.28em;
+      color: rgba(255,255,255,0.78); margin-bottom: 44px;
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      position: relative;
+    }
+    .end-a .period::before, .end-a .period::after { content: ''; display: block; width: 28px; height: 1px; background: rgba(255,255,255,0.24); }
+    .end-a .btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.24em;
+      padding: 18px 52px; background: #fff; color: #B80020;
+      text-decoration: none;
+      box-shadow: 0 10px 36px rgba(0,0,0,0.30);
+      position: relative;
+    }
+    .end-a .btn::before { content: ''; position: absolute; inset: -4px; border: 1px solid rgba(255,255,255,0.18); pointer-events: none; }
+    .end-a .btn::after { content: '›'; font-size: 18px; font-weight: 300; color: #B80020; }
+
+    /* ─── 改善ポイント注記 ─── */
+    .change-log { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .change-chip { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; padding: 4px 12px; background: #fff; border: 1px solid rgba(184,0,32,0.30); color: #B80020; border-radius: 1px; }
+
+  </style>
+</head>
+<body>
+
+  <!-- ── ヘッダー ── -->
+  <div class="doc-header">
+    <h1>DESIGN DRAFT — AIMEGANE THE SALE 2026</h1>
+    <p>使い捨て比較ファイルです。本番コードには一切触れていません。<br>気に入った案だけを本番に取り入れてください。</p>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       提案A：FV ヘッドライン階層の改善
+  ══════════════════════════════════════════ -->
+  <div class="proposal-block">
+    <span class="proposal-eyebrow">Proposal A</span>
+    <h2 class="proposal-title">FV ヘッドライン階層の改善</h2>
+    <p class="proposal-note">
+      現状は「キャッチコピー → 期間バッジ → THE SALE → 30%OFF」の順です。<br>
+      改善案では <strong>ブランドラインを先頭に置き、バッジをゴールドボーダー仕様</strong>に変更。
+      キャッチコピーを日付の下に移動することで「THE SALE → 30%OFF → いつ → 一言コピー」という自然な視線の流れになります。
+      斜めストライプのテクスチャーと天部ゴールドラインで高級感を演出。
+    </p>
+    <div class="ba-grid">
+      <div>
+        <span class="ba-label before">BEFORE</span>
+        <div class="ba-frame">
+          <div class="fv-a">
+            <p class="catch">どうせ買うなら、お得な日に。</p>
+            <span class="badge-b">期間限定</span>
+            <div>
+              <span class="the">THE</span>
+              <span class="sale">SALE</span>
+            </div>
+            <div class="divider"><div class="dv-line"></div><div class="dv-star">✦</div><div class="dv-line"></div></div>
+            <div>
+              <span class="saidai">最大</span>
+              <div class="num-row">
+                <span class="num">30</span>
+                <div class="suf"><span>%</span><span>OFF</span></div>
+              </div>
+            </div>
+            <p class="date">2026.8.8（土）— 10.12（月）</p>
+            <p class="sub">＋ クーポンでさらにお得！</p>
+            <a href="#" class="btn">ご来店予約はこちら</a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="ba-label after">AFTER</span>
+        <div class="ba-frame">
+          <div class="fv-a-new">
+            <span class="brand-line">Aimegane &nbsp; The Sale</span>
+            <span class="badge-a">期間限定開催</span>
+            <div>
+              <span class="the">THE</span>
+              <span class="sale">SALE</span>
+            </div>
+            <div class="divider"><div class="dv-line"></div><div class="dv-star">✦</div><div class="dv-line"></div></div>
+            <div>
+              <span class="saidai">最大</span>
+              <div class="num-row">
+                <span class="num">30</span>
+                <div class="suf"><span>%</span><span>OFF</span></div>
+              </div>
+            </div>
+            <p class="date">2026.8.8（土）— 10.12（月）</p>
+            <p class="catch">どうせ買うなら、お得な日に。</p>
+            <a href="#" class="btn">ご来店予約はこちら</a>
+          </div>
+        </div>
+        <div class="change-log">
+          <span class="change-chip">ブランドライン追加</span>
+          <span class="change-chip">バッジをゴールドボーダーに</span>
+          <span class="change-chip">テクスチャー追加</span>
+          <span class="change-chip">キャッチコピーを日付下に移動</span>
+          <span class="change-chip">数字を少し大きく</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       提案B：セール概要カードのプレミアム化
+  ══════════════════════════════════════════ -->
+  <div class="proposal-block">
+    <span class="proposal-eyebrow">Proposal B</span>
+    <h2 class="proposal-title">セール概要カードのプレミアム化</h2>
+    <p class="proposal-note">
+      現状のカードは「白地＋天部の色ボーダー」。改善案では <strong>カードヘッダー部分にグラデーション背景を追加し、左辺にアクセントボーダー</strong>を入れます。
+      割引率の数字をさらに大きくし、ENTRY/STANDARD/PREMIUMのバッジを左揃えにすることで、スキャンしやすさが向上します。
+    </p>
+    <div class="ba-grid">
+      <div>
+        <span class="ba-label before">BEFORE</span>
+        <div class="ba-frame">
+          <div class="sale-sec-wrap">
+            <span class="eyebrow">Sale Contents</span>
+            <h2 class="title">フレーム・サングラス<br>最大30%OFF</h2>
+            <p class="sub">今年のザ・セールは3段階の割引をご用意。対象商品の詳細はお気軽に店頭スタッフへお尋ねください。</p>
+            <div class="cards">
+              <div class="sc-b c1">
+                <span class="bdg">ENTRY</span>
+                <div class="illust" id="bi1"></div>
+                <div class="num">10</div><div class="unit">%OFF</div>
+                <div class="ph"><span>👓</span><small>商品画像が入ります</small></div>
+              </div>
+              <div class="sc-b c2">
+                <span class="bdg">STANDARD</span>
+                <div class="illust" id="bi2"></div>
+                <div class="num">20</div><div class="unit">%OFF</div>
+                <div class="ph"><span>👓</span><small>商品画像が入ります</small></div>
+              </div>
+              <div class="sc-b c3">
+                <span class="bdg">PREMIUM</span>
+                <div class="illust" id="bi3"></div>
+                <div class="num">30</div><div class="unit">%OFF</div>
+                <div class="ph"><span>👓</span><small>商品画像が入ります</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="ba-label after">AFTER</span>
+        <div class="ba-frame">
+          <div class="sale-sec-wrap">
+            <span class="eyebrow">Sale Contents</span>
+            <h2 class="title">フレーム・サングラス<br>最大30%OFF</h2>
+            <p class="sub">今年のザ・セールは3段階の割引をご用意。対象商品の詳細はお気軽に店頭スタッフへお尋ねください。</p>
+            <div class="cards">
+              <div class="sc-a c1">
+                <div class="card-head">
+                  <span class="bdg">ENTRY</span>
+                  <div class="illust" id="ai1"></div>
+                  <div class="num-wrap"><span class="num">10</span><span class="unit">%OFF</span></div>
+                </div>
+                <div class="card-body"><div class="ph"><span>👓</span><small>商品画像が入ります</small></div></div>
+              </div>
+              <div class="sc-a c2">
+                <div class="card-head">
+                  <span class="bdg">STANDARD</span>
+                  <div class="illust" id="ai2"></div>
+                  <div class="num-wrap"><span class="num">20</span><span class="unit">%OFF</span></div>
+                </div>
+                <div class="card-body"><div class="ph"><span>👓</span><small>商品画像が入ります</small></div></div>
+              </div>
+              <div class="sc-a c3">
+                <div class="card-head">
+                  <span class="bdg">PREMIUM</span>
+                  <div class="illust" id="ai3"></div>
+                  <div class="num-wrap"><span class="num">30</span><span class="unit">%OFF</span></div>
+                </div>
+                <div class="card-body"><div class="ph"><span>👓</span><small>商品画像が入ります</small></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="change-log">
+          <span class="change-chip">ヘッダーにグラデ背景</span>
+          <span class="change-chip">左辺アクセントボーダー</span>
+          <span class="change-chip">数字を大きく・左揃え</span>
+          <span class="change-chip">バッジを小さめ・上部に独立</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       提案C：クーポンセクションの呼吸感向上
+  ══════════════════════════════════════════ -->
+  <div class="proposal-block">
+    <span class="proposal-eyebrow">Proposal C</span>
+    <h2 class="proposal-title">クーポンセクションの呼吸感向上</h2>
+    <p class="proposal-note">
+      現状のクーポン項目はパディングが少なく、割引数値（1,100円・10%）が小さめです。
+      改善案では<strong>各項目の高さを増やしてゴールド左ボーダーで区分</strong>し、
+      割引数値を大きく表示します。CTAボックスのボタンをゴールドボーダースタイルに変更し、全体の統一感を高めます。
+    </p>
+    <div class="ba-grid">
+      <div>
+        <span class="ba-label before">BEFORE</span>
+        <div class="ba-frame">
+          <div class="cp-b">
+            <div class="head">
+              <div class="title-wrap">
+                <h2 class="title">セール価格から、さらに<span class="num-hl">３</span>つのお得✨</h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="list">
+                <div class="cp-b item">
+                  <div class="icon">💬</div>
+                  <div>
+                    <p class="desc">LINEお友だち登録（新規・その場で）で</p>
+                    <p class="val"><span class="sarani">さらに</span><span class="cb-num">1,100</span>円引き</p>
+                  </div>
+                </div>
+                <div class="cp-b item">
+                  <div class="icon">📋</div>
+                  <div>
+                    <p class="desc">処方箋持参で</p>
+                    <p class="val"><span class="sarani">さらに</span><span class="cb-num">1,100</span>円引き</p>
+                  </div>
+                </div>
+                <div class="cp-b item">
+                  <div class="icon">👓</div>
+                  <div>
+                    <p class="desc">2本目を同時購入でお安いほうが</p>
+                    <p class="val"><span class="sarani">さらに</span><span class="cb-num">10</span>%引き</p>
+                  </div>
+                </div>
+              </div>
+              <div class="cp-b cta">
+                <p class="cta-lbl">来店予約はこちら</p>
+                <div class="cta-icon">📅</div>
+                <p class="cta-sub">スムーズにご案内<br>いたします。</p>
+                <a href="#" class="cta-btn">来店予約ページへ ›</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="ba-label after">AFTER</span>
+        <div class="ba-frame">
+          <div class="cp-a">
+            <div class="head">
+              <span class="eyebrow">Special Benefit</span>
+              <h2 class="title">セール価格から、さらに<span class="num-hl">３</span>つのお得</h2>
+            </div>
+            <div class="grid">
+              <div class="item">
+                <span class="item-lbl">01 LINE</span>
+                <p class="desc">LINEお友だち登録（新規・その場で）で</p>
+                <div class="val"><span class="sarani">さらに</span><span class="big">1,100</span><span class="suf">円引き</span></div>
+              </div>
+              <div class="item">
+                <span class="item-lbl">02 処方箋</span>
+                <p class="desc">処方箋持参で</p>
+                <div class="val"><span class="sarani">さらに</span><span class="big">1,100</span><span class="suf">円引き</span></div>
+              </div>
+              <div class="item">
+                <span class="item-lbl">03 2本同時</span>
+                <p class="desc">2本目を同時購入でお安いほうが</p>
+                <div class="val"><span class="sarani">さらに</span><span class="big">10</span><span class="suf">%引き</span></div>
+              </div>
+              <div class="cta">
+                <div class="gold-line"></div>
+                <p class="cta-lbl">来店予約はこちら</p>
+                <div class="cta-icon">📅</div>
+                <p class="cta-sub">スムーズにご案内いたします</p>
+                <div class="gold-line"></div>
+                <a href="#" class="cta-btn">来店予約ページへ</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="change-log">
+          <span class="change-chip">パディング増加</span>
+          <span class="change-chip">左ゴールドボーダー</span>
+          <span class="change-chip">割引数値を大きく</span>
+          <span class="change-chip">番号ラベル追加</span>
+          <span class="change-chip">CTAをゴールドボーダーに</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       提案D：締めCTA のビジュアル強化
+  ══════════════════════════════════════════ -->
+  <div class="proposal-block">
+    <span class="proposal-eyebrow">Proposal D</span>
+    <h2 class="proposal-title">締めCTA のビジュアル強化</h2>
+    <p class="proposal-note">
+      現状は赤一色のフラットな背景。改善案では<strong>斜めストライプのテクスチャーとゴールドのデコレーション要素</strong>を加えます。
+      ボタンに外枠のハローを追加し、「›」矢印のスタイルも変更。単調な赤面に動きと高級感が生まれます。
+    </p>
+    <div class="ba-grid">
+      <div>
+        <span class="ba-label before">BEFORE</span>
+        <div class="ba-frame">
+          <div class="end-b">
+            <p class="copy">お得な機会に、新しい一本を。</p>
+            <p class="period">2026.8.8（土）— 10.12（月）</p>
+            <a href="#" class="btn">ご来店予約はこちら</a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="ba-label after">AFTER</span>
+        <div class="ba-frame">
+          <div class="end-a">
+            <div class="deco">
+              <div class="deco-line l"></div>
+              <div class="deco-diamond"></div>
+              <div class="deco-line r"></div>
+            </div>
+            <p class="copy">お得な機会に、新しい一本を。</p>
+            <p class="period">2026.8.8（土）— 10.12（月）</p>
+            <a href="#" class="btn">ご来店予約はこちら</a>
+          </div>
+        </div>
+        <div class="change-log">
+          <span class="change-chip">斜めテクスチャー追加</span>
+          <span class="change-chip">ゴールドデコ要素追加</span>
+          <span class="change-chip">ボタンにハロー枠</span>
+          <span class="change-chip">矢印アイコンを変更</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function glasses(type, w, color, sw) {
+      sw = sw || 2.5;
+      const t = type % 4;
+      if (t === 0) return `<svg viewBox="-14 -2 160 56" width="${w}" height="${Math.round(w*0.38)}"><ellipse cx="35" cy="26" rx="28" ry="19.5" fill="none" stroke="${color}" stroke-width="${sw}"/><ellipse cx="103" cy="26" rx="28" ry="19.5" fill="none" stroke="${color}" stroke-width="${sw}"/><path d="M63 26 Q69 20 77 26" fill="none" stroke="${color}" stroke-width="${sw*0.7}"/><line x1="7" y1="17" x2="-14" y2="14" stroke="${color}" stroke-width="${sw*0.7}"/><line x1="131" y1="17" x2="146" y2="14" stroke="${color}" stroke-width="${sw*0.7}"/></svg>`;
+      if (t === 1) return `<svg viewBox="-14 4 176 46" width="${w}" height="${Math.round(w*0.33)}"><rect x="4" y="8" width="62" height="30" rx="5" fill="none" stroke="${color}" stroke-width="${sw}"/><rect x="84" y="8" width="62" height="30" rx="5" fill="none" stroke="${color}" stroke-width="${sw}"/><line x1="66" y1="23" x2="84" y2="23" stroke="${color}" stroke-width="${sw*0.7}"/><line x1="4" y1="18" x2="-14" y2="15" stroke="${color}" stroke-width="${sw*0.7}"/><line x1="146" y1="18" x2="162" y2="15" stroke="${color}" stroke-width="${sw*0.7}"/></svg>`;
+      return `<svg viewBox="-14 0 176 62" width="${w}" height="${Math.round(w*0.38)}"><circle cx="38" cy="31" r="27" fill="none" stroke="${color}" stroke-width="${sw}"/><circle cx="112" cy="31" r="27" fill="none" stroke="${color}" stroke-width="${sw}"/><line x1="65" y1="31" x2="85" y2="31" stroke="${color}" stroke-width="${sw*0.7}"/><line x1="11" y1="20" x2="-14" y2="17" stroke="${color}" stroke-width="${sw*0.7}"/><line x1="139" y1="20" x2="162" y2="17" stroke="${color}" stroke-width="${sw*0.7}"/></svg>`;
+    }
+    ['bi1','bi2','bi3'].forEach((id,i)=>{ const el=document.getElementById(id); if(el)el.innerHTML=glasses(i,100,['#B8942A','#B80020','#1A2444'][i],2); });
+    ['ai1','ai2','ai3'].forEach((id,i)=>{ const el=document.getElementById(id); if(el)el.innerHTML=glasses(i,100,['#B8942A','#B80020','#fff'][i],2); });
+  </script>
+
+</body>
+</html>
