@@ -1,0 +1,3 @@
+# Affinity Designer working files / lock files — never commit these
+*.af
+*.af~lock~
