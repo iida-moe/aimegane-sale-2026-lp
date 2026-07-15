@@ -273,6 +273,12 @@
   }
   .feature-highlight h3 { font-size: 19px; font-weight: 900; color: #E30212; margin: 0 0 10px; }
   .feature-highlight p { font-size: 14px; line-height: 1.9; color: #444; margin: 0; }
+  .feature-icon-badge {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: #E30212; margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .feature-icon-badge img { width: 56%; height: 56%; filter: brightness(0) invert(1); }
   .glasses-tag-illust { display: block; width: min(220px, 50vw); height: auto; margin: 12px auto; }
   .section-title-sm {
     font-size: clamp(24px, 3vw, 30px); font-weight: 900; color: #111;
@@ -358,6 +364,29 @@
   .overview-body {
     max-width: 760px; margin: 0 auto; text-align: center;
     font-size: 16px; line-height: 2; color: #333;
+  }
+  .overview-hero-inner {
+    max-width: 1000px; margin: 0 auto;
+    display: flex; align-items: center; gap: clamp(24px, 4vw, 56px);
+  }
+  .overview-hero-text { flex: 1; min-width: 0; }
+  .overview-hero-title {
+    text-align: left; margin: 0 0 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .overview-hero-title .arrow { color: #F5C518; font-weight: 400; }
+  .overview-hero-body { text-align: left; margin: 0; max-width: none; }
+  .overview-hero-photo {
+    flex: 0 0 clamp(220px, 34vw, 380px);
+    height: clamp(190px, 24vw, 280px);
+    background: linear-gradient(135deg, #fdf0f0, #fff6e0);
+    border-radius: 16px;
+  }
+  @media (max-width: 800px) {
+    .overview-hero-inner { flex-direction: column; }
+    .overview-hero-photo { width: 100%; flex-basis: auto; }
+    .overview-hero-title, .overview-hero-body { text-align: center; }
+    .overview-hero-title { justify-content: center; }
   }
   .overview-period {
     display: inline-block; margin-top: 20px; padding: 10px 28px;
@@ -520,24 +549,28 @@
 
   <!-- ① アイメガネ THE SALEとは -->
   <section class="section section-white">
-    <h2 class="section-title">アイメガネ THE SALE<span>とは</span></h2>
-
-    <img class="glasses-tag-illust" src="イメージ画像/megane-sale-tag.png" alt="メガネにSALEタグが付いているイラスト">
-
-    <div class="overview-body">
-      対象のメガネ・サングラスが最大30%OFFになる、年に一度のお得なチャンス！
-      <br>
-      この機会に、新しい一本と出会ってみませんか？
+    <div class="overview-hero-inner">
+      <div class="overview-hero-text">
+        <h2 class="section-title overview-hero-title"><span class="arrow">&lsaquo;</span> アイメガネ THE SALE<span>とは</span> <span class="arrow">&rsaquo;</span></h2>
+        <div class="overview-body overview-hero-body">
+          対象のメガネ・サングラスが最大30%OFFになる、年に一度のお得なチャンス！
+          <br>
+          この機会に、新しい一本と出会ってみませんか？
+        </div>
+      </div>
+      <div class="overview-hero-photo"></div>
     </div>
 
     <div class="feature-row">
       <div class="feature-highlight">
+        <div class="feature-icon-badge"><img src="イメージ画像/ai-scan-icon.svg" alt=""></div>
         <span class="feature-highlight-tag">アイメガネ限定</span>
         <h3>AIフィッティングミラーで似合い度チェック</h3>
         <p>店頭のAI搭載ミラーが、フレームの似合い度を測定。客観的なデータを見ながら、自分に似合う一本を無料で診断できます。</p>
       </div>
 
       <div class="feature-block">
+        <div class="feature-icon-badge"><img src="イメージ画像/glasses-icon.svg" alt=""></div>
         <h3>標準でもこれだけ充実</h3>
         <p>アイメガネの標準レンズは、薄型の「1.60非球面レンズ」。汚れが付きにくいコーティングとUVカットも標準で付いています。度数のタイプも遠近・中近・遠中近・近々・アシストレンズから選べます。特殊なレンズは度数によって見え方が異なるため、無料相談でスタッフにご相談いただけます。</p>
       </div>
