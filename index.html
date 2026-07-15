@@ -279,6 +279,11 @@
     display: flex; align-items: center; justify-content: center;
   }
   .feature-icon-badge img { width: 56%; height: 56%; filter: brightness(0) invert(1); }
+  .feature-highlight-photo {
+    display: block; width: 100%; max-width: 320px; height: 190px;
+    object-fit: cover; object-position: 78% center;
+    border-radius: 12px; margin: 0 auto 16px;
+  }
   .glasses-tag-illust { display: block; width: min(220px, 50vw); height: auto; margin: 12px auto; }
   .section-title-sm {
     font-size: clamp(24px, 3vw, 30px); font-weight: 900; color: #111;
@@ -563,7 +568,7 @@
 
     <div class="feature-row">
       <div class="feature-highlight">
-        <div class="feature-icon-badge"><img src="イメージ画像/ai-scan-icon.svg" alt=""></div>
+        <img class="feature-highlight-photo" src="イメージ画像/aifittingmirror.webp" alt="AIフィッティングミラーで顔を測定している様子">
         <span class="feature-highlight-tag">アイメガネ限定</span>
         <h3>AIフィッティングミラーで似合い度チェック</h3>
         <p>店頭のAI搭載ミラーが、フレームの似合い度を測定。客観的なデータを見ながら、自分に似合う一本を無料で診断できます。</p>
