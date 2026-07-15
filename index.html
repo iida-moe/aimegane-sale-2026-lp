@@ -294,6 +294,17 @@
     .ai-mirror-band-text { text-align: center; }
     .ai-mirror-band-photo-wrap { flex-basis: auto; }
   }
+  .lens-standard-band { border-color: #F5C518; }
+  .lens-standard-band .feature-icon-badge { margin: 0 0 16px; }
+  .ai-mirror-band-text h3.lens-standard-title { color: #111; }
+  .lens-standard-photo {
+    width: 100%; height: clamp(180px, 22vw, 260px);
+    background: linear-gradient(135deg, #fdf0f0, #fff6e0);
+    border-radius: 10px;
+  }
+  @media (max-width: 800px) {
+    .lens-standard-band .feature-icon-badge { margin: 0 auto 16px; }
+  }
   .glasses-tag-illust { display: block; width: min(220px, 50vw); height: auto; margin: 12px auto; }
   .section-title-sm {
     font-size: clamp(24px, 3vw, 30px); font-weight: 900; color: #111;
@@ -565,10 +576,13 @@
       </div>
     </div>
 
-    <div class="feature-row">
-      <div class="feature-block">
+    <div class="ai-mirror-band lens-standard-band">
+      <div class="ai-mirror-band-photo-wrap lens-standard-photo-wrap">
+        <div class="lens-standard-photo"></div>
+      </div>
+      <div class="ai-mirror-band-text">
         <div class="feature-icon-badge"><img src="イメージ画像/glasses-icon.svg" alt=""></div>
-        <h3>標準でもこれだけ充実</h3>
+        <h3 class="lens-standard-title">標準でもこれだけ充実</h3>
         <p>アイメガネの標準レンズは、薄型の「1.60非球面レンズ」。汚れが付きにくいコーティングとUVカットも標準で付いています。度数のタイプも遠近・中近・遠中近・近々・アシストレンズから選べます。特殊なレンズは度数によって見え方が異なるため、無料相談でスタッフにご相談いただけます。</p>
       </div>
     </div>
