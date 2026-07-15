@@ -253,6 +253,12 @@
 
   .section-white { background: #ffffff; }
   .section-cream { background: #FDF5E6; }
+  .section-red-frame { background: #E30212; }
+  .sale-frame-inner {
+    background: #fff; max-width: 1100px; margin: 0 auto;
+    padding: clamp(32px, 5vw, 56px) clamp(20px, 4vw, 48px);
+    border-radius: 24px;
+  }
   .feature-row {
     max-width: 1000px; margin: 0 auto 32px;
     display: flex; align-items: stretch; gap: clamp(16px, 2.4vw, 32px);
@@ -261,12 +267,6 @@
   .feature-block { max-width: 720px; margin: 0 auto 32px; text-align: center; }
   .feature-block h3 { font-size: 18px; font-weight: 900; color: #111; margin: 0 0 10px; }
   .feature-block p { font-size: 14px; line-height: 1.9; color: #444; margin: 0; }
-  .feature-icon-badge {
-    width: 64px; height: 64px; border-radius: 50%;
-    background: #E30212; margin: 0 auto 16px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .feature-icon-badge img { width: 56%; height: 56%; filter: brightness(0) invert(1); }
   .ai-mirror-band {
     max-width: 1000px; margin: 0 auto 40px;
     display: flex; align-items: stretch;
@@ -295,15 +295,10 @@
     .ai-mirror-band-photo-wrap { flex-basis: auto; }
   }
   .lens-standard-band { border-color: #F5C518; }
-  .lens-standard-band .feature-icon-badge { margin: 0 0 16px; }
-  .ai-mirror-band-text h3.lens-standard-title { color: #111; }
   .lens-standard-photo {
     width: 100%; height: clamp(180px, 22vw, 260px);
     background: linear-gradient(135deg, #fdf0f0, #fff6e0);
     border-radius: 10px;
-  }
-  @media (max-width: 800px) {
-    .lens-standard-band .feature-icon-badge { margin: 0 auto 16px; }
   }
   .glasses-tag-illust { display: block; width: min(220px, 50vw); height: auto; margin: 12px auto; }
   .section-title-sm {
@@ -553,7 +548,8 @@
   </a>
 
   <!-- ① アイメガネ THE SALEとは -->
-  <section class="section section-white">
+  <section class="section section-red-frame">
+   <div class="sale-frame-inner">
     <h2 class="section-title overview-title-tight">アイメガネ THE SALE<span>とは</span></h2>
 
     <img class="glasses-tag-illust" src="イメージ画像/megane-sale-tag.png" alt="メガネにSALEタグが付いているイラスト">
@@ -581,8 +577,7 @@
         <div class="lens-standard-photo"></div>
       </div>
       <div class="ai-mirror-band-text">
-        <div class="feature-icon-badge"><img src="イメージ画像/glasses-icon.svg" alt=""></div>
-        <h3 class="lens-standard-title">標準でもこれだけ充実</h3>
+        <h3>標準でもこれだけ充実</h3>
         <p>アイメガネの標準レンズは、薄型の「1.60非球面レンズ」。汚れが付きにくいコーティングとUVカットも標準で付いています。度数のタイプも遠近・中近・遠中近・近々・アシストレンズから選べます。特殊なレンズは度数によって見え方が異なるため、無料相談でスタッフにご相談いただけます。</p>
       </div>
     </div>
@@ -611,6 +606,7 @@
         </div>
       </div>
     </div>
+   </div>
   </section>
 
   <!-- ②-1 価格例(Paris Miki LP参考・仮の数字) -->
