@@ -267,11 +267,6 @@
     display: flex; align-items: center; justify-content: center;
   }
   .feature-icon-badge img { width: 56%; height: 56%; filter: brightness(0) invert(1); }
-  .feature-highlight-tag {
-    display: inline-block; background: #F5C518; color: #111;
-    font-weight: 900; font-size: 12px; padding: 4px 14px; border-radius: 999px;
-    margin-bottom: 14px;
-  }
   .ai-mirror-band {
     max-width: 1000px; margin: 0 auto 40px;
     display: flex; align-items: stretch;
@@ -280,9 +275,14 @@
   .ai-mirror-band-text {
     flex: 1; min-width: 0; text-align: left;
     padding: clamp(24px, 4vw, 40px);
+    display: flex; flex-direction: column; justify-content: center;
   }
-  .ai-mirror-band-text h3 { font-size: clamp(19px, 2.2vw, 23px); font-weight: 900; color: #E30212; margin: 0 0 12px; }
+  .ai-mirror-band-text h3 { font-size: clamp(21px, 2.6vw, 27px); font-weight: 900; color: #E30212; line-height: 1.4; margin: 0 0 10px; }
+  .ai-mirror-band-text p.ai-mirror-band-subtitle { font-size: 15px; font-weight: 700; color: #111; margin: 0 0 16px; }
   .ai-mirror-band-text p { font-size: 14px; line-height: 1.9; color: #444; margin: 0; }
+  .ai-mirror-band-text p.ai-mirror-band-cta {
+    margin-top: 16px; font-size: 14px; font-weight: 700; color: #E30212;
+  }
   .ai-mirror-band-photo-wrap {
     flex: 0 0 42%;
     display: flex; align-items: center; justify-content: center;
@@ -555,9 +555,10 @@
 
     <div class="ai-mirror-band">
       <div class="ai-mirror-band-text">
-        <span class="feature-highlight-tag">アイメガネ限定</span>
-        <h3>AIフィッティングミラーで似合い度チェック</h3>
+        <h3>AIフィッティングミラーで<br>似合う一本を判定</h3>
+        <p class="ai-mirror-band-subtitle">もう迷わない、すぐ見つかる。</p>
         <p>店頭のAI搭載ミラーが、フレームの似合い度を測定。客観的なデータを見ながら、自分に似合う一本を無料で診断できます。</p>
+        <p class="ai-mirror-band-cta">&#9654; 全国のアイメガネ店舗で無料体験できます</p>
       </div>
       <div class="ai-mirror-band-photo-wrap">
         <img class="ai-mirror-band-photo" src="イメージ画像/aifittingmirror-cutout.png" alt="AIフィッティングミラーで顔を測定している様子">
