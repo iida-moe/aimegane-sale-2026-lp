@@ -190,92 +190,13 @@
     .fv-discount-wrap { position: static; padding: 0 20px; }
   }
 
-  /* FV直下の特典セクション(シンプルな「30%+1,100円+10%」の足し算表示) */
+  /* FV直下の特典セクション(ユーザー作成の完成画像を表示) */
   .perk-section {
     background: #FBF6EA;
-    padding: clamp(14px, 2vh, 22px) clamp(16px, 3vw, 40px);
+    padding: clamp(24px, 4vh, 40px) clamp(16px, 3vw, 40px);
   }
-  .perk-heading-row {
-    display: flex; align-items: center; justify-content: center;
-    gap: clamp(8px, 1.2vw, 14px);
-    margin-bottom: clamp(16px, 2.4vh, 24px);
-  }
-  .perk-heading-row::before, .perk-heading-row::after {
-    content: ''; flex: 1; max-width: 60px; height: 1px; background: #F5C518;
-  }
-  .perk-heading-text {
-    font-size: clamp(19px, calc(1.5vw + 6px), 22px); font-weight: 900; color: #111;
-    white-space: nowrap;
-  }
-  .perk-heading-text strong {
-    font-family: 'Bebas Neue', sans-serif;
-    color: #E30212; font-size: 1.3em; margin: 0 2px;
-  }
-  .perk-formula {
-    max-width: 1000px; margin: 0 auto;
-    display: flex; align-items: flex-start; justify-content: center;
-    gap: clamp(10px, 2vw, 24px);
-    flex-wrap: wrap;
-  }
-  .perk-item {
-    display: flex; flex-direction: column; align-items: center;
-    min-width: 130px;
-  }
-  .perk-item-num {
-    margin: 0;
-    display: flex; align-items: baseline; justify-content: center;
-    font-family: 'Bebas Neue', sans-serif; color: #F5C518; line-height: 0.85;
-    font-size: clamp(46px, 6vw, 64px);
-    -webkit-text-stroke: 2px #111; paint-order: stroke fill;
-  }
-  .perk-item-num .unit-sm {
-    font-family: 'Noto Sans JP', sans-serif; font-size: 0.42em; margin-left: 2px; font-weight: 700;
-  }
-  .perk-item-cond {
-    margin: 6px 0 0;
-    font-size: clamp(11px, 1.2vw, 13px); color: #555;
-    text-align: center; line-height: 1.5;
-  }
-  .perk-plus {
-    color: #111; font-weight: 900; font-size: clamp(24px, 3vw, 32px);
-    flex-shrink: 0;
-    margin-top: 54px;
-  }
-  .perk-item-sale { flex-shrink: 0; align-items: flex-start; text-align: left; }
-  .perk-item-topslot { height: 40px; display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-  .perk-item-eyebrow {
-    margin: 0; font-family: 'Bebas Neue', sans-serif; color: #111;
-    font-size: clamp(14px, 1.6vw, 17px); letter-spacing: 0.08em;
-  }
-  .perk-item-eyebrow-sub {
-    margin: 0; font-size: 12px; color: #555; white-space: nowrap;
-  }
-  .perk-item-sale .perk-item-num { font-size: clamp(52px, 7vw, 72px); justify-content: flex-start; }
-  .perk-card-item {
-    align-items: flex-start; text-align: left;
-    background: #fff; border: 1px solid #f0d6d6;
-    padding: 16px 22px;
-    min-width: 0;
-  }
-  .perk-card-icon {
-    width: 40px; height: 40px; border-radius: 10px;
-    background: #E30212; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .perk-card-icon-outline { background: #fff; border: 1.5px solid #111; }
-  .perk-icon-plain { width: 40px; height: 40px; flex-shrink: 0; }
-  .perk-card-item .perk-item-num { justify-content: flex-start; }
-  .perk-card-item .perk-item-cond { text-align: left; margin: 4px 0 0; white-space: nowrap; }
-  .perk-card-stack { gap: 10px; padding: 14px 20px; justify-content: center; }
-  .perk-stack-row { display: flex; align-items: center; gap: 10px; }
-  .perk-stack-text { display: flex; flex-direction: column; }
-  .perk-stack-label { margin: 0; font-size: 12px; font-weight: 700; color: #111; white-space: nowrap; }
-  .perk-stack-price {
-    margin: 0; font-family: 'Bebas Neue', sans-serif; color: #F5C518;
-    font-size: clamp(24px, 2.8vw, 30px); line-height: 1.1;
-    -webkit-text-stroke: 1px #111; paint-order: stroke fill;
-  }
-  .perk-stack-price .unit-sm { font-family: 'Noto Sans JP', sans-serif; font-size: 0.5em; margin-left: 2px; font-weight: 700; -webkit-text-stroke: 0; }
+  .perk-inner { max-width: 900px; margin: 0 auto; }
+  .perk-benefits-image { display: block; width: 100%; height: auto; }
 
   /* ══════════════ FV より下のセクション ══════════════ */
   .section { padding: 64px clamp(20px, 5vw, 80px); }
@@ -613,40 +534,8 @@
     </div>
 
     <div class="perk-section">
-      <div class="perk-heading-row">
-        <p class="perk-heading-text">さらに併用できる特典<strong>!</strong></p>
-      </div>
-      <div class="perk-formula">
-        <div class="perk-item perk-item-sale">
-          <div class="perk-item-topslot">
-            <p class="perk-item-eyebrow">THE SALE</p>
-            <p class="perk-item-eyebrow-sub">メガネとサングラス</p>
-          </div>
-          <p class="perk-item-num">MAX30<span class="unit-sm">%OFF</span></p>
-        </div>
-        <span class="perk-plus">+</span>
-        <div class="perk-item perk-card-item perk-card-stack">
-          <div class="perk-stack-row">
-            <div class="perk-card-icon perk-card-icon-outline"><img src="イメージ画像/prescription-icon.svg" alt="処方箋" style="width:58%; height:58%; filter: brightness(0);"></div>
-            <div class="perk-stack-text">
-              <p class="perk-stack-label">処方箋持参で</p>
-              <p class="perk-stack-price">1,100<span class="unit-sm">円OFF</span></p>
-            </div>
-          </div>
-          <div class="perk-stack-row">
-            <img class="perk-icon-plain" src="イメージ画像/icons8-line.svg" alt="LINE">
-            <div class="perk-stack-text">
-              <p class="perk-stack-label">LINE友だち登録で</p>
-              <p class="perk-stack-price">1,100<span class="unit-sm">円OFF</span></p>
-            </div>
-          </div>
-        </div>
-        <span class="perk-plus">+</span>
-        <div class="perk-item perk-card-item">
-          <div class="perk-item-topslot"><div class="perk-card-icon perk-card-icon-outline"><img src="イメージ画像/glasses-icon.svg" alt="2本目" style="width:60%; height:60%; filter: brightness(0);"></div></div>
-          <p class="perk-item-num">10<span class="unit-sm">%OFF</span></p>
-          <p class="perk-item-cond">2本目同時購入で<br>(お安いほうに適用)</p>
-        </div>
+      <div class="perk-inner">
+        <img class="perk-benefits-image" src="イメージ画像/perk-benefits.png" alt="さらに併用できるお得な特典! THE SALE MAX30%OFF(メガネ&サングラス)+LINEお友だち登録で1,100円OFF・処方箋持参で1,100円OFF+2本目同時購入で10%OFF(価格の低い方に適用)">
       </div>
     </div>
    </div>
