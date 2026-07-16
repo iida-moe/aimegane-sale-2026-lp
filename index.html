@@ -242,10 +242,13 @@
     margin-top: 54px;
   }
   .perk-item-sale { flex-shrink: 0; align-items: flex-start; text-align: left; }
-  .perk-item-topslot { height: 40px; display: flex; align-items: center; margin-bottom: 6px; }
+  .perk-item-topslot { height: 40px; display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
   .perk-item-eyebrow {
     margin: 0; font-family: 'Bebas Neue', sans-serif; color: #111;
     font-size: clamp(14px, 1.6vw, 17px); letter-spacing: 0.08em;
+  }
+  .perk-item-eyebrow-sub {
+    margin: 0; font-size: 12px; color: #555; white-space: nowrap;
   }
   .perk-item-sale .perk-item-num { font-size: clamp(52px, 7vw, 72px); justify-content: flex-start; }
   .perk-card-item {
@@ -611,13 +614,15 @@
 
     <div class="perk-section">
       <div class="perk-heading-row">
-        <p class="perk-heading-text">さらに<strong>!</strong>併用できる特典</p>
+        <p class="perk-heading-text">さらに併用できる特典<strong>!</strong></p>
       </div>
       <div class="perk-formula">
         <div class="perk-item perk-item-sale">
-          <div class="perk-item-topslot"><p class="perk-item-eyebrow">THE SALE</p></div>
+          <div class="perk-item-topslot">
+            <p class="perk-item-eyebrow">THE SALE</p>
+            <p class="perk-item-eyebrow-sub">メガネとサングラス</p>
+          </div>
           <p class="perk-item-num">MAX30<span class="unit-sm">%OFF</span></p>
-          <p class="perk-item-cond">メガネとサングラス</p>
         </div>
         <span class="perk-plus">+</span>
         <div class="perk-item perk-card-item perk-card-stack">
