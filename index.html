@@ -231,11 +231,6 @@
   .perk-item-num .unit-sm {
     font-family: 'Noto Sans JP', sans-serif; font-size: 0.42em; margin-left: 2px; font-weight: 700;
   }
-  .perk-item-label {
-    margin: 2px 0 0;
-    font-family: 'Bebas Neue', sans-serif; color: #111;
-    font-size: clamp(16px, 1.8vw, 20px); letter-spacing: 0.04em;
-  }
   .perk-item-cond {
     margin: 6px 0 0;
     font-size: clamp(11px, 1.2vw, 13px); color: #555;
@@ -266,8 +261,7 @@
   }
   .perk-card-icon-outline { background: #fff; border: 1.5px solid #111; }
   .perk-icon-plain { width: 40px; height: 40px; flex-shrink: 0; }
-  .perk-card-item .perk-item-num, .perk-card-item .perk-item-label { justify-content: flex-start; }
-  .perk-card-item .perk-item-label { color: #F5C518; }
+  .perk-card-item .perk-item-num { justify-content: flex-start; }
   .perk-card-item .perk-item-cond { text-align: left; margin: 4px 0 0; white-space: nowrap; }
   .perk-card-stack { gap: 10px; padding: 14px 20px; justify-content: center; }
   .perk-stack-row { display: flex; align-items: center; gap: 10px; }
@@ -617,7 +611,7 @@
 
     <div class="perk-section">
       <div class="perk-heading-row">
-        <p class="perk-heading-text">さらに併用できる<strong>3</strong>つの特典</p>
+        <p class="perk-heading-text">さらに<strong>!</strong>併用できる特典</p>
       </div>
       <div class="perk-formula">
         <div class="perk-item perk-item-sale">
@@ -645,8 +639,7 @@
         <span class="perk-plus">+</span>
         <div class="perk-item perk-card-item">
           <div class="perk-item-topslot"><div class="perk-card-icon perk-card-icon-outline"><img src="イメージ画像/glasses-icon.svg" alt="2本目" style="width:60%; height:60%; filter: brightness(0);"></div></div>
-          <p class="perk-item-num">10<span class="unit-sm">%</span></p>
-          <p class="perk-item-label">OFF</p>
+          <p class="perk-item-num">10<span class="unit-sm">%OFF</span></p>
           <p class="perk-item-cond">2本目同時購入で<br>(お安いほうに適用)</p>
         </div>
       </div>
