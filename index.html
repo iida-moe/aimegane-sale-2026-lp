@@ -266,10 +266,19 @@
   }
   .perk-card-icon-outline { background: #fff; border: 1.5px solid #111; }
   .perk-icon-plain { width: 40px; height: 40px; flex-shrink: 0; }
-  .perk-item-topslot-multi { gap: 8px; }
   .perk-card-item .perk-item-num, .perk-card-item .perk-item-label { justify-content: flex-start; }
   .perk-card-item .perk-item-label { color: #F5C518; }
   .perk-card-item .perk-item-cond { text-align: left; margin: 4px 0 0; white-space: nowrap; }
+  .perk-card-stack { gap: 10px; padding: 14px 20px; justify-content: center; }
+  .perk-stack-row { display: flex; align-items: center; gap: 10px; }
+  .perk-stack-text { display: flex; flex-direction: column; }
+  .perk-stack-label { margin: 0; font-size: 12px; font-weight: 700; color: #111; white-space: nowrap; }
+  .perk-stack-price {
+    margin: 0; font-family: 'Bebas Neue', sans-serif; color: #F5C518;
+    font-size: clamp(24px, 2.8vw, 30px); line-height: 1.1;
+    -webkit-text-stroke: 1px #111; paint-order: stroke fill;
+  }
+  .perk-stack-price .unit-sm { font-family: 'Noto Sans JP', sans-serif; font-size: 0.5em; margin-left: 2px; font-weight: 700; -webkit-text-stroke: 0; }
 
   /* ══════════════ FV より下のセクション ══════════════ */
   .section { padding: 64px clamp(20px, 5vw, 80px); }
@@ -617,14 +626,21 @@
           <p class="perk-item-cond">メガネとサングラス</p>
         </div>
         <span class="perk-plus">+</span>
-        <div class="perk-item perk-card-item">
-          <div class="perk-item-topslot perk-item-topslot-multi">
-            <img class="perk-icon-plain" src="イメージ画像/icons8-line.svg" alt="LINE">
+        <div class="perk-item perk-card-item perk-card-stack">
+          <div class="perk-stack-row">
             <div class="perk-card-icon perk-card-icon-outline"><img src="イメージ画像/prescription-icon.svg" alt="処方箋" style="width:58%; height:58%; filter: brightness(0);"></div>
+            <div class="perk-stack-text">
+              <p class="perk-stack-label">処方箋持参で</p>
+              <p class="perk-stack-price">1,100<span class="unit-sm">円OFF</span></p>
+            </div>
           </div>
-          <p class="perk-item-num">1,100<span class="unit-sm">円</span></p>
-          <p class="perk-item-label">OFF</p>
-          <p class="perk-item-cond">LINE友だち登録<br>または処方箋持参で</p>
+          <div class="perk-stack-row">
+            <img class="perk-icon-plain" src="イメージ画像/icons8-line.svg" alt="LINE">
+            <div class="perk-stack-text">
+              <p class="perk-stack-label">LINE友だち登録で</p>
+              <p class="perk-stack-price">1,100<span class="unit-sm">円OFF</span></p>
+            </div>
+          </div>
         </div>
         <span class="perk-plus">+</span>
         <div class="perk-item perk-card-item">
