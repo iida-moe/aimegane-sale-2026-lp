@@ -291,10 +291,12 @@
   .price-card-photo-wrap {
     position: relative;
     flex: 0 0 clamp(220px, 32vw, 300px); height: clamp(120px, 16vw, 155px);
+    border-radius: 10px; overflow: hidden;
   }
   .price-card-photo {
     width: 100%; height: 100%; object-fit: contain;
-    border-radius: 10px; background: #F3EFE6;
+    background: #F3EFE6;
+    transform: scale(1.2);
   }
   .price-card-photo-note {
     position: absolute; bottom: 6px; right: 8px;
