@@ -204,6 +204,12 @@
 
   .section-white { background: #ffffff; }
   .section-cream { background: #FDF5E6; }
+  .section-divider { background: #fff; padding: 14px 0; text-align: center; }
+  .section-divider-triangle {
+    display: inline-block; width: 0; height: 0;
+    border-left: 32px solid transparent; border-right: 32px solid transparent;
+    border-top: 24px solid #999;
+  }
   .section-red-frame { background: #E30212; }
   .sale-frame-inner {
     background: #fff; max-width: 1100px; margin: 0 auto;
@@ -245,12 +251,14 @@
     .ai-mirror-band-text { text-align: center; }
     .ai-mirror-band-photo-wrap { flex-basis: auto; }
   }
-  .lens-standard-band { border-color: #F5C518; }
-  .lens-standard-photo {
-    width: 100%; height: clamp(180px, 22vw, 260px);
-    background: linear-gradient(135deg, #fdf0f0, #fff6e0);
-    border-radius: 10px;
+  .lens-standard-band {
+    max-width: 1000px; margin: 0 auto 40px;
+    background: #fff; border: 2px solid #F5C518;
+    padding: clamp(14px, 2vw, 20px) clamp(20px, 4vw, 36px);
   }
+  .lens-standard-inner { width: 88%; max-width: 780px; margin: 0 auto; }
+  .lens-standard-band h3 { font-size: clamp(21px, 2.6vw, 27px); font-weight: 900; color: #E30212; line-height: 1.4; margin: 0 0 10px; text-align: left; }
+  .lens-standard-diagram { display: block; width: 100%; height: auto; }
   .glasses-tag-illust { display: block; width: min(220px, 50vw); height: auto; margin: 12px auto; }
   .section-title-sm {
     font-size: clamp(24px, 3vw, 30px); font-weight: 900; color: #111;
@@ -271,33 +279,46 @@
 
   /* 価格例 */
   .price-list {
-    max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;
+    max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;
   }
   .price-card {
     position: relative;
     display: flex; align-items: center; gap: 24px;
-    background: #fff; border: 2px solid #f0d6d6; border-radius: 16px;
-    padding: 20px 24px;
+    background: #fff;
+    padding: 36px 24px;
     overflow: hidden;
   }
-  .price-card-photo {
-    flex: 0 0 clamp(140px, 22vw, 220px); height: clamp(110px, 17vw, 160px);
-    background: linear-gradient(135deg, #fdf0f0, #fff6e0);
-    border-radius: 10px;
+  .price-card-photo-wrap {
+    position: relative;
+    flex: 0 0 clamp(220px, 32vw, 300px); height: clamp(120px, 16vw, 155px);
   }
-  .price-card-body { flex: 1; min-width: 0; }
-  .price-card-name { font-size: 17px; font-weight: 900; color: #111; margin: 0 0 10px; }
-  .price-card-prices { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
-  .price-card-before { font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif; font-size: 15px; color: #999; text-decoration: line-through; text-decoration-color: #bbb; }
-  .price-card-before small, .price-card-after small { font-size: 12px; font-weight: 700; margin-left: 2px; }
-  .price-card-arrow { color: #F5C518; font-size: 18px; }
+  .price-card-photo {
+    width: 100%; height: 100%; object-fit: contain;
+    border-radius: 10px; background: #F3EFE6;
+  }
+  .price-card-photo-note {
+    position: absolute; bottom: 6px; right: 8px;
+    font-size: 10px; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  }
+  .price-card-body { flex: 1; min-width: 0; text-align: left; }
+  .price-card-title-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+  .price-card-name { font-size: 26px; font-weight: 900; color: #111; margin: 0 0 14px; text-align: left; }
+  .price-card-title-row .price-card-name { margin: 0; }
+  .price-card-prices { display: flex; align-items: center; justify-content: flex-start; flex-wrap: wrap; gap: 14px; margin-bottom: 14px; }
+  .price-card-before { font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif; font-size: 52px; line-height: 1; color: #999; text-decoration: line-through; text-decoration-color: #bbb; }
+  .price-card-after small { font-size: 15px; font-weight: 700; margin-left: 2px; }
+  .price-card-before-unit {
+    font-size: 15px; font-weight: 700; color: #999; margin-left: 2px;
+    text-decoration: none;
+  }
+  .price-card-arrow { color: #F5C518; font-size: 22px; }
   .price-card-after {
     font-family: 'Bebas Neue', sans-serif;
-    color: #E30212; font-size: 34px; line-height: 1;
+    color: #E30212; font-size: 52px; line-height: 1;
   }
   .price-card-tag {
     display: inline-block; background: #F5C518; color: #111;
-    font-weight: 900; font-size: 12px; padding: 4px 12px; border-radius: 999px;
+    font-weight: 900; font-size: 14px; padding: 6px 16px; border-radius: 999px;
   }
   .price-card-corner {
     position: absolute; top: 10px; right: -66px; width: 240px;
@@ -309,8 +330,14 @@
   }
   .price-card-corner .corner-num { font-size: 46px; }
   .price-card-corner .corner-pct { font-size: 24px; }
-  @media (max-width: 480px) {
-    .price-card { flex-wrap: wrap; }
+  @media (max-width: 560px) {
+    .price-card { flex-direction: column; align-items: stretch; padding: 24px 20px; gap: 16px; }
+    .price-card-photo-wrap { flex-basis: auto; width: 100%; height: 180px; }
+    .price-card-before, .price-card-after { font-size: 32px; }
+    .price-card-name { font-size: 21px; }
+    .price-card-corner { width: 160px; top: 6px; right: -46px; padding: 8px 0; }
+    .price-card-corner .corner-num { font-size: 30px; }
+    .price-card-corner .corner-pct { font-size: 16px; }
   }
 
   /* レンズアップグレード紹介 */
@@ -319,14 +346,23 @@
     font-size: 14px; line-height: 1.9; color: #444;
   }
   .lens-list {
-    max-width: 980px; margin: 0 auto; display: flex; flex-wrap: wrap;
-    justify-content: center; gap: 20px;
+    max-width: 980px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 20px;
   }
+  .lens-list-secondary {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;
+  }
+  .lens-list-secondary .lens-card { flex: 1 1 260px; max-width: 460px; }
   .lens-card {
-    flex: 1 1 260px; max-width: 300px;
     background: #fff; border-radius: 14px; padding: 26px 20px;
     box-shadow: 0 4px 14px rgba(0,0,0,0.06);
   }
+  .lens-card-featured {
+    padding: clamp(28px, 4vw, 40px) clamp(24px, 5vw, 48px);
+  }
+  .lens-card-featured .lens-card-name { font-size: 22px; }
+  .lens-card-featured .lens-card-catch { font-size: 19px; }
+  .lens-card-featured .lens-card-desc { font-size: 15px; max-width: 640px; }
   .lens-card-name { font-size: 17px; font-weight: 900; color: #111; margin: 0 0 8px; }
   .lens-card-name span { color: #E30212; }
   .lens-card-catch { font-size: 15px; font-weight: 900; color: #E30212; line-height: 1.5; margin: 0 0 8px; }
@@ -336,7 +372,7 @@
   /* セール概要 */
   .overview-body {
     max-width: 900px; margin: 0 auto 40px; text-align: center;
-    font-size: clamp(18px, 2.2vw, 22px); font-weight: 700; line-height: 1.8; color: #111;
+    font-size: clamp(16px, 2vw, 19px); font-weight: 500; line-height: 1.8; color: #111;
     word-break: keep-all; overflow-wrap: break-word;
   }
   .overview-period {
@@ -477,7 +513,16 @@
 
   /* フッター */
   .footer { background: #111; color: #ccc; text-align: center; padding: 32px 20px; font-size: 13px; }
-  .footer img { height: 22px; margin-bottom: 12px; filter: brightness(0) invert(1); }
+  .footer-top {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+    gap: clamp(16px, 4vw, 40px); margin-bottom: 20px;
+  }
+  .footer-logo { height: 22px; filter: brightness(0) invert(1); }
+  .footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(12px, 3vw, 28px); }
+  .footer-nav a { color: #ccc; text-decoration: none; }
+  .footer-nav a:hover { color: #fff; text-decoration: underline; }
+  .footer-company { margin: 0 0 10px; color: #aaa; }
+  .footer-legal { margin: 0; color: #777; font-size: 11px; line-height: 1.7; max-width: 900px; margin-left: auto; margin-right: auto; }
 </style>
 </head>
 <body>
@@ -513,8 +558,8 @@
 
     <div class="ai-mirror-band">
       <div class="ai-mirror-band-text">
-        <h3>AIフィッティングミラーで<br>似合う一本を判定</h3>
-        <p class="ai-mirror-band-subtitle">もう迷わない、すぐ見つかる。</p>
+        <h3>もう迷わない、すぐ見つかる。</h3>
+        <p class="ai-mirror-band-subtitle">AIフィッティングミラーで似合う一本を判定</p>
         <p>店頭のAI搭載ミラーが、フレームの似合い度を測定。客観的なデータを見ながら、自分に似合う一本を無料で診断できます。</p>
         <p class="ai-mirror-band-cta">&#9654; 全国のアイメガネ店舗で無料体験できます</p>
       </div>
@@ -523,13 +568,10 @@
       </div>
     </div>
 
-    <div class="ai-mirror-band lens-standard-band">
-      <div class="ai-mirror-band-photo-wrap lens-standard-photo-wrap">
-        <div class="lens-standard-photo"></div>
-      </div>
-      <div class="ai-mirror-band-text">
-        <h3>標準でもこれだけ充実</h3>
-        <p>アイメガネの標準レンズは、薄型の「1.60非球面レンズ」。汚れが付きにくいコーティングとUVカットも標準で付いています。度数のタイプも遠近・中近・遠中近・近々・アシストレンズから選べます。特殊なレンズは度数によって見え方が異なるため、無料相談でスタッフにご相談いただけます。</p>
+    <div class="lens-standard-band">
+      <h3>標準セットでこんなに充実!</h3>
+      <div class="lens-standard-inner">
+        <img class="lens-standard-diagram" src="イメージ画像/standard-lens.png" alt="UVカット・汚れ防止・1.60非球面。スタイルに合わせて選べるレンズ(遠近・遠中近・中近・近々・アシスト)">
       </div>
     </div>
 
@@ -547,55 +589,67 @@
     <div class="price-list">
       <div class="price-card">
         <div class="price-card-corner"><span class="corner-num">30</span><span class="corner-pct">%OFF</span></div>
-        <div class="price-card-photo"></div>
+        <div class="price-card-photo-wrap">
+          <img class="price-card-photo" src="イメージ画像/price-glasses.png" alt="メガネのイメージ">
+          <span class="price-card-photo-note">※画像はイメージです</span>
+        </div>
         <div class="price-card-body">
-          <p class="price-card-name">メガネ</p>
+          <div class="price-card-title-row">
+            <p class="price-card-name">メガネ</p>
+            <span class="price-card-tag">選べるレンズ付</span>
+          </div>
           <div class="price-card-prices">
-            <span class="price-card-before">&yen;29,700<small>(税込)</small></span>
+            <span class="price-card-before">&yen;29,700</span><small class="price-card-before-unit">(税込)</small>
             <span class="price-card-arrow">&#9654;</span>
             <span class="price-card-after">&yen;20,790<small>(税込)</small></span>
           </div>
-          <span class="price-card-tag">選べるレンズ付</span>
-          <p style="margin:8px 0 0; font-size:11px; color:#999;">※店舗により取り扱いが異なります</p>
+          <p style="margin:10px 0 0; font-size:13px; color:#999;">※店舗により取り扱いが異なります</p>
         </div>
       </div>
       <div class="price-card">
         <div class="price-card-corner"><span class="corner-num">30</span><span class="corner-pct">%OFF</span></div>
-        <div class="price-card-photo"></div>
+        <div class="price-card-photo-wrap">
+          <img class="price-card-photo" src="イメージ画像/price-sunglasses.png" alt="サングラスのイメージ">
+          <span class="price-card-photo-note">※画像はイメージです</span>
+        </div>
         <div class="price-card-body">
-          <p class="price-card-name">サングラス(仮)</p>
+          <p class="price-card-name">サングラス</p>
           <div class="price-card-prices">
-            <span class="price-card-before">&yen;22,000<small>(税込)</small></span>
+            <span class="price-card-before">&yen;22,000</span><small class="price-card-before-unit">(税込)</small>
             <span class="price-card-arrow">&#9654;</span>
             <span class="price-card-after">&yen;15,400<small>(税込)</small></span>
           </div>
+          <p style="margin:10px 0 0; font-size:13px; color:#999;">※店舗により取り扱いが異なります</p>
         </div>
       </div>
     </div>
   </section>
 
+  <div class="section-divider"><div class="section-divider-triangle"></div></div>
+
   <!-- ②-2 レンズアップグレード紹介(Paris Miki LP参考・仮の内容) -->
   <section class="section section-white">
-    <h2 class="section-title">この機会に<span>レンズもグレードアップ</span></h2>
-    <div class="draft-note">※レンズの種類・価格はすべて仮の内容です。実際のラインナップが決まり次第差し替えます。</div>
+    <h2 class="section-title">あなたの毎日に<span>、機能をプラス</span></h2>
     <div class="lens-list">
-      <div class="lens-card">
+      <div class="lens-card lens-card-featured">
         <p class="lens-card-name"><span>調光</span>レンズ</p>
         <p class="lens-card-catch">紫外線で色が変わる、驚きの一本二役。</p>
         <p class="lens-card-desc">屋外では自然にサングラスに、屋内では普段のメガネに。1本で普段用とサングラス代わりの2役。</p>
         <p class="lens-card-price">+&yen;11,000〜(仮)</p>
       </div>
-      <div class="lens-card">
-        <p class="lens-card-name"><span>偏光</span>レンズ</p>
-        <p class="lens-card-catch">まぶしさなんて、もう気にしない。</p>
-        <p class="lens-card-desc">反射光によるまぶしさをカットし、運転やアウトドアもくっきりクリアに。</p>
-        <p class="lens-card-price">+&yen;8,800〜(仮)</p>
-      </div>
-      <div class="lens-card">
-        <p class="lens-card-name"><span>HEV</span>カットレンズ</p>
-        <p class="lens-card-catch">目に負担をかける光から、しっかりガード。</p>
-        <p class="lens-card-desc">スマホ・PC画面や太陽光に含まれるHEV(紫外線に近い青色光)を軽減し、目の負担をやわらげます。</p>
-        <p class="lens-card-price">+&yen;5,500〜(仮)</p>
+      <div class="lens-list-secondary">
+        <div class="lens-card">
+          <p class="lens-card-name"><span>偏光</span>レンズ</p>
+          <p class="lens-card-catch">まぶしさなんて、もう気にしない。</p>
+          <p class="lens-card-desc">反射光によるまぶしさをカットし、運転やアウトドアもくっきりクリアに。</p>
+          <p class="lens-card-price">+&yen;8,800〜(仮)</p>
+        </div>
+        <div class="lens-card">
+          <p class="lens-card-name"><span>HEV</span>カットレンズ</p>
+          <p class="lens-card-catch">目に負担をかける光から、しっかりガード。</p>
+          <p class="lens-card-desc">スマホ・PC画面や太陽光に含まれるHEV(紫外線に近い青色光)を軽減し、目の負担をやわらげます。</p>
+          <p class="lens-card-price">+&yen;5,500〜(仮)</p>
+        </div>
       </div>
     </div>
   </section>
@@ -662,8 +716,17 @@
 
   <!-- ⑦ フッター -->
   <footer class="footer">
-    <img src="aimegane_logo.jpg" alt="アイメガネ">
-    <p>&copy; 2026 AIMEGANE Co., Ltd.</p>
+    <div class="footer-top">
+      <img class="footer-logo" src="イメージ画像/aimegane_logo_transparent.png" alt="アイメガネ">
+      <nav class="footer-nav">
+        <a href="https://www.aimegane.com/">アイメガネ公式サイト</a>
+        <a href="https://www.aimegane.com/onlineshop/">アイメガネオンラインショップ</a>
+        <a href="https://www.aimegane.com/privacy/">プライバシーポリシー</a>
+        <a href="https://www.aimegane.com/contact/">お問い合わせ</a>
+      </nav>
+    </div>
+    <p class="footer-company">アイジャパン株式会社　〒331-0812 埼玉県さいたま市北区宮原町1丁目505番地1　お客様相談室:0120-21-0110　&copy; 2026 アイジャパン株式会社</p>
+    <p class="footer-legal">MiYOSMART&reg;はHOYA Corporationの登録商標です。Essilor&reg;、Stellest&reg;はEssilorLuxottica系列会社の登録商標です。本ページの製品情報は各社およびアイメガネの公式情報に基づいています。</p>
   </footer>
 
 <script>
@@ -898,10 +961,11 @@ document.getElementById('zip2').addEventListener('keydown',function(e){if(e.key=
 
 showInitialShops();
 
-// フローティングCTA: FVを過ぎたら右上→右下になめらかに移動
+// フローティングCTA: FVを過ぎたら右上→右下になめらかに移動。店舗検索セクションでは予約ボタンと重なるため非表示にする
 (function(){
   var cta = document.querySelector('.floating-cta');
   var fv = document.querySelector('.fv');
+  var shopSection = document.getElementById('shop-search');
   if(!cta || !fv) return;
   var topPos = getComputedStyle(cta).top;
   var margin = 24;
@@ -911,6 +975,11 @@ showInitialShops();
       cta.style.top = (window.innerHeight - cta.offsetHeight - margin) + 'px';
     } else {
       cta.style.top = topPos;
+    }
+    if(shopSection){
+      var r = shopSection.getBoundingClientRect();
+      var overlapsShop = r.top < window.innerHeight && r.bottom > 0;
+      cta.style.display = overlapsShop ? 'none' : '';
     }
   }
   window.addEventListener('scroll', updateCtaPosition);
