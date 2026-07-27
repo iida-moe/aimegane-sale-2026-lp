@@ -197,6 +197,11 @@
   }
   .perk-inner { max-width: 900px; margin: 0 auto; }
   .perk-benefits-image { display: block; width: 100%; height: auto; }
+  .only-mobile { display: none !important; }
+  @media (max-width: 640px) {
+    .only-mobile { display: block !important; }
+    .only-desktop { display: none !important; }
+  }
 
   /* ══════════════ FV より下のセクション ══════════════ */
   .section { padding: 64px clamp(20px, 5vw, 80px); }
@@ -603,13 +608,15 @@
     <div class="lens-standard-band">
       <h3>標準セットでこんなに充実!</h3>
       <div class="lens-standard-inner">
-        <img class="lens-standard-diagram" src="イメージ画像/standard-lens.png" alt="UVカット・汚れ防止・1.60非球面。スタイルに合わせて選べるレンズ(遠近・遠中近・中近・近々・アシスト)">
+        <img class="lens-standard-diagram only-desktop" src="イメージ画像/standard-lens.png" alt="UVカット・汚れ防止・1.60非球面。スタイルに合わせて選べるレンズ(遠近・遠中近・中近・近々・アシスト)">
+        <img class="lens-standard-diagram only-mobile" src="イメージ画像/スマホ用標準.png" alt="UVカット・汚れ防止・1.60非球面。スタイルに合わせて選べるレンズ(遠近・遠中近・中近・近々・アシスト)">
       </div>
     </div>
 
     <div class="perk-section">
       <div class="perk-inner">
-        <img class="perk-benefits-image" src="イメージ画像/perk-benefits.png" alt="さらに併用できるお得な特典! THE SALE MAX30%OFF(メガネ&サングラス)+LINEお友だち登録で1,100円OFF・処方箋持参で1,100円OFF+2本目同時購入で10%OFF(価格の低い方に適用)">
+        <img class="perk-benefits-image only-desktop" src="イメージ画像/perk-benefits.png" alt="さらに併用できるお得な特典! THE SALE MAX30%OFF(メガネ&サングラス)+LINEお友だち登録で1,100円OFF・処方箋持参で1,100円OFF+2本目同時購入で10%OFF(価格の低い方に適用)">
+        <img class="perk-benefits-image only-mobile" src="イメージ画像/sumaho.png" alt="さらに併用できるお得な特典! THE SALE MAX30%OFF(メガネ&サングラス)+LINEお友だち登録で1,100円OFF・処方箋持参で1,100円OFF+2本目同時購入で10%OFF(価格の低い方に適用)">
       </div>
     </div>
    </div>
@@ -622,7 +629,7 @@
       <div class="price-card">
         <div class="price-card-corner"><span class="corner-num">30</span><span class="corner-pct">%OFF</span></div>
         <div class="price-card-photo-wrap">
-          <img class="price-card-photo" src="イメージ画像/price-glasses.png" alt="メガネのイメージ">
+          <img class="price-card-photo" src="イメージ画像/price-megane.png" alt="メガネのイメージ">
           <span class="price-card-photo-note">※画像はイメージです</span>
         </div>
         <div class="price-card-body">
@@ -641,7 +648,7 @@
       <div class="price-card">
         <div class="price-card-corner"><span class="corner-num">30</span><span class="corner-pct">%OFF</span></div>
         <div class="price-card-photo-wrap">
-          <img class="price-card-photo" src="イメージ画像/price-sunglasses.png" alt="サングラスのイメージ">
+          <img class="price-card-photo" src="イメージ画像/price-SG.png" alt="サングラスのイメージ">
           <span class="price-card-photo-note">※画像はイメージです</span>
         </div>
         <div class="price-card-body">
@@ -672,11 +679,11 @@
           <div class="lens-card-v2-compare">
             <div class="lens-card-v2-compare-item">
               <span class="lens-card-v2-compare-label">屋内(クリア)</span>
-              <img class="lens-card-v2-compare-img" src="イメージ画像/lens-photic-indoor.png" alt="屋内でクリアなレンズの様子">
+              <img class="lens-card-v2-compare-img" src="イメージ画像/lens-photic-glasses-indoor.png" alt="屋内でクリアなレンズの様子">
             </div>
             <div class="lens-card-v2-compare-item">
               <span class="lens-card-v2-compare-label">屋外(色が変化)</span>
-              <img class="lens-card-v2-compare-img" src="イメージ画像/lens-photic-outdoor.png" alt="屋外で色が変化したレンズの様子">
+              <img class="lens-card-v2-compare-img" src="イメージ画像/lens-photic-glasses-outdoor.png" alt="屋外で色が変化したレンズの様子">
             </div>
           </div>
         </div>
