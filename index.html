@@ -369,8 +369,8 @@
     object-fit: cover; border-radius: 12px;
   }
   .lens-card-featured-text { flex: 1; min-width: 0; }
-  .lens-card-featured .lens-card-name { font-size: 22px; }
-  .lens-card-featured .lens-card-catch { font-size: clamp(24px, 3.4vw, 34px); }
+  .lens-card-featured .lens-card-name { font-size: clamp(30px, 4vw, 40px); }
+  .lens-card-featured .lens-card-catch { font-size: clamp(18px, 2.4vw, 24px); }
   .lens-card-featured .lens-card-desc { font-size: 15px; max-width: 640px; }
   .lens-card-photo {
     width: 100%; height: clamp(180px, 20vw, 230px); object-fit: cover;
@@ -381,9 +381,9 @@
     .lens-card-featured { flex-direction: column; align-items: stretch; }
     .lens-card-featured-photos img { width: 100%; height: clamp(120px, 40vw, 180px); }
   }
-  .lens-card-name { font-size: 17px; font-weight: 900; color: #111; margin: 0 0 8px; }
+  .lens-card-name { font-size: clamp(26px, 3.4vw, 34px); font-weight: 900; color: #111; margin: 0 0 8px; }
   .lens-card-name span { color: #E30212; }
-  .lens-card-catch { font-size: clamp(22px, 3.2vw, 32px); font-weight: 900; color: #E30212; line-height: 1.5; margin: 0 0 8px; }
+  .lens-card-catch { font-size: clamp(16px, 2.2vw, 20px); font-weight: 900; color: #111; line-height: 1.5; margin: 0 0 8px; }
   .lens-card-desc { font-size: 14px; line-height: 1.7; color: #444; margin: 0 0 12px; }
   .lens-card-price { font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif; font-size: 13px; font-weight: 700; color: #E30212; }
 
@@ -401,10 +401,17 @@
 
   /* よくある質問 */
   .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
-  .faq-item { background: #fff; border-radius: 12px; padding: 20px 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-  .faq-q { display: flex; gap: 12px; font-weight: 700; color: #111; font-size: 16px; }
-  .faq-q span { color: #E30212; }
-  .faq-a { display: flex; gap: 12px; margin-top: 10px; font-size: 15px; color: #444; line-height: 1.7; }
+  .faq-item { background: #fff; border-radius: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .faq-q {
+    display: flex; align-items: center; gap: 12px; font-weight: 700; color: #111; font-size: 16px;
+    padding: 20px 24px; cursor: pointer; list-style: none;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q-label { color: #E30212; }
+  .faq-q-text { flex: 1; color: #111; }
+  .faq-chevron { color: #E30212; font-size: 14px; transition: transform .2s; flex-shrink: 0; }
+  .faq-item[open] .faq-chevron { transform: rotate(180deg); }
+  .faq-a { display: flex; gap: 12px; padding: 0 24px 20px; font-size: 15px; color: #444; line-height: 1.7; }
   .faq-a span { color: #F5C518; font-weight: 900; }
 
   /* 店舗検索(GW LP版の仕組みを移植) */
@@ -698,18 +705,18 @@
     <h2 class="section-title">よくある<span>質問</span></h2>
     <div class="draft-note">※このセクションの内容はまだ仮の下書きです。実際の質問・回答が決まったら差し替えます。</div>
     <div class="faq-list">
-      <div class="faq-item">
-        <div class="faq-q"><span>Q.</span>すべての店舗が対象ですか？</div>
+      <details class="faq-item">
+        <summary class="faq-q"><span class="faq-q-label">Q.</span><span class="faq-q-text">すべての店舗が対象ですか？</span><span class="faq-chevron">▾</span></summary>
         <div class="faq-a"><span>A.</span>一部対象外の店舗がございます(詳細は店舗情報をご確認ください)。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span>Q.</span>割引の特典は併用できますか？</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><span class="faq-q-label">Q.</span><span class="faq-q-text">割引の特典は併用できますか？</span><span class="faq-chevron">▾</span></summary>
         <div class="faq-a"><span>A.</span>2本目割引・クーポン・LINE登録・処方箋持参の特典は、それぞれ併用が可能です(詳細は店頭にてご確認ください)。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span>Q.</span>予約なしでも来店できますか？</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><span class="faq-q-label">Q.</span><span class="faq-q-text">予約なしでも来店できますか？</span><span class="faq-chevron">▾</span></summary>
         <div class="faq-a"><span>A.</span>ご予約なしでもご来店いただけますが、スムーズにご案内するため事前のご予約をおすすめしています。</div>
-      </div>
+      </details>
     </div>
   </section>
 
