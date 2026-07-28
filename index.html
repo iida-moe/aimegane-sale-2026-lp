@@ -378,6 +378,10 @@
   }
   .section-title span { color: #111; }
   .overview-title-tight { margin-bottom: 4px; }
+  @media (max-width: 640px) {
+    .overview-title-brand { display: none; }
+    .glasses-tag-illust { margin: 0 auto; }
+  }
 
   /* 価格例 */
   .price-list {
@@ -521,6 +525,10 @@
     max-width: 900px; margin: 0 auto 40px; text-align: center;
     font-size: clamp(16px, 2vw, 19px); font-weight: 500; line-height: 1.8; color: #111;
     word-break: keep-all; overflow-wrap: break-word;
+  }
+  .overview-highlight {
+    background: linear-gradient(transparent 80%, #FFDD00 80%, #FFDD00 90%, transparent 90%);
+    font-weight: 700;
   }
   .overview-period {
     display: inline-block; margin-top: 20px; padding: 10px 28px;
@@ -742,14 +750,12 @@
   <!-- ① アイメガネ THE SALEとは -->
   <section class="section section-red-frame">
    <div class="sale-frame-inner">
-    <h2 class="section-title overview-title-tight">アイメガネ THE SALE<span>とは</span></h2>
+    <h2 class="section-title overview-title-tight"><span class="overview-title-brand">アイメガネ </span>THE SALE<span>とは</span></h2>
 
     <img class="glasses-tag-illust" src="イメージ画像/megane-sale-tag.png" alt="メガネにSALEタグが付いているイラスト">
 
     <div class="overview-body">
-      対象のメガネ・サングラスが最大30%OFFになる、夏から秋のお得なチャンス！
-      <br>
-      この機会に、新しい一本と出会ってみませんか？
+      対象のメガネ・サングラスが<br class="only-mobile"><span class="overview-highlight">最大30%OFF</span>になる、<br class="only-mobile">夏から秋のお得なチャンス&#65281;
     </div>
 
     <div class="ai-mirror-band">
