@@ -222,18 +222,18 @@
     border-radius: 24px;
   }
   .fit-band-list { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
-  .fit-band { display: flex; align-items: center; gap: clamp(24px, 4vw, 48px); }
+  .fit-band { display: flex; align-items: stretch; background: #fff; border: 2px solid #F5C518; overflow: hidden; }
   .fit-band-reverse { flex-direction: row-reverse; }
-  .fit-band-photo { flex: 0 0 42%; }
-  .fit-band-photo img { display: block; width: 100%; height: auto; border-radius: 12px; }
+  .fit-band-photo { flex: 0 0 42%; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .fit-band-photo img { display: block; width: 100%; height: auto; max-height: 280px; object-fit: cover; border-radius: 8px; }
   .fit-band-photo-ph {
-    width: 100%; aspect-ratio: 4/3; border-radius: 12px;
+    width: 100%; aspect-ratio: 4/3; border-radius: 8px;
     background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 100%);
     display: flex; align-items: center; justify-content: center;
     color: #999; font-size: 14px; letter-spacing: 0.05em;
   }
-  .fit-band-text { flex: 1; min-width: 0; }
-  .fit-band-text h3 { font-size: clamp(20px, 2.4vw, 26px); font-weight: 900; color: #111; line-height: 1.4; margin: 0 0 12px; }
+  .fit-band-text { flex: 1; min-width: 0; padding: clamp(24px, 4vw, 40px); display: flex; flex-direction: column; justify-content: center; }
+  .fit-band-text h3 { font-size: clamp(20px, 2.4vw, 25px); font-weight: 900; color: #E30212; line-height: 1.4; margin: 0 0 10px; }
   .fit-band-text p { font-size: 14px; line-height: 1.9; color: #444; margin: 0; }
   @media (max-width: 720px) {
     .fit-band, .fit-band-reverse { flex-direction: column; }
