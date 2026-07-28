@@ -9,6 +9,32 @@
   html, body { height: 100%; }
   body { font-family: 'Noto Sans JP', sans-serif; overflow-x: hidden; background: #FBF6EA; }
 
+  /* ── 社内レビュー用パスワードゲート(簡易) ── */
+  .preview-gate {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #FBF6EA;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .preview-gate-box {
+    background: #fff; border: 2px solid #F5C518; border-radius: 12px;
+    padding: clamp(24px, 5vw, 40px); width: 100%; max-width: 340px;
+    text-align: center;
+  }
+  .preview-gate-title { font-weight: 900; font-size: 18px; color: #111; margin: 0 0 8px; }
+  .preview-gate-desc { font-size: 14px; color: #555; margin: 0 0 16px; }
+  .preview-gate-input {
+    width: 100%; box-sizing: border-box; font-size: 16px;
+    padding: 10px 12px; border: 1px solid #ccc; border-radius: 8px; margin: 0 0 12px;
+  }
+  .preview-gate-button {
+    width: 100%; font-size: 15px; font-weight: 700; color: #fff;
+    background: #E30212; border: none; border-radius: 8px; padding: 10px 12px;
+    cursor: pointer;
+  }
+  .preview-gate-error { color: #E30212; font-size: 13px; margin: 12px 0 0; }
+  body.preview-locked > *:not(.preview-gate) { display: none; }
+
   /* ── フローティングCTA(全ページ共通・右端に縦長で固定し、常に追尾する) ── */
   .floating-cta {
     position: fixed; right: 0;
@@ -263,11 +289,24 @@
     padding: clamp(24px, 4vw, 40px);
     display: flex; flex-direction: column; justify-content: center;
   }
+  .ai-mirror-band-label-vertical {
+    flex: 0 0 auto; width: clamp(36px, 4vw, 48px);
+    background: #F5C518; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ai-mirror-band-label-vertical span {
+    writing-mode: vertical-rl; text-orientation: mixed;
+    font-weight: 900; font-size: clamp(15px, 1.8vw, 18px); letter-spacing: 0.15em;
+    white-space: nowrap;
+  }
   .ai-mirror-band-text h3 { font-size: clamp(21px, 2.6vw, 27px); font-weight: 900; color: #E30212; line-height: 1.4; margin: 0 0 10px; }
   .ai-mirror-band-text p.ai-mirror-band-subtitle { font-size: 15px; font-weight: 700; color: #111; margin: 0 0 16px; }
   .ai-mirror-band-text p { font-size: 14px; line-height: 1.9; color: #444; margin: 0; }
   .ai-mirror-band-text p.ai-mirror-band-cta {
     margin-top: 16px; font-size: 14px; font-weight: 700; color: #E30212;
+  }
+  .ai-mirror-band-text p.ai-mirror-band-cta a {
+    color: inherit; text-decoration: underline;
   }
   .ai-mirror-band-photo-wrap {
     flex: 0 0 42%;
@@ -279,10 +318,24 @@
     .ai-mirror-band { flex-direction: column; }
     .ai-mirror-band-text { text-align: center; }
     .ai-mirror-band-photo-wrap { flex-basis: auto; }
+    .lens-standard-band { flex-direction: column; }
+    .lens-standard-band h3 { text-align: center; }
+    .ai-mirror-band-label-vertical {
+      width: auto; padding: 8px 0;
+    }
+    .ai-mirror-band-label-vertical span {
+      writing-mode: horizontal-tb;
+      letter-spacing: 0.1em;
+    }
   }
   .lens-standard-band {
     max-width: 1000px; margin: 0 auto 40px;
     background: #fff; border: 2px solid #F5C518;
+    display: flex; align-items: stretch;
+    overflow: hidden;
+  }
+  .lens-standard-content {
+    flex: 1; min-width: 0;
     padding: clamp(14px, 2vw, 20px) clamp(20px, 4vw, 36px);
   }
   .lens-standard-inner { width: 88%; max-width: 780px; margin: 0 auto; }
@@ -299,7 +352,7 @@
     text-align: center; margin: 0 0 40px;
   }
   .section-title span { color: #111; }
-  .overview-title-tight { margin-bottom: 4px; }
+  .overview-title-tight { margin-bottom: 4px; font-size: clamp(32px, 4.8vw, 50px); }
   .price-list-title { font-size: clamp(30px, 4.4vw, 46px); }
   .fit-title-lg { font-size: clamp(28px, 3.9vw, 40px); }
 
@@ -397,7 +450,7 @@
   /* レンズアップグレード紹介 */
   .lens-standard-note {
     max-width: 720px; margin: 0 auto 24px; text-align: center;
-    font-size: 14px; line-height: 1.9; color: #444;
+    font-size: clamp(13px, 1.6vw, 15px); line-height: 1.9; color: #444;
   }
   .lens-list {
     max-width: 1100px; margin: 0 auto;
@@ -621,7 +674,17 @@
   .footer-legal { margin: 0; color: #777; font-size: 11px; line-height: 1.7; max-width: 900px; margin-left: auto; margin-right: auto; }
 </style>
 </head>
-<body>
+<body class="preview-locked">
+
+  <div id="preview-gate" class="preview-gate">
+    <form id="preview-gate-form" class="preview-gate-box">
+      <p class="preview-gate-title">社内レビュー用プレビュー</p>
+      <p class="preview-gate-desc">パスワードを入力してください</p>
+      <input type="password" id="preview-gate-input" class="preview-gate-input" autocomplete="off">
+      <button type="submit" class="preview-gate-button">開く</button>
+      <p id="preview-gate-error" class="preview-gate-error" style="display:none;">パスワードが違います</p>
+    </form>
+  </div>
 
   <section class="fv">
     <img class="fv-text-graphic" src="イメージ画像/fv-text-graphic.png" alt="アイメガネ THE SALE メガネ&サングラス MAX30%OFF 2026.10.12(月)まで">
@@ -647,17 +710,18 @@
     <img class="glasses-tag-illust" src="イメージ画像/megane-sale-tag.png" alt="メガネにSALEタグが付いているイラスト">
 
     <div class="overview-body">
-      対象のメガネ・サングラスが最大30%OFFになる、年に一度のお得なチャンス！
+      対象のメガネ・サングラスが最大30%OFFになる、夏から秋のお得なチャンス！
       <br>
       この機会に、新しい一本と出会ってみませんか？
     </div>
 
     <div class="ai-mirror-band">
+      <div class="ai-mirror-band-label-vertical"><span>フレーム選び</span></div>
       <div class="ai-mirror-band-text">
         <h3>もう迷わない、すぐ見つかる。</h3>
         <p class="ai-mirror-band-subtitle">AIフィッティングミラーで似合う一本を判定</p>
         <p>店頭のAI搭載ミラーが、フレームの似合い度を測定。客観的なデータを見ながら、自分に似合う一本を無料で診断できます。</p>
-        <p class="ai-mirror-band-cta">&#9654; 全国のアイメガネ店舗で無料体験できます</p>
+        <p class="ai-mirror-band-cta"><a href="https://www.aimegane.com/booking-search/">&#9654; 全国のアイメガネ店舗で無料体験できます</a></p>
       </div>
       <div class="ai-mirror-band-photo-wrap">
         <img class="ai-mirror-band-photo" src="イメージ画像/aifittingmirror-cutout.png" alt="AIフィッティングミラーで顔を測定している様子">
@@ -665,10 +729,13 @@
     </div>
 
     <div class="lens-standard-band">
-      <h3>標準セットでこんなに充実!</h3>
-      <div class="lens-standard-inner">
-        <img class="lens-standard-diagram only-desktop" src="イメージ画像/standard-lens.png" alt="UVカット・汚れ防止・1.60非球面。スタイルに合わせて選べるレンズ(遠近・遠中近・中近・近々・アシスト)">
-        <img class="lens-standard-diagram only-mobile" src="イメージ画像/スマホ用標準.png" alt="UVカット・汚れ防止・1.60非球面。スタイルに合わせて選べるレンズ(遠近・遠中近・中近・近々・アシスト)">
+      <div class="ai-mirror-band-label-vertical"><span>レンズ選び</span></div>
+      <div class="lens-standard-content">
+        <h3>標準セットでこんなに充実!</h3>
+        <div class="lens-standard-inner">
+          <img class="lens-standard-diagram only-desktop" src="イメージ画像/standard-lens.png" alt="UVカット・汚れ防止・1.60非球面。スタイルに合わせて選べるレンズ(遠近・遠中近・中近・近々・アシスト)">
+          <img class="lens-standard-diagram only-mobile" src="イメージ画像/スマホ用標準.png" alt="UVカット・汚れ防止・1.60非球面。スタイルに合わせて選べるレンズ(遠近・遠中近・中近・近々・アシスト)">
+        </div>
       </div>
     </div>
 
@@ -744,6 +811,7 @@
   <!-- ②-2 レンズアップグレード紹介(Paris Miki LP参考・仮の内容) -->
   <section class="section section-white">
     <h2 class="section-title">あなたの毎日に<span>、機能をプラス</span></h2>
+    <p class="lens-standard-note">お得に選んだ一本を、レンズで自分だけの一本に。毎日の見え方や快適さは、レンズ次第で大きく変わります。</p>
     <div class="lens-list">
       <div class="lens-card-v2">
         <div class="lens-card-v2-photo"><img src="イメージ画像/lens-photic-outdoor.png" alt="屋外でサングラスのように色が変わった様子"></div>
@@ -902,6 +970,39 @@
     <p class="footer-company">アイジャパン株式会社　〒331-0812 埼玉県さいたま市北区宮原町1丁目505番地1　お客様相談室:0120-21-0110　&copy; 2026 アイジャパン株式会社</p>
     <p class="footer-legal">MiYOSMART&reg;はHOYA Corporationの登録商標です。Essilor&reg;、Stellest&reg;はEssilorLuxottica系列会社の登録商標です。本ページの製品情報は各社およびアイメガネの公式情報に基づいています。</p>
   </footer>
+
+<script>
+// 社内レビュー用パスワードゲート(簡易・本番公開時は削除すること)
+(function () {
+  var PASSWORD = 'THESALE2026';
+  var STORAGE_KEY = 'salepreview_unlocked';
+  var gate = document.getElementById('preview-gate');
+  var form = document.getElementById('preview-gate-form');
+  var input = document.getElementById('preview-gate-input');
+  var error = document.getElementById('preview-gate-error');
+
+  function unlock() {
+    document.body.classList.remove('preview-locked');
+    gate.style.display = 'none';
+  }
+
+  if (sessionStorage.getItem(STORAGE_KEY) === 'true') {
+    unlock();
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (input.value === PASSWORD) {
+      sessionStorage.setItem(STORAGE_KEY, 'true');
+      unlock();
+    } else {
+      error.style.display = 'block';
+      input.value = '';
+      input.focus();
+    }
+  });
+})();
+</script>
 
 <script>
 // 店舗検索(アイメガネ全店・公式サイトで確認済みの確定データ)
