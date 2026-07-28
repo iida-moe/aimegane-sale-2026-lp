@@ -9,21 +9,24 @@
   html, body { height: 100%; }
   body { font-family: 'Noto Sans JP', sans-serif; overflow-x: hidden; background: #FBF6EA; }
 
-  /* ── フローティングCTA(全ページ共通・最初は右上、スクロールしたら右下に固定) ── */
+  /* ── フローティングCTA(全ページ共通・右端に縦長で固定し、常に追尾する) ── */
   .floating-cta {
-    position: fixed; right: clamp(24px, 4vw, 48px);
-    top: clamp(60px, 10vh, 110px);
+    position: fixed; right: 0;
+    top: 50%; transform: translateY(-50%);
     z-index: 1000;
-    width: clamp(84px, 10vw, 108px); height: clamp(84px, 10vw, 108px);
-    border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    padding: clamp(16px, 2vh, 22px) clamp(8px, 1.2vw, 12px);
     background: #F5C518; color: #111;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
-    text-align: center; text-decoration: none;
-    font-weight: 900; font-size: clamp(12px, 1.4vw, 14px); line-height: 1.3;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-    transition: top 0.35s ease;
+    text-decoration: none;
+    border-radius: 12px 0 0 12px;
+    box-shadow: -4px 4px 16px rgba(0,0,0,0.3);
   }
-  .floating-cta-icon { width: 28%; height: auto; }
+  .floating-cta-icon { width: clamp(22px, 2.6vw, 28px); height: auto; }
+  .floating-cta-text {
+    writing-mode: vertical-rl; text-orientation: mixed;
+    font-weight: 900; font-size: clamp(13px, 1.5vw, 15px); letter-spacing: 0.15em; line-height: 1.5;
+    white-space: nowrap;
+  }
 
   /* ── FV(赤ブロック) チラシ実物に忠実な、1本につながる対角線構成 ── */
   .fv {
@@ -297,6 +300,7 @@
   }
   .section-title span { color: #111; }
   .overview-title-tight { margin-bottom: 4px; }
+  .price-list-title { font-size: clamp(30px, 4.4vw, 46px); }
   .fit-title-lg { font-size: clamp(28px, 3.9vw, 40px); }
 
   /* 価格例 */
@@ -307,61 +311,87 @@
     position: relative;
     display: flex; align-items: center; gap: 44px;
     background: #fff;
+    border: 2px solid #F5C518;
     padding: 36px 24px;
     overflow: hidden;
   }
+  .price-card-photo-col { flex: 0 0 clamp(300px, 42vw, 420px); display: flex; flex-direction: column; gap: 6px; }
   .price-card-photo-wrap {
     position: relative;
-    flex: 0 0 clamp(300px, 42vw, 420px); height: clamp(150px, 20vw, 195px);
+    height: clamp(150px, 20vw, 195px);
     border-radius: 10px; overflow: hidden;
   }
   .price-card-photo {
     width: 100%; height: 100%; object-fit: contain;
     background: #F3EFE6;
-    transform: scale(1.2);
+    transform: scale(1.5);
   }
   .price-card-photo-note {
     position: absolute; bottom: 6px; right: 8px;
-    font-size: 10px; color: #999;
+    font-size: 11px; color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.7);
   }
   .price-card-body { flex: 1; min-width: 0; text-align: left; }
   .price-card-title-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
   .price-card-name { font-size: 26px; font-weight: 900; color: #111; margin: 0 0 14px; text-align: left; }
   .price-card-title-row .price-card-name { margin: 0; }
-  .price-card-prices { display: flex; align-items: center; justify-content: flex-start; flex-wrap: wrap; gap: 14px; margin-bottom: 14px; }
-  .price-card-before { font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif; font-size: 52px; line-height: 1; color: #999; text-decoration: line-through; text-decoration-color: #bbb; }
-  .price-card-after small { font-size: 15px; font-weight: 700; margin-left: 2px; }
+  .price-card-prices { display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; gap: 14px; margin-bottom: 14px; }
+  .price-card-price-group { display: flex; flex-direction: column; }
+  .price-card-price-label { font-size: 12px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .price-card-before-label { color: #999; }
+  .price-card-after-label { color: #E30212; }
+  .price-card-before { font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif; font-size: 60px; line-height: 1; color: #999; text-decoration: line-through; text-decoration-color: #bbb; }
+  .price-card-after small { font-family: 'Noto Sans JP', sans-serif; font-size: 15px; font-weight: 700; margin-left: 2px; }
   .price-card-before-unit {
     font-size: 15px; font-weight: 700; color: #999; margin-left: 2px;
     text-decoration: none;
   }
-  .price-card-arrow { color: #F5C518; font-size: 22px; }
+  .price-card-arrow { color: #F5C518; font-size: 22px; margin-bottom: 6px; }
   .price-card-after {
-    font-family: 'Bebas Neue', sans-serif;
-    color: #E30212; font-size: 52px; line-height: 1;
+    font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif;
+    color: #E30212; font-size: 60px; line-height: 1;
   }
   .price-card-tag {
-    display: inline-block; background: #F5C518; color: #111;
-    font-weight: 900; font-size: 14px; padding: 6px 16px; border-radius: 999px;
+    display: inline-block; background: #EFEAE0; color: #555;
+    font-weight: 700; font-size: 13px; padding: 4px 14px; border-radius: 999px;
   }
+  .price-card-note { margin: 20px 0 0; font-size: 12px; color: #999; }
   .price-card-corner {
-    position: absolute; top: 10px; right: -66px; width: 240px;
+    position: absolute; top: 16px; right: -82px; width: 350px;
     background: #E30212; color: #fff; text-align: center;
     font-family: 'Bebas Neue', sans-serif; line-height: 1;
-    padding: 13px 0; transform: rotate(40deg);
+    padding: 10px 0; transform: rotate(40deg);
     border-top: 2px solid #F5C518; border-bottom: 2px solid #F5C518;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   }
-  .price-card-corner .corner-num { font-size: 46px; }
-  .price-card-corner .corner-pct { font-size: 24px; }
+  .price-card-corner .corner-text { display: inline-block; transform: translate(14px, 8px); }
+  .price-card-corner .corner-num { font-size: 62px; }
+  .price-card-corner .corner-pct { font-size: 26px; }
   @media (max-width: 560px) {
-    .price-card { flex-direction: column; align-items: stretch; padding: 24px 20px; gap: 16px; }
-    .price-card-photo-wrap { flex-basis: auto; width: 100%; height: 180px; }
-    .price-card-before, .price-card-after { font-size: 32px; }
-    .price-card-name { font-size: 21px; }
-    .price-card-corner { width: 160px; top: 6px; right: -46px; padding: 8px 0; }
-    .price-card-corner .corner-num { font-size: 30px; }
+    .price-card { flex-direction: column; align-items: stretch; padding: 22px 20px; gap: 10px; }
+    .price-card-photo-col { flex-basis: auto; width: 100%; margin-top: 34px; }
+    .price-card-photo-wrap { height: auto; aspect-ratio: 3 / 2; width: 78%; margin: 0 auto; }
+    .price-card-photo { transform: scale(1.05); }
+    .price-card-body { text-align: center; }
+    .price-card-title-row { justify-content: center; margin-bottom: 8px; }
+    .price-card-name { margin-bottom: 8px; text-align: center; }
+    .price-card-prices { flex-direction: column; align-items: center; gap: 6px; margin-bottom: 8px; }
+    .price-card-price-group { text-align: left; }
+    .price-card-arrow {
+      transform: none; margin-bottom: 0;
+      display: inline-block; width: 0; height: 0; color: transparent; font-size: 0;
+      border-left: 18px solid transparent; border-right: 18px solid transparent;
+      border-top: 13px solid #F5C518;
+    }
+    .price-card-before { font-size: 40px; }
+    .price-card-after { font-size: 60px; }
+    .price-card-price-label { font-size: 14px; }
+    .price-card-name { font-size: 24px; }
+    .price-card-note { text-align: left; margin-top: 6px; }
+    .price-card-corner { width: 190px; top: 0px; right: -58px; padding: 8px 0; }
+    .price-card-corner .corner-num { font-size: 40px; }
     .price-card-corner .corner-pct { font-size: 16px; }
+    .price-card-corner .corner-text { transform: translate(8px, 5px); }
   }
 
   /* レンズアップグレード紹介 */
@@ -419,19 +449,29 @@
   }
 
   /* よくある質問 */
-  .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
-  .faq-item { background: #fff; border-radius: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+  .faq-item { background: #fff; border: 1px solid #eee; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); overflow: hidden; }
   .faq-q {
-    display: flex; align-items: center; gap: 12px; font-weight: 700; color: #111; font-size: 16px;
-    padding: 20px 24px; cursor: pointer; list-style: none;
+    display: flex; align-items: center; gap: 16px; font-weight: 700; color: #111; font-size: 16px;
+    padding: 20px 24px; cursor: pointer; list-style: none; transition: background .15s;
   }
   .faq-q::-webkit-details-marker { display: none; }
-  .faq-q-label { color: #E30212; }
+  .faq-q:hover { background: #FAF6EE; }
+  .faq-item[open] .faq-q { background: #FAF6EE; }
+  .faq-q-label {
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: #E30212; color: #fff; font-size: 15px; font-weight: 900;
+  }
   .faq-q-text { flex: 1; color: #111; }
-  .faq-chevron { color: #E30212; font-size: 14px; transition: transform .2s; flex-shrink: 0; }
+  .faq-chevron { color: #E30212; font-size: 22px; transition: transform .2s; flex-shrink: 0; }
   .faq-item[open] .faq-chevron { transform: rotate(180deg); }
-  .faq-a { display: flex; gap: 12px; padding: 0 24px 20px; font-size: 15px; color: #444; line-height: 1.7; }
-  .faq-a span { color: #F5C518; font-weight: 900; }
+  .faq-a { display: flex; gap: 16px; padding: 16px 24px; font-size: 15px; color: #555; line-height: 1.7; background: #FAF6EE; }
+  .faq-a span {
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: #F0DDA0; color: #6b5a2a; font-size: 15px; font-weight: 700;
+  }
 
   /* 店舗検索(GW LP版の仕組みを移植) */
   #shop-search { text-align: center; }
@@ -596,7 +636,7 @@
 
   <a href="https://www.aimegane.com/booking-search/" class="floating-cta">
     <img src="イメージ画像/calendar-icon.svg" alt="" class="floating-cta-icon">
-    来店予約は<br>こちら&#9654;
+    <span class="floating-cta-text">来店予約はこちら</span>
   </a>
 
   <!-- ① アイメガネ THE SALEとは -->
@@ -643,13 +683,15 @@
 
   <!-- ②-1 価格例(Paris Miki LP参考・仮の数字) -->
   <section class="section section-cream">
-    <h2 class="section-title">お得な<span>価格例</span></h2>
+    <h2 class="section-title price-list-title">お得な<span>価格例</span></h2>
     <div class="price-list">
       <div class="price-card">
-        <div class="price-card-corner"><span class="corner-num">30</span><span class="corner-pct">%OFF</span></div>
-        <div class="price-card-photo-wrap">
-          <img class="price-card-photo" src="イメージ画像/price-megane.png" alt="メガネのイメージ">
-          <span class="price-card-photo-note">※画像はイメージです</span>
+        <div class="price-card-corner"><span class="corner-text"><span class="corner-num">30</span><span class="corner-pct">%OFF</span></span></div>
+        <div class="price-card-photo-col">
+          <div class="price-card-photo-wrap">
+            <img class="price-card-photo" src="イメージ画像/price-megane.png" alt="メガネのイメージ">
+            <span class="price-card-photo-note">※画像はイメージです</span>
+          </div>
         </div>
         <div class="price-card-body">
           <div class="price-card-title-row">
@@ -657,27 +699,41 @@
             <span class="price-card-tag">選べるレンズ付</span>
           </div>
           <div class="price-card-prices">
-            <span class="price-card-before">&yen;29,700</span><small class="price-card-before-unit">(税込)</small>
+            <div class="price-card-price-group">
+              <span class="price-card-price-label price-card-before-label">通常価格</span>
+              <div><span class="price-card-before">&yen;29,700</span><small class="price-card-before-unit">(税込)</small></div>
+            </div>
             <span class="price-card-arrow">&#9654;</span>
-            <span class="price-card-after">&yen;20,790<small>(税込)</small></span>
+            <div class="price-card-price-group">
+              <span class="price-card-price-label price-card-after-label">THE SALE価格</span>
+              <div><span class="price-card-after">&yen;20,790<small>(税込)</small></span></div>
+            </div>
           </div>
-          <p style="margin:10px 0 0; font-size:13px; color:#999;">※店舗により取り扱いが異なります</p>
+          <p class="price-card-note">※上記は価格の一例です。取り扱い商品・金額は店舗により異なります</p>
         </div>
       </div>
       <div class="price-card">
-        <div class="price-card-corner"><span class="corner-num">30</span><span class="corner-pct">%OFF</span></div>
-        <div class="price-card-photo-wrap">
-          <img class="price-card-photo" src="イメージ画像/price-SG.png" alt="サングラスのイメージ">
-          <span class="price-card-photo-note">※画像はイメージです</span>
+        <div class="price-card-corner"><span class="corner-text"><span class="corner-num">30</span><span class="corner-pct">%OFF</span></span></div>
+        <div class="price-card-photo-col">
+          <div class="price-card-photo-wrap">
+            <img class="price-card-photo" src="イメージ画像/price-SG.png" alt="サングラスのイメージ">
+            <span class="price-card-photo-note">※画像はイメージです</span>
+          </div>
         </div>
         <div class="price-card-body">
           <p class="price-card-name">サングラス</p>
           <div class="price-card-prices">
-            <span class="price-card-before">&yen;22,000</span><small class="price-card-before-unit">(税込)</small>
+            <div class="price-card-price-group">
+              <span class="price-card-price-label price-card-before-label">通常価格</span>
+              <div><span class="price-card-before">&yen;22,000</span><small class="price-card-before-unit">(税込)</small></div>
+            </div>
             <span class="price-card-arrow">&#9654;</span>
-            <span class="price-card-after">&yen;15,400<small>(税込)</small></span>
+            <div class="price-card-price-group">
+              <span class="price-card-price-label price-card-after-label">THE SALE価格</span>
+              <div><span class="price-card-after">&yen;15,400<small>(税込)</small></span></div>
+            </div>
           </div>
-          <p style="margin:10px 0 0; font-size:13px; color:#999;">※店舗により取り扱いが異なります</p>
+          <p class="price-card-note">※上記は価格の一例です。取り扱い商品・金額は店舗により異なります</p>
         </div>
       </div>
     </div>
@@ -775,7 +831,7 @@
   </section>
 
   <!-- ④ よくある質問 -->
-  <section class="section section-cream">
+  <section class="section section-white">
     <h2 class="section-title">よくある<span>質問</span></h2>
     <div class="faq-list">
       <details class="faq-item">
@@ -1104,30 +1160,20 @@ document.getElementById('zip2').addEventListener('keydown',function(e){if(e.key=
 
 showInitialShops();
 
-// フローティングCTA: FVを過ぎたら右上→右下になめらかに移動。店舗検索セクションでは予約ボタンと重なるため非表示にする
+// フローティングCTA: 右端に縦長で常時固定。店舗検索セクションでは予約ボタンと重なるため非表示にする
 (function(){
   var cta = document.querySelector('.floating-cta');
-  var fv = document.querySelector('.fv');
   var shopSection = document.getElementById('shop-search');
-  if(!cta || !fv) return;
-  var topPos = getComputedStyle(cta).top;
-  var margin = 24;
-  function updateCtaPosition(){
-    var fvBottom = fv.getBoundingClientRect().bottom;
-    if(fvBottom <= 0){
-      cta.style.top = (window.innerHeight - cta.offsetHeight - margin) + 'px';
-    } else {
-      cta.style.top = topPos;
-    }
-    if(shopSection){
-      var r = shopSection.getBoundingClientRect();
-      var overlapsShop = r.top < window.innerHeight && r.bottom > 0;
-      cta.style.display = overlapsShop ? 'none' : '';
-    }
+  if(!cta) return;
+  function updateCtaVisibility(){
+    if(!shopSection) return;
+    var r = shopSection.getBoundingClientRect();
+    var overlapsShop = r.top < window.innerHeight && r.bottom > 0;
+    cta.style.display = overlapsShop ? 'none' : '';
   }
-  window.addEventListener('scroll', updateCtaPosition);
-  window.addEventListener('resize', updateCtaPosition);
-  updateCtaPosition();
+  window.addEventListener('scroll', updateCtaVisibility);
+  window.addEventListener('resize', updateCtaVisibility);
+  updateCtaVisibility();
 })();
 </script>
 
