@@ -221,14 +221,24 @@
     padding: clamp(32px, 5vw, 56px) clamp(20px, 4vw, 48px);
     border-radius: 24px;
   }
-  .feature-row {
-    max-width: 1000px; margin: 0 auto 32px;
-    display: flex; align-items: stretch; gap: clamp(16px, 2.4vw, 32px);
+  .fit-band-list { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+  .fit-band { display: flex; align-items: center; gap: clamp(24px, 4vw, 48px); }
+  .fit-band-reverse { flex-direction: row-reverse; }
+  .fit-band-photo { flex: 0 0 42%; }
+  .fit-band-photo img { display: block; width: 100%; height: auto; border-radius: 12px; }
+  .fit-band-photo-ph {
+    width: 100%; aspect-ratio: 4/3; border-radius: 12px;
+    background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: #999; font-size: 14px; letter-spacing: 0.05em;
   }
-  .feature-row .feature-highlight, .feature-row .feature-block { flex: 1; min-width: 0; margin-bottom: 0; }
-  .feature-block { max-width: 720px; margin: 0 auto 32px; text-align: center; }
-  .feature-block h3 { font-size: 18px; font-weight: 900; color: #111; margin: 0 0 10px; }
-  .feature-block p { font-size: 14px; line-height: 1.9; color: #444; margin: 0; }
+  .fit-band-text { flex: 1; min-width: 0; }
+  .fit-band-text h3 { font-size: clamp(20px, 2.4vw, 26px); font-weight: 900; color: #111; line-height: 1.4; margin: 0 0 12px; }
+  .fit-band-text p { font-size: 14px; line-height: 1.9; color: #444; margin: 0; }
+  @media (max-width: 720px) {
+    .fit-band, .fit-band-reverse { flex-direction: column; }
+    .fit-band-photo { flex-basis: auto; width: 100%; }
+  }
   .ai-mirror-band {
     max-width: 1000px; margin: 0 auto 40px;
     display: flex; align-items: stretch;
@@ -276,11 +286,6 @@
   }
   .section-title span { color: #111; }
   .overview-title-tight { margin-bottom: 4px; }
-  .draft-note {
-    max-width: 720px; margin: 0 auto 32px; padding: 12px 18px;
-    background: #FDF5E6; border: 1px dashed #F5C518; border-radius: 8px;
-    font-size: 14px; color: #E30212; text-align: center; line-height: 1.6;
-  }
 
   /* 価格例 */
   .price-list {
@@ -364,10 +369,11 @@
   .lens-card-v2-photo { flex: 0 0 clamp(260px, 30vw, 360px); border-radius: 12px; overflow: hidden; }
   .lens-card-v2-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .lens-card-v2-content { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-  .lens-card-name { font-size: clamp(26px, 3.4vw, 34px); font-weight: 900; color: #111; margin: 0 0 8px; }
+  .lens-card-title-row { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; margin: 0 0 8px; }
+  .lens-card-name { font-size: clamp(26px, 3.4vw, 34px); font-weight: 900; color: #111; margin: 0; }
   .lens-card-name span { color: #E30212; }
   .lens-card-desc { font-size: clamp(16px, 2.2vw, 20px); font-weight: 900; color: #111; line-height: 1.6; margin: 0 0 14px; }
-  .lens-card-price { font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif; font-size: 13px; font-weight: 700; color: #E30212; margin-bottom: 20px; }
+  .lens-card-price { font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif; font-size: clamp(24px, 3vw, 30px); font-weight: 900; color: #E30212; white-space: nowrap; }
   .lens-card-v2-compare { display: flex; gap: 14px; margin-top: auto; }
   .lens-card-v2-compare-item { flex: 1; min-width: 0; }
   .lens-card-v2-compare-label {
@@ -378,6 +384,7 @@
     width: 100%; height: clamp(90px, 12vw, 140px); border-radius: 8px;
   }
   .lens-card-v2-compare-img { object-fit: cover; display: block; }
+  .lens-card-v2-compare-img.is-bottom { object-position: center 70%; }
   .lens-card-v2-compare-placeholder {
     display: flex; align-items: center; justify-content: center;
     background: #f2f2f2; border: 1px dashed #ccc; color: #999; font-size: 13px;
@@ -673,27 +680,31 @@
       <div class="lens-card-v2">
         <div class="lens-card-v2-photo"><img src="イメージ画像/lens-photic-outdoor.png" alt="屋外でサングラスのように色が変わった様子"></div>
         <div class="lens-card-v2-content">
-          <p class="lens-card-name"><span>調光</span>レンズ</p>
+          <div class="lens-card-title-row">
+            <p class="lens-card-name"><span>調光</span>レンズ</p>
+            <p class="lens-card-price">+&yen;8,800〜</p>
+          </div>
           <p class="lens-card-desc">紫外線で色が変わる、驚きの一本二役。屋外では自然にサングラスに、屋内では普段のメガネに。</p>
-          <p class="lens-card-price">+&yen;8,800〜</p>
           <div class="lens-card-v2-compare">
             <div class="lens-card-v2-compare-item">
               <span class="lens-card-v2-compare-label">屋内(クリア)</span>
-              <img class="lens-card-v2-compare-img" src="イメージ画像/lens-photic-glasses-indoor.png" alt="屋内でクリアなレンズの様子">
+              <img class="lens-card-v2-compare-img is-bottom" src="イメージ画像/lens-photic-glasses-indoor.png" alt="屋内でクリアなレンズの様子">
             </div>
             <div class="lens-card-v2-compare-item">
               <span class="lens-card-v2-compare-label">屋外(色が変化)</span>
-              <img class="lens-card-v2-compare-img" src="イメージ画像/lens-photic-glasses-outdoor.png" alt="屋外で色が変化したレンズの様子">
+              <img class="lens-card-v2-compare-img is-bottom" src="イメージ画像/lens-photic-glasses-outdoor.png" alt="屋外で色が変化したレンズの様子">
             </div>
           </div>
         </div>
       </div>
       <div class="lens-card-v2">
-        <div class="lens-card-v2-photo"><img src="イメージ画像/lens-polarized-fishing.png" alt="釣りをしながら偏光レンズのサングラスをかけている様子"></div>
+        <div class="lens-card-v2-photo"><img src="イメージ画像/lens-polarized-fishing-real.jpg" alt="桟橋で釣りをする2人の様子"></div>
         <div class="lens-card-v2-content">
-          <p class="lens-card-name"><span>偏光</span>レンズ</p>
+          <div class="lens-card-title-row">
+            <p class="lens-card-name"><span>偏光</span>レンズ</p>
+            <p class="lens-card-price">+&yen;11,000〜</p>
+          </div>
           <p class="lens-card-desc">まぶしさなんて、もう気にしない。反射光によるまぶしさをカットし、運転やアウトドアもくっきりクリアに。</p>
-          <p class="lens-card-price">+&yen;11,000〜</p>
           <div class="lens-card-v2-compare">
             <div class="lens-card-v2-compare-item">
               <span class="lens-card-v2-compare-label">裸眼の見え方イメージ</span>
@@ -709,9 +720,11 @@
       <div class="lens-card-v2">
         <div class="lens-card-v2-photo"><img src="イメージ画像/lens-hev-laptop.png" alt="PCで作業をしながらHEVカットレンズのメガネをかけている様子"></div>
         <div class="lens-card-v2-content">
-          <p class="lens-card-name"><span>HEV</span>カットレンズ</p>
+          <div class="lens-card-title-row">
+            <p class="lens-card-name"><span>HEV</span>カットレンズ</p>
+            <p class="lens-card-price">+&yen;5,500〜</p>
+          </div>
           <p class="lens-card-desc">目に負担をかけるHEV(ブルーライトに近い光)を軽減し、デジタルライフをもっと心地よく。</p>
-          <p class="lens-card-price">+&yen;5,500〜</p>
           <div class="lens-card-v2-compare">
             <div class="lens-card-v2-compare-item">
               <span class="lens-card-v2-compare-label">裸眼の見え方イメージ</span>
@@ -727,23 +740,30 @@
     </div>
   </section>
 
-  <!-- ③ かけ心地(LLI・眼鏡作製技能士) -->
+  <!-- ③ かけ心地(調節機能解析装置・眼鏡作製技能士) -->
   <section class="section section-cream">
-    <h2 class="section-title">こだわりの<span>かけ心地</span></h2>
-    <div class="feature-block">
-      <h3>HOYA「LLI」による専用設計</h3>
-      <p>フレームを掛けた状態を正面・横・上から撮影し、そり角・前傾角・角膜頂点距離を測定。従来の「平均的な数値」ではなく、一人ひとりの掛け方に合わせたレンズ設計ができる、HOYA独自の測定システムです。</p>
-    </div>
-    <div class="feature-block">
-      <h3>国家資格「眼鏡作製技能士」在籍</h3>
-      <p>メガネのフィッティングやレンズ選びについて、国家資格を持つスタッフ(グループ内約60名)がご相談に対応します。</p>
+    <h2 class="section-title">快適な一本をつくるために</h2>
+    <div class="fit-band-list">
+      <div class="fit-band">
+        <div class="fit-band-photo"><div class="fit-band-photo-ph">写真準備中</div></div>
+        <div class="fit-band-text">
+          <h3>眼のストレスを無料で解析<br>NHKで紹介!「調節機能解析装置」</h3>
+          <p>目の疲れや肩こり、頭痛は、メガネが合っていないサインかもしれません。「アコモレフSpeedy-i」で目の調節力やストレス度合いを数値でチェック(体験時間は約2分)。他店でお作りのメガネもセカンドオピニオンとして気軽にご相談いただけます。</p>
+        </div>
+      </div>
+      <div class="fit-band fit-band-reverse">
+        <div class="fit-band-photo"><img src="イメージ画像/staff-fitting-scene.png" alt="スタッフがメガネを丁寧に手入れしている様子"></div>
+        <div class="fit-band-text">
+          <h3>国家資格を持つ<br>眼鏡作製技能士</h3>
+          <p>メガネのフィッティングやレンズ選びについて、国家資格を持つスタッフ(グループ内約60名)がご相談に対応します。</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ④ よくある質問 -->
   <section class="section section-cream">
     <h2 class="section-title">よくある<span>質問</span></h2>
-    <div class="draft-note">※このセクションの内容はまだ仮の下書きです。実際の質問・回答が決まったら差し替えます。</div>
     <div class="faq-list">
       <details class="faq-item">
         <summary class="faq-q"><span class="faq-q-label">Q.</span><span class="faq-q-text">すべての店舗が対象ですか？</span><span class="faq-chevron">▾</span></summary>
@@ -756,6 +776,14 @@
       <details class="faq-item">
         <summary class="faq-q"><span class="faq-q-label">Q.</span><span class="faq-q-text">予約なしでも来店できますか？</span><span class="faq-chevron">▾</span></summary>
         <div class="faq-a"><span>A.</span>ご予約なしでもご来店いただけますが、スムーズにご案内するため事前のご予約をおすすめしています。</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><span class="faq-q-label">Q.</span><span class="faq-q-text">セール期間中でもレンズの相談はできますか？</span><span class="faq-chevron">▾</span></summary>
+        <div class="faq-a"><span>A.</span>はい。お客様の生活スタイルや見え方のお悩みに合わせて、最適なレンズをご提案いたします。機能レンズについてもお気軽にご相談ください。</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><span class="faq-q-label">Q.</span><span class="faq-q-text">視力測定だけでも利用できますか？</span><span class="faq-chevron">▾</span></summary>
+        <div class="faq-a"><span>A.</span>はい。現在の見え方のチェックやメガネに関するご相談だけでもお気軽にご来店ください。</div>
       </details>
     </div>
   </section>
