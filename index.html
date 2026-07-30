@@ -340,6 +340,7 @@
   @media (max-width: 800px) {
     .ai-mirror-band { flex-direction: column; }
     .ai-mirror-band-text { text-align: center; }
+    .ai-mirror-band-text p:not(.ai-mirror-band-subtitle) { text-align: left; }
     .ai-mirror-band-photo-wrap { flex-basis: auto; }
     .lens-standard-band { flex-direction: column; }
     .lens-standard-band h3 { text-align: center; }
@@ -488,7 +489,7 @@
   .lens-card-v2-photo { flex: 0 0 clamp(260px, 30vw, 360px); border-radius: 12px; overflow: hidden; }
   .lens-card-v2-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .lens-card-v2-content { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-  .lens-card-title-row { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; margin: 0 0 8px; }
+  .lens-card-title-row { display: flex; align-items: baseline; justify-content: flex-start; flex-wrap: wrap; gap: 8px 16px; margin: 0 0 8px; }
   .lens-card-name { font-size: clamp(26px, 3.4vw, 34px); font-weight: 900; color: #111; margin: 0; }
   .lens-card-name span { color: #E30212; }
   .lens-card-desc { font-size: clamp(16px, 2.2vw, 20px); font-weight: 900; color: #111; line-height: 1.6; margin: 0 0 14px; }
@@ -757,7 +758,7 @@
         <h3>もう迷わない、<br class="only-mobile">すぐ見つかる。</h3>
         <p class="ai-mirror-band-subtitle">AIフィッティングミラーで<br class="only-mobile">似合う一本を判定</p>
         <p>店頭のAI搭載ミラーが、フレームの似合い度を測定。客観的なデータを見ながら、自分に似合う一本を無料で診断できます。</p>
-        <p class="ai-mirror-band-cta"><a href="https://www.aimegane.com/booking-search/">&#9654; 全国のアイメガネ店舗で無料体験できます</a></p>
+        <p class="ai-mirror-band-cta"><a href="#shop-search">&#9654; 全国のアイメガネ店舗で無料体験できます</a></p>
       </div>
       <div class="ai-mirror-band-photo-wrap">
         <img class="ai-mirror-band-photo" src="イメージ画像/aifittingmirror-cutout.png" alt="AIフィッティングミラーで顔を測定している様子">
