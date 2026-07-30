@@ -246,7 +246,7 @@
   /* FV直下の特典セクション(ユーザー作成の完成画像を表示) */
   .perk-section {
     background: #FBF6EA;
-    padding: clamp(24px, 4vh, 40px) clamp(16px, 3vw, 40px);
+    padding: clamp(24px, 4vh, 40px) clamp(8px, 1vw, 16px);
   }
   .perk-inner { max-width: 1000px; margin: 0 auto; }
   .perk-benefits-image { display: block; width: 100%; height: auto; }
@@ -372,6 +372,7 @@
     text-align: center; margin: 0 0 40px;
   }
   .section-title span { color: #111; }
+  .lens-section-title { text-align: left; margin-bottom: 12px; }
   .overview-title-tight { margin-bottom: 4px; font-size: clamp(21px, 6.8vw, 46px); }
   .overview-title-brand { margin-right: 0.2em; }
   .overview-title-logo { height: 1em; width: auto; vertical-align: -0.06em; }
@@ -472,7 +473,7 @@
 
   /* レンズアップグレード紹介 */
   .lens-standard-note {
-    max-width: 1000px; margin: -20px auto 24px; text-align: center;
+    max-width: 1000px; margin: 0 auto 24px; text-align: left;
     font-size: clamp(13px, 1.6vw, 15px); line-height: 1.9; color: #444;
     white-space: nowrap;
   }
@@ -491,11 +492,11 @@
   .lens-card-v2-photo { flex: 0 0 clamp(260px, 30vw, 360px); border-radius: 12px; overflow: hidden; }
   .lens-card-v2-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .lens-card-v2-content { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-  .lens-card-title-row { display: flex; align-items: baseline; justify-content: flex-start; flex-wrap: wrap; gap: 8px 16px; margin: 0 0 8px; }
+  .lens-card-title-row { display: flex; align-items: baseline; justify-content: flex-start; flex-wrap: wrap; gap: 8px 16px; margin: 0 0 4px; }
   .lens-card-name { font-size: clamp(26px, 3.4vw, 34px); font-weight: 900; color: #111; margin: 0; }
   .lens-card-name span { color: #E30212; }
-  .lens-card-desc { font-size: clamp(16px, 2.2vw, 20px); font-weight: 900; color: #111; line-height: 1.6; margin: 0 0 14px; }
-  .lens-card-price { font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif; font-size: clamp(24px, 3vw, 30px); font-weight: 900; color: #E30212; white-space: nowrap; }
+  .lens-card-desc { font-size: clamp(16px, 2.2vw, 20px); font-weight: 700; color: #111; line-height: 1.6; margin: 0 0 14px; }
+  .lens-card-price { font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif; font-size: clamp(24px, 3vw, 30px); font-weight: 900; color: #E30212; white-space: nowrap; margin: 0; }
   .lens-card-v2-compare { display: flex; gap: 14px; margin-top: auto; }
   .lens-card-v2-compare-item { flex: 1; min-width: 0; }
   .lens-card-v2-compare-label {
@@ -513,7 +514,8 @@
   }
   @media (max-width: 720px) {
     .lens-card-v2 { flex-direction: column; }
-    .lens-card-v2-photo { flex-basis: auto; height: clamp(180px, 50vw, 260px); }
+    .lens-card-v2-photo { flex-basis: auto; height: clamp(170px, 44vw, 220px); }
+    .lens-card-v2-photo img { object-position: center 20%; }
   }
 
   /* セール概要 */
@@ -854,8 +856,8 @@
 
   <!-- ②-2 レンズアップグレード紹介(Paris Miki LP参考・仮の内容) -->
   <section class="section section-white">
-    <h2 class="section-title">あなたの毎日に<span>、機能をプラス</span></h2>
-    <p class="lens-standard-note">お得に選んだ一本を、レンズで自分だけの一本に。毎日の見え方や快適さは、レンズ次第で大きく変わります。</p>
+    <h2 class="section-title lens-section-title">あなたの毎日に、<br><span>機能をプラス</span></h2>
+    <p class="lens-standard-note">お得に選んだ一本を、レンズで自分だけの一本に。</p>
     <div class="lens-list">
       <div class="lens-card-v2">
         <div class="lens-card-v2-photo"><img src="イメージ画像/lens-photic-outdoor.png" alt="屋外でサングラスのように色が変わった様子"></div>
@@ -922,7 +924,7 @@
 
   <!-- ③ かけ心地(調節機能解析装置・眼鏡作製技能士) -->
   <section class="section section-cream">
-    <h2 class="section-title fit-title-lg">あなたの目に<span>、ちょうどいい一本を。</span></h2>
+    <h2 class="section-title fit-title-lg">あなたの目に、<br class="only-mobile"><span>ちょうどいい一本を。</span></h2>
     <div class="fit-band-list">
       <div class="fit-band">
         <div class="fit-band-photo"><img class="is-contain" src="イメージ画像/accomref-speedy-i.png" alt="調節機能解析装置 アコモレフSpeedy-i(測定無料)"></div>
