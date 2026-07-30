@@ -305,23 +305,22 @@
     .fit-band-photo { flex-basis: auto; width: 100%; }
   }
   .ai-mirror-band {
+    position: relative;
     max-width: 1000px; margin: 0 auto 40px;
     display: flex; align-items: stretch;
-    background: #fff; border: 2px solid #F5C518; overflow: hidden;
+    background: #fff; border: 2px solid #F5C518; overflow: visible;
   }
   .ai-mirror-band-text {
     flex: 1; min-width: 0; text-align: left;
     padding: clamp(24px, 4vw, 40px);
     display: flex; flex-direction: column; justify-content: center;
   }
-  .ai-mirror-band-label-vertical {
-    flex: 0 0 auto; width: clamp(36px, 4vw, 48px);
-    background: #F5C518; color: #fff;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .ai-mirror-band-label-vertical span {
-    writing-mode: vertical-rl; text-orientation: mixed;
-    font-weight: 900; font-size: clamp(15px, 1.8vw, 18px); letter-spacing: 0.15em;
+  .corner-tag {
+    position: absolute; top: -16px; left: 24px; z-index: 2;
+    background: #F5C518; color: #111;
+    font-weight: 900; font-size: clamp(13px, 1.6vw, 15px); letter-spacing: 0.05em;
+    padding: 7px 20px; border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     white-space: nowrap;
   }
   .ai-mirror-band-text h3 { font-size: clamp(21px, 2.6vw, 27px); font-weight: 900; color: #E30212; line-height: 1.4; margin: 0 0 10px; }
@@ -345,19 +344,13 @@
     .ai-mirror-band-photo-wrap { flex-basis: auto; }
     .lens-standard-band { flex-direction: column; }
     .lens-standard-band h3 { text-align: center; }
-    .ai-mirror-band-label-vertical {
-      width: auto; padding: 8px 0;
-    }
-    .ai-mirror-band-label-vertical span {
-      writing-mode: horizontal-tb;
-      letter-spacing: 0.1em;
-    }
   }
   .lens-standard-band {
+    position: relative;
     max-width: 1000px; margin: 0 auto 40px;
     background: #fff; border: 2px solid #F5C518;
     display: flex; align-items: stretch;
-    overflow: hidden;
+    overflow: visible;
   }
   .lens-standard-content {
     flex: 1; min-width: 0;
@@ -378,6 +371,7 @@
   }
   .section-title span { color: #111; }
   .overview-title-tight { margin-bottom: 4px; }
+  .overview-title-logo { height: 0.62em; width: auto; vertical-align: -0.06em; margin-right: 0.15em; }
   @media (max-width: 640px) {
     .overview-title-brand { display: none; }
     .glasses-tag-illust { margin: 0 auto; }
@@ -710,9 +704,9 @@
   .footer-legal { margin: 0; color: #777; font-size: 11px; line-height: 1.7; max-width: 900px; margin-left: auto; margin-right: auto; }
 </style>
 </head>
-<body class="preview-locked">
+<body>
 
-  <div id="preview-gate" class="preview-gate">
+  <div id="preview-gate" class="preview-gate" style="display:none;">
     <form id="preview-gate-form" class="preview-gate-box">
       <p class="preview-gate-title">社内レビュー用プレビュー</p>
       <p class="preview-gate-desc">パスワードを入力してください</p>
@@ -750,7 +744,7 @@
   <!-- ① アイメガネ THE SALEとは -->
   <section class="section section-red-frame">
    <div class="sale-frame-inner">
-    <h2 class="section-title overview-title-tight"><span class="overview-title-brand">アイメガネ </span>THE SALE<span>とは</span></h2>
+    <h2 class="section-title overview-title-tight"><span class="overview-title-brand"><img class="overview-title-logo" src="イメージ画像/aimegane_logo_transparent.png" alt="アイメガネ"></span>THE SALE<span>とは</span></h2>
 
     <img class="glasses-tag-illust" src="イメージ画像/megane-sale-tag.png" alt="メガネにSALEタグが付いているイラスト">
 
@@ -759,7 +753,7 @@
     </div>
 
     <div class="ai-mirror-band">
-      <div class="ai-mirror-band-label-vertical"><span>フレーム選び</span></div>
+      <div class="corner-tag">フレーム選び</div>
       <div class="ai-mirror-band-text">
         <h3>もう迷わない、すぐ見つかる。</h3>
         <p class="ai-mirror-band-subtitle">AIフィッティングミラーで似合う一本を判定</p>
@@ -772,7 +766,7 @@
     </div>
 
     <div class="lens-standard-band">
-      <div class="ai-mirror-band-label-vertical"><span>レンズ選び</span></div>
+      <div class="corner-tag">レンズ選び</div>
       <div class="lens-standard-content">
         <h3>標準セットでこんなに充実!</h3>
         <div class="lens-standard-inner">
