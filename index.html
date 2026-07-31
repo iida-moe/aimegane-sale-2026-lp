@@ -84,7 +84,7 @@
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    object-fit: cover; object-position: top left;
+    object-fit: contain; object-position: top left;
     z-index: 3;
     pointer-events: none;
   }
@@ -104,14 +104,14 @@
   }
   .fv-the {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(60px, min(14.5vh, 9vw), 162px); font-weight: 400; color: #111;
+    font-size: clamp(88px, 14.5vh, 162px); font-weight: 400; color: #111;
     letter-spacing: 0.12em; line-height: 1;
     -webkit-text-stroke: 2px #111;
     paint-order: stroke fill;
   }
   .fv-sale {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(120px, min(calc(33vh + 6px), 20vw), 354px); font-weight: 400; color: #111;
+    font-size: clamp(196px, calc(33vh + 6px), 354px); font-weight: 400; color: #111;
     letter-spacing: -0.02em; line-height: 1;
   }
 
@@ -274,6 +274,11 @@
   .perk-bubble.perk-bubble-desktop {
     position: absolute; top: 16%; left: 22%;
     margin: 0; transform: translateY(-50%);
+  }
+  .perk-bubble.perk-bubble-desktop::after {
+    top: 50%; bottom: auto; left: auto; right: -4px;
+    transform: translateY(-50%);
+    border-left: 7px solid #F5C518; border-right: none; border-top: 6px solid transparent; border-bottom: 6px solid transparent;
   }
   .only-mobile { display: none !important; }
   @media (max-width: 640px) {
@@ -1024,7 +1029,7 @@
             <p class="lens-card-name"><span>調光</span>レンズ</p>
             <p class="lens-card-price">+&yen;8,800〜</p>
           </div>
-          <p class="lens-card-desc">紫外線で色が変わる、驚きの一本二役。屋外では自然にサングラスに、屋内では普段のメガネに。</p>
+          <p class="lens-card-desc">紫外線で色が変わる、驚きの一本二役。<br>屋外では自然にサングラスに、屋内では普段のメガネに。</p>
           <div class="lens-card-v2-compare">
             <div class="lens-card-v2-compare-item">
               <span class="lens-card-v2-compare-label">屋内(クリア)</span>
@@ -1044,7 +1049,7 @@
             <p class="lens-card-name"><span>偏光</span>レンズ</p>
             <p class="lens-card-price">+&yen;11,000〜</p>
           </div>
-          <p class="lens-card-desc">まぶしさなんて、もう気にしない。反射光によるまぶしさをカットし、運転やアウトドアもくっきりクリアに。</p>
+          <p class="lens-card-desc">まぶしさなんて、もう気にしない。<br>反射光によるまぶしさをカットし、運転やアウトドアもくっきりクリアに。</p>
           <div class="lens-card-v2-compare">
             <div class="lens-card-v2-compare-item">
               <span class="lens-card-v2-compare-label">ノーマル</span>
