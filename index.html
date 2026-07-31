@@ -303,7 +303,7 @@
   @media (max-width: 720px) {
     .fit-band, .fit-band-reverse { flex-direction: column; }
     .fit-band-photo { flex-basis: auto; width: 100%; }
-    .fit-band-photo img.is-contain { height: 220px; object-fit: cover; object-position: center 25%; }
+    .fit-band-photo img.is-contain { height: 220px; object-fit: contain; }
   }
   .ai-mirror-band {
     position: relative;
@@ -481,6 +481,7 @@
   @media (max-width: 900px) {
     .lens-standard-note { white-space: normal; text-wrap: balance; }
   }
+  .lens-photo-disclaimer { max-width: 1000px; margin: -16px auto 24px; text-align: left; font-size: 12px; color: #999; }
   .lens-list {
     max-width: 1100px; margin: 0 auto;
     display: flex; flex-direction: column; gap: 24px;
@@ -859,6 +860,7 @@
   <section class="section section-white">
     <h2 class="section-title lens-section-title">あなたの毎日に、<br><span>機能をプラス</span></h2>
     <p class="lens-standard-note">お得に選んだ一本を、レンズで自分だけの一本に。</p>
+    <p class="lens-photo-disclaimer">※写真はすべてイメージです</p>
     <div class="lens-list">
       <div class="lens-card-v2">
         <div class="lens-card-v2-photo"><img src="イメージ画像/lens-photic-outdoor.png" alt="屋外でサングラスのように色が変わった様子"></div>
