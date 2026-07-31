@@ -340,8 +340,7 @@
   .ai-mirror-band-photo { width: 100%; height: auto; max-height: 280px; object-fit: contain; }
   @media (max-width: 800px) {
     .ai-mirror-band { flex-direction: column; }
-    .ai-mirror-band-text { text-align: center; }
-    .ai-mirror-band-text p:not(.ai-mirror-band-subtitle) { text-align: left; }
+    .ai-mirror-band-text { text-align: left; }
     .ai-mirror-band-photo-wrap { flex-basis: auto; }
     .lens-standard-band { flex-direction: column; }
   }
@@ -374,6 +373,7 @@
   }
   .section-title span { color: #111; }
   .lens-section-title { text-align: left; max-width: 1000px; margin: 0 auto 12px; }
+  .fit-title-lg { text-align: left; max-width: 1000px; margin: 0 auto 12px; }
   .overview-title-tight { margin-bottom: 4px; font-size: clamp(21px, 6.8vw, 46px); }
   .overview-title-brand { margin-right: 0.2em; }
   .overview-title-logo { height: 1em; width: auto; vertical-align: -0.06em; }
@@ -478,7 +478,7 @@
   /* レンズアップグレード紹介 */
   .lens-standard-note {
     max-width: 1000px; margin: 0 auto 24px; text-align: left;
-    font-size: clamp(13px, 1.6vw, 15px); line-height: 1.9; color: #444;
+    font-size: clamp(13px, 1.6vw, 15px); line-height: 1.6; color: #444;
     white-space: nowrap;
   }
   @media (max-width: 900px) {
@@ -507,6 +507,7 @@
   .lens-card-v2-compare-label {
     display: inline-block; background: #333; color: #fff;
     font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px;
+    white-space: nowrap;
   }
   .lens-card-v2-compare-img, .lens-card-v2-compare-placeholder {
     width: 100%; height: clamp(90px, 12vw, 140px); border-radius: 8px;
@@ -951,14 +952,14 @@
         <div class="fit-band-text">
           <span class="tv-bubble">TV番組で紹介されました!</span>
           <h3>調節機能解析装置で<br>眼のストレスを無料解析!</h3>
-          <p>目の疲れや肩こり、頭痛は、メガネが合っていないサインかもしれません。「アコモレフSpeedy-i」で目の調節力やストレス度合いを数値でチェック(体験時間は約2分)。他店でお作りのメガネもセカンドオピニオンとして気軽にご相談いただけます。</p>
+          <p>その疲れ目、メガネが原因かもしれません。「アコモレフSpeedy-i」で目の調節力やストレス度合いを無料でチェック(約2分)。他店でお作りのメガネのご相談も歓迎です。</p>
         </div>
       </div>
       <div class="fit-band fit-band-reverse">
         <div class="fit-band-photo"><img src="イメージ画像/staff-fitting-scene.png" alt="スタッフがメガネを丁寧に手入れしている様子"></div>
         <div class="fit-band-text">
           <h3>国家資格<br>「眼鏡作製技能士」在籍</h3>
-          <p>メガネのフィッティングやレンズ選びについて、国家資格「眼鏡作製技能士」がご相談に対応します。快適な見え方・かけ心地をサポートし、お客様のライフスタイルに合ったご提案をいたします。</p>
+          <p>フィッティングもレンズ選びも、国家資格「眼鏡作製技能士」におまかせください。あなたのライフスタイルに合わせて、心地よい一本をご提案します。</p>
         </div>
       </div>
     </div>
