@@ -46,8 +46,9 @@
     text-decoration: none;
     border-radius: 12px 0 0 12px;
     box-shadow: -4px 4px 16px rgba(0,0,0,0.3);
-    transition: opacity 0.4s ease;
+    transition: opacity 0.4s ease, background .2s;
   }
+  .floating-cta:hover { background: #e0b400; }
   .floating-cta-icon { width: clamp(22px, 2.6vw, 28px); height: auto; }
   .floating-cta-text {
     writing-mode: vertical-rl; text-orientation: mixed;
@@ -224,7 +225,9 @@
     text-decoration: none; white-space: nowrap;
     box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     border-radius: 8px;
+    transition: background .2s;
   }
+  .fv-cta:hover { background: #eee; }
   .fv-cta::after { content: '\2192'; font-weight: 900; }
 
   /* スマホ専用FV(PC版と同じ「1枚絵+写真を重ねる」方式だが、
@@ -265,12 +268,18 @@
     background: #FBF6EA;
     padding: clamp(24px, 4vh, 40px) clamp(8px, 1vw, 16px);
   }
-  .perk-inner { max-width: 1000px; margin: 0 auto; }
+  .perk-inner { max-width: 1000px; margin: 0 auto; position: relative; }
   .perk-benefits-image { display: block; width: 100%; height: auto; }
+  .perk-bubble { margin: 0 0 10px; }
+  .perk-bubble-desktop {
+    position: absolute; top: 13.5%; left: 6%;
+    transform: translateY(-50%);
+  }
   .only-mobile { display: none !important; }
   @media (max-width: 640px) {
     .only-mobile { display: block !important; }
     .only-desktop { display: none !important; }
+    .perk-bubble.only-mobile { display: inline-block !important; }
   }
 
   /* ══════════════ FV より下のセクション ══════════════ */
@@ -481,7 +490,9 @@
     background: #E30212; color: #fff; font-weight: 700;
     font-size: 19px; letter-spacing: 0.05em;
     text-decoration: none; border-radius: 8px;
+    transition: background .2s;
   }
+  .price-card-cta:hover { background: #b3010e; }
   .price-card-cta::after { content: '\25b6'; font-weight: 900; }
   .price-list-cta-wrap { display: flex; justify-content: center; margin-top: 28px; }
   .price-list-cta-wrap .price-card-cta { margin-top: 0; white-space: nowrap; }
@@ -532,7 +543,9 @@
     background: #fff; color: #666; border: 1.5px solid #ccc;
     font-size: 13px; font-weight: 700; padding: 8px 16px;
     border-radius: 6px; text-decoration: none;
+    transition: background .2s, border-color .2s;
   }
+  .price-teaser-cta a:hover { background: #f5f5f5; border-color: #999; }
   .price-teaser-note { margin: 0; font-size: 12px; color: #111; text-align: left; }
   @media (max-width: 560px) {
     .price-teaser { flex-direction: column; padding: 24px 20px; gap: 20px; }
@@ -663,7 +676,8 @@
     width: 32px; height: 32px; border-radius: 50%;
     background: #F0DDA0; color: #6b5a2a; font-size: 15px; font-weight: 700;
   }
-  .faq-a-link { display: inline-block; margin-left: 6px; color: #999; text-decoration: underline; }
+  .faq-a-link { display: inline-block; margin-left: 6px; color: #999; text-decoration: underline; transition: color .2s; }
+  .faq-a-link:hover { color: #666; }
 
   /* 店舗検索(GW LP版の仕組みを移植) */
   #shop-search { text-align: center; }
@@ -901,6 +915,8 @@
 
     <div class="perk-section">
       <div class="perk-inner">
+        <span class="tv-bubble perk-bubble only-mobile">さらに!</span>
+        <span class="tv-bubble perk-bubble perk-bubble-desktop only-desktop">さらに!</span>
         <img class="perk-benefits-image only-desktop" src="イメージ画像/perk-benefits.png" alt="さらに併用できるお得な特典! THE SALE MAX30%OFF(メガネ&サングラス)+LINEお友だち登録で1,100円OFF・処方箋持参で1,100円OFF+2本目同時購入で10%OFF(価格の低い方に適用)">
         <img class="perk-benefits-image only-mobile" src="イメージ画像/sumaho.png" alt="さらに併用できるお得な特典! THE SALE MAX30%OFF(メガネ&サングラス)+LINEお友だち登録で1,100円OFF・処方箋持参で1,100円OFF+2本目同時購入で10%OFF(価格の低い方に適用)">
       </div>
@@ -1075,7 +1091,7 @@
       <div class="fit-band">
         <div class="fit-band-photo"><img class="is-contain" src="イメージ画像/accomref-speedy-i.png" alt="調節機能解析装置 アコモレフSpeedy-i(測定無料)"></div>
         <div class="fit-band-text">
-          <span class="tv-bubble">TV番組で紹介されました!</span>
+          <span class="tv-bubble">NHK番組で紹介されました!</span>
           <h3>調節機能解析装置で<br>眼のストレスを無料解析!</h3>
           <p>その疲れ目、メガネが原因かもしれません。「アコモレフSpeedy-i」で目の調節力やストレス度合いを無料でチェック(約2分)。他店でお作りのメガネのご相談も歓迎です。</p>
         </div>
