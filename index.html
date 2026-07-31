@@ -1318,7 +1318,7 @@ showInitialShops();
   function updateCtaVisibility(){
     if(!shopSection) return;
     var r = shopSection.getBoundingClientRect();
-    var overlapsShop = r.top < window.innerHeight && r.bottom > 0;
+    var overlapsShop = r.top < window.innerHeight * 0.2 && r.bottom > 0;
     cta.style.display = overlapsShop ? 'none' : '';
   }
   window.addEventListener('scroll', updateCtaVisibility);
