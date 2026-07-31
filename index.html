@@ -46,12 +46,28 @@
     text-decoration: none;
     border-radius: 12px 0 0 12px;
     box-shadow: -4px 4px 16px rgba(0,0,0,0.3);
+    transition: opacity 0.4s ease;
   }
   .floating-cta-icon { width: clamp(22px, 2.6vw, 28px); height: auto; }
   .floating-cta-text {
     writing-mode: vertical-rl; text-orientation: mixed;
     font-weight: 900; font-size: clamp(13px, 1.5vw, 15px); letter-spacing: 0.15em; line-height: 1.5;
     white-space: nowrap;
+  }
+  @media (max-width: 640px) {
+    .floating-cta {
+      right: auto; left: 50%; top: auto; bottom: 16px;
+      transform: translateX(-50%);
+      flex-direction: row; gap: 10px;
+      padding: 15px 40px;
+      border-radius: 999px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .floating-cta-icon { width: 22px; }
+    .floating-cta-text {
+      writing-mode: horizontal-tb; text-orientation: mixed;
+      font-size: 16px; letter-spacing: 0.08em; line-height: 1;
+    }
   }
 
   /* ── FV(赤ブロック) チラシ実物に忠実な、1本につながる対角線構成 ── */
@@ -125,8 +141,8 @@
   /* メガネ写真(中央よりやや右・少し傾けて動きを出す) */
   .fv-photo-wrap {
     position: absolute;
-    top: calc(4% + 10px); left: 58%;
-    width: 65%; height: 88%;
+    top: 11%; left: 62%;
+    width: 65%; height: 84%;
     z-index: 2;
     transform: translateX(-50%) rotate(-10deg);
   }
@@ -296,7 +312,7 @@
     color: #999; font-size: 14px; letter-spacing: 0.05em;
   }
   .fit-band-text { flex: 1; min-width: 0; padding: clamp(24px, 4vw, 40px); display: flex; flex-direction: column; justify-content: center; }
-  .fit-band-text h3 { font-size: clamp(20px, 2.4vw, 25px); font-weight: 900; color: #E30212; line-height: 1.4; margin: 0 0 10px; }
+  .fit-band-text h3 { font-size: clamp(20px, 2.4vw, 25px); font-weight: 900; color: #E30212; line-height: 1.4; margin: 0 0 10px; letter-spacing: 0.05em; }
   .fit-band-text p { font-size: 15px; line-height: 1.9; color: #444; margin: 0; }
   .tv-bubble {
     display: inline-block; align-self: flex-start;
@@ -382,10 +398,10 @@
   .fit-title-lg { text-align: left; max-width: 1000px; margin: 0 auto 12px; }
   .overview-title-tight { margin-bottom: 4px; font-size: clamp(22px, 8vw, 46px); }
   .overview-title-tight::before, .overview-title-tight::after {
-    content: "\2666"; color: #F5C518; font-size: 0.4em; vertical-align: middle; margin: 0 10px;
+    content: "\2666"; color: #F5C518; font-size: 0.5em; vertical-align: middle; margin: 0 14px;
   }
   .overview-title-brand { margin-right: 0.2em; white-space: nowrap; }
-  .overview-title-logo { height: 1.5em; width: auto; vertical-align: -0.3em; }
+  .overview-title-logo { height: 1.5em; width: auto; vertical-align: -0.3em; margin-left: -0.44em; }
   .overview-title-text { white-space: nowrap; }
   .overview-title-suffix { font-size: 0.6em; }
   @media (max-width: 640px) {
@@ -554,11 +570,14 @@
   /* レンズアップグレード紹介 */
   .lens-standard-note {
     max-width: 1000px; margin: 0 auto 24px; text-align: left;
-    font-size: clamp(13px, 1.6vw, 15px); line-height: 1.6; color: #444;
+    font-size: clamp(16px, 2.2vw, 20px); line-height: 1.6; color: #444;
     white-space: nowrap;
   }
   @media (max-width: 900px) {
     .lens-standard-note { white-space: normal; text-wrap: balance; }
+  }
+  @media (max-width: 480px) {
+    .lens-standard-note { font-size: 13px; white-space: nowrap; }
   }
   .lens-photo-disclaimer { max-width: 1000px; margin: -16px auto 24px; text-align: left; font-size: 12px; color: #999; }
   .lens-list {
@@ -576,7 +595,7 @@
   .lens-card-title-row { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; margin: 0 0 4px; }
   .lens-card-name { font-size: clamp(26px, 3.4vw, 34px); font-weight: 900; color: #111; margin: 0; }
   .lens-card-name span { color: #E30212; }
-  .lens-card-desc { font-size: clamp(16px, 2.2vw, 20px); font-weight: 400; color: #333; line-height: 1.8; margin: 0 0 14px; }
+  .lens-card-desc { font-size: clamp(13px, 1.6vw, 15px); font-weight: 400; color: #333; line-height: 1.8; margin: 0 0 14px; }
   .lens-card-price { font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif; font-size: clamp(24px, 3vw, 30px); font-weight: 900; color: #E30212; white-space: nowrap; margin: 0; position: relative; top: 2px; }
   .lens-card-v2-compare { display: flex; gap: 14px; margin-top: auto; }
   .lens-card-v2-compare-item { flex: 1; min-width: 0; }
@@ -824,7 +843,7 @@
     <div class="fv-photo-wrap only-desktop">
       <div class="fv-photo-group">
         <div class="fv-shadow"></div>
-        <img class="fv-image" src="イメージ画像/f7c6bd09-0553-4e16-863c-14d5fad10db0-removebg-preview.png" alt="メガネ">
+        <img class="fv-image" src="イメージ画像/fv-glasses.png" alt="メガネ">
       </div>
     </div>
 
@@ -858,7 +877,7 @@
         <h3>もう迷わない、すぐ見つかる。</h3>
         <img class="ai-mirror-band-photo-mobile only-mobile" src="イメージ画像/aifittingmirror-cutout.png" alt="AIフィッティングミラーで顔を測定している様子">
         <p class="ai-mirror-band-subtitle">AIフィッティングミラーで、<br class="only-mobile">似合い度を点数チェック&#65281;</p>
-        <p>店頭のAI搭載ミラーで、スタッフのサポートを受けながら、自分に似合う一本が無料でわかります。</p>
+        <p>店頭のAI搭載ミラーで、スタッフのサポートを受けながら、<br>自分に似合う一本が無料でわかります。</p>
       </div>
       <div class="ai-mirror-band-photo-wrap only-desktop">
         <img class="ai-mirror-band-photo" src="イメージ画像/aifittingmirror-cutout.png" alt="AIフィッティングミラーで顔を測定している様子">
@@ -914,7 +933,7 @@
             </div>
           </div>
           <p class="price-card-lens-note">※レンズ込みの価格です</p>
-          <p class="price-card-note">※上記は価格の一例です。<br class="only-mobile">詳しくは店頭にてお確かめください</p>
+          <p class="price-card-note">※上記は価格の一例です。<br class="only-mobile">詳しくは店頭にてお確かめください。</p>
         </div>
       </div>
       <div class="price-card">
@@ -940,7 +959,7 @@
               <div><span class="price-card-after">&yen;15,400<small>(税込)</small></span></div>
             </div>
           </div>
-          <p class="price-card-note">※上記は価格の一例です。<br class="only-mobile">詳しくは店頭にてお確かめください</p>
+          <p class="price-card-note">※上記は価格の一例です。<br class="only-mobile">詳しくは店頭にてお確かめください。</p>
         </div>
       </div>
       <div class="price-teaser">
@@ -1060,7 +1079,7 @@
       <div class="fit-band fit-band-reverse">
         <div class="fit-band-photo"><img src="イメージ画像/staff-fitting-scene.png" alt="スタッフがメガネを丁寧に手入れしている様子"></div>
         <div class="fit-band-text">
-          <h3>国家資格<br>「眼鏡作製技能士」在籍</h3>
+          <h3>全店に<br class="only-mobile">「眼鏡作製技能士」が在籍</h3>
           <p>フィッティングもレンズ選びも、国家資格「眼鏡作製技能士」におまかせください。あなたのライフスタイルに合わせて、心地よい一本をご提案します。</p>
         </div>
       </div>
@@ -1438,7 +1457,8 @@ showInitialShops();
     if(!shopSection) return;
     var r = shopSection.getBoundingClientRect();
     var overlapsShop = r.top < window.innerHeight * 0.2 && r.bottom > 0;
-    cta.style.display = overlapsShop ? 'none' : '';
+    cta.style.opacity = overlapsShop ? '0' : '1';
+    cta.style.pointerEvents = overlapsShop ? 'none' : '';
   }
   window.addEventListener('scroll', updateCtaVisibility);
   window.addEventListener('resize', updateCtaVisibility);
