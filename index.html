@@ -66,7 +66,7 @@
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    object-fit: contain; object-position: top left;
+    object-fit: cover; object-position: top left;
     z-index: 3;
     pointer-events: none;
   }
@@ -122,13 +122,13 @@
   .fv-date-day { font-weight: 700; font-size: 0.7em; }
   .fv-date-sub { font-weight: 500; font-size: 0.7em; }
 
-  /* メガネ写真(右側・少し傾けて動きを出す・左下に食い込ませて要素をつなげる) */
+  /* メガネ写真(中央よりやや右・少し傾けて動きを出す) */
   .fv-photo-wrap {
     position: absolute;
-    top: calc(4% + 10px); right: 9%;
+    top: calc(4% + 10px); left: 58%;
     width: 65%; height: 88%;
     z-index: 2;
-    transform: rotate(-10deg);
+    transform: translateX(-50%) rotate(-10deg);
   }
   .fv-photo-wrap::before {
     content: '';
@@ -240,7 +240,7 @@
   }
 
   @media (max-width: 640px) {
-    .fv { height: auto; padding: 0; }
+    .fv { height: auto; padding: 0; margin-bottom: -1px; }
   }
 
   /* FV直下の特典セクション(ユーザー作成の完成画像を表示) */
@@ -361,7 +361,6 @@
     .lens-standard-band h3 { text-align: center; }
   }
   .lens-standard-diagram { display: block; width: 100%; height: auto; }
-  .glasses-tag-illust { display: block; width: min(220px, 50vw); height: auto; margin: 12px auto; }
   .section-title-sm {
     font-size: clamp(24px, 3vw, 30px); font-weight: 900; color: #111;
     text-align: center; margin: 0 0 16px;
@@ -374,9 +373,13 @@
   .section-title span { color: #111; }
   .lens-section-title { text-align: left; max-width: 1000px; margin: 0 auto 12px; }
   .fit-title-lg { text-align: left; max-width: 1000px; margin: 0 auto 12px; }
-  .overview-title-tight { margin-bottom: 4px; font-size: clamp(21px, 6.8vw, 46px); }
+  .overview-title-tight { margin-bottom: 4px; font-size: clamp(19px, 6vw, 46px); }
+  .overview-title-tight::before, .overview-title-tight::after {
+    content: "\25BC"; color: #F5C518; font-size: 0.45em; vertical-align: middle; margin: 0 18px;
+  }
   .overview-title-brand { margin-right: 0.2em; }
-  .overview-title-logo { height: 1em; width: auto; vertical-align: -0.06em; }
+  .overview-title-logo { height: 1.5em; width: auto; vertical-align: -0.3em; }
+  .overview-title-suffix { font-size: 0.6em; }
   @media (min-width: 641px) {
     .overview-title-logo { height: 1.6em; vertical-align: -0.34em; }
   }
@@ -448,22 +451,43 @@
   .price-card-corner .corner-num { font-size: 62px; }
   .price-card-corner .corner-pct { font-size: 26px; }
   .price-teaser {
-    display: flex; align-items: center; gap: 24px;
+    display: flex; align-items: center; gap: 32px;
     background: #fff; border: 2px solid #F5C518;
-    padding: 20px 24px;
+    padding: 14px 20px;
   }
+  .price-teaser-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+  .price-teaser-main { display: flex; align-items: center; gap: 24px; }
   .price-teaser-photo-ph {
-    flex: 0 0 88px; height: 88px; border-radius: 8px;
+    flex: 0 0 170px; height: 170px; border-radius: 8px;
     background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 100%);
     display: flex; align-items: center; justify-content: center;
     color: #999; font-size: 12px; line-height: 1.4; text-align: center;
   }
-  .price-teaser-text { flex: 1; min-width: 0; text-align: left; }
-  .price-teaser-title { margin: 0 0 4px; font-size: 16px; font-weight: 900; color: #111; }
-  .price-teaser-sub { margin: 0; font-size: 13px; color: #999; }
+  .price-teaser-photo {
+    flex: 0 0 170px; height: 170px; border-radius: 8px;
+    background: #F3EFE6; object-fit: contain;
+  }
+  .price-teaser-text { flex: 0 1 380px; max-width: 380px; min-width: 0; text-align: left; }
+  .price-teaser-label { margin: 0; font-size: 16px; font-weight: 700; color: #111; }
+  .price-teaser-title { margin: 0 0 6px; font-size: 26px; font-weight: 900; color: #111; line-height: 1.3; }
+  .price-teaser-prices { flex: 0 0 auto; display: flex; gap: 24px; }
+  .price-teaser-price-group { display: flex; flex-direction: column; text-align: left; }
+  .price-teaser-price-label { font-size: 12px; font-weight: 700; letter-spacing: 0.05em; color: #999; margin-bottom: 4px; white-space: nowrap; }
+  .price-teaser-price-value {
+    font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif;
+    font-size: 32px; font-weight: 900; color: #E30212; white-space: nowrap;
+  }
+  .price-teaser-cta { margin: 0; font-size: 14px; font-weight: 700; color: #E30212; text-align: left; }
+  .price-teaser-cta a { color: inherit; text-decoration: underline; }
+  .price-teaser-note { margin: 0; font-size: 12px; color: #111; text-align: left; }
   @media (max-width: 560px) {
-    .price-teaser { flex-direction: column; text-align: center; gap: 12px; padding: 20px; }
+    .price-teaser { flex-direction: column; }
+    .price-teaser-main { flex-direction: column; text-align: center; gap: 12px; }
     .price-teaser-text { text-align: center; }
+    .price-teaser-cta { text-align: center; }
+    .price-teaser-note { text-align: center; }
+    .price-teaser-prices { justify-content: center; }
+    .price-teaser-note { text-align: center; }
   }
   @media (max-width: 560px) {
     .price-card { flex-direction: column; align-items: stretch; padding: 22px 20px; gap: 10px; }
@@ -549,7 +573,7 @@
     word-break: keep-all; overflow-wrap: break-word;
   }
   .overview-highlight {
-    background: linear-gradient(transparent 80%, #F5C518 80%, #F5C518 90%, transparent 90%);
+    color: #E30212;
     font-weight: 700;
   }
   .overview-period {
@@ -786,9 +810,7 @@
   <!-- ① アイメガネ THE SALEとは -->
   <section class="section section-red-frame">
    <div class="sale-frame-inner">
-    <h2 class="section-title overview-title-tight"><span class="overview-title-brand"><img class="overview-title-logo" src="イメージ画像/aimegane_logo_transparent.png" alt="アイメガネ"></span><span class="overview-title-text">THE SALE<span>とは</span></span></h2>
-
-    <img class="glasses-tag-illust" src="イメージ画像/megane-sale-tag.png" alt="メガネにSALEタグが付いているイラスト">
+    <h2 class="section-title overview-title-tight"><span class="overview-title-brand"><img class="overview-title-logo" src="イメージ画像/aimegane_logo_transparent.png" alt="アイメガネ"></span><span class="overview-title-text">THE SALE<span class="overview-title-suffix">とは</span></span></h2>
 
     <div class="overview-body">
       対象のメガネ・サングラスが<br class="only-mobile"><span class="overview-highlight">最大30%OFF</span>になる、<br class="only-mobile">夏から秋のお得なチャンス&#65281;
@@ -888,10 +910,26 @@
         </div>
       </div>
       <div class="price-teaser">
-        <div class="price-teaser-photo-ph">写真<br>準備中</div>
-        <div class="price-teaser-text">
-          <p class="price-teaser-title">補聴器もお取り扱いしています(スターキー Gシリーズ クラス10 RIC・充電器付き価格)</p>
-          <p class="price-teaser-sub">片耳&yen;78,500 / 両耳&yen;149,500</p>
+        <img class="price-teaser-photo" src="イメージ画像/price-hochouki.png" alt="スターキー Gシリーズ 補聴器">
+        <div class="price-teaser-body">
+          <div class="price-teaser-main">
+            <div class="price-teaser-text">
+              <p class="price-teaser-title">補聴器</p>
+              <p class="price-teaser-label">スターキー Gシリーズ クラス10 RIC<br>(充電器付き価格)</p>
+            </div>
+            <div class="price-teaser-prices">
+              <div class="price-teaser-price-group">
+                <span class="price-teaser-price-label">片耳</span>
+                <span class="price-teaser-price-value">&yen;78,500</span>
+              </div>
+              <div class="price-teaser-price-group">
+                <span class="price-teaser-price-label">両耳</span>
+                <span class="price-teaser-price-value">&yen;149,500</span>
+              </div>
+            </div>
+          </div>
+          <p class="price-teaser-cta"><a href="#shop-search">補聴器相談無料受付中 &#9654;</a></p>
+          <p class="price-teaser-note">※上記は価格の一例です。取り扱い商品・金額は店舗により異なります</p>
         </div>
       </div>
     </div>
