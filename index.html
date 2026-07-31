@@ -389,7 +389,11 @@
   .overview-title-text { white-space: nowrap; }
   .overview-title-suffix { font-size: 0.6em; }
   @media (max-width: 640px) {
-    .overview-title-tight::before, .overview-title-tight::after { font-size: 0.35em; margin: 0 6px; }
+    .overview-title-tight::before { content: none; }
+    .overview-title-tight::after { font-size: 0.35em; margin: 0 6px; }
+    .overview-title-text::before {
+      content: "\2666"; color: #F5C518; font-size: 0.35em; vertical-align: middle; margin-right: 6px;
+    }
   }
   @media (min-width: 641px) {
     .overview-title-logo { height: 1.6em; vertical-align: -0.34em; }
