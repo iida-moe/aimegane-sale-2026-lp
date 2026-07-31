@@ -323,7 +323,7 @@
     padding: 7px 20px; border-radius: 0;
     white-space: nowrap;
   }
-  .ai-mirror-band-text h3 { font-size: clamp(21px, 2.6vw, 27px); font-weight: 900; color: #E30212; line-height: 1.4; margin: 0 0 10px; }
+  .ai-mirror-band-text h3 { font-size: clamp(15px, 4vw, 27px); font-weight: 900; color: #E30212; line-height: 1.4; margin: 0 0 10px; white-space: nowrap; }
   .ai-mirror-band-text p.ai-mirror-band-subtitle { font-size: 15px; font-weight: 700; color: #111; margin: 0 0 16px; }
   .ai-mirror-band-text p { font-size: 14px; line-height: 1.9; color: #444; margin: 0; }
   .ai-mirror-band-text p.ai-mirror-band-cta {
@@ -447,6 +447,24 @@
   .price-card-corner .corner-text { display: inline-block; transform: translate(14px, 8px); }
   .price-card-corner .corner-num { font-size: 62px; }
   .price-card-corner .corner-pct { font-size: 26px; }
+  .price-teaser {
+    display: flex; align-items: center; gap: 24px;
+    background: #fff; border: 2px solid #F5C518;
+    padding: 20px 24px;
+  }
+  .price-teaser-photo-ph {
+    flex: 0 0 88px; height: 88px; border-radius: 8px;
+    background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: #999; font-size: 12px; line-height: 1.4; text-align: center;
+  }
+  .price-teaser-text { flex: 1; min-width: 0; text-align: left; }
+  .price-teaser-title { margin: 0 0 4px; font-size: 16px; font-weight: 900; color: #111; }
+  .price-teaser-sub { margin: 0; font-size: 13px; color: #999; }
+  @media (max-width: 560px) {
+    .price-teaser { flex-direction: column; text-align: center; gap: 12px; padding: 20px; }
+    .price-teaser-text { text-align: center; }
+  }
   @media (max-width: 560px) {
     .price-card { flex-direction: column; align-items: stretch; padding: 22px 20px; gap: 10px; }
     .price-card-photo-col { flex-basis: auto; width: 100%; margin-top: 34px; }
@@ -778,7 +796,7 @@
     <div class="ai-mirror-band">
       <div class="corner-tag">フレーム選び</div>
       <div class="ai-mirror-band-text">
-        <h3>もう迷わない、<br class="only-mobile">すぐ見つかる。</h3>
+        <h3>もう迷わない、すぐ見つかる。</h3>
         <p class="ai-mirror-band-subtitle">AIフィッティングミラーで<br class="only-mobile">似合う一本を判定</p>
         <p>店頭のAI搭載ミラーが、フレームの似合い度を測定。客観的なデータを見ながら、自分に似合う一本を無料で診断できます。</p>
         <p class="ai-mirror-band-cta"><a href="#shop-search">&#9654; 全国のアイメガネ店舗で無料体験できます</a></p>
@@ -866,6 +884,13 @@
           </div>
           <p class="price-card-lens-note">※レンズ込みの価格です</p>
           <p class="price-card-note">※上記は価格の一例です。取り扱い商品・金額は店舗により異なります</p>
+        </div>
+      </div>
+      <div class="price-teaser">
+        <div class="price-teaser-photo-ph">写真<br>準備中</div>
+        <div class="price-teaser-text">
+          <p class="price-teaser-title">補聴器もお取り扱いしています</p>
+          <p class="price-teaser-sub">価格例は近日公開予定</p>
         </div>
       </div>
     </div>
