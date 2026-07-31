@@ -56,12 +56,13 @@
   }
   @media (max-width: 640px) {
     .floating-cta {
-      right: auto; left: 50%; top: auto; bottom: 16px;
-      transform: translateX(-50%);
-      flex-direction: row; gap: 10px;
-      padding: 15px 40px;
-      border-radius: 999px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      right: 0; left: 0; top: auto; bottom: 0;
+      width: 100%; box-sizing: border-box;
+      transform: none;
+      flex-direction: row; justify-content: center; gap: 10px;
+      padding: 16px 20px;
+      border-radius: 0;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.3);
     }
     .floating-cta-icon { width: 22px; }
     .floating-cta-text {
@@ -314,6 +315,9 @@
   .fit-band-text { flex: 1; min-width: 0; padding: clamp(24px, 4vw, 40px); display: flex; flex-direction: column; justify-content: center; }
   .fit-band-text h3 { font-size: clamp(20px, 2.4vw, 25px); font-weight: 900; color: #E30212; line-height: 1.4; margin: 0 0 10px; letter-spacing: 0.05em; }
   .fit-band-text p { font-size: 15px; line-height: 1.9; color: #444; margin: 0; }
+  @media (max-width: 640px) {
+    .fit-title-lead { display: inline-block; margin-left: 0.4em; }
+  }
   .tv-bubble {
     display: inline-block; align-self: flex-start;
     background: #F5C518; color: #111; font-weight: 700; font-size: 14px;
@@ -1079,7 +1083,7 @@
       <div class="fit-band fit-band-reverse">
         <div class="fit-band-photo"><img src="イメージ画像/staff-fitting-scene.png" alt="スタッフがメガネを丁寧に手入れしている様子"></div>
         <div class="fit-band-text">
-          <h3>全店に<br class="only-mobile">「眼鏡作製技能士」が在籍</h3>
+          <h3><span class="fit-title-lead">全店に</span><br class="only-mobile">「眼鏡作製技能士」が在籍</h3>
           <p>フィッティングもレンズ選びも、国家資格「眼鏡作製技能士」におまかせください。あなたのライフスタイルに合わせて、心地よい一本をご提案します。</p>
         </div>
       </div>
