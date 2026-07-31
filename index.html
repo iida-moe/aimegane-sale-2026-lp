@@ -268,6 +268,12 @@
     background: #FDF5E6;
     clip-path: polygon(0 0, 100% 0, 50% 100%);
   }
+  .section-divider-cream { background: #FDF5E6; }
+  .section-divider-triangle-white {
+    display: block; width: 100%; height: 100%;
+    background: #ffffff;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+  }
   .section-red-frame { background: #E30212; }
   .sale-frame-inner {
     background: #fff; max-width: 1100px; margin: 0 auto;
@@ -276,6 +282,9 @@
   }
   .fit-band-list { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
   .fit-band { display: flex; align-items: stretch; background: #fff; border: 2px solid #F5C518; overflow: hidden; }
+  @media (min-width: 721px) {
+    .fit-band { height: 320px; }
+  }
   .fit-band-reverse { flex-direction: row-reverse; }
   .fit-band-photo { flex: 0 0 42%; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
   .fit-band-photo img { display: block; width: 100%; height: auto; max-height: 280px; object-fit: cover; object-position: 65% center; border-radius: 8px; }
@@ -448,7 +457,7 @@
     font-size: 15px; letter-spacing: 0.05em;
     text-decoration: none; border-radius: 8px;
   }
-  .price-card-cta::after { content: '\2192'; font-weight: 900; }
+  .price-card-cta::after { content: '\25b6'; font-weight: 900; }
   .price-list-cta-wrap { display: flex; justify-content: center; margin-top: 28px; }
   .price-list-cta-wrap .price-card-cta { margin-top: 0; }
   .price-card-corner {
@@ -623,6 +632,7 @@
     width: 32px; height: 32px; border-radius: 50%;
     background: #F0DDA0; color: #6b5a2a; font-size: 15px; font-weight: 700;
   }
+  .faq-a-link { display: inline-block; margin-left: 6px; color: #999; text-decoration: underline; }
 
   /* 店舗検索(GW LP版の仕組みを移植) */
   #shop-search { text-align: center; }
@@ -839,7 +849,7 @@
         <h3>もう迷わない、すぐ見つかる。</h3>
         <img class="ai-mirror-band-photo-mobile only-mobile" src="イメージ画像/aifittingmirror-cutout.png" alt="AIフィッティングミラーで顔を測定している様子">
         <p class="ai-mirror-band-subtitle">AIフィッティングミラーで、<br class="only-mobile">似合い度を点数チェック&#65281;</p>
-        <p>店頭のAI搭載ミラーで、自分に似合う一本が無料でわかります。</p>
+        <p>店頭のAI搭載ミラーで、スタッフのサポートを受けながら、自分に似合う一本が無料でわかります。</p>
       </div>
       <div class="ai-mirror-band-photo-wrap only-desktop">
         <img class="ai-mirror-band-photo" src="イメージ画像/aifittingmirror-cutout.png" alt="AIフィッティングミラーで顔を測定している様子">
@@ -1026,6 +1036,8 @@
     </div>
   </section>
 
+  <div class="section-divider section-divider-cream"><div class="section-divider-triangle-white"></div></div>
+
   <!-- ③ かけ心地(調節機能解析装置・眼鏡作製技能士) -->
   <section class="section section-cream">
     <h2 class="section-title fit-title-lg">あなたの目に、<br class="only-mobile"><span>ちょうどいい一本を。</span></h2>
@@ -1063,7 +1075,7 @@
       </details>
       <details class="faq-item">
         <summary class="faq-q"><span class="faq-q-label">Q.</span><span class="faq-q-text">予約は不要ですか？</span><span class="faq-chevron">▾</span></summary>
-        <div class="faq-a"><span>A.</span>ご予約なしでもご来店いただけますが、スムーズにご案内するため事前のご予約をおすすめしています。</div>
+        <div class="faq-a"><span>A.</span><div>ご予約なしでもご来店いただけますが、スムーズにご案内するため事前のご予約をおすすめしています。<a href="#shop-search" class="faq-a-link">来店予約はこちら &#9654;</a></div></div>
       </details>
       <details class="faq-item">
         <summary class="faq-q"><span class="faq-q-label">Q.</span><span class="faq-q-text">セール中もレンズ相談できますか？</span><span class="faq-chevron">▾</span></summary>
@@ -1241,8 +1253,8 @@ function renderHeroShop(s){
 function showInitialShops(){
   const resEl=document.getElementById('shop-results');
   const countEl=document.getElementById('shop-count');
-  const initial=SHOPS.slice(0,6);
-  const rest=SHOPS.slice(6);
+  const initial=SHOPS.slice(0,4);
+  const rest=SHOPS.slice(4);
   countEl.style.display='none';
   resEl.innerHTML=`
     <div class="shop-initial">${renderShops(initial)}</div>
