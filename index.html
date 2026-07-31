@@ -326,12 +326,6 @@
   .ai-mirror-band-text h3 { font-size: clamp(16px, 4.7vw, 27px); font-weight: 900; color: #E30212; line-height: 1.4; margin: 0 0 10px; white-space: nowrap; }
   .ai-mirror-band-text p.ai-mirror-band-subtitle { font-size: 15px; font-weight: 700; color: #111; margin: 0 0 16px; }
   .ai-mirror-band-text p { font-size: 14px; line-height: 1.9; color: #444; margin: 0; }
-  .ai-mirror-band-text p.ai-mirror-band-cta {
-    margin-top: 16px; font-size: 14px; font-weight: 700; color: #E30212;
-  }
-  .ai-mirror-band-text p.ai-mirror-band-cta a {
-    color: inherit; text-decoration: underline;
-  }
   .ai-mirror-band-photo-wrap {
     flex: 0 0 42%;
     display: flex; align-items: center; justify-content: center;
@@ -455,7 +449,7 @@
     text-decoration: none; border-radius: 8px;
   }
   .price-card-cta::after { content: '\2192'; font-weight: 900; }
-  .price-list-cta-wrap { display: flex; justify-content: center; }
+  .price-list-cta-wrap { display: flex; justify-content: center; margin-top: 28px; }
   .price-list-cta-wrap .price-card-cta { margin-top: 0; }
   .price-card-corner {
     position: absolute; top: 16px; right: -82px; width: 350px;
@@ -504,9 +498,9 @@
   }
   .price-teaser-note { margin: 0; font-size: 12px; color: #111; text-align: left; }
   @media (max-width: 560px) {
-    .price-teaser { flex-direction: column; }
+    .price-teaser { flex-direction: column; padding: 24px 20px; gap: 20px; }
     .price-teaser-main { flex-direction: column; text-align: center; gap: 12px; }
-    .price-teaser-text { text-align: center; }
+    .price-teaser-text { flex: 0 1 auto; max-width: 100%; text-align: center; }
     .price-teaser-cta { text-align: center; }
     .price-teaser-note { text-align: center; }
     .price-teaser-prices { justify-content: center; }
@@ -846,7 +840,6 @@
         <img class="ai-mirror-band-photo-mobile only-mobile" src="イメージ画像/aifittingmirror-cutout.png" alt="AIフィッティングミラーで顔を測定している様子">
         <p class="ai-mirror-band-subtitle">AIフィッティングミラーで、<br class="only-mobile">似合い度を点数チェック&#65281;</p>
         <p>店頭のAI搭載ミラーで、自分に似合う一本が無料でわかります。</p>
-        <p class="ai-mirror-band-cta"><a href="#shop-search">&#9654; 全国のアイメガネ店舗で無料体験できます</a></p>
       </div>
       <div class="ai-mirror-band-photo-wrap only-desktop">
         <img class="ai-mirror-band-photo" src="イメージ画像/aifittingmirror-cutout.png" alt="AIフィッティングミラーで顔を測定している様子">
@@ -933,9 +926,6 @@
           <p class="price-card-note">※上記は価格の一例です。取り扱い商品・金額は店舗により異なります</p>
         </div>
       </div>
-      <div class="price-list-cta-wrap">
-        <a href="#shop-search" class="price-card-cta">この価格で相談する</a>
-      </div>
       <div class="price-teaser">
         <img class="price-teaser-photo" src="イメージ画像/price-hochouki.png" alt="スターキー Gシリーズ 補聴器">
         <div class="price-teaser-body">
@@ -959,6 +949,9 @@
           <p class="price-teaser-note">※上記は価格の一例です。取り扱い商品・金額は店舗により異なります</p>
         </div>
       </div>
+    </div>
+    <div class="price-list-cta-wrap">
+      <a href="#shop-search" class="price-card-cta">まずはお近くの店舗を探す</a>
     </div>
   </section>
 
