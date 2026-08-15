@@ -1651,7 +1651,7 @@ async function fetchZipCoord(zip7){
   }catch(e){}
   return null;
 }
-function renderSearchResult(userLat,userLng,labelHtml){
+function renderSearchResult(userLat,userLng,labelHtml,scrollToResult){
   shopState.mode='search';
   shopState.lastLat=userLat;
   shopState.lastLng=userLng;
@@ -1667,6 +1667,9 @@ function renderSearchResult(userLat,userLng,labelHtml){
   if(ranked.length===0){
     resEl.innerHTML='<p class="shop-empty">選択した都道府県に店舗がありません。都道府県の絞り込みを解除するか、別の都道府県をお試しください。</p>';
     updateFloatingBar();
+    if(scrollToResult){
+      countEl.scrollIntoView({behavior:'smooth',block:'start'});
+    }
     return;
   }
   const hero=ranked[0];
@@ -1687,6 +1690,9 @@ function renderSearchResult(userLat,userLng,labelHtml){
     `:''}
   `;
   updateFloatingBar();
+  if(scrollToResult){
+    countEl.scrollIntoView({behavior:'smooth',block:'start'});
+  }
 }
 function searchByLocation(){
   const btn=document.getElementById('shopGeoBtn');
@@ -1704,7 +1710,7 @@ function searchByLocation(){
   navigator.geolocation.getCurrentPosition(
     pos=>{
       btn.disabled=false;
-      renderSearchResult(pos.coords.latitude,pos.coords.longitude,'現在地から近い順');
+      renderSearchResult(pos.coords.latitude,pos.coords.longitude,'現在地から近い順',true);
     },
     ()=>{
       btn.disabled=false;
@@ -1730,7 +1736,7 @@ async function searchShop(){
     const coord=await fetchZipCoord(zip);
     if(coord){
       renderSearchResult(coord.lat,coord.lng,
-        `<span class="shop-count-zip">〒${z1}-${z2}</span>(${coord.addr})から近い順`);
+        `<span class="shop-count-zip">〒${z1}-${z2}</span>(${coord.addr})から近い順`,true);
       return;
     }
   }
@@ -1742,7 +1748,7 @@ async function searchShop(){
     return;
   }
   renderSearchResult(center[0],center[1],
-    `<span class="shop-count-zip">〒${z1}${z2?'-'+z2:''}</span> から近い順`);
+    `<span class="shop-count-zip">〒${z1}${z2?'-'+z2:''}</span> から近い順`,true);
 }
 document.getElementById('zip1').addEventListener('input',function(){if(this.value.length>=3)document.getElementById('zip2').focus();});
 document.getElementById('zip1').addEventListener('keydown',function(e){
