@@ -1,0 +1,1729 @@
+<?php
+/* page-lp-sale2026.php : アイメガネ THE SALE 2026 LP */
+$lp_assets = get_stylesheet_directory_uri() . '/lp/assets/sale2026/img';
+?>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>アイメガネ THE SALE 2026</title>
+<?php include get_stylesheet_directory() . '/lp/lp-tracking-head.php'; ?>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  html, body { overflow-x: hidden; margin: 0; padding: 0; }
+  html { background: #E30212; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: #FBF6EA; }
+
+  /* ── フローティングCTA(全ページ共通・右端に縦長で固定し、常に追尾する) ── */
+  .floating-cta {
+    position: fixed; right: 0;
+    top: 50%; transform: translateY(-50%);
+    z-index: 1000;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    padding: clamp(16px, 2vh, 22px) clamp(8px, 1.2vw, 12px);
+    background: #F5C518; color: #111;
+    text-decoration: none;
+    border-radius: 12px 0 0 12px;
+    box-shadow: -4px 4px 16px rgba(0,0,0,0.3);
+    transition: opacity 0.4s ease, background .2s;
+  }
+  .floating-cta:hover { background: #e0b400; }
+  .floating-cta-icon { width: clamp(22px, 2.6vw, 28px); height: auto; }
+  .floating-cta-text {
+    writing-mode: vertical-rl; text-orientation: mixed;
+    font-weight: 900; font-size: clamp(13px, 1.5vw, 15px); letter-spacing: 0.15em; line-height: 1.5;
+    white-space: nowrap;
+  }
+  @media (max-width: 640px) {
+    .floating-cta {
+      right: 0; left: 0; top: auto; bottom: 0;
+      width: 100%; box-sizing: border-box;
+      transform: none;
+      flex-direction: row; justify-content: center; gap: 12px;
+      padding: 20px 20px;
+      border-radius: 0;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.3);
+    }
+    .floating-cta-icon { width: 26px; }
+    .floating-cta-text {
+      writing-mode: horizontal-tb; text-orientation: mixed;
+      font-size: 19px; letter-spacing: 0.08em; line-height: 1;
+    }
+  }
+
+  /* ── FV(赤ブロック) チラシ実物に忠実な、1本につながる対角線構成 ── */
+  .fv {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    background: #E30212;
+    overflow: hidden;
+  }
+  .fv-text-graphic {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: contain; object-position: top left;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* 見出し+日付(左上・一体化した塊) */
+  .fv-hero {
+    position: absolute;
+    top: 6%; left: 4%;
+    z-index: 3;
+    max-width: 54%;
+  }
+  .fv-headline { display: flex; align-items: center; gap: clamp(2px, 0.6vw, 8px); }
+  .fv-headline-left { display: flex; flex-direction: column; align-items: flex-start; white-space: nowrap; }
+  .fv-brand {
+    font-size: clamp(39px, 5.8vh, 64px); font-weight: 700; color: #111;
+    letter-spacing: 0.04em;
+  }
+  .fv-the {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(88px, 14.5vh, 162px); font-weight: 400; color: #111;
+    letter-spacing: 0.12em; line-height: 1;
+    -webkit-text-stroke: 2px #111;
+    paint-order: stroke fill;
+  }
+  .fv-sale {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(196px, calc(33vh + 6px), 354px); font-weight: 400; color: #111;
+    letter-spacing: -0.02em; line-height: 1;
+  }
+
+  /* 日付(メガネ写真の下・写真に対して中央ぞろえ) */
+  .fv-date-wrap {
+    position: absolute;
+    left: 72%; bottom: calc(9% - 10px);
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 3;
+  }
+  .fv-date {
+    display: flex; align-items: baseline; justify-content: center; gap: 0.2em;
+    color: #fff;
+    font-size: clamp(79px, calc(5.5vh + 40px), 100px);
+    white-space: nowrap;
+    line-height: 0.9;
+  }
+  .fv-date-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.55em; font-weight: 400;
+    letter-spacing: 0.02em; line-height: 1;
+    white-space: nowrap;
+  }
+  .fv-date-main { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: calc(1em + 2px); line-height: 1; }
+  .fv-date-day { font-weight: 700; font-size: 0.7em; }
+  .fv-date-sub { font-weight: 500; font-size: 0.7em; }
+
+  /* メガネ写真(中央よりやや右・少し傾けて動きを出す) */
+  .fv-photo-wrap {
+    position: absolute;
+    top: 11%; left: 62%;
+    width: 65%; height: 84%;
+    z-index: 2;
+    transform: translateX(-50%) rotate(-10deg);
+  }
+  .fv-photo-wrap::before {
+    content: '';
+    position: absolute;
+    width: min(70vh, 46vw);
+    height: min(70vh, 46vw);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,197,24,0.30) 0%, rgba(245,197,24,0.12) 40%, rgba(245,197,24,0) 70%);
+    top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(5deg);
+    pointer-events: none;
+  }
+  .fv-photo-group { position: relative; width: 100%; height: 100%; }
+  .fv-image { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; }
+  .fv-shadow {
+    position: absolute;
+    width: 50%; height: 6%;
+    left: 48%; bottom: 14%;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 70%);
+    filter: blur(3px);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .fv-catch {
+    position: absolute;
+    top: 14%; right: 40%;
+    transform: rotate(-8deg);
+    font-size: clamp(17px, 2.2vh, 24px); font-weight: 700; color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.35);
+    white-space: nowrap;
+    z-index: 3;
+  }
+
+  /* 対象品目 + 割引(左下・写真の裾が少しかぶって連動して見える) */
+  .fv-discount-wrap {
+    position: absolute;
+    left: 4%; bottom: calc(9% - 10px);
+    z-index: 3;
+  }
+  .fv-discount-left {
+    display: flex; flex-direction: column; align-items: flex-start;
+    align-self: center;
+  }
+  .fv-item-label {
+    font-size: clamp(35px, 5.3vh, 53px); font-weight: 900; color: #111;
+    line-height: 1.05; margin: 0; white-space: nowrap;
+  }
+  .fv-discount {
+    display: flex; align-items: center; gap: 2px;
+    color: #F5C518; line-height: 0.9;
+  }
+  .fv-max {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(53px, 7.7vh, 77px); font-weight: 400; letter-spacing: 0.5em;
+    line-height: 1.05;
+  }
+  .fv-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(202px, 35vh, 367px); font-weight: 400; line-height: 0.85;
+    -webkit-text-stroke: 3px #111; paint-order: stroke fill;
+  }
+  .fv-pct-off {
+    font-family: 'Bebas Neue', sans-serif;
+    display: flex; flex-direction: column; align-self: flex-end;
+    font-size: clamp(58px, 10.3vh, 109px); font-weight: 400; line-height: 0.85;
+    margin-bottom: 0.22em;
+  }
+
+  /* CTA(今は非表示・必要になったら復活) */
+  .fv-cta {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 0.4em;
+    padding: clamp(14px, 2vh, 22px) clamp(28px, 3.4vw, 48px);
+    background: #fff; color: #111; font-weight: 700;
+    font-size: clamp(15px, 1.9vh, 21px); letter-spacing: 0.08em;
+    text-decoration: none; white-space: nowrap;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    transition: background .2s;
+  }
+  .fv-cta:hover { background: #eee; }
+  .fv-cta::after { content: '\2192'; font-weight: 900; }
+
+  /* スマホ専用FV(PC版と同じ「1枚絵+写真を重ねる」方式だが、
+     写真を重ねる土台(.fv-mobile-stage)の縦横比を画像そのものに固定するため、
+     画面幅が変わっても画像とメガネ写真の位置関係が崩れない) */
+  .fv-mobile-stage { position: relative; width: 100%; aspect-ratio: 1206 / 1450; overflow: hidden; }
+  .fv-mobile-graphic {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: auto; z-index: 2;
+    pointer-events: none;
+  }
+  .fv-mobile-photo {
+    position: absolute; z-index: 1;
+    left: 50%; top: 47%; width: 106%;
+    transform: translateX(-50%) translateY(-50%) rotate(-7deg);
+  }
+  .fv-mobile-photo img { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
+  .fv-mobile-photo::before {
+    content: ''; position: absolute; z-index: 0;
+    width: 90%; height: 90%; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,197,24,0.30) 0%, rgba(245,197,24,0.12) 40%, rgba(245,197,24,0) 70%);
+  }
+  .fv-mobile-photo::after {
+    content: ''; position: absolute; z-index: 0;
+    width: 55%; height: 14px; left: 50%; bottom: 8%;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 70%);
+    filter: blur(3px);
+  }
+
+  @media (max-width: 640px) {
+    .fv { height: auto; padding: 0; margin-bottom: -1px; }
+  }
+
+  /* FV直下の特典セクション(ユーザー作成の完成画像を表示) */
+  .perk-section {
+    background: #FBF6EA;
+    padding: clamp(24px, 4vh, 40px) clamp(8px, 1vw, 16px);
+  }
+  @media (max-width: 640px) {
+    .lens-standard-band { margin-bottom: 20px !important; }
+    .perk-section { padding-top: 16px; }
+  }
+  .perk-inner { max-width: 1000px; margin: 0 auto; position: relative; }
+  .perk-benefits-image { display: block; width: 100%; height: auto; }
+  .perk-bubble { margin: 0 0 10px; }
+  .perk-bubble.perk-bubble-desktop {
+    position: absolute; top: 16%; left: 22%;
+    margin: 0; transform: translateY(-50%);
+  }
+  .perk-bubble.perk-bubble-desktop::after {
+    top: 50%; bottom: auto; left: auto; right: -4px;
+    transform: translateY(-50%);
+    border-left: 7px solid #F5C518; border-right: none; border-top: 6px solid transparent; border-bottom: 6px solid transparent;
+  }
+  .only-mobile { display: none !important; }
+  @media (max-width: 640px) {
+    .only-mobile { display: block !important; }
+    .only-desktop { display: none !important; }
+    .perk-bubble.only-mobile { display: inline-block !important; }
+  }
+
+  /* ══════════════ FV より下のセクション ══════════════ */
+  .section { padding: 64px clamp(20px, 5vw, 80px); }
+  .section-sm { padding: 36px clamp(20px, 5vw, 80px); }
+
+  .section-white { background: #ffffff; }
+  .section-cream { background: #FDF5E6; }
+  .section-divider { background: #fff; height: 100px; }
+  .section-divider-triangle {
+    display: block; width: 100%; height: 100%;
+    background: #FDF5E6;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+  }
+  .section-divider-cream { background: #FDF5E6; }
+  .section-divider-triangle-white {
+    display: block; width: 100%; height: 100%;
+    background: #ffffff;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+  }
+  .section-red-frame { background: #E30212; }
+  .sale-frame-inner {
+    background: #fff; max-width: 1100px; margin: 0 auto;
+    padding: clamp(32px, 5vw, 56px) clamp(20px, 4vw, 48px);
+    border-radius: 24px;
+  }
+  .fit-band-list { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+  .fit-band { display: flex; align-items: stretch; background: #fff; border: 2px solid #F5C518; overflow: hidden; }
+  @media (min-width: 721px) {
+    .fit-band { height: 320px; }
+  }
+  .fit-band-reverse { flex-direction: row-reverse; }
+  .fit-band-photo { flex: 0 0 42%; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+  .fit-band-photo img { display: block; width: 100%; height: auto; max-height: 280px; object-fit: cover; object-position: 65% center; border-radius: 8px; }
+  .fit-band-photo img.is-contain { height: 280px; object-fit: contain; object-position: center; }
+  .fit-band-photo-ph {
+    width: 100%; aspect-ratio: 4/3; border-radius: 8px;
+    background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: #999; font-size: 14px; letter-spacing: 0.05em;
+  }
+  .fit-band-text { flex: 1; min-width: 0; padding: clamp(24px, 4vw, 40px); display: flex; flex-direction: column; justify-content: center; }
+  .fit-band-text h3 { font-size: clamp(20px, 2.4vw, 25px); font-weight: 900; color: #E30212; line-height: 1.4; margin: 0 0 10px; letter-spacing: 0.05em; }
+  .fit-band-text p { font-size: 15px; line-height: 1.9; color: #444; margin: 0; }
+  @media (max-width: 640px) {
+    .fit-title-bracket { display: inline-block; margin-left: -0.4em; }
+  }
+  .tv-bubble {
+    display: inline-block; align-self: flex-start;
+    background: #F5C518; color: #111; font-weight: 700; font-size: 14px;
+    padding: 7px 20px; border-radius: 999px; margin: 0 0 16px; position: relative;
+  }
+  .tv-bubble::after {
+    content: ""; position: absolute; bottom: -6px; left: 26px;
+    width: 0; height: 0;
+    border-left: 6px solid transparent; border-right: 6px solid transparent;
+    border-top: 6px solid #F5C518;
+  }
+  @media (max-width: 720px) {
+    .fit-band, .fit-band-reverse { flex-direction: column; }
+    .fit-band-photo { flex-basis: auto; width: 100%; }
+    .fit-band-photo img.is-contain { height: 220px; object-fit: contain; object-position: 30% center; }
+  }
+  .ai-mirror-band {
+    position: relative;
+    max-width: 1000px; margin: 24px auto 40px;
+    display: flex; align-items: stretch;
+    background: #fff; border: 2px solid #F5C518; overflow: visible;
+  }
+  .ai-mirror-band-text {
+    flex: 1; min-width: 0; text-align: left;
+    padding: clamp(24px, 4vw, 40px);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .corner-tag {
+    position: absolute; top: -35px; left: 0; z-index: 2;
+    background: #F5C518; color: #111;
+    font-weight: 900; font-size: clamp(13px, 1.6vw, 15px); letter-spacing: 0.05em;
+    padding: 7px 20px; border-radius: 0;
+    white-space: nowrap;
+  }
+  .ai-mirror-band-text h3 { font-size: clamp(16px, 4.7vw, 27px); font-weight: 900; color: #E30212; line-height: 1.4; margin: 0 0 10px; white-space: nowrap; }
+  .ai-mirror-band-text p.ai-mirror-band-subtitle { font-size: 15px; font-weight: 700; color: #111; margin: 0 0 16px; }
+  .ai-mirror-band-text p { font-size: 14px; line-height: 1.9; color: #444; margin: 0; }
+  .ai-mirror-band-photo-wrap {
+    flex: 0 0 42%;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .ai-mirror-band-photo { width: 100%; height: auto; max-height: 280px; object-fit: contain; }
+  .ai-mirror-band-photo-mobile {
+    display: block; width: 100%; max-height: 220px; object-fit: contain;
+    margin: 4px 0 16px;
+  }
+  @media (max-width: 800px) {
+    .ai-mirror-band { flex-direction: column; }
+    .ai-mirror-band-text { text-align: left; }
+    .ai-mirror-band-photo-wrap { flex-basis: auto; }
+    .lens-standard-band { flex-direction: column; }
+  }
+  .lens-standard-band {
+    position: relative;
+    max-width: 1000px; margin: 24px auto 40px;
+    background: #fff; border: 2px solid #F5C518;
+    display: flex; align-items: stretch;
+    overflow: visible;
+  }
+  .lens-standard-content {
+    flex: 1; min-width: 0;
+    padding: clamp(14px, 2vw, 20px) clamp(20px, 4vw, 36px);
+  }
+  .lens-standard-inner { width: 88%; max-width: 780px; margin: 0 auto; }
+  .lens-standard-band h3 { font-size: clamp(16px, 4.7vw, 27px); font-weight: 900; color: #E30212; line-height: 1.4; margin: 0 0 10px; text-align: left; }
+  @media (max-width: 800px) {
+    .lens-standard-band h3 { text-align: center; }
+  }
+  .lens-standard-diagram { display: block; width: 100%; height: auto; }
+  .section-title-sm {
+    font-size: clamp(24px, 3vw, 30px); font-weight: 900; color: #111;
+    text-align: center; margin: 0 0 16px;
+  }
+  .section-title-sm span { color: #111; }
+  .section-title {
+    font-size: clamp(32px, 4.8vw, 50px); font-weight: 900; color: #111;
+    text-align: center; margin: 0 0 40px;
+  }
+  .section-title span { color: #111; }
+  .lens-section-title { text-align: left; max-width: 1000px; margin: 0 auto 12px; }
+  .fit-title-lg { text-align: left; max-width: 1000px; margin: 0 auto 12px; }
+  .overview-title-tight { margin-bottom: 4px; font-size: clamp(22px, 8vw, 46px); }
+  .overview-title-tight::before, .overview-title-tight::after {
+    content: "\2666"; color: #F5C518; font-size: 0.5em; vertical-align: middle; margin: 0 14px;
+  }
+  .overview-title-brand { margin-right: 0.2em; white-space: nowrap; }
+  .overview-title-logo { height: 1.5em; width: auto; vertical-align: -0.3em; margin-left: -0.44em; }
+  .overview-title-text { white-space: nowrap; }
+  .overview-title-suffix { font-size: 0.6em; }
+  @media (max-width: 640px) {
+    .overview-title-tight::before { content: none; }
+    .overview-title-tight::after { font-size: 0.35em; margin: 0 6px; }
+    .overview-title-text::before {
+      content: "\2666"; color: #F5C518; font-size: 0.35em; vertical-align: middle; margin-right: 6px;
+    }
+  }
+  @media (min-width: 641px) {
+    .overview-title-logo { height: 1.6em; vertical-align: -0.34em; }
+  }
+
+  /* 価格例 */
+  .price-list {
+    max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;
+  }
+  .price-card {
+    position: relative;
+    display: flex; align-items: center; gap: 44px;
+    background: #fff;
+    border: 2px solid #F5C518;
+    padding: 36px 24px;
+    overflow: hidden;
+    clip-path: inset(0);
+  }
+  .price-card-photo-col { flex: 0 0 clamp(300px, 42vw, 420px); display: flex; flex-direction: column; gap: 6px; }
+  .price-card-photo-wrap {
+    position: relative;
+    height: clamp(150px, 20vw, 195px);
+    border-radius: 10px; overflow: hidden;
+  }
+  .price-card-photo {
+    width: 100%; height: 100%; object-fit: contain;
+    background: #F3EFE6;
+    transform: scale(1.5);
+  }
+  .price-card-photo-note {
+    position: absolute; bottom: 6px; right: 8px;
+    font-size: 11px; color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+  }
+  .price-card-body { flex: 1; min-width: 0; text-align: left; }
+  .price-card-title-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+  .price-card-name { font-size: 26px; font-weight: 900; color: #111; margin: 0 0 14px; text-align: left; }
+  .price-card-title-row .price-card-name { margin: 0; }
+  .price-card-prices { display: flex; align-items: flex-end; justify-content: flex-start; flex-wrap: wrap; gap: 14px; margin-bottom: 14px; }
+  .price-card-price-group { display: flex; flex-direction: column; }
+  .price-card-price-label { font-size: 12px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .price-card-before-label { color: #999; }
+  .price-card-after-label { color: #E30212; }
+  .price-card-before { font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif; font-size: 60px; line-height: 1; color: #999; text-decoration: line-through; text-decoration-color: #bbb; }
+  .price-card-after small { font-family: 'Noto Sans JP', sans-serif; font-size: 15px; font-weight: 700; margin-left: 2px; }
+  .price-card-before-unit {
+    font-size: 15px; font-weight: 700; color: #999; margin-left: 2px;
+    text-decoration: none;
+  }
+  .price-card-arrow { color: #F5C518; font-size: 22px; margin-bottom: 6px; }
+  .price-card-after {
+    font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif;
+    color: #E30212; font-size: 60px; line-height: 1;
+  }
+  .price-card-tag {
+    display: inline-block; background: #F5C518; color: #111;
+    font-weight: 800; font-size: 13px; padding: 4px 14px; border-radius: 999px;
+  }
+  .price-card-lens-note { margin: 0 0 4px; font-size: 12px; font-weight: 400; color: #111; }
+  .price-card-note { margin: 20px 0 0; font-size: 12px; color: #111; }
+  .price-card-lens-note + .price-card-note { margin-top: 2px; }
+  .price-card-cta {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.4em;
+    margin-top: 18px;
+    padding: 18px 40px;
+    background: #E30212; color: #fff; font-weight: 700;
+    font-size: 19px; letter-spacing: 0.05em;
+    text-decoration: none; border-radius: 8px;
+    transition: background .2s;
+  }
+  .price-card-cta:hover { background: #b3010e; }
+  .price-card-cta::after { content: '\25b6'; font-weight: 900; }
+  .price-list-cta-wrap { display: flex; justify-content: center; margin-top: 28px; }
+  .price-list-cta-wrap .price-card-cta { margin-top: 0; white-space: nowrap; }
+  @media (max-width: 480px) {
+    .price-list-cta-wrap .price-card-cta { padding: 15px 22px; font-size: 16px; }
+  }
+  .price-card-corner {
+    position: absolute; top: 16px; right: -82px; width: 350px;
+    background: #E30212; color: #fff; text-align: center;
+    font-family: 'Bebas Neue', sans-serif; line-height: 1;
+    padding: 10px 0; transform: rotate(40deg);
+    border-top: 2px solid #F5C518; border-bottom: 2px solid #F5C518;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .price-card-corner .corner-text { display: inline-block; transform: translate(14px, 8px); }
+  .price-card-corner .corner-num { font-size: 62px; }
+  .price-card-corner .corner-pct { font-size: 26px; }
+  .price-teaser {
+    display: flex; align-items: center; gap: 48px;
+    background: #fff; border: 2px solid #F5C518;
+    padding: 14px 20px;
+  }
+  .price-teaser-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+  .price-teaser-main { display: flex; align-items: center; gap: 24px; }
+  .price-teaser-photo-ph {
+    flex: 0 0 170px; height: 170px; border-radius: 8px;
+    background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: #999; font-size: 12px; line-height: 1.4; text-align: center;
+  }
+  .price-teaser-photo {
+    flex: 0 0 clamp(300px, 42vw, 420px); width: clamp(300px, 42vw, 420px); height: 170px; border-radius: 8px;
+    background: #F3EFE6; object-fit: contain;
+  }
+  .price-teaser-text { flex: 0 1 380px; max-width: 380px; min-width: 0; text-align: left; }
+  .price-teaser-label { margin: 0; font-size: 16px; font-weight: 700; color: #111; }
+  .price-teaser-title { margin: 0 0 6px; font-size: 26px; font-weight: 900; color: #111; line-height: 1.3; }
+  .price-teaser-prices { flex: 0 0 auto; display: flex; gap: 24px; }
+  .price-teaser-price-group { display: flex; flex-direction: column; text-align: left; }
+  .price-teaser-price-label { font-size: 12px; font-weight: 700; letter-spacing: 0.05em; color: #999; margin-bottom: 4px; white-space: nowrap; }
+  .price-teaser-price-value {
+    font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif;
+    font-size: 32px; font-weight: 900; color: #E30212; white-space: nowrap;
+  }
+  .price-teaser-cta { margin: 0; text-align: left; }
+  .price-teaser-cta a {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #fff; color: #666; border: 1.5px solid #ccc;
+    font-size: 13px; font-weight: 700; padding: 8px 16px;
+    border-radius: 6px; text-decoration: none;
+    transition: background .2s, border-color .2s;
+  }
+  .price-teaser-cta a:hover { background: #f5f5f5; border-color: #999; }
+  .price-teaser-note { margin: 0; font-size: 12px; color: #111; text-align: left; }
+  @media (max-width: 560px) {
+    .price-teaser { flex-direction: column; padding: 24px 20px; gap: 20px; }
+    .price-teaser-main { flex-direction: column; text-align: center; gap: 12px; }
+    .price-teaser-text { flex: 0 1 auto; max-width: 100%; text-align: center; }
+    .price-teaser-cta { text-align: center; }
+    .price-teaser-note { text-align: center; }
+    .price-teaser-prices { justify-content: center; }
+    .price-teaser-note { text-align: center; }
+    .price-teaser-photo { flex: 0 0 250px; width: 250px; height: 142px; }
+  }
+  @media (max-width: 560px) {
+    .price-card { flex-direction: column; align-items: stretch; padding: 22px 20px; gap: 10px; }
+    .price-card-photo-col { flex-basis: auto; width: 100%; margin-top: 34px; }
+    .price-card-photo-wrap { height: auto; aspect-ratio: 3 / 2; width: 78%; margin: 0 auto; }
+    .price-card-photo { transform: scale(1.05); }
+    .price-card-body { text-align: center; }
+    .price-card-title-row { justify-content: center; margin-bottom: 8px; }
+    .price-card-name { margin-bottom: 8px; text-align: center; }
+    .price-card-prices { flex-direction: column; align-items: center; gap: 6px; margin-bottom: 8px; }
+    .price-card-price-group { text-align: left; }
+    .price-card-arrow {
+      transform: none; margin-bottom: 0;
+      display: inline-block; width: 0; height: 0; color: transparent; font-size: 0;
+      border-left: 18px solid transparent; border-right: 18px solid transparent;
+      border-top: 13px solid #F5C518;
+    }
+    .price-card-before { font-size: 40px; }
+    .price-card-after { font-size: 60px; }
+    .price-card-price-label { font-size: 14px; }
+    .price-card-name { font-size: 24px; }
+    .price-card-lens-note { text-align: left; margin-top: 6px; }
+    .price-card-note { text-align: left; margin-top: 6px; }
+    .price-card-corner { width: 190px; top: 0px; right: -58px; padding: 8px 0; }
+    .price-card-corner .corner-num { font-size: 40px; }
+    .price-card-corner .corner-pct { font-size: 16px; }
+    .price-card-corner .corner-text { transform: translate(8px, 5px); }
+  }
+
+  /* レンズアップグレード紹介 */
+  .lens-standard-note {
+    max-width: 1000px; margin: 0 auto 24px; text-align: left;
+    font-size: clamp(16px, 2.2vw, 20px); line-height: 1.6; color: #111;
+    white-space: nowrap;
+  }
+  @media (max-width: 900px) {
+    .lens-standard-note { white-space: normal; text-wrap: balance; }
+  }
+  @media (max-width: 480px) {
+    .lens-standard-note { font-size: 13px; }
+  }
+  .lens-photo-disclaimer { max-width: 1000px; margin: -16px auto 24px; text-align: left; font-size: 12px; color: #111; }
+  .lens-list {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 24px;
+  }
+  .lens-card-v2 {
+    background: #fff; border-radius: 14px; padding: clamp(24px, 3vw, 32px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.14);
+    display: flex; gap: clamp(20px, 3vw, 32px); align-items: stretch;
+  }
+  .lens-card-v2-photo { flex: 0 0 clamp(260px, 30vw, 360px); height: clamp(300px, 30vw, 360px); border-radius: 12px; overflow: hidden; }
+  .lens-card-v2-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .lens-card-v2-content { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .lens-card-title-row { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; margin: 0 0 4px; }
+  .lens-card-name { font-size: clamp(26px, 3.4vw, 34px); font-weight: 900; color: #111; margin: 0; }
+  .lens-card-name span { color: #E30212; }
+  .lens-card-desc { font-size: clamp(13px, 1.6vw, 15px); font-weight: 400; color: #333; line-height: 1.8; margin: 0 0 14px; }
+  .lens-card-price { font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif; font-size: clamp(24px, 3vw, 30px); font-weight: 900; color: #E30212; white-space: nowrap; margin: 0; position: relative; top: 2px; }
+  .lens-card-v2-compare { display: flex; gap: 14px; margin-top: auto; }
+  .lens-card-v2-compare-item { flex: 1; min-width: 0; }
+  .lens-card-v2-compare-label {
+    display: inline-block; background: #333; color: #fff;
+    font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px;
+    white-space: nowrap;
+  }
+  .lens-card-v2-compare-img, .lens-card-v2-compare-placeholder {
+    width: 100%; height: clamp(90px, 12vw, 140px); border-radius: 8px;
+  }
+  .lens-card-v2-compare-img { object-fit: cover; display: block; }
+  .lens-card-v2-compare-img.is-bottom { object-position: center 70%; }
+  .lens-card-v2-compare-placeholder {
+    display: flex; align-items: center; justify-content: center;
+    background: #f2f2f2; border: 1px dashed #ccc; color: #999; font-size: 13px;
+  }
+  @media (max-width: 720px) {
+    .lens-card-v2 { flex-direction: column; }
+    .lens-card-v2-photo { flex-basis: auto; height: clamp(170px, 44vw, 220px); }
+    .lens-card-v2-photo img { object-position: center 20%; }
+  }
+
+  /* セール概要 */
+  .overview-body {
+    max-width: 900px; margin: 0 auto 64px; text-align: center;
+    font-size: clamp(16px, 2vw, 19px); font-weight: 500; line-height: 1.8; color: #111;
+    word-break: keep-all; overflow-wrap: break-word;
+  }
+  .overview-highlight {
+    color: #E30212;
+    font-weight: 700;
+  }
+  .overview-period {
+    display: inline-block; margin-top: 20px; padding: 10px 28px;
+    background: #111; color: #fff; border-radius: 999px; font-weight: 700;
+    font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif; letter-spacing: 0.03em;
+  }
+
+  /* よくある質問 */
+  .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+  .faq-item { background: #fff; border: 1px solid #eee; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); overflow: hidden; }
+  .faq-q {
+    display: flex; align-items: center; gap: 16px; font-weight: 700; color: #111; font-size: 16px;
+    padding: 20px 24px; cursor: pointer; list-style: none; transition: background .15s;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q:hover { background: #FAF6EE; }
+  .faq-item[open] .faq-q { background: #FAF6EE; }
+  .faq-q-label {
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    width: 32px; height: 32px; border-radius: 50%; line-height: 1; padding-bottom: 2px; box-sizing: border-box;
+    background: #E30212; color: #fff; font-size: 15px; font-weight: 900;
+  }
+  .faq-q-text { flex: 1; color: #111; text-wrap: balance; }
+  .faq-chevron { color: #E30212; font-size: 22px; transition: transform .2s; flex-shrink: 0; }
+  .faq-item[open] .faq-chevron { transform: rotate(180deg); }
+  .faq-a { display: flex; gap: 16px; padding: 16px 24px; font-size: 15px; color: #555; line-height: 1.7; background: #FAF6EE; }
+  .faq-a span {
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    width: 32px; height: 32px; border-radius: 50%; line-height: 1; padding-bottom: 2px; box-sizing: border-box;
+    background: #F0DDA0; color: #6b5a2a; font-size: 15px; font-weight: 700;
+  }
+  .faq-a-link { display: inline-block; margin-left: 6px; color: #E30212; text-decoration: underline; transition: color .2s; }
+  .faq-a-link:hover { color: #b3010e; }
+
+  /* 店舗検索(GW LP版の仕組みを移植) */
+  #shop-search { text-align: center; }
+  .shop-intro {
+    font-size: clamp(15px, 2vw, 20px); color: #555; line-height: 1.8; margin-bottom: 24px;
+    max-width: 600px; margin-left: auto; margin-right: auto;
+  }
+  .shop-search-box {
+    background: #F7F7F5; border-radius: 16px;
+    max-width: 500px; margin: 0 auto 32px;
+    padding: clamp(20px, 3vw, 32px) clamp(16px, 3vw, 28px);
+  }
+  .shop-filter-panel {
+    display: none;
+    background: #F7F7F5; border-radius: 16px; text-align: left;
+    max-width: 900px; margin: 0 auto 24px;
+    padding: clamp(20px, 3vw, 28px) clamp(16px, 3vw, 24px);
+  }
+  .shop-filter-panel.open { display: block; }
+  .shop-filter-panel-placeholder { margin: 0; font-size: 14px; color: #999; text-align: center; }
+  .shop-filter-group { margin-bottom: 20px; }
+  .shop-filter-group:last-child { margin-bottom: 0; }
+  .shop-filter-group-title { margin: 0 0 10px; font-size: 14px; font-weight: 900; color: #111; }
+  .shop-filter-checks { display: flex; flex-wrap: wrap; gap: 10px 24px; }
+  .shop-filter-check {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 14px; color: #333; cursor: pointer; user-select: none;
+  }
+  .shop-filter-check input[type="checkbox"] { width: 17px; height: 17px; accent-color: #E30212; cursor: pointer; }
+  .shop-pref-tabs {
+    display: flex; flex-wrap: nowrap; justify-content: flex-start; gap: 8px;
+    max-width: 100%; margin: 0 auto 24px;
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    padding: 0 4px 4px;
+  }
+  @media (min-width: 640px) {
+    .shop-pref-tabs { justify-content: center; }
+  }
+  .shop-pref-tab {
+    display: inline-flex; align-items: center; gap: 5px; flex-shrink: 0;
+    padding: 7px 13px; border: 1.5px solid #ddd; border-radius: 999px;
+    background: #fff; color: #555; font-size: 12.5px; font-weight: 700;
+    cursor: pointer; transition: all .2s; font-family: inherit; white-space: nowrap;
+  }
+  .shop-pref-tab:hover { border-color: #E30212; color: #E30212; }
+  .shop-pref-tab.active { background: #E30212; border-color: #E30212; color: #fff; }
+  .shop-pref-count {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 20px; height: 20px; padding: 0 4px;
+    background: rgba(0,0,0,0.08); border-radius: 999px; font-size: 11px;
+  }
+  .shop-pref-tab.active .shop-pref-count { background: rgba(255,255,255,0.25); }
+
+  .shop-geo-wrap { max-width: 420px; margin: 0 auto; }
+  .shop-geo-btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+    padding: 16px 20px; background: #111; color: #fff;
+    font-size: 16px; font-weight: 700; border: none; border-radius: 8px;
+    cursor: pointer; transition: background .2s; font-family: inherit;
+  }
+  .shop-geo-btn:hover { background: #333; }
+  .shop-geo-btn:disabled { opacity: .6; cursor: default; }
+  .shop-geo-icon { font-size: 18px; }
+  .shop-divider { display: flex; align-items: center; gap: 12px; margin: 18px 0; color: #999; font-size: 13px; }
+  .shop-divider::before, .shop-divider::after { content: ''; flex: 1; height: 1px; background: #e0e0e0; }
+  .shop-search-form {
+    display: flex; align-items: center; justify-content: center;
+    flex-wrap: wrap; gap: 8px; margin-bottom: 20px;
+  }
+  .shop-zip-label { font-size: 18px; font-weight: 700; color: #111; }
+  .shop-zip-input {
+    width: 80px; padding: 12px 16px;
+    font-size: 18px; font-weight: 700; text-align: center;
+    border: 2px solid #e0e0e0; border-radius: 8px;
+    font-family: inherit; color: #111;
+    transition: border-color .2s;
+  }
+  .shop-zip-input-lg { width: 100px; }
+  .shop-zip-input:focus { outline: none; border-color: #E30212; }
+  .shop-zip-sep { font-size: 18px; font-weight: 700; color: #888; }
+  .shop-search-btn {
+    padding: 12px 28px;
+    background: #E30212; color: #fff;
+    font-size: 16px; font-weight: 900;
+    border: none; border-radius: 8px; cursor: pointer;
+    transition: background .2s;
+  }
+  .shop-search-btn:hover { background: #b3010e; }
+  .shop-count { font-size: 15px; font-weight: 700; color: #555; margin-bottom: 16px; }
+  .shop-count-zip { font-weight: 900; color: #E30212; }
+  .shop-count-note { display: inline-block; margin-top: 4px; font-size: 11px; color: #888; }
+  .shop-results { text-align: left; margin-bottom: 8px; max-width: 900px; margin-left: auto; margin-right: auto; }
+  .shop-initial, .shop-more-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .shop-more-list { display: none; margin-top: 16px; }
+  .shop-more-list.open { display: grid; }
+  .shop-more-wrap { position: relative; text-align: center; }
+  .shop-more-list-outer { display: none; position: relative; margin-top: 16px; }
+  .shop-more-list-outer.open { display: block; }
+  .shop-more-list-outer .shop-more-list { display: grid !important; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .shop-more-btn {
+    display: inline-block; margin: 24px auto 0; padding: 4px 2px;
+    background: none; border: none; color: #E30212;
+    font-size: 15px; font-weight: 700; letter-spacing: .04em; cursor: pointer;
+    transition: opacity .2s; text-decoration: underline; text-underline-offset: 4px;
+  }
+  .shop-more-btn:hover { opacity: .7; }
+  .shop-more-btn-text::after { content: ' \25bc'; font-size: 1.2em; margin-left: 6px; text-decoration: none; display: inline-block; }
+  .shop-more-btn.open .shop-more-btn-text::after { content: ' \25b2'; }
+  .shop-back-rail { display: none; }
+  .shop-back-arrows { display: block; width: 14px; height: 16px; margin: 0 auto 8px; position: relative; font-size: 0; }
+  .shop-back-arrows::before, .shop-back-arrows::after {
+    content: ''; position: absolute; left: 50%; width: 9px; height: 9px;
+    border-top: 2px solid currentColor; border-right: 2px solid currentColor;
+    transform: translateX(-50%) rotate(-45deg);
+  }
+  .shop-back-arrows::before { top: -1px; }
+  .shop-back-arrows::after { top: 5px; }
+  .shop-card {
+    border: 1px solid #e0e0e0; border-radius: 12px; padding: 20px 24px; background: #fff;
+    transition: box-shadow .2s ease, border-color .2s ease;
+  }
+  .shop-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-color: rgba(227,2,18,0.35); }
+  .shop-card-name { font-size: 17px; font-weight: 900; color: #111; margin-bottom: 6px; }
+  .shop-card-addr { font-size: 13px; color: #888; margin-bottom: 14px; }
+  .shop-card-distance { font-size: 13px; color: #E30212; font-weight: 700; margin-bottom: 12px; }
+  .shop-card-distance strong { font-weight: 900; }
+  .shop-card-btns { display: flex; gap: 8px; }
+  .shop-btn-web, .shop-btn-tel { flex: 1; padding: 8px 0; text-align: center; font-size: 14px; font-weight: 900; border-radius: 6px; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all .2s; }
+  .shop-btn-web { background: #E30212; color: #fff; border: none; }
+  .shop-btn-web:hover { background: #b3010e; }
+  .shop-btn-tel { background: #fff; color: #E30212; border: 2px solid #E30212; }
+  .shop-btn-tel:hover { background: #E30212; color: #fff; }
+  .shop-btn-tel-num { font-size: 12px; font-weight: 700; }
+  .shop-hero-card {
+    background: #fff; border: 2.5px solid #E30212; border-radius: 12px; overflow: hidden;
+    display: flex; margin-bottom: 24px; box-shadow: 0 6px 20px rgba(227,2,18,0.10);
+  }
+  .shop-hero-photo { width: 46%; flex-shrink: 0; background: #f5f5f5; position: relative; overflow: hidden; min-height: 280px; }
+  .shop-hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .shop-hero-photo-ph {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 100%); color: #999; font-size: 14px; letter-spacing: .1em;
+  }
+  .shop-hero-body { flex: 1; padding: clamp(24px, 3vw, 36px) clamp(20px, 2.5vw, 32px); display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+  .shop-hero-badge { color: #E30212; font-weight: 700; font-size: clamp(13px, 1.5vw, 15px); letter-spacing: .06em; margin-bottom: 10px; }
+  .shop-hero-name { font-size: clamp(20px, 2.4vw, 26px); font-weight: 900; color: #111; line-height: 1.3; margin-bottom: 14px; }
+  .shop-hero-addr { font-size: clamp(13px, 1.5vw, 15px); color: #111; margin-bottom: 10px; line-height: 1.6; }
+  .shop-hero-distance { font-size: clamp(14px, 1.6vw, 16px); color: #E30212; font-weight: 700; margin-bottom: 20px; }
+  .shop-hero-distance strong { font-size: 1.15em; font-weight: 900; }
+  .shop-hero-btns { display: flex; gap: 12px; }
+  .shop-hero-btn { flex: 1; padding: 12px 8px; text-align: center; font-size: clamp(14px, 1.6vw, 16px); font-weight: 900; text-decoration: none; border-radius: 6px; transition: all .2s; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .shop-hero-btn-web { background: #E30212; color: #fff; border: 2px solid #E30212; }
+  .shop-hero-btn-web:hover { background: #b3010e; border-color: #b3010e; }
+  .shop-hero-btn-tel { background: #fff; color: #E30212; border: 2px solid #E30212; }
+  .shop-hero-btn-tel:hover { background: #E30212; color: #fff; }
+  .shop-hero-btn-tel-num { font-size: 0.7em; font-weight: 700; }
+  .shop-others-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .shop-empty { grid-column: 1/-1; text-align: center; color: #888; padding: 24px 16px; font-size: 15px; line-height: 1.7; }
+  @media (max-width: 768px) {
+    .shop-hero-card { flex-direction: column; }
+    .shop-hero-photo { width: 100%; min-height: 200px; }
+    .shop-others-grid, .shop-initial, .shop-more-list-outer .shop-more-list { grid-template-columns: 1fr !important; gap: 12px !important; }
+  }
+
+  /* 店舗検索: フローティング絞り込みカード */
+  .shop-filter-bar {
+    position: fixed; left: 0; right: 0; bottom: 16px; z-index: 900;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: 0; pointer-events: none;
+    transform: translateY(14px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .shop-filter-back-btn {
+    display: inline-flex; align-items: center; gap: 4px;
+    order: -1;
+    background: #fff; color: #E30212; font-size: 12px; font-weight: 700;
+    padding: 6px 14px; border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    transition: background .2s;
+  }
+  .shop-filter-back-btn:hover { background: #fdeceb; }
+  .shop-filter-back-arrow { font-size: 9px; }
+  .shop-filter-bar.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .shop-filter-card {
+    background: #fff; border-radius: 16px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+    padding: 14px 18px;
+    width: min(250px, 85vw);
+    text-align: center;
+  }
+  .shop-filter-count-row { display: flex; align-items: baseline; justify-content: center; gap: 6px; }
+  .shop-filter-count-num { font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif; font-size: 30px; font-weight: 900; color: #E30212; line-height: 1; }
+  .shop-filter-count-label { font-size: 12px; font-weight: 700; color: #555; }
+  .shop-filter-total { margin: 2px 0 0; font-size: 10px; color: #999; }
+  .shop-filter-divider { height: 2px; background: #E30212; margin: 10px 0; border-radius: 1px; }
+  .shop-filter-cond-label { margin: 0 0 8px; font-size: 12px; color: #888; text-align: left; }
+  .shop-filter-pill {
+    display: flex; align-items: center; justify-content: space-between; gap: 6px;
+    background: #f2f2f2; color: #333; font-size: 12px; font-weight: 700;
+    padding: 6px 6px 6px 12px; border-radius: 999px; margin-bottom: 8px;
+  }
+  .shop-filter-pill-label { flex: 1; min-width: 0; text-align: left; line-height: 1.3; }
+  .shop-filter-pill-x {
+    background: none; border: none; color: #999; font-size: 16px; line-height: 1;
+    cursor: pointer; padding: 4px 8px; font-family: inherit;
+  }
+  .shop-filter-pill-x:hover { color: #E30212; }
+  .shop-filter-add-btn {
+    display: block; width: 100%; margin-top: 4px;
+    background: #fff; color: #E30212; border: 2px solid #E30212;
+    font-size: 12px; font-weight: 900; padding: 8px 0; border-radius: 999px;
+    text-decoration: none; transition: background .2s;
+    cursor: pointer; font-family: inherit;
+  }
+  .shop-filter-add-btn:hover { background: #fdeceb; }
+  .shop-filter-add-plus { display: inline-block; transition: transform .2s; }
+  .shop-filter-add-btn.open .shop-filter-add-plus { transform: rotate(45deg); }
+  .shop-filter-apply-btn {
+    display: block; margin-top: 6px;
+    background: #b3010e; color: #fff; border: 2px solid #b3010e;
+    font-size: 12px; font-weight: 900; padding: 8px 0; border-radius: 999px;
+    text-decoration: none; transition: background .2s;
+  }
+  .shop-filter-apply-btn:hover { background: #8a010b; }
+  .shop-filter-clear-btn {
+    display: block; margin: 8px auto 0; background: none; border: none;
+    color: #E30212; font-size: 11px; text-decoration: underline; cursor: pointer;
+    font-family: inherit; text-underline-offset: 3px;
+  }
+  @media (min-width: 768px) {
+    .shop-filter-bar { left: auto; right: 16px; bottom: auto; top: 50%; transform: translateY(calc(-50% + 14px)); align-items: flex-end; }
+    .shop-filter-bar.visible { transform: translateY(-50%); }
+    .shop-filter-back-btn { order: 1; }
+    .shop-filter-card { width: 150px; padding: 14px 14px; border-radius: 16px; }
+    .shop-filter-count-num { font-size: 30px; }
+    .shop-filter-count-label { font-size: 11px; }
+    .shop-filter-total { font-size: 10px; }
+    .shop-filter-divider { margin: 10px 0; }
+    .shop-filter-cond-label { font-size: 10px; margin-bottom: 6px; }
+    .shop-filter-pill { font-size: 12px; padding: 6px 6px 6px 12px; margin-bottom: 8px; }
+    .shop-filter-add-btn { font-size: 12px; padding: 8px 0; }
+    .shop-filter-apply-btn { font-size: 12px; padding: 8px 0; margin-top: 6px; }
+    .shop-filter-clear-btn { font-size: 11px; margin-top: 8px; }
+  }
+
+  /* 締めCTA */
+  .closing { background: #E30212; text-align: center; position: relative; }
+  .closing-copy { position: relative; color: #fff; font-weight: 700; line-height: 1.5; margin: 0 0 20px; }
+  .closing-copy-sub { display: block; font-size: clamp(22px, 3.2vw, 30px); }
+  .closing-copy-main {
+    display: inline-block; font-size: clamp(40px, 5.6vw, 58px);
+    padding-bottom: 6px; border-bottom: 2px solid #F5C518;
+  }
+  .closing-period {
+    position: relative;
+    font-family: 'Bebas Neue', sans-serif;
+    color: #fff; font-size: clamp(36px, 5vw, 52px); margin: 0 0 28px;
+  }
+  .closing-period-dow { font-size: 0.6em; }
+  .closing .fv-cta { position: relative; align-self: center; }
+
+  /* フッター */
+  .footer { background: #111; color: #ccc; text-align: left; padding: 56px 24px 44px; font-size: 13px; }
+  .footer-top {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start;
+    gap: clamp(16px, 4vw, 40px); max-width: 1000px; margin: 0 auto 28px;
+  }
+  .footer-logo { height: 56px; filter: brightness(0) invert(1); }
+  .footer-nav { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: clamp(12px, 3vw, 28px); }
+  .footer-nav a { color: #ccc; text-decoration: none; }
+  .footer-nav a:hover { color: #fff; text-decoration: underline; }
+  .footer-company { max-width: 1000px; margin: 0 auto 10px; color: #aaa; }
+  .footer-company a { color: #ccc; text-decoration: underline; }
+  .footer-copyright { white-space: nowrap; }
+  @media (max-width: 640px) {
+    .footer-top { flex-direction: column; align-items: flex-start; gap: 20px; margin-bottom: 24px; }
+    .footer-logo { height: 44px; }
+    .footer-nav { flex-direction: column; gap: 16px; width: 100%; }
+    .footer-nav a { display: block; padding: 4px 0; }
+    .footer-company { line-height: 1.9; }
+  }
+
+</style>
+</head>
+<body>
+
+  <?php include get_stylesheet_directory() . '/lp/lp-tracking-body.php'; ?>
+
+  <section class="fv">
+    <img class="fv-text-graphic only-desktop" src="<?php echo $lp_assets; ?>/fv-text-graphic.png?v=2" alt="アイメガネ THE SALE メガネ&サングラス MAX30%OFF 2026.10.12(月)まで">
+
+    <div class="fv-photo-wrap only-desktop">
+      <div class="fv-photo-group">
+        <div class="fv-shadow"></div>
+        <img class="fv-image" src="<?php echo $lp_assets; ?>/fv-glasses.png?v=2" alt="メガネ">
+      </div>
+    </div>
+
+    <div class="fv-mobile only-mobile">
+      <div class="fv-mobile-stage">
+        <img class="fv-mobile-graphic" src="<?php echo $lp_assets; ?>/fv-text-graphic-mobile.png?v=2" alt="アイメガネ THE SALE メガネ&サングラス MAX30%OFF 2026.10.12(月)まで">
+        <div class="fv-mobile-photo">
+          <img src="<?php echo $lp_assets; ?>/f7c6bd09-0553-4e16-863c-14d5fad10db0-removebg-preview.png" alt="メガネ">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <a href="#shop-search" class="floating-cta" data-cta-location="floating">
+    <img src="<?php echo $lp_assets; ?>/calendar-icon.svg" alt="" class="floating-cta-icon">
+    <span class="floating-cta-text">来店予約はこちら</span>
+  </a>
+
+  <!-- ① アイメガネ THE SALEとは -->
+  <section class="section section-red-frame">
+   <div class="sale-frame-inner">
+    <h2 class="section-title overview-title-tight"><span class="overview-title-brand"><img class="overview-title-logo" src="<?php echo $lp_assets; ?>/aimegane_logo_transparent.png" alt="アイメガネ"></span><span class="overview-title-text">THE SALE<span class="overview-title-suffix">とは</span></span></h2>
+
+    <div class="overview-body">
+      対象のメガネ・サングラスが<br class="only-mobile"><span class="overview-highlight">最大30%OFF</span>になる、<br class="only-mobile">夏から秋のお得なチャンス&#65281;
+    </div>
+
+    <div class="ai-mirror-band">
+      <div class="corner-tag">フレーム選び</div>
+      <div class="ai-mirror-band-text">
+        <h3>もう迷わない、すぐ見つかる。</h3>
+        <img class="ai-mirror-band-photo-mobile only-mobile" src="<?php echo $lp_assets; ?>/aifittingmirror-cutout.png" alt="AIフィッティングミラーで顔を測定している様子">
+        <p class="ai-mirror-band-subtitle">AIフィッティングミラーで、<br class="only-mobile">似合い度を点数チェック&#65281;</p>
+        <p>店頭のAI搭載ミラーで、スタッフのサポートを受けながら、<br>自分に似合う一本が無料でわかります。</p>
+      </div>
+      <div class="ai-mirror-band-photo-wrap only-desktop">
+        <img class="ai-mirror-band-photo" src="<?php echo $lp_assets; ?>/aifittingmirror-cutout.png" alt="AIフィッティングミラーで顔を測定している様子">
+      </div>
+    </div>
+
+    <div class="lens-standard-band">
+      <div class="corner-tag">レンズ選び</div>
+      <div class="lens-standard-content">
+        <h3>標準セットでこんなに充実!</h3>
+        <div class="lens-standard-inner">
+          <img class="lens-standard-diagram only-desktop" src="<?php echo $lp_assets; ?>/standard-lens.png" alt="UVカット・汚れ防止・1.60非球面。スタイルに合わせて選べるレンズ(遠近・遠中近・中近・近々・アシスト)">
+          <img class="lens-standard-diagram only-mobile" src="<?php echo $lp_assets; ?>/スマホ用標準.png" alt="UVカット・汚れ防止・1.60非球面。スタイルに合わせて選べるレンズ(遠近・遠中近・中近・近々・アシスト)">
+        </div>
+      </div>
+    </div>
+
+    <div class="perk-section">
+      <div class="perk-inner">
+        <span class="tv-bubble perk-bubble only-mobile">さらに!</span>
+        <span class="tv-bubble perk-bubble perk-bubble-desktop only-desktop">さらに!</span>
+        <img class="perk-benefits-image only-desktop" src="<?php echo $lp_assets; ?>/perk-benefits.png?v=2" alt="さらに併用できるお得な特典! THE SALE MAX30%OFF(メガネ&サングラス)+LINEお友だち登録で1,100円OFF・処方箋持参で1,100円OFF+2本目同時購入で10%OFF(価格の低い方に適用)">
+        <img class="perk-benefits-image only-mobile" src="<?php echo $lp_assets; ?>/sumaho.png?v=2" alt="さらに併用できるお得な特典! THE SALE MAX30%OFF(メガネ&サングラス)+LINEお友だち登録で1,100円OFF・処方箋持参で1,100円OFF+2本目同時購入で10%OFF(価格の低い方に適用)">
+      </div>
+    </div>
+   </div>
+  </section>
+
+  <!-- ②-1 価格例(Paris Miki LP参考・仮の数字) -->
+  <section class="section section-cream">
+    <h2 class="section-title price-list-title">お得な<span>価格例</span></h2>
+    <div class="price-list">
+      <div class="price-card">
+        <div class="price-card-corner"><span class="corner-text"><span class="corner-num">30</span><span class="corner-pct">%OFF</span></span></div>
+        <div class="price-card-photo-col">
+          <div class="price-card-photo-wrap">
+            <img class="price-card-photo" src="<?php echo $lp_assets; ?>/price-megane.png" alt="メガネのイメージ">
+            <span class="price-card-photo-note">※画像はイメージです</span>
+          </div>
+        </div>
+        <div class="price-card-body">
+          <div class="price-card-title-row">
+            <p class="price-card-name">メガネ</p>
+            <span class="price-card-tag">選べるレンズ付</span>
+          </div>
+          <div class="price-card-prices">
+            <div class="price-card-price-group">
+              <span class="price-card-price-label price-card-before-label">通常価格</span>
+              <div><span class="price-card-before">&yen;29,700</span><small class="price-card-before-unit">(税込)</small></div>
+            </div>
+            <span class="price-card-arrow">&#9654;</span>
+            <div class="price-card-price-group">
+              <span class="price-card-price-label price-card-after-label">THE SALE価格</span>
+              <div><span class="price-card-after">&yen;20,790<small>(税込)</small></span></div>
+            </div>
+          </div>
+          <p class="price-card-lens-note">※レンズ込みの価格です</p>
+          <p class="price-card-note">※上記は価格の一例です。<br class="only-mobile">詳しくは店頭にてお確かめください。</p>
+        </div>
+      </div>
+      <div class="price-card">
+        <div class="price-card-corner"><span class="corner-text"><span class="corner-num">30</span><span class="corner-pct">%OFF</span></span></div>
+        <div class="price-card-photo-col">
+          <div class="price-card-photo-wrap">
+            <img class="price-card-photo" src="<?php echo $lp_assets; ?>/price-SG.png" alt="サングラスのイメージ">
+            <span class="price-card-photo-note">※画像はイメージです</span>
+          </div>
+        </div>
+        <div class="price-card-body">
+          <div class="price-card-title-row">
+            <p class="price-card-name">サングラス</p>
+          </div>
+          <div class="price-card-prices">
+            <div class="price-card-price-group">
+              <span class="price-card-price-label price-card-before-label">通常価格</span>
+              <div><span class="price-card-before">&yen;22,000</span><small class="price-card-before-unit">(税込)</small></div>
+            </div>
+            <span class="price-card-arrow">&#9654;</span>
+            <div class="price-card-price-group">
+              <span class="price-card-price-label price-card-after-label">THE SALE価格</span>
+              <div><span class="price-card-after">&yen;15,400<small>(税込)</small></span></div>
+            </div>
+          </div>
+          <p class="price-card-note">※上記は価格の一例です。<br class="only-mobile">詳しくは店頭にてお確かめください。</p>
+        </div>
+      </div>
+      <div class="price-teaser">
+        <img class="price-teaser-photo" src="<?php echo $lp_assets; ?>/price-hochouki.png" alt="スターキー Gシリーズ 補聴器">
+        <div class="price-teaser-body">
+          <div class="price-teaser-main">
+            <div class="price-teaser-text">
+              <p class="price-teaser-title">補聴器</p>
+              <p class="price-teaser-label">スターキー Gシリーズ クラス10 RIC<br>(充電器付き価格)</p>
+            </div>
+            <div class="price-teaser-prices">
+              <div class="price-teaser-price-group">
+                <span class="price-teaser-price-label">片耳</span>
+                <span class="price-teaser-price-value">&yen;78,500</span>
+              </div>
+              <div class="price-teaser-price-group">
+                <span class="price-teaser-price-label">両耳</span>
+                <span class="price-teaser-price-value">&yen;149,500</span>
+              </div>
+            </div>
+          </div>
+          <p class="price-teaser-cta"><a href="https://www.aimegane.com/hochouki/soudankai/" target="_blank" rel="noopener">補聴器相談無料受付中 &#9654;</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="price-list-cta-wrap">
+      <a href="#shop-search" class="price-card-cta" data-cta-location="price_card">まずはお近くの店舗を探す</a>
+    </div>
+  </section>
+
+  <div class="section-divider"><div class="section-divider-triangle"></div></div>
+
+  <!-- ②-2 レンズアップグレード紹介(Paris Miki LP参考・仮の内容) -->
+  <section class="section section-white">
+    <h2 class="section-title lens-section-title">あなたの毎日に、<br class="only-mobile"><span>機能をプラス</span></h2>
+    <p class="lens-standard-note">お得に選んだ一本を、レンズで自分だけの一本に。</p>
+    <p class="lens-photo-disclaimer">※写真はすべてイメージです</p>
+    <div class="lens-list">
+      <div class="lens-card-v2">
+        <div class="lens-card-v2-photo"><img src="<?php echo $lp_assets; ?>/lens-photic-outdoor.png" alt="屋外でサングラスのように色が変わった様子"></div>
+        <div class="lens-card-v2-content">
+          <div class="lens-card-title-row">
+            <p class="lens-card-name"><span>調光</span>レンズ</p>
+            <p class="lens-card-price">+&yen;8,800〜</p>
+          </div>
+          <p class="lens-card-desc">紫外線で色が変わる、驚きの一本二役。<br>屋外では自然にサングラスに、屋内では普段のメガネに。</p>
+          <div class="lens-card-v2-compare">
+            <div class="lens-card-v2-compare-item">
+              <span class="lens-card-v2-compare-label">屋内(クリア)</span>
+              <img class="lens-card-v2-compare-img is-bottom" src="<?php echo $lp_assets; ?>/lens-photic-glasses-indoor.png" alt="屋内でクリアなレンズの様子">
+            </div>
+            <div class="lens-card-v2-compare-item">
+              <span class="lens-card-v2-compare-label">屋外(色が変化)</span>
+              <img class="lens-card-v2-compare-img is-bottom" src="<?php echo $lp_assets; ?>/lens-photic-glasses-outdoor.png" alt="屋外で色が変化したレンズの様子">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lens-card-v2">
+        <div class="lens-card-v2-photo"><img src="<?php echo $lp_assets; ?>/lens-polarized-fishing-real.jpg" alt="桟橋で釣りをする2人の様子"></div>
+        <div class="lens-card-v2-content">
+          <div class="lens-card-title-row">
+            <p class="lens-card-name"><span>偏光</span>レンズ</p>
+            <p class="lens-card-price">+&yen;11,000〜</p>
+          </div>
+          <p class="lens-card-desc">まぶしさなんて、もう気にしない。<br>反射光によるまぶしさをカットし、運転やアウトドアもくっきりクリアに。</p>
+          <div class="lens-card-v2-compare">
+            <div class="lens-card-v2-compare-item">
+              <span class="lens-card-v2-compare-label">ノーマル</span>
+              <img class="lens-card-v2-compare-img" src="<?php echo $lp_assets; ?>/lens-polarized-naked.png" alt="裸眼だと水面の反射でギラつく様子">
+            </div>
+            <div class="lens-card-v2-compare-item">
+              <span class="lens-card-v2-compare-label">偏光レンズ着用</span>
+              <img class="lens-card-v2-compare-img" src="<?php echo $lp_assets; ?>/lens-polarized-effect.png" alt="偏光レンズだと反射が抑えられ水中まで見える様子">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lens-card-v2">
+        <div class="lens-card-v2-photo"><img src="<?php echo $lp_assets; ?>/lens-hev-laptop.png" alt="PCで作業をしながらHEVカットレンズのメガネをかけている様子"></div>
+        <div class="lens-card-v2-content">
+          <div class="lens-card-title-row">
+            <p class="lens-card-name"><span>HEV</span>カットレンズ</p>
+            <p class="lens-card-price">+&yen;5,500〜</p>
+          </div>
+          <p class="lens-card-desc">目に負担をかけるHEV(ブルーライトに近い光)を軽減し、デジタルライフをもっと心地よく。</p>
+          <div class="lens-card-v2-compare">
+            <div class="lens-card-v2-compare-item">
+              <span class="lens-card-v2-compare-label">ノーマル</span>
+              <img class="lens-card-v2-compare-img" src="<?php echo $lp_assets; ?>/lens-hev-naked.png" alt="裸眼だとPC画面がまぶしく見える様子">
+            </div>
+            <div class="lens-card-v2-compare-item">
+              <span class="lens-card-v2-compare-label">HEVカットレンズ着用</span>
+              <img class="lens-card-v2-compare-img" src="<?php echo $lp_assets; ?>/lens-hev-effect.png" alt="HEVカットレンズだとまぶしさが軽減されクリアに見える様子">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider section-divider-cream"><div class="section-divider-triangle-white"></div></div>
+
+  <!-- ③ かけ心地(調節機能解析装置・眼鏡作製技能士) -->
+  <section class="section section-cream">
+    <h2 class="section-title fit-title-lg">あなたの目に、<br class="only-mobile"><span>ちょうどいい一本を。</span></h2>
+    <p class="lens-standard-note">無料の測定と、資格を持つプロの技術で。あなたに合う一本を、とことん追求。</p>
+    <div class="fit-band-list">
+      <div class="fit-band">
+        <div class="fit-band-photo"><img class="is-contain" src="<?php echo $lp_assets; ?>/accomref-speedy-i.png?v=2" alt="調節機能解析装置 アコモレフSpeedy-i(測定無料)"></div>
+        <div class="fit-band-text">
+          <span class="tv-bubble">NHK番組で紹介されました!</span>
+          <h3>調節機能解析装置で<br>眼のストレスを無料解析!</h3>
+          <p>その疲れ目、メガネが原因かもしれません。「アコモレフSpeedy-i」で目の調節力やストレス度合いを無料でチェック(約2分)。他店でお作りのメガネのご相談も歓迎です。</p>
+        </div>
+      </div>
+      <div class="fit-band fit-band-reverse">
+        <div class="fit-band-photo"><img src="<?php echo $lp_assets; ?>/staff-fitting-scene.png" alt="スタッフがメガネを丁寧に手入れしている様子"></div>
+        <div class="fit-band-text">
+          <h3><span class="fit-title-lead">全店に</span><br class="only-mobile"><span class="fit-title-bracket">「眼鏡作製技能士」が在籍</span></h3>
+          <p>フィッティングもレンズ選びも、国家資格「眼鏡作製技能士」<span style="white-space:nowrap;">におまかせください。</span>あなたに合わせて、心地よい一本をご提案します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ よくある質問 -->
+  <section class="section section-white" id="faq-section">
+    <h2 class="section-title">よくある<span>質問</span></h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary class="faq-q"><span class="faq-q-label">Q</span><span class="faq-q-text">全店舗が対象ですか？</span><span class="faq-chevron">▾</span></summary>
+        <div class="faq-a"><span>A</span>本庄南大通り店を除くアイメガネ全店が対象です。<br class="only-mobile">詳しくはお近くの店舗にてお確かめください。</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><span class="faq-q-label">Q</span><span class="faq-q-text">特典は併用できますか？</span><span class="faq-chevron">▾</span></summary>
+        <div class="faq-a"><span>A</span>2本目割引・クーポン・LINE登録・処方箋持参の特典は、それぞれ併用が可能です(詳細は店頭にてご確認ください)。</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><span class="faq-q-label">Q</span><span class="faq-q-text">予約は不要ですか？</span><span class="faq-chevron">▾</span></summary>
+        <div class="faq-a"><span>A</span><div>ご予約なしでもご来店いただけますが、スムーズにご案内するため事前のご予約をおすすめしています。<a href="#shop-search" class="faq-a-link" data-cta-location="faq">来店予約はこちら &#9654;</a></div></div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><span class="faq-q-label">Q</span><span class="faq-q-text">セール中もレンズ相談できますか？</span><span class="faq-chevron">▾</span></summary>
+        <div class="faq-a"><span>A</span>はい。ご相談は無料です。お客様の見え方のお悩みや生活スタイルに合わせて最適なレンズ・フレームのご提案をいたします。</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><span class="faq-q-label">Q</span><span class="faq-q-text">視力測定だけで<br class="only-mobile">利用できますか？</span><span class="faq-chevron">▾</span></summary>
+        <div class="faq-a"><span>A</span>はい。視力測定は無料です。現在の見え方のチェックやメガネに関するご相談だけでもお気軽にご来店ください。</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ⑤ 店舗情報(店舗検索) -->
+  <section class="section section-white" id="shop-search">
+    <h2 class="section-title">お近くの<span>店舗を探す</span></h2>
+    <p class="shop-intro">現在地、または郵便番号(上3桁)で<br class="only-mobile">お近くの店舗を探せます</p>
+
+    <div class="shop-search-box">
+      <div class="shop-geo-wrap">
+        <button type="button" class="shop-geo-btn" id="shopGeoBtn" data-cta-location="search_geo" onclick="searchByLocation()"><span class="shop-geo-icon">&#9678;</span> 現在地から探す</button>
+        <div class="shop-divider"><span>または</span></div>
+      </div>
+
+      <div class="shop-search-form">
+        <span class="shop-zip-label">〒</span>
+        <input type="text" id="zip1" maxlength="3" placeholder="330" class="shop-zip-input" inputmode="numeric" autocomplete="off" aria-label="郵便番号の前3桁">
+        <span class="shop-zip-sep">-</span>
+        <input type="text" id="zip2" maxlength="4" placeholder="0846" class="shop-zip-input shop-zip-input-lg" inputmode="numeric" autocomplete="off" aria-label="郵便番号の後4桁(任意)">
+        <button type="button" class="shop-search-btn" data-cta-location="search_submit" onclick="searchShop()">検索</button>
+      </div>
+    </div>
+
+    <div class="shop-pref-tabs" id="shopPrefTabs"></div>
+
+    <div class="shop-filter-panel" id="shopFilterPanel">
+      <div class="shop-filter-group">
+        <p class="shop-filter-group-title">取扱商材</p>
+        <div class="shop-filter-checks">
+          <label class="shop-filter-check"><input type="checkbox" data-cat="products" value="コンタクト" onchange="toggleFilterCheck(this)">コンタクトレンズ取扱店</label>
+          <label class="shop-filter-check"><input type="checkbox" data-cat="products" value="補聴器" onchange="toggleFilterCheck(this)">補聴器取扱店</label>
+        </div>
+      </div>
+      <div class="shop-filter-group">
+        <p class="shop-filter-group-title">資格者在籍</p>
+        <div class="shop-filter-checks">
+          <label class="shop-filter-check"><input type="checkbox" data-cat="qualifications" value="1級眼鏡作製技能士" onchange="toggleFilterCheck(this)">1級眼鏡作製技能士</label>
+          <label class="shop-filter-check"><input type="checkbox" data-cat="qualifications" value="眼鏡作製技能士" onchange="toggleFilterCheck(this)">眼鏡作製技能士</label>
+          <label class="shop-filter-check"><input type="checkbox" data-cat="qualifications" value="認定補聴器技能者" onchange="toggleFilterCheck(this)">認定補聴器技能者</label>
+        </div>
+      </div>
+      <div class="shop-filter-group">
+        <p class="shop-filter-group-title">設備</p>
+        <div class="shop-filter-checks">
+          <label class="shop-filter-check"><input type="checkbox" data-cat="facilities" value="アコモレフ" onchange="toggleFilterCheck(this)">調節機能解析装置(アコモレフ)常設店</label>
+          <label class="shop-filter-check"><input type="checkbox" data-cat="facilities" value="AIフィッティングミラー" onchange="toggleFilterCheck(this)">AIフィッティングミラー</label>
+          <label class="shop-filter-check"><input type="checkbox" data-cat="facilities" value="深視力測定" onchange="toggleFilterCheck(this)">深視力測定</label>
+          <label class="shop-filter-check"><input type="checkbox" data-cat="facilities" value="防音室完備" onchange="toggleFilterCheck(this)">防音室完備</label>
+        </div>
+      </div>
+    </div>
+
+    <p id="shop-count" class="shop-count" style="display:none;" role="status" aria-live="polite"></p>
+    <div id="shop-results" class="shop-results"></div>
+  </section>
+
+  <div class="shop-filter-bar" id="shopFilterBar">
+    <div class="shop-filter-card">
+      <div class="shop-filter-count-row">
+        <span class="shop-filter-count-num" id="shopFilterCount">0</span>
+        <span class="shop-filter-count-label">店舗該当</span>
+      </div>
+      <p class="shop-filter-total">/ 全<span id="shopFilterTotal">0</span>店舗</p>
+      <div class="shop-filter-divider"></div>
+      <div id="shopFilterConditions"></div>
+      <button type="button" class="shop-filter-add-btn" id="shopFilterAddBtn" onclick="toggleFilterPanel()">条件を追加 <span class="shop-filter-add-plus">+</span></button>
+      <a href="#shop-results" class="shop-filter-apply-btn">絞り込む</a>
+      <button type="button" class="shop-filter-clear-btn" id="shopFilterClearBtn" onclick="clearAllFilters()" style="display:none;">すべて解除</button>
+    </div>
+    <a href="#shop-search" class="shop-filter-back-btn"><span class="shop-filter-back-arrow">&#9650;</span>検索に戻る</a>
+  </div>
+
+  <!-- ⑥ 締めのCTA -->
+  <section class="section closing">
+    <p class="closing-copy"><span class="closing-copy-sub">お得な機会に</span><span class="closing-copy-main">新しい一本を</span></p>
+    <p class="closing-period">8.7 <span class="closing-period-dow">fri</span> &rarr; 10.12 <span class="closing-period-dow">mon</span></p>
+    <a href="#shop-search" class="fv-cta" data-cta-location="fv">ご来店予約はこちら</a>
+  </section>
+
+  <!-- ⑦ フッター -->
+  <footer class="footer">
+    <div class="footer-top">
+      <a href="https://www.aimegane.com/"><img class="footer-logo" src="<?php echo $lp_assets; ?>/aimegane_logo_transparent.png" alt="アイメガネ"></a>
+      <nav class="footer-nav">
+        <a href="https://www.aimegane.com/">アイメガネ公式サイト</a>
+        <a href="https://www.ai-group.net/privacy/">プライバシーポリシー</a>
+        <a href="https://www.aimegane.com/inquiry/">お問い合わせ</a>
+      </nav>
+    </div>
+    <p class="footer-company">アイジャパン株式会社<br class="only-mobile">　〒331-0812 埼玉県さいたま市北区<br class="only-mobile">　宮原町1丁目505番地1<br class="only-mobile">　お客様相談室:<a href="tel:0120210110">0120-21-0110</a><br class="only-mobile">　(受付10時〜18時、土日祝休)<br class="only-mobile">　<span class="footer-copyright">&copy; 2026 アイジャパン株式会社</span></p>
+  </footer>
+
+<script>
+// 店舗検索(アイメガネ全店・公式サイトで確認済みの確定データ)
+const SHOPS = [
+  { name:'アイメガネ本店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/01_honten.webp', zip:'331', addr:'〒331-8760 埼玉県さいたま市北区宮原町1-505-1', web:'https://www.aimegane.com/qualification/6395/', tel:'048-668-0001', lat:35.937226, lng:139.613603, products:'メガネ・コンタクト・補聴器', qualifications:'1級眼鏡作製技能士・眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・深視力測定', },
+  { name:'アイメガネ与野イオン店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/02_yono_aeon.webp', zip:'338', addr:'〒338-0004 埼玉県さいたま市中央区本町西5-2-9', web:'https://www.aimegane.com/qualification/6938/', tel:'048-851-0001', lat:35.890863, lng:139.612513, products:'メガネ・補聴器', qualifications:'1級眼鏡作製技能士・眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・防音室完備', },
+  { name:'アイメガネ与野本町店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/04_yonohonmachi.webp', zip:'338', addr:'〒338-0003 埼玉県さいたま市中央区本町東1-6-3', web:'https://www.aimegane.com/qualification/7355/', tel:'048-852-0001', lat:35.878821, lng:139.622358, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・防音室完備', },
+  { name:'アイメガネ南浦和店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/1-南浦和外観修正.jpg', zip:'336', addr:'〒336-0017 埼玉県さいたま市南区南浦和3-2-5', web:'https://www.aimegane.com/qualification/6340/', tel:'048-885-0001', lat:35.846721, lng:139.669621, products:'メガネ・コンタクト・補聴器', qualifications:'1級眼鏡作製技能士・眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・防音室完備', },
+  { name:'アイメガネ岩槻駅前通り店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/岩槻店舗外観写真.jpg', zip:'339', addr:'〒339-0055 埼玉県さいたま市岩槻区東町1-12', web:'https://www.aimegane.com/qualification/7356/', tel:'048-757-0001', lat:35.947905, lng:139.695562, products:'メガネ・コンタクト・補聴器', qualifications:'1級眼鏡作製技能士・眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・深視力測定', },
+  { name:'アイメガネ上尾東口駅前店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/06_ageo.webp', zip:'362', addr:'〒362-0036 埼玉県上尾市宮本町4-18', web:'https://www.aimegane.com/qualification/7153/', tel:'048-773-0001', lat:35.97386, lng:139.587324, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー', },
+  { name:'アイメガネ鴻巣東駅通り店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/IMG_0363.jpg', zip:'365', addr:'〒365-0039 埼玉県鴻巣市東2-6-2', web:'https://www.aimegane.com/qualification/6939/', tel:'048-542-0001', lat:36.0637, lng:139.5241, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・深視力測定・防音室完備', },
+  { name:'アイメガネ鴻巣ウニクス店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/25_kounosu_uniqus.webp', zip:'369', addr:'〒369-0116 埼玉県鴻巣市北新宿225-1', web:'https://www.aimegane.com/qualification/7358/', tel:'048-547-0001', lat:36.112509, lng:139.436912, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー', },
+  { name:'アイメガネ熊谷ティアラ店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/08_kumgaya.webp', zip:'360', addr:'〒360-0037 埼玉県熊谷市筑波3-202', web:'https://www.aimegane.com/qualification/7359/', tel:'048-525-0001', lat:36.139479, lng:139.389063, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー', },
+  { name:'アイメガネ深谷上柴西店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/202506改装深谷上芝.jpg', zip:'366', addr:'〒366-0052 埼玉県深谷市上柴町西3-7-9', web:'https://www.aimegane.com/qualification/6681/', tel:'048-572-0001', lat:36.18414, lng:139.300285, products:'メガネ・コンタクト・補聴器', qualifications:'1級眼鏡作製技能士・眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・深視力測定・防音室完備', },
+  { name:'アイメガネ富士見鶴馬店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/14_fujimi.webp', zip:'354', addr:'〒354-0021 埼玉県富士見市鶴馬1-25-1', web:'https://www.aimegane.com/qualification/7158/', tel:'049-251-0001', lat:35.851697, lng:139.541735, products:'メガネ・コンタクト・補聴器', qualifications:'1級眼鏡作製技能士・眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・深視力測定', },
+  { name:'アイメガネ川越的場店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/kawagoematoba-1.jpg', zip:'350', addr:'〒350-1101 埼玉県川越市的場823-1', web:'https://www.aimegane.com/qualification/7159/', tel:'049-233-0001', lat:35.914154, lng:139.42809, products:'メガネ・コンタクト・補聴器', qualifications:'1級眼鏡作製技能士・眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・深視力測定', },
+  { name:'アイメガネ坂戸にっさい店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/IMG_7521.jpg', zip:'350', addr:'〒350-0269 埼玉県坂戸市にっさい花みず木3-11-2', web:'https://www.aimegane.com/qualification/6940/', tel:'049-280-0001', lat:35.969359, lng:139.368666, products:'メガネ・コンタクト・補聴器', qualifications:'1級眼鏡作製技能士・眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー', },
+  { name:'アイメガネ東松山松本町店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/東松山2026.jpg', zip:'355', addr:'〒355-0014 埼玉県東松山市松本町2-7-1', web:'https://www.aimegane.com/qualification/7361/', tel:'0493-27-0001', lat:36.039377, lng:139.41351, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー', },
+  { name:'アイメガネ嵐山バイパス店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/19_ranzan.webp', zip:'355', addr:'〒355-0215 埼玉県比企郡嵐山町平澤2610', web:'https://www.aimegane.com/qualification/7362/', tel:'0493-61-0001', lat:36.044584, lng:139.314798, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・深視力測定', },
+  { name:'アイメガネ小川大塚店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/21_ogawa.webp', zip:'355', addr:'〒355-0328 埼玉県比企郡小川町大塚541-1', web:'https://www.aimegane.com/qualification/7363/', tel:'0493-73-0001', lat:36.058609, lng:139.254464, products:'メガネ・コンタクト・補聴器', qualifications:'1級眼鏡作製技能士・眼鏡作製技能士・認定補聴器技能者', facilities:'AIフィッティングミラー', },
+  { name:'アイメガネ寄居店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/22_yorii.webp', zip:'369', addr:'〒369-1203 埼玉県大里郡寄居町寄居1615-1', web:'https://www.aimegane.com/qualification/7364/', tel:'048-580-0001', lat:36.120921, lng:139.186708, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・防音室完備', },
+  { name:'アイメガネ日高店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/16_hidaka.webp', zip:'350', addr:'〒350-1231 埼玉県日高市鹿山301-6', web:'https://www.aimegane.com/qualification/5078/', tel:'042-986-0001', lat:35.896285, lng:139.337031, products:'メガネ・コンタクト・補聴器', qualifications:'1級眼鏡作製技能士・眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・防音室完備', },
+  { name:'アイメガネイオンタウン毛呂山店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/26_aeontown_moroyama.webp', zip:'350', addr:'〒350-0436 埼玉県入間郡毛呂山町川角58-3', web:'https://www.aimegane.com/qualification/6941/', tel:'049-293-0001', lat:35.946429, lng:139.311799, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・防音室完備', },
+  { name:'アイメガネ秩父中宮地店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/23_chichibu.webp', zip:'368', addr:'〒368-0022 埼玉県秩父市中宮地町5-7', web:'https://www.aimegane.com/qualification/6682/', tel:'0494-21-0001', lat:36.0043, lng:139.08865, products:'メガネ・コンタクト・補聴器', qualifications:'1級眼鏡作製技能士・眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・深視力測定・防音室完備', },
+  { name:'アイメガネ川口赤井店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/%E5%90%8D%E7%A7%B0%E6%9C%AA%E8%A8%AD%E5%AE%9A-3.jpg', zip:'334', addr:'〒334-0073 埼玉県川口市赤井4-16-19', web:'https://www.aimegane.com/qualification/7154/', tel:'048-280-0001', lat:35.829315, lng:139.738067, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー', },
+  { name:'アイメガネエキア谷塚店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/28_ekiayatuka.webp', zip:'340', addr:'〒340-0028 埼玉県草加市谷塚1-1-23', web:'https://www.aimegane.com/qualification/7156/', tel:'048-924-0001', lat:35.81447, lng:139.799081, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・深視力測定・防音室完備', },
+  { name:'アイメガネ三郷南口駅前通り店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/11_misato_minamiguchi.webp', zip:'341', addr:'〒341-0024 埼玉県三郷市三郷1-27-7', web:'https://www.aimegane.com/qualification/7360/', tel:'048-949-0002', lat:35.841637, lng:139.881253, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー', },
+  { name:'アイメガネ新越谷店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/27_shinkosigaya.webp', zip:'343', addr:'〒343-0857 埼玉県越谷市新越谷1-70-1', web:'https://www.aimegane.com/qualification/6133/', tel:'048-990-0001', lat:35.872129, lng:139.781357, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・防音室完備', },
+  { name:'アイメガネ蓮田関山店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/05_hasuda.webp', zip:'349', addr:'〒349-0121 埼玉県蓮田市関山2-6-13', web:'https://www.aimegane.com/qualification/7152/', tel:'048-764-0001', lat:35.989131, lng:139.646368, products:'メガネ・コンタクト・補聴器', qualifications:'1級眼鏡作製技能士・眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー', },
+  { name:'アイメガネ幸手エムズタウン店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/12_satte.webp', zip:'340', addr:'〒340-0155 埼玉県幸手市上高野824', web:'https://www.aimegane.com/qualification/7157/', tel:'0480-44-0001', lat:36.066043, lng:139.71615, products:'メガネ・コンタクト・補聴器', qualifications:'1級眼鏡作製技能士・眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・防音室完備', },
+  { name:'アイメガネ羽生店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/13_hanyu.webp', zip:'348', addr:'〒348-0053 埼玉県羽生市南7-1-1', web:'https://www.aimegane.com/qualification/6937/', tel:'048-563-0001', lat:36.166224, lng:139.537497, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー', },
+  { name:'アイメガネ小平小川町店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/kodaira.png', zip:'187', addr:'〒187-0032 東京都小平市小川町2-1328', web:'https://www.aimegane.com/qualification/6683/', tel:'042-347-6877', lat:35.73041, lng:139.473441, products:'メガネ・コンタクト・補聴器', qualifications:'1級眼鏡作製技能士・眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー', },
+  { name:'アイメガネザ・マーケットプレイス東大和店', photo:'https://www.aimegane.com/wp-content/uploads/2024/10/IMG_7097-修正.jpg', zip:'207', addr:'〒207-0021 東京都東大和市立野3-1344-1', web:'https://www.aimegane.com/qualification/6684/', tel:'042-843-7011', lat:35.751, lng:139.442, products:'メガネ・コンタクト・補聴器', qualifications:'1級眼鏡作製技能士・眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・防音室完備', },
+  { name:'アイメガネ町田木曽店', photo:'https://www.aimegane.com/wp-content/uploads/2025/12/町田木曽外観.jpg', zip:'194', addr:'〒194-0036 東京都町田市木曽東3-8-1', web:'https://www.aimegane.com/qualification/7679/', tel:'042-724-0201', lat:35.561476, lng:139.425796, products:'メガネ・コンタクト・補聴器', qualifications:'1級眼鏡作製技能士・眼鏡作製技能士', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・防音室完備', },
+  { name:'アイメガネおもちゃのまち西口店', photo:'https://www.aimegane.com/wp-content/uploads/2025/10/omocha-2-1.jpg', zip:'321', addr:'〒321-0206 栃木県下都賀郡壬生町あけぼの町5-5', web:'https://www.aimegane.com/qualification/7678/', tel:'0282-85-0001', lat:36.47107, lng:139.825802, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・防音室完備', },
+  { name:'アイメガネ宇都宮錦店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/31_utunomiyanisiki.webp', zip:'321', addr:'〒321-0967 栃木県宇都宮市錦3-9-11', web:'https://www.aimegane.com/qualification/7433/', tel:'028-627-0001', lat:36.574698, lng:139.89493, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・防音室完備', },
+  { name:'アイメガネ今市センショープラザ店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/32_imaichi.webp', zip:'321', addr:'〒321-2405 栃木県日光市芹沼1448-1', web:'https://www.aimegane.com/qualification/6680/', tel:'0288-23-0001', lat:36.741119, lng:139.70774, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー', },
+  { name:'アイメガネ八千代台ユアエルム店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/35_yachiyodai.webp', zip:'276', addr:'〒276-0032 千葉県八千代市八千代台東1-1-10', web:'https://www.aimegane.com/qualification/7365/', tel:'047-485-0001', lat:35.700303, lng:140.073005, products:'メガネ・コンタクト・補聴器', qualifications:'1級眼鏡作製技能士・眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・防音室完備', },
+  { name:'アイメガネ古河イオン店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/36_kogaaeon.webp', zip:'306', addr:'〒306-0012 茨城県古河市旭町1-2-17', web:'https://www.aimegane.com/qualification/7366/', tel:'0280-33-0001', lat:36.197244, lng:139.716929, products:'メガネ・コンタクト・補聴器', qualifications:'1級眼鏡作製技能士・眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー', },
+  { name:'アイメガネ藤岡店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/fujioka-2.jpg', zip:'375', addr:'〒375-0024 群馬県藤岡市藤岡937-1', web:'https://www.aimegane.com/qualification/7367/', tel:'0274-22-0001', lat:36.253775, lng:139.074382, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー', },
+  { name:'アイメガネ焼津石津店', photo:'https://www.aimegane.com/wp-content/uploads/2024/03/38_yaizu.webp', zip:'425', addr:'〒425-0041 静岡県焼津市石津3-19-16', web:'https://www.aimegane.com/qualification/7369/', tel:'054-656-0001', lat:34.843318, lng:138.31291, products:'メガネ・コンタクト・補聴器', qualifications:'眼鏡作製技能士・認定補聴器技能者', facilities:'調節機能解析装置(アコモレフ)常設店・AIフィッティングミラー・深視力測定', },
+];
+
+// 郵便番号3桁プレフィックス→[緯度,経度]概算マップ(ユーザー入力位置の推定用)
+const ZIP_CENTERS = {
+  '100':[35.685,139.753],'101':[35.698,139.770],'102':[35.689,139.744],'103':[35.685,139.781],'104':[35.669,139.769],'105':[35.658,139.751],'106':[35.655,139.730],'107':[35.663,139.729],'108':[35.642,139.750],'110':[35.712,139.777],'111':[35.710,139.800],'112':[35.721,139.745],'113':[35.720,139.762],'114':[35.751,139.733],'115':[35.775,139.720],'116':[35.736,139.762],'120':[35.776,139.804],'121':[35.786,139.822],'130':[35.703,139.814],'131':[35.711,139.821],'132':[35.708,139.878],'133':[35.709,139.868],'134':[35.677,139.875],'135':[35.652,139.819],'136':[35.669,139.826],'140':[35.609,139.731],'141':[35.625,139.729],'142':[35.611,139.715],'143':[35.605,139.729],'144':[35.561,139.716],'145':[35.587,139.688],'146':[35.562,139.675],'150':[35.658,139.702],'151':[35.677,139.701],'152':[35.633,139.699],'153':[35.640,139.693],'154':[35.648,139.670],'155':[35.659,139.659],'156':[35.641,139.643],'157':[35.653,139.629],'158':[35.608,139.643],'160':[35.694,139.703],'161':[35.708,139.715],'162':[35.699,139.725],'163':[35.690,139.692],'164':[35.694,139.666],'165':[35.706,139.665],'166':[35.700,139.640],'167':[35.705,139.622],'168':[35.684,139.634],'169':[35.704,139.702],'170':[35.733,139.712],'171':[35.728,139.714],'173':[35.751,139.709],'174':[35.752,139.686],'175':[35.777,139.686],'176':[35.736,139.652],'177':[35.734,139.627],'178':[35.731,139.605],'179':[35.757,139.616],'180':[35.705,139.580],'181':[35.684,139.568],'182':[35.651,139.545],'183':[35.680,139.479],'184':[35.698,139.481],'185':[35.702,139.464],'186':[35.738,139.438],'187':[35.729,139.478],'188':[35.722,139.455],'189':[35.763,139.477],'190':[35.696,139.414],'191':[35.659,139.339],'192':[35.663,139.338],'193':[35.640,139.339],'194':[35.559,139.437],'195':[35.635,139.441],'196':[35.800,139.386],'197':[35.795,139.348],'198':[35.799,139.210],'201':[35.697,139.546],'202':[35.714,139.548],'203':[35.756,139.544],'204':[35.799,139.478],'205':[35.785,139.391],'206':[35.650,139.442],'207':[35.754,139.436],'208':[35.717,139.407],'211':[35.571,139.664],'212':[35.538,139.697],'213':[35.606,139.577],'214':[35.592,139.556],'215':[35.559,139.563],'216':[35.579,139.542],'220':[35.453,139.634],'221':[35.485,139.605],'222':[35.504,139.627],'223':[35.539,139.635],'224':[35.537,139.592],'225':[35.531,139.545],'226':[35.515,139.522],'227':[35.544,139.495],'230':[35.521,139.702],'231':[35.442,139.642],'232':[35.430,139.620],'233':[35.393,139.586],'234':[35.398,139.553],'235':[35.384,139.615],'236':[35.365,139.638],'237':[35.339,139.657],'238':[35.275,139.661],'239':[35.281,139.678],'240':[35.451,139.582],'241':[35.493,139.508],'243':[35.438,139.343],'245':[35.475,139.527],'250':[35.265,139.154],'252':[35.530,139.387],'253':[35.331,139.406],'254':[35.322,139.341],'257':[35.301,139.148],'270':[35.771,139.918],'271':[35.781,139.901],'272':[35.724,139.932],'273':[35.697,139.983],'274':[35.697,140.027],'275':[35.687,140.027],'276':[35.722,140.101],'277':[35.864,139.962],'278':[35.820,139.912],'279':[35.642,139.900],'290':[35.495,140.124],'295':[35.082,140.111],'296':[35.168,140.166],'298':[35.134,140.283],'299':[35.519,140.222],'300':[35.976,140.140],'301':[35.908,140.027],'302':[35.931,139.989],'305':[36.103,140.117],'306':[36.178,139.698],'307':[36.193,139.742],'308':[36.177,139.997],'309':[36.108,140.136],'310':[36.343,140.448],'311':[36.373,140.408],'312':[36.384,140.478],'313':[36.385,140.540],'314':[36.028,140.487],'315':[36.118,140.407],'316':[36.383,140.564],'317':[36.517,140.663],'318':[36.569,140.651],'319':[36.394,140.443],'320':[36.553,139.876],'321':[36.554,139.889],'322':[36.726,139.853],'323':[36.370,139.731],'324':[36.962,139.910],'325':[36.979,139.919],'326':[36.380,139.605],'327':[36.333,139.569],'328':[36.381,139.671],'329':[36.575,139.799],'330':[35.903,139.665],'331':[35.942,139.623],'332':[35.828,139.743],'333':[35.861,139.748],'334':[35.823,139.765],'335':[35.796,139.685],'336':[35.847,139.671],'337':[35.924,139.701],'338':[35.883,139.635],'339':[35.949,139.686],'340':[35.813,139.803],'341':[35.819,139.866],'342':[35.987,139.799],'343':[35.875,139.795],'344':[35.899,139.716],'345':[36.075,139.741],'346':[36.080,139.657],'347':[36.140,139.600],'348':[36.171,139.549],'349':[35.994,139.674],'350':[35.931,139.471],'351':[35.795,139.591],'352':[35.796,139.570],'353':[35.814,139.578],'354':[35.846,139.543],'355':[36.032,139.408],'356':[35.869,139.557],'357':[35.850,139.317],'358':[35.878,139.534],'359':[35.784,139.432],'360':[36.139,139.395],'361':[36.056,139.497],'362':[35.974,139.596],'363':[36.008,139.566],'364':[35.994,139.554],'365':[36.066,139.522],'366':[36.185,139.288],'367':[36.248,139.199],'368':[36.007,139.085],'369':[36.117,139.203],'370':[36.322,139.006],'371':[36.390,139.061],'372':[36.311,139.325],'373':[36.302,139.371],'374':[36.256,139.192],'375':[36.256,139.077],'376':[36.402,139.333],'377':[36.480,138.996],'378':[36.644,139.061],'379':[36.467,138.879],'380':[36.649,138.195],'381':[36.605,138.195],'400':[35.664,138.568],'410':[35.119,138.906],'411':[35.117,138.907],'412':[35.240,138.937],'413':[34.975,138.934],'414':[34.968,139.099],'415':[34.761,138.946],'416':[35.121,138.685],'417':[35.172,138.610],'418':[35.216,138.612],'419':[35.315,138.252],'420':[34.975,138.383],'421':[34.866,138.274],'422':[34.944,138.425],'423':[34.974,138.485],'424':[35.012,138.488],'425':[34.863,138.318],'426':[34.897,138.260],'427':[34.816,138.232],'428':[34.987,138.149],'429':[34.761,137.961],'430':[34.710,137.727],'431':[34.712,137.721],'432':[34.710,137.714],'433':[34.760,137.751],'434':[34.776,137.811],'435':[34.720,137.775],'436':[34.801,137.999],'437':[34.786,138.039],'438':[34.728,137.852],'439':[34.790,138.012],'440':[34.773,137.389]
+};
+
+// 都道府県による絞り込み(住所テキストから都道府県名を判定)
+const shopState = {
+  pref:'', products:new Set(), qualifications:new Set(), facilities:new Set(),
+  mode:'initial', lastLat:null, lastLng:null, lastLabel:''
+};
+const FILTER_LABELS = {
+  'コンタクト':'コンタクトレンズ取扱店', '補聴器':'補聴器取扱店',
+  'アコモレフ':'調節機能解析装置(アコモレフ)常設店'
+};
+function getPref(s){
+  const m = s.addr.match(/(北海道|東京都|京都府|大阪府|[一-龠]{2,3}県)/);
+  return m ? m[0] : '';
+}
+function filteredShops(){
+  return SHOPS.filter(s=>{
+    if(shopState.pref && getPref(s)!==shopState.pref) return false;
+    if(shopState.products.size && ![...shopState.products].some(v=>s.products.includes(v))) return false;
+    if(shopState.qualifications.size && ![...shopState.qualifications].some(v=>s.qualifications.includes(v))) return false;
+    if(shopState.facilities.size && ![...shopState.facilities].some(v=>s.facilities.includes(v))) return false;
+    return true;
+  });
+}
+function toggleFilterCheck(el){
+  const cat=el.dataset.cat;
+  if(el.checked) shopState[cat].add(el.value);
+  else shopState[cat].delete(el.value);
+  refreshResults();
+}
+function noBreakTail(text,n){
+  if(text.length<=n) return `<span style="white-space:nowrap">${text}</span>`;
+  return text.slice(0,-n)+`<span style="white-space:nowrap">${text.slice(-n)}</span>`;
+}
+function getActiveConditions(){
+  const conds=[];
+  if(shopState.pref) conds.push({cat:'pref', value:shopState.pref, label:shopState.pref});
+  ['products','qualifications','facilities'].forEach(cat=>{
+    shopState[cat].forEach(v=>conds.push({cat, value:v, label:FILTER_LABELS[v]||v}));
+  });
+  return conds;
+}
+function removeCondition(cat,value){
+  if(cat==='pref'){
+    shopState.pref='';
+    renderPrefTabs();
+  } else {
+    shopState[cat].delete(value);
+    const cb=document.querySelector(`.shop-filter-check input[data-cat="${cat}"][value="${value}"]`);
+    if(cb) cb.checked=false;
+  }
+  refreshResults();
+}
+function clearAllFilters(){
+  shopState.pref='';
+  shopState.products.clear();
+  shopState.qualifications.clear();
+  shopState.facilities.clear();
+  renderPrefTabs();
+  document.querySelectorAll('.shop-filter-check input[type="checkbox"]').forEach(cb=>cb.checked=false);
+  refreshResults();
+}
+function renderPrefTabs(){
+  const wrap=document.getElementById('shopPrefTabs');
+  if(!wrap)return;
+  const order=[];
+  const counts={};
+  SHOPS.forEach(s=>{
+    const p=getPref(s);
+    if(!(p in counts)){ counts[p]=0; order.push(p); }
+    counts[p]++;
+  });
+  let html=`<button type="button" class="shop-pref-tab${shopState.pref===''?' active':''}" onclick="selectPref('')">すべて<span class="shop-pref-count">${SHOPS.length}</span></button>`;
+  order.forEach(p=>{
+    html+=`<button type="button" class="shop-pref-tab${shopState.pref===p?' active':''}" onclick="selectPref('${p}')">${p}<span class="shop-pref-count">${counts[p]}</span></button>`;
+  });
+  wrap.innerHTML=html;
+}
+function selectPref(p){
+  shopState.pref=p;
+  renderPrefTabs();
+  refreshResults();
+}
+function toggleFilterPanel(){
+  const panel=document.getElementById('shopFilterPanel');
+  const btn=document.getElementById('shopFilterAddBtn');
+  if(!panel||!btn)return;
+  const isOpen=panel.classList.toggle('open');
+  btn.classList.toggle('open',isOpen);
+  if(isOpen){
+    document.getElementById('shop-search').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+function refreshResults(){
+  if(shopState.mode==='search' && shopState.lastLat!=null){
+    renderSearchResult(shopState.lastLat, shopState.lastLng, shopState.lastLabel);
+  } else {
+    showInitialShops();
+  }
+}
+function updateFloatingBar(){
+  const countEl=document.getElementById('shopFilterCount');
+  const totalEl=document.getElementById('shopFilterTotal');
+  const condEl=document.getElementById('shopFilterConditions');
+  const clearBtn=document.getElementById('shopFilterClearBtn');
+  if(countEl) countEl.textContent=filteredShops().length;
+  if(totalEl) totalEl.textContent=SHOPS.length;
+  const conds=getActiveConditions();
+  if(condEl){
+    condEl.innerHTML = conds.length ? `
+      <p class="shop-filter-cond-label">検索条件:</p>
+      ${conds.map(c=>{
+        const labelHtml = c.cat==='qualifications' ? noBreakTail(c.label,3) : c.label;
+        return `<div class="shop-filter-pill"><span class="shop-filter-pill-label">${labelHtml}</span><button type="button" class="shop-filter-pill-x" onclick="removeCondition('${c.cat}','${c.value}')" aria-label="絞り込みを解除">×</button></div>`;
+      }).join('')}
+    ` : '';
+  }
+  if(clearBtn) clearBtn.style.display = conds.length ? 'block' : 'none';
+}
+function setupShopFilterBarVisibility(){
+  const bar=document.getElementById('shopFilterBar');
+  const shopSection=document.getElementById('shop-search');
+  if(!bar||!shopSection)return;
+  function check(){
+    const r=shopSection.getBoundingClientRect();
+    // 見出し(セクション上端)が画面の下半分まで入ってきてから表示し、
+    // 次のセクションがある程度見えてきたら少し早めに消す
+    const visible = r.top < window.innerHeight*0.5 && r.bottom > window.innerHeight*0.35;
+    bar.classList.toggle('visible', visible);
+  }
+  window.addEventListener('scroll', check, {passive:true});
+  window.addEventListener('resize', check);
+  // ページ内の画像読み込み完了前は高さが確定しておらず誤判定するため、
+  // 読み込み完了後にも必ず再計算する
+  window.addEventListener('load', check);
+  check();
+  setTimeout(check, 800);
+}
+
+function haversineKm(lat1,lng1,lat2,lng2){
+  const toRad=d=>d*Math.PI/180;
+  const R=6371;
+  const dLat=toRad(lat2-lat1);
+  const dLng=toRad(lng2-lng1);
+  const a=Math.sin(dLat/2)**2+Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLng/2)**2;
+  return 2*R*Math.asin(Math.sqrt(a));
+}
+function renderShops(list){
+  return list.map(s=>`
+    <div class="shop-card">
+      <p class="shop-card-name">${s.name}</p>
+      <p class="shop-card-addr">${s.addr}</p>
+      ${s.distanceKm!=null?`<p class="shop-card-distance">お住まいから約 <strong>${s.distanceKm.toFixed(1)} km</strong></p>`:''}
+      <div class="shop-card-btns">
+        <a href="${s.web}" target="_blank" rel="noopener" class="shop-btn-web" data-cta-location="store_web">WEB予約</a>
+        <a href="tel:${s.tel.replace(/-/g,'')}" class="shop-btn-tel" data-cta-location="store_tel">電話予約<br><span class="shop-btn-tel-num">${s.tel}</span></a>
+      </div>
+    </div>
+  `).join('');
+}
+function renderHeroShop(s){
+  return `
+    <div class="shop-hero-card">
+      <div class="shop-hero-photo">${s.photo?`<img src="${s.photo}" alt="${s.name}" loading="lazy">`:`<div class="shop-hero-photo-ph"><span>📷 店舗写真</span></div>`}</div>
+      <div class="shop-hero-body">
+        <p class="shop-hero-badge">お客様に最も近い店舗</p>
+        <h3 class="shop-hero-name">${s.name}</h3>
+        <p class="shop-hero-addr">${s.addr}</p>
+        ${s.distanceKm!=null?`<p class="shop-hero-distance">お住まいから約 <strong>${s.distanceKm.toFixed(1)} km</strong></p>`:''}
+        <div class="shop-hero-btns">
+          <a href="${s.web}" target="_blank" rel="noopener" class="shop-hero-btn shop-hero-btn-web" data-cta-location="store_web">WEB予約</a>
+          <a href="tel:${s.tel.replace(/-/g,'')}" class="shop-hero-btn shop-hero-btn-tel" data-cta-location="store_tel">電話予約<br><span class="shop-hero-btn-tel-num">${s.tel}</span></a>
+        </div>
+      </div>
+    </div>
+  `;
+}
+function showInitialShops(){
+  shopState.mode='initial';
+  const resEl=document.getElementById('shop-results');
+  const countEl=document.getElementById('shop-count');
+  const shops=filteredShops();
+  const initial=shops.slice(0,4);
+  const rest=shops.slice(4);
+  countEl.style.display='none';
+  resEl.innerHTML = shops.length===0 ? `
+    <p class="shop-empty">選択した都道府県に店舗がありません。</p>
+  ` : `
+    <div class="shop-initial">${renderShops(initial)}</div>
+    ${rest.length>0?`
+    <div class="shop-more-wrap">
+      <div class="shop-more-list-outer">
+        <div class="shop-more-list" id="shopMoreList">${renderShops(rest)}</div>
+        <div class="shop-back-rail" id="shopBackRail"><a href="#shop-search" class="shop-back-top" data-cta-location="back_to_search"><span class="shop-back-arrows">«</span>検索に戻る</a></div>
+      </div>
+      <button type="button" class="shop-more-btn" id="shopMoreBtn" onclick="toggleMoreShops()">
+        <span class="shop-more-btn-text">もっと見る</span>
+      </button>
+    </div>
+    `:''}
+  `;
+  updateFloatingBar();
+}
+function toggleMoreShops(){
+  const list=document.getElementById('shopMoreList');
+  const outer=list.closest('.shop-more-list-outer');
+  const btn=document.getElementById('shopMoreBtn');
+  const textEl=btn.querySelector('.shop-more-btn-text');
+  const isOpen=outer.classList.toggle('open');
+  list.classList.toggle('open',isOpen);
+  textEl.textContent=isOpen?'閉じる':'もっと見る';
+  btn.classList.toggle('open',isOpen);
+}
+// HeartRails APIで7桁郵便番号→緯度経度を取得(建物レベル精度)
+async function fetchZipCoord(zip7){
+  try{
+    const res=await fetch(`https://geoapi.heartrails.com/api/json?method=searchByPostal&postal=${zip7}`);
+    const data=await res.json();
+    const loc=data?.response?.location?.[0];
+    if(loc && loc.x && loc.y){
+      return {lat:parseFloat(loc.y),lng:parseFloat(loc.x),addr:`${loc.prefecture}${loc.city}${loc.town}`};
+    }
+  }catch(e){}
+  return null;
+}
+function renderSearchResult(userLat,userLng,labelHtml){
+  shopState.mode='search';
+  shopState.lastLat=userLat;
+  shopState.lastLng=userLng;
+  shopState.lastLabel=labelHtml;
+  const resEl=document.getElementById('shop-results');
+  const countEl=document.getElementById('shop-count');
+  const ranked=filteredShops().map(s=>({
+    ...s,
+    distanceKm:haversineKm(userLat,userLng,s.lat,s.lng)
+  })).sort((a,b)=>a.distanceKm-b.distanceKm);
+  countEl.style.display='block';
+  countEl.innerHTML=`${labelHtml}<br><small class="shop-count-note">※表示される距離は直線距離です。実際の道のりとは異なる場合があります。</small>`;
+  if(ranked.length===0){
+    resEl.innerHTML='<p class="shop-empty">選択した都道府県に店舗がありません。都道府県の絞り込みを解除するか、別の都道府県をお試しください。</p>';
+    updateFloatingBar();
+    return;
+  }
+  const hero=ranked[0];
+  const others=ranked.slice(1,5);
+  const rest=ranked.slice(5);
+  resEl.innerHTML=`
+    ${renderHeroShop(hero)}
+    <div class="shop-others-grid">${renderShops(others)}</div>
+    ${rest.length>0?`
+    <div class="shop-more-wrap">
+      <div class="shop-more-list-outer">
+        <div class="shop-more-list" id="shopMoreList">${renderShops(rest)}</div>
+      </div>
+      <button type="button" class="shop-more-btn" id="shopMoreBtn" onclick="toggleMoreShops()">
+        <span class="shop-more-btn-text">もっと見る</span>
+      </button>
+    </div>
+    `:''}
+  `;
+  updateFloatingBar();
+}
+function searchByLocation(){
+  const btn=document.getElementById('shopGeoBtn');
+  const countEl=document.getElementById('shop-count');
+  const resEl=document.getElementById('shop-results');
+  if(!navigator.geolocation){
+    countEl.style.display='block';
+    countEl.textContent='お使いの環境では現在地の取得に対応していません。郵便番号で検索してください。';
+    return;
+  }
+  btn.disabled=true;
+  countEl.style.display='block';
+  countEl.textContent='現在地を取得中…';
+  resEl.innerHTML='';
+  navigator.geolocation.getCurrentPosition(
+    pos=>{
+      btn.disabled=false;
+      renderSearchResult(pos.coords.latitude,pos.coords.longitude,'現在地から近い順');
+    },
+    ()=>{
+      btn.disabled=false;
+      countEl.textContent='現在地を取得できませんでした。郵便番号で検索してください。';
+    },
+    {timeout:10000}
+  );
+}
+async function searchShop(){
+  const z1=document.getElementById('zip1').value.trim();
+  const z2=document.getElementById('zip2').value.trim();
+  const zip=z1+z2;
+  const countEl=document.getElementById('shop-count');
+  const resEl=document.getElementById('shop-results');
+  if(zip.length<3){
+    showInitialShops();
+    return;
+  }
+  if(zip.length===7){
+    countEl.style.display='block';
+    countEl.textContent='位置情報を取得中…';
+    resEl.innerHTML='';
+    const coord=await fetchZipCoord(zip);
+    if(coord){
+      renderSearchResult(coord.lat,coord.lng,
+        `<span class="shop-count-zip">〒${z1}-${z2}</span>(${coord.addr})から近い順`);
+      return;
+    }
+  }
+  const center=ZIP_CENTERS[z1];
+  if(!center){
+    countEl.style.display='block';
+    countEl.textContent='この郵便番号の位置情報が見つかりませんでした。';
+    resEl.innerHTML='<p class="shop-empty">別の番号を試すか、下の店舗一覧からお近くの店舗をお探しください。</p>';
+    return;
+  }
+  renderSearchResult(center[0],center[1],
+    `<span class="shop-count-zip">〒${z1}${z2?'-'+z2:''}</span> から近い順`);
+}
+document.getElementById('zip1').addEventListener('input',function(){if(this.value.length>=3)document.getElementById('zip2').focus();});
+document.getElementById('zip1').addEventListener('keydown',function(e){
+  if(e.key!=='Enter')return;
+  e.preventDefault();
+  if(this.value.trim().length>=3)searchShop();
+  else document.getElementById('zip2').focus();
+});
+document.getElementById('zip2').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();searchShop();}});
+
+renderPrefTabs();
+showInitialShops();
+setupShopFilterBarVisibility();
+
+// フローティングCTA: 右端に縦長で常時固定。店舗検索セクションが近づくとゆっくりフェードアウトし、
+// 絞り込みカードが表示される前(店舗検索セクション上端が画面半分に到達する前)に必ず消えているようにする
+(function(){
+  var cta = document.querySelector('.floating-cta');
+  var shopSection = document.getElementById('shop-search');
+  if(!cta || !shopSection) return;
+  function updateCtaVisibility(){
+    var vh = window.innerHeight;
+    var fadeStart = vh * 1.1; // このタイミングでフェード開始(まだ画面下に見えていない)
+    var fadeEnd = vh * 0.55;  // このタイミングで完全に消える(絞り込みカードの表示条件=vh*0.5より手前で消し切る)
+    var r = shopSection.getBoundingClientRect();
+    var progress = Math.min(Math.max((fadeStart - r.top) / (fadeStart - fadeEnd), 0), 1);
+    var opacity = 1 - progress;
+    cta.style.opacity = String(opacity);
+    cta.style.pointerEvents = opacity < 0.05 ? 'none' : '';
+  }
+  window.addEventListener('scroll', updateCtaVisibility, {passive:true});
+  window.addEventListener('resize', updateCtaVisibility);
+  window.addEventListener('load', updateCtaVisibility);
+  updateCtaVisibility();
+  setTimeout(updateCtaVisibility, 800);
+})();
+</script>
+
+</body>
+</html>
