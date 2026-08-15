@@ -331,7 +331,7 @@ $lp_assets = get_stylesheet_directory_uri() . '/lp/assets/sale2026/img';
   @media (max-width: 720px) {
     .fit-band, .fit-band-reverse { flex-direction: column; }
     .fit-band-photo { flex-basis: auto; width: 100%; }
-    .fit-band-photo img.is-contain { height: 220px; object-fit: contain; object-position: 30% center; }
+    .fit-band-photo img.is-contain { height: 220px; object-fit: contain; object-position: center; }
   }
   .ai-mirror-band {
     position: relative;
@@ -1198,7 +1198,7 @@ $lp_assets = get_stylesheet_directory_uri() . '/lp/assets/sale2026/img';
         <div class="fit-band-text">
           <span class="tv-bubble">NHK番組で紹介されました!</span>
           <h3>調節機能解析装置で<br>眼のストレスを無料解析!</h3>
-          <p>その疲れ目、メガネが原因かもしれません。「アコモレフSpeedy-i」で目の調節力やストレス度合いを無料でチェック(約2分)。他店でお作りのメガネのご相談も歓迎です。</p>
+          <p>その疲れ目、メガネが原因かもしれません。「アコモレフSpeedy-i」で目の調節力やストレス度合いを無料でチェック(約2分)。他店でお作りのメガネの<br class="only-mobile">ご相談も歓迎です。</p>
         </div>
       </div>
       <div class="fit-band fit-band-reverse">
