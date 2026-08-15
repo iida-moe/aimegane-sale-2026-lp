@@ -352,6 +352,7 @@
     .fit-band, .fit-band-reverse { flex-direction: column; }
     .fit-band-photo { flex-basis: auto; width: 100%; }
     .fit-band-photo img.is-contain { height: 220px; object-fit: contain; object-position: center; }
+    .fit-band-note-tight { display: inline-block; font-size: 13.5px; white-space: nowrap; }
   }
   .ai-mirror-band {
     position: relative;
@@ -702,23 +703,42 @@
     max-width: 500px; margin: 0 auto 32px;
     padding: clamp(20px, 3vw, 32px) clamp(16px, 3vw, 28px);
   }
-  .shop-filter-panel {
-    display: none;
-    background: #F7F7F5; border-radius: 16px; text-align: left;
-    max-width: 900px; margin: 0 auto 24px;
-    padding: clamp(20px, 3vw, 28px) clamp(16px, 3vw, 24px);
+  .shop-filter-accordion {
+    max-width: 900px; margin: 0 auto 24px; text-align: left;
+    background: #fff; border: 1.5px solid #ddd; border-radius: 14px;
+    overflow: hidden; transition: border-color .2s;
   }
-  .shop-filter-panel.open { display: block; }
-  .shop-filter-panel-placeholder { margin: 0; font-size: 14px; color: #999; text-align: center; }
+  .shop-filter-toggle {
+    display: flex; align-items: center; gap: 10px; width: 100%;
+    background: none; border: none; padding: 16px 20px;
+    font-size: 15px; font-weight: 700; color: #111; text-align: left;
+    cursor: pointer; font-family: inherit;
+  }
+  .shop-filter-toggle-icon { color: #E30212; width: 18px; height: 18px; flex-shrink: 0; display: flex; }
+  .shop-filter-toggle-label { flex: 1; }
+  .shop-filter-toggle-chevron { color: #999; font-size: 12px; transition: transform .25s; }
+  .shop-filter-accordion.open .shop-filter-toggle-chevron { transform: rotate(180deg); }
+  .shop-filter-panel {
+    max-height: 0; overflow: hidden;
+    border-top: 0 solid #eee; transition: max-height .3s ease;
+  }
+  .shop-filter-accordion.open .shop-filter-panel { max-height: 900px; border-top-width: 1px; }
+  .shop-filter-panel-inner { padding: clamp(18px, 3vw, 24px) clamp(16px, 3vw, 24px); }
   .shop-filter-group { margin-bottom: 20px; }
   .shop-filter-group:last-child { margin-bottom: 0; }
   .shop-filter-group-title { margin: 0 0 10px; font-size: 14px; font-weight: 900; color: #111; }
-  .shop-filter-checks { display: flex; flex-wrap: wrap; gap: 10px 24px; }
-  .shop-filter-check {
-    display: flex; align-items: center; gap: 8px;
-    font-size: 14px; color: #333; cursor: pointer; user-select: none;
+  .shop-filter-checks { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 420px) {
+    .shop-filter-checks { grid-template-columns: 1fr; }
   }
-  .shop-filter-check input[type="checkbox"] { width: 17px; height: 17px; accent-color: #E30212; cursor: pointer; }
+  .shop-filter-check {
+    display: flex; align-items: center; gap: 10px;
+    border: 1.5px solid #e2e2e2; border-radius: 10px; padding: 14px 16px;
+    font-size: 14px; color: #333; cursor: pointer; user-select: none;
+    transition: border-color .2s;
+  }
+  .shop-filter-check:hover { border-color: #E30212; }
+  .shop-filter-check input[type="checkbox"] { width: 18px; height: 18px; accent-color: #E30212; cursor: pointer; flex-shrink: 0; }
   .shop-pref-tabs {
     display: flex; flex-wrap: nowrap; justify-content: flex-start; gap: 8px;
     max-width: 100%; margin: 0 auto 24px;
@@ -757,7 +777,7 @@
   .shop-divider::before, .shop-divider::after { content: ''; flex: 1; height: 1px; background: #e0e0e0; }
   .shop-search-form {
     display: flex; align-items: center; justify-content: center;
-    flex-wrap: wrap; gap: 8px; margin-bottom: 20px;
+    flex-wrap: wrap; gap: 8px;
   }
   .shop-zip-label { font-size: 18px; font-weight: 700; color: #111; }
   .shop-zip-input {
@@ -854,86 +874,68 @@
     .shop-others-grid, .shop-initial, .shop-more-list-outer .shop-more-list { grid-template-columns: 1fr !important; gap: 12px !important; }
   }
 
-  /* 店舗検索: フローティング絞り込みカード */
+  /* 店舗検索: フローティング絞り込みバー */
   .shop-filter-bar {
-    position: fixed; left: 0; right: 0; bottom: 16px; z-index: 900;
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    position: fixed; left: 50%; bottom: 16px; z-index: 900;
+    transform: translateX(-50%) translateY(14px);
     opacity: 0; pointer-events: none;
-    transform: translateY(14px);
     transition: opacity .8s ease, transform .8s ease;
+    width: min(1000px, 94vw);
   }
-  .shop-filter-back-btn {
-    display: inline-flex; align-items: center; gap: 4px;
-    order: -1;
-    background: #fff; color: #E30212; font-size: 12px; font-weight: 700;
-    padding: 6px 14px; border-radius: 999px;
-    text-decoration: none;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
-    transition: background .2s;
-  }
-  .shop-filter-back-btn:hover { background: #fdeceb; }
-  .shop-filter-back-arrow { font-size: 9px; }
-  .shop-filter-bar.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .shop-filter-bar.visible { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
   .shop-filter-card {
-    background: #fff; border-radius: 16px;
+    background: #fff; border-radius: 20px;
     box-shadow: 0 8px 28px rgba(0,0,0,0.18);
-    padding: 14px 18px;
-    width: min(250px, 85vw);
-    text-align: center;
+    padding: 14px 20px;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px;
   }
-  .shop-filter-count-row { display: flex; align-items: baseline; justify-content: center; gap: 6px; }
-  .shop-filter-count-num { font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif; font-size: 30px; font-weight: 900; color: #E30212; line-height: 1; }
+  .shop-filter-count-row { display: flex; align-items: baseline; gap: 5px; flex-shrink: 0; white-space: nowrap; }
+  .shop-filter-count-num { font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif; font-size: 26px; font-weight: 900; color: #E30212; line-height: 1; }
   .shop-filter-count-label { font-size: 12px; font-weight: 700; color: #555; }
-  .shop-filter-total { margin: 2px 0 0; font-size: 10px; color: #999; }
-  .shop-filter-divider { height: 2px; background: #E30212; margin: 10px 0; border-radius: 1px; }
-  .shop-filter-cond-label { margin: 0 0 8px; font-size: 12px; color: #888; text-align: left; }
+  .shop-filter-total { font-size: 11px; color: #999; }
+  .shop-filter-divider { width: 1px; align-self: stretch; background: #eee; flex-shrink: 0; }
+  .shop-filter-cond-wrap { flex: 1 1 220px; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+  .shop-filter-cond-label { font-size: 12px; color: #888; white-space: nowrap; flex-shrink: 0; }
+  .shop-filter-cond-empty { font-size: 12px; color: #888; }
+  .shop-filter-pills { display: flex; flex-wrap: wrap; gap: 6px 8px; }
   .shop-filter-pill {
-    display: flex; align-items: center; justify-content: space-between; gap: 6px;
+    display: inline-flex; align-items: center; gap: 3px;
     background: #f2f2f2; color: #333; font-size: 12px; font-weight: 700;
-    padding: 6px 6px 6px 12px; border-radius: 999px; margin-bottom: 8px;
+    padding: 5px 5px 5px 12px; border-radius: 999px; white-space: nowrap;
   }
-  .shop-filter-pill-label { flex: 1; min-width: 0; text-align: left; line-height: 1.3; }
   .shop-filter-pill-x {
-    background: none; border: none; color: #999; font-size: 16px; line-height: 1;
-    cursor: pointer; padding: 4px 8px; font-family: inherit;
+    background: none; border: none; color: #999; font-size: 15px; line-height: 1;
+    cursor: pointer; padding: 3px 6px; font-family: inherit;
   }
   .shop-filter-pill-x:hover { color: #E30212; }
+  .shop-filter-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; margin-left: auto; }
   .shop-filter-add-btn {
-    display: block; width: 100%; margin-top: 4px;
+    display: inline-flex; align-items: center; justify-content: center;
     background: #fff; color: #E30212; border: 2px solid #E30212;
-    font-size: 12px; font-weight: 900; padding: 8px 0; border-radius: 999px;
-    text-decoration: none; transition: background .2s;
-    cursor: pointer; font-family: inherit;
+    font-size: 12.5px; font-weight: 900; padding: 9px 16px; border-radius: 999px;
+    white-space: nowrap; transition: background .2s; cursor: pointer; font-family: inherit;
   }
   .shop-filter-add-btn:hover { background: #fdeceb; }
-  .shop-filter-add-plus { display: inline-block; transition: transform .2s; }
-  .shop-filter-add-btn.open .shop-filter-add-plus { transform: rotate(45deg); }
   .shop-filter-apply-btn {
-    display: block; margin-top: 6px;
+    display: inline-flex; align-items: center; justify-content: center;
     background: #b3010e; color: #fff; border: 2px solid #b3010e;
-    font-size: 12px; font-weight: 900; padding: 8px 0; border-radius: 999px;
-    text-decoration: none; transition: background .2s;
+    font-size: 12.5px; font-weight: 900; padding: 9px 16px; border-radius: 999px;
+    white-space: nowrap; text-decoration: none; transition: background .2s;
   }
   .shop-filter-apply-btn:hover { background: #8a010b; }
   .shop-filter-clear-btn {
-    display: block; margin: 8px auto 0; background: none; border: none;
-    color: #E30212; font-size: 11px; text-decoration: underline; cursor: pointer;
-    font-family: inherit; text-underline-offset: 3px;
+    background: none; border: none; flex-shrink: 0;
+    color: #E30212; font-size: 11.5px; text-decoration: underline; cursor: pointer;
+    font-family: inherit; text-underline-offset: 3px; white-space: nowrap;
   }
-  @media (min-width: 768px) {
-    .shop-filter-bar { left: auto; right: 16px; bottom: auto; top: 50%; transform: translateY(calc(-50% + 14px)); align-items: flex-end; }
-    .shop-filter-bar.visible { transform: translateY(-50%); }
-    .shop-filter-back-btn { order: 1; }
-    .shop-filter-card { width: 150px; padding: 14px 14px; border-radius: 16px; }
-    .shop-filter-count-num { font-size: 30px; }
-    .shop-filter-count-label { font-size: 11px; }
-    .shop-filter-total { font-size: 10px; }
-    .shop-filter-divider { margin: 10px 0; }
-    .shop-filter-cond-label { font-size: 10px; margin-bottom: 6px; }
-    .shop-filter-pill { font-size: 12px; padding: 6px 6px 6px 12px; margin-bottom: 8px; }
-    .shop-filter-add-btn { font-size: 12px; padding: 8px 0; }
-    .shop-filter-apply-btn { font-size: 12px; padding: 8px 0; margin-top: 6px; }
-    .shop-filter-clear-btn { font-size: 11px; margin-top: 8px; }
+  @media (max-width: 640px) {
+    .shop-filter-card { flex-direction: column; align-items: stretch; gap: 6px; border-radius: 20px; padding: 14px 16px; }
+    .shop-filter-divider { display: none; }
+    .shop-filter-cond-wrap { flex: none; }
+    .shop-filter-actions { width: 100%; margin-left: 0; }
+    .shop-filter-actions .shop-filter-add-btn,
+    .shop-filter-actions .shop-filter-apply-btn { flex: 1; }
+    .shop-filter-clear-btn { align-self: center; margin-top: 2px; }
   }
 
   /* 締めCTA */
@@ -1225,7 +1227,7 @@
         <div class="fit-band-text">
           <span class="tv-bubble">NHK番組で紹介されました!</span>
           <h3>調節機能解析装置で<br>眼のストレスを無料解析!</h3>
-          <p>その疲れ目、メガネが原因かもしれません。「アコモレフSpeedy-i」で目の調節力やストレス度合いを無料でチェック(約2分)。他店でお作りのメガネの<br class="only-mobile">ご相談も歓迎です。</p>
+          <p>その疲れ目、メガネが原因かもしれません。「アコモレフSpeedy-i」で目の調節力やストレス度合いを無料でチェック(約2分)。<span class="fit-band-note-tight">他店でお作りのメガネのご相談も歓迎です。</span></p>
         </div>
       </div>
       <div class="fit-band fit-band-reverse">
@@ -1287,29 +1289,38 @@
 
     <div class="shop-pref-tabs" id="shopPrefTabs"></div>
 
-    <div class="shop-filter-panel open" id="shopFilterPanel">
-      <div class="shop-filter-group">
-        <p class="shop-filter-group-title">取扱商材</p>
-        <div class="shop-filter-checks">
-          <label class="shop-filter-check"><input type="checkbox" data-cat="products" value="コンタクト" onchange="toggleFilterCheck(this)">コンタクトレンズ取扱店</label>
-          <label class="shop-filter-check"><input type="checkbox" data-cat="products" value="補聴器" onchange="toggleFilterCheck(this)">補聴器取扱店</label>
-        </div>
-      </div>
-      <div class="shop-filter-group">
-        <p class="shop-filter-group-title">資格者在籍</p>
-        <div class="shop-filter-checks">
-          <label class="shop-filter-check"><input type="checkbox" data-cat="qualifications" value="1級眼鏡作製技能士" onchange="toggleFilterCheck(this)">1級眼鏡作製技能士</label>
-          <label class="shop-filter-check"><input type="checkbox" data-cat="qualifications" value="眼鏡作製技能士" onchange="toggleFilterCheck(this)">眼鏡作製技能士</label>
-          <label class="shop-filter-check"><input type="checkbox" data-cat="qualifications" value="認定補聴器技能者" onchange="toggleFilterCheck(this)">認定補聴器技能者</label>
-        </div>
-      </div>
-      <div class="shop-filter-group">
-        <p class="shop-filter-group-title">設備</p>
-        <div class="shop-filter-checks">
-          <label class="shop-filter-check"><input type="checkbox" data-cat="facilities" value="アコモレフ" onchange="toggleFilterCheck(this)">調節機能解析装置(アコモレフ)常設店</label>
-          <label class="shop-filter-check"><input type="checkbox" data-cat="facilities" value="AIフィッティングミラー" onchange="toggleFilterCheck(this)">AIフィッティングミラー</label>
-          <label class="shop-filter-check"><input type="checkbox" data-cat="facilities" value="深視力測定" onchange="toggleFilterCheck(this)">深視力測定</label>
-          <label class="shop-filter-check"><input type="checkbox" data-cat="facilities" value="防音室完備" onchange="toggleFilterCheck(this)">防音室完備</label>
+    <div class="shop-filter-accordion" id="shopFilterAccordion">
+      <button type="button" class="shop-filter-toggle" id="shopFilterToggleBtn" onclick="toggleFilterAccordion()" aria-expanded="false">
+        <span class="shop-filter-toggle-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 12 22l-9-9V4a1 1 0 0 1 1-1h9l9 9a1 1 0 0 1 0 1.41Z"></path><circle cx="7" cy="7" r="1.2" fill="currentColor" stroke="none"></circle></svg></span>
+        <span class="shop-filter-toggle-label">取扱・資格・設備で絞り込む</span>
+        <span class="shop-filter-toggle-chevron">&#9660;</span>
+      </button>
+      <div class="shop-filter-panel" id="shopFilterPanel">
+        <div class="shop-filter-panel-inner">
+          <div class="shop-filter-group">
+            <p class="shop-filter-group-title">取扱商材</p>
+            <div class="shop-filter-checks">
+              <label class="shop-filter-check"><input type="checkbox" data-cat="products" value="コンタクト" onchange="toggleFilterCheck(this)">コンタクトレンズ取扱店</label>
+              <label class="shop-filter-check"><input type="checkbox" data-cat="products" value="補聴器" onchange="toggleFilterCheck(this)">補聴器取扱店</label>
+            </div>
+          </div>
+          <div class="shop-filter-group">
+            <p class="shop-filter-group-title">資格者在籍</p>
+            <div class="shop-filter-checks">
+              <label class="shop-filter-check"><input type="checkbox" data-cat="qualifications" value="1級眼鏡作製技能士" onchange="toggleFilterCheck(this)">1級眼鏡作製技能士</label>
+              <label class="shop-filter-check"><input type="checkbox" data-cat="qualifications" value="眼鏡作製技能士" onchange="toggleFilterCheck(this)">眼鏡作製技能士</label>
+              <label class="shop-filter-check"><input type="checkbox" data-cat="qualifications" value="認定補聴器技能者" onchange="toggleFilterCheck(this)">認定補聴器技能者</label>
+            </div>
+          </div>
+          <div class="shop-filter-group">
+            <p class="shop-filter-group-title">設備</p>
+            <div class="shop-filter-checks">
+              <label class="shop-filter-check"><input type="checkbox" data-cat="facilities" value="アコモレフ" onchange="toggleFilterCheck(this)">調節機能解析装置(アコモレフ)常設店</label>
+              <label class="shop-filter-check"><input type="checkbox" data-cat="facilities" value="AIフィッティングミラー" onchange="toggleFilterCheck(this)">AIフィッティングミラー</label>
+              <label class="shop-filter-check"><input type="checkbox" data-cat="facilities" value="深視力測定" onchange="toggleFilterCheck(this)">深視力測定</label>
+              <label class="shop-filter-check"><input type="checkbox" data-cat="facilities" value="防音室完備" onchange="toggleFilterCheck(this)">防音室完備</label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1320,18 +1331,15 @@
 
   <div class="shop-filter-bar" id="shopFilterBar">
     <div class="shop-filter-card">
-      <div class="shop-filter-count-row">
-        <span class="shop-filter-count-num" id="shopFilterCount">0</span>
-        <span class="shop-filter-count-label">店舗該当</span>
-      </div>
-      <p class="shop-filter-total">/ 全<span id="shopFilterTotal">0</span>店舗</p>
+      <div class="shop-filter-count-row" id="shopFilterCountRow"></div>
       <div class="shop-filter-divider"></div>
-      <div id="shopFilterConditions"></div>
-      <button type="button" class="shop-filter-add-btn open" id="shopFilterAddBtn" onclick="toggleFilterPanel()">条件を追加 <span class="shop-filter-add-plus">+</span></button>
-      <a href="#shop-results" class="shop-filter-apply-btn">絞り込む</a>
+      <div class="shop-filter-cond-wrap" id="shopFilterCondWrap"></div>
+      <div class="shop-filter-actions">
+        <button type="button" class="shop-filter-add-btn" id="shopFilterAddBtn" onclick="toggleFilterPanel()">条件を追加</button>
+        <a href="#shop-results" class="shop-filter-apply-btn" id="shopFilterApplyBtn" style="display:none;">絞り込む</a>
+      </div>
       <button type="button" class="shop-filter-clear-btn" id="shopFilterClearBtn" onclick="clearAllFilters()" style="display:none;">すべて解除</button>
     </div>
-    <a href="#shop-search" class="shop-filter-back-btn"><span class="shop-filter-back-arrow">&#9650;</span>検索に戻る</a>
   </div>
 
   <!-- ⑥ 締めのCTA -->
@@ -1463,10 +1471,6 @@ function toggleFilterCheck(el){
   else shopState[cat].delete(el.value);
   refreshResults();
 }
-function noBreakTail(text,n){
-  if(text.length<=n) return `<span style="white-space:nowrap">${text}</span>`;
-  return text.slice(0,-n)+`<span style="white-space:nowrap">${text.slice(-n)}</span>`;
-}
 function getActiveConditions(){
   const conds=[];
   if(shopState.pref) conds.push({cat:'pref', value:shopState.pref, label:shopState.pref});
@@ -1516,8 +1520,17 @@ function selectPref(p){
   renderPrefTabs();
   refreshResults();
 }
+function toggleFilterAccordion(forceOpen){
+  const acc=document.getElementById('shopFilterAccordion');
+  const btn=document.getElementById('shopFilterToggleBtn');
+  if(!acc)return;
+  const open = forceOpen===true ? true : !acc.classList.contains('open');
+  acc.classList.toggle('open', open);
+  if(btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
 function toggleFilterPanel(){
-  document.getElementById('shop-search').scrollIntoView({behavior:'smooth',block:'start'});
+  toggleFilterAccordion(true);
+  document.getElementById('shopFilterAccordion').scrollIntoView({behavior:'smooth',block:'start'});
 }
 function refreshResults(){
   if(shopState.mode==='search' && shopState.lastLat!=null){
@@ -1527,23 +1540,24 @@ function refreshResults(){
   }
 }
 function updateFloatingBar(){
-  const countEl=document.getElementById('shopFilterCount');
-  const totalEl=document.getElementById('shopFilterTotal');
-  const condEl=document.getElementById('shopFilterConditions');
+  const countRow=document.getElementById('shopFilterCountRow');
+  const condWrap=document.getElementById('shopFilterCondWrap');
+  const applyBtn=document.getElementById('shopFilterApplyBtn');
   const clearBtn=document.getElementById('shopFilterClearBtn');
-  if(countEl) countEl.textContent=filteredShops().length;
-  if(totalEl) totalEl.textContent=SHOPS.length;
   const conds=getActiveConditions();
-  if(condEl){
-    condEl.innerHTML = conds.length ? `
-      <p class="shop-filter-cond-label">検索条件:</p>
-      ${conds.map(c=>{
-        const labelHtml = c.cat==='qualifications' ? noBreakTail(c.label,3) : c.label;
-        return `<div class="shop-filter-pill"><span class="shop-filter-pill-label">${labelHtml}</span><button type="button" class="shop-filter-pill-x" onclick="removeCondition('${c.cat}','${c.value}')" aria-label="絞り込みを解除">×</button></div>`;
-      }).join('')}
-    ` : '';
+  const matched=filteredShops().length;
+  if(countRow){
+    countRow.innerHTML = conds.length
+      ? `<span class="shop-filter-count-num">${matched}</span><span class="shop-filter-count-label">店舗該当</span><span class="shop-filter-total">/ 全${SHOPS.length}店舗</span>`
+      : `<span class="shop-filter-count-num">${SHOPS.length}</span><span class="shop-filter-count-label">店舗</span><span class="shop-filter-total">全${SHOPS.length}店舗を表示中</span>`;
   }
-  if(clearBtn) clearBtn.style.display = conds.length ? 'block' : 'none';
+  if(condWrap){
+    condWrap.innerHTML = conds.length
+      ? `<span class="shop-filter-cond-label">検索条件:</span><div class="shop-filter-pills">${conds.map(c=>`<span class="shop-filter-pill">${c.label}<button type="button" class="shop-filter-pill-x" onclick="removeCondition('${c.cat}','${c.value}')" aria-label="絞り込みを解除">×</button></span>`).join('')}</div>`
+      : '<span class="shop-filter-cond-empty">絞り込み条件なし。</span>';
+  }
+  if(applyBtn) applyBtn.style.display = conds.length ? 'inline-flex' : 'none';
+  if(clearBtn) clearBtn.style.display = conds.length ? 'inline-block' : 'none';
 }
 function setupShopFilterBarVisibility(){
   const bar=document.getElementById('shopFilterBar');
