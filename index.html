@@ -1517,14 +1517,7 @@ function selectPref(p){
   refreshResults();
 }
 function toggleFilterPanel(){
-  const panel=document.getElementById('shopFilterPanel');
-  const btn=document.getElementById('shopFilterAddBtn');
-  if(!panel||!btn)return;
-  const isOpen=panel.classList.toggle('open');
-  btn.classList.toggle('open',isOpen);
-  if(isOpen){
-    document.getElementById('shop-search').scrollIntoView({behavior:'smooth',block:'start'});
-  }
+  document.getElementById('shop-search').scrollIntoView({behavior:'smooth',block:'start'});
 }
 function refreshResults(){
   if(shopState.mode==='search' && shopState.lastLat!=null){
