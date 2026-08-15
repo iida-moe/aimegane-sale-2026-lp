@@ -732,7 +732,7 @@ $lp_assets = get_stylesheet_directory_uri() . '/lp/assets/sale2026/img';
   }
   .shop-geo-btn:hover { background: #333; }
   .shop-geo-btn:disabled { opacity: .6; cursor: default; }
-  .shop-geo-icon { font-size: 18px; }
+  .shop-geo-icon { width: 18px; height: 18px; }
   .shop-divider { display: flex; align-items: center; gap: 12px; margin: 18px 0; color: #999; font-size: 13px; }
   .shop-divider::before, .shop-divider::after { content: ''; flex: 1; height: 1px; background: #e0e0e0; }
   .shop-search-form {
@@ -1245,7 +1245,7 @@ $lp_assets = get_stylesheet_directory_uri() . '/lp/assets/sale2026/img';
 
     <div class="shop-search-box">
       <div class="shop-geo-wrap">
-        <button type="button" class="shop-geo-btn" id="shopGeoBtn" data-cta-location="search_geo" onclick="searchByLocation()"><span class="shop-geo-icon">&#9678;</span> 現在地から探す</button>
+        <button type="button" class="shop-geo-btn" id="shopGeoBtn" data-cta-location="search_geo" onclick="searchByLocation()"><img src="<?php echo $lp_assets; ?>/map-marker-icon.svg" alt="" class="shop-geo-icon"> 現在地から探す</button>
         <div class="shop-divider"><span>または</span></div>
       </div>
 
