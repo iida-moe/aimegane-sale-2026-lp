@@ -698,8 +698,11 @@
   /* 店舗検索(GW LP版の仕組みを移植) */
   #shop-search { text-align: center; }
   .shop-intro {
-    font-size: clamp(15px, 2vw, 20px); color: #555; line-height: 1.8; margin-bottom: 24px;
+    font-size: clamp(15px, 2vw, 20px); color: #555; line-height: 1.8; margin-bottom: 8px;
     max-width: 600px; margin-left: auto; margin-right: auto;
+  }
+  .shop-intro-note {
+    font-size: 13px; color: #111; margin-bottom: 24px;
   }
   .shop-search-box {
     background: #F7F7F5; border-radius: 16px;
@@ -846,7 +849,6 @@
   .shop-btn-tel { background: #fff; color: #E30212; border: 2px solid #E30212; }
   .shop-btn-tel:hover { background: #E30212; color: #fff; }
   .shop-btn-tel-num { font-size: 12px; font-weight: 700; }
-  .shop-btn-note { font-size: 11px; color: #999; text-align: center; margin-top: 8px; }
   .shop-hero-card {
     background: #fff; border: 2.5px solid #E30212; border-radius: 12px; overflow: hidden;
     display: flex; margin-bottom: 24px; box-shadow: 0 6px 20px rgba(227,2,18,0.10);
@@ -870,7 +872,6 @@
   .shop-hero-btn-tel { background: #fff; color: #E30212; border: 2px solid #E30212; }
   .shop-hero-btn-tel:hover { background: #E30212; color: #fff; }
   .shop-hero-btn-tel-num { font-size: 0.7em; font-weight: 700; }
-  .shop-hero-btn-note { font-size: 12px; color: #999; text-align: center; margin-top: 10px; }
   .shop-others-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
   .shop-empty { grid-column: 1/-1; text-align: center; color: #888; padding: 24px 16px; font-size: 15px; line-height: 1.7; }
   @media (max-width: 768px) {
@@ -1276,6 +1277,7 @@
   <section class="section section-white" id="shop-search">
     <h2 class="section-title">お近くの<span>店舗を探す</span></h2>
     <p class="shop-intro">現在地、または郵便番号(上3桁)で<br class="only-mobile">お近くの店舗を探せます</p>
+    <p class="shop-intro-note">※WEB予約は、本日から3日後以降の日程でお取りいただけます。お急ぎの場合はお電話にてお問い合わせください。</p>
 
     <div class="shop-search-box">
       <div class="shop-geo-wrap">
@@ -1602,7 +1604,6 @@ function renderShops(list){
         <a href="${s.web}" target="_blank" rel="noopener" class="shop-btn-web" data-cta-location="store_web">WEB予約</a>
         <a href="tel:${s.tel.replace(/-/g,'')}" class="shop-btn-tel" data-cta-location="store_tel">電話予約<br><span class="shop-btn-tel-num">${s.tel}</span></a>
       </div>
-      <p class="shop-btn-note">※WEB予約は3日前までとなります</p>
     </div>
   `).join('');
 }
@@ -1619,7 +1620,6 @@ function renderHeroShop(s){
           <a href="${s.web}" target="_blank" rel="noopener" class="shop-hero-btn shop-hero-btn-web" data-cta-location="store_web">WEB予約</a>
           <a href="tel:${s.tel.replace(/-/g,'')}" class="shop-hero-btn shop-hero-btn-tel" data-cta-location="store_tel">電話予約<br><span class="shop-hero-btn-tel-num">${s.tel}</span></a>
         </div>
-        <p class="shop-hero-btn-note">※WEB予約は3日前までとなります</p>
       </div>
     </div>
   `;
