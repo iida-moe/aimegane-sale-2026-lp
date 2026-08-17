@@ -677,8 +677,11 @@ $lp_assets = get_stylesheet_directory_uri() . '/lp/assets/sale2026/img';
   /* 店舗検索(GW LP版の仕組みを移植) */
   #shop-search { text-align: center; }
   .shop-intro {
-    font-size: clamp(15px, 2vw, 20px); color: #555; line-height: 1.8; margin-bottom: 24px;
+    font-size: clamp(15px, 2vw, 20px); color: #555; line-height: 1.8; margin-bottom: 8px;
     max-width: 600px; margin-left: auto; margin-right: auto;
+  }
+  .shop-intro-note {
+    font-size: 13px; color: #111; margin-bottom: 24px;
   }
   .shop-search-box {
     background: #F7F7F5; border-radius: 16px;
@@ -960,7 +963,6 @@ $lp_assets = get_stylesheet_directory_uri() . '/lp/assets/sale2026/img';
 </style>
 </head>
 <body>
-
   <?php include get_stylesheet_directory() . '/lp/lp-tracking-body.php'; ?>
 
   <section class="fv">
@@ -1245,6 +1247,7 @@ $lp_assets = get_stylesheet_directory_uri() . '/lp/assets/sale2026/img';
   <section class="section section-white" id="shop-search">
     <h2 class="section-title">お近くの<span>店舗を探す</span></h2>
     <p class="shop-intro">現在地、または郵便番号(上3桁)で<br class="only-mobile">お近くの店舗を探せます</p>
+    <p class="shop-intro-note">※WEB予約は、本日から3日後以降の日程でお取りいただけます。お急ぎの場合はお電話にてお問い合わせください。</p>
 
     <div class="shop-search-box">
       <div class="shop-geo-wrap">
@@ -1335,6 +1338,7 @@ $lp_assets = get_stylesheet_directory_uri() . '/lp/assets/sale2026/img';
     </div>
     <p class="footer-company">アイジャパン株式会社<br class="only-mobile">　〒331-0812 埼玉県さいたま市北区<br class="only-mobile">　宮原町1丁目505番地1<br class="only-mobile">　お客様相談室:<a href="tel:0120210110">0120-21-0110</a><br class="only-mobile">　(受付10時〜18時、土日祝休)<br class="only-mobile">　<span class="footer-copyright">&copy; 2026 アイジャパン株式会社</span></p>
   </footer>
+
 
 <script>
 // 店舗検索(アイメガネ全店・公式サイトで確認済みの確定データ)
